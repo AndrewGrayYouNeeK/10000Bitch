@@ -1,0 +1,27 @@
+{
+  "name": "GameStats",
+  "type": "object",
+  "properties": {
+    "games_played": {
+      "type": "number",
+      "default": 0,
+      "description": "Total games played"
+    },
+    "games_won": {
+      "type": "number",
+      "default": 0,
+      "description": "Total games won"
+    },
+    "highest_turn_score": {
+      "type": "number",
+      "default": 0,
+      "description": "Highest single-turn score"
+    },
+    "total_farkles": {
+      "type": "number",
+      "default": 0,
+      "description": "Total Farkles rolled"
+    }
+  },
+  "required": []
+}
