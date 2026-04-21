@@ -4,6 +4,12 @@ import { scoreSelection, hasAnyScore } from "./scoring";
 export const TARGET_SCORE = 10000;
 export const ENTRY_THRESHOLD = 1000;
 
+// Bust words — alternated on each bust for variety.
+const BUST_WORDS = ["YEEET!", "SKEERT!"];
+function bustWord(count) {
+  return BUST_WORDS[count % BUST_WORDS.length];
+}
+
 export function createInitialState(playerNames) {
   return {
     players: playerNames.map(name => ({ name, score: 0, onBoard: false })),
@@ -16,6 +22,8 @@ export function createInitialState(playerNames) {
     message: `${playerNames[0]}'s turn — roll the dice!`,
     messageVariant: "info",
     farkle: false,
+    bustCount: 0,
+    lastBustWord: null,
   };
 }
 
@@ -40,13 +48,16 @@ export function rollDice(state) {
 export function evaluateRoll(state) {
   const active = state.dice.filter(d => !d.used).map(d => d.value);
   if (!hasAnyScore(active)) {
-    // Farkle
+    // Bust
     const currentName = state.players[state.currentIndex].name;
+    const word = bustWord(state.bustCount || 0);
     return {
       ...state,
       farkle: true,
       turnScore: 0,
-      message: `💥 FARKLE! ${currentName} loses turn score.`,
+      bustCount: (state.bustCount || 0) + 1,
+      lastBustWord: word,
+      message: `💥 ${word} ${currentName} loses turn score.`,
       messageVariant: "danger",
     };
   }
@@ -117,6 +128,7 @@ export function confirmAndReroll(state) {
   const farkled = !hasAnyScore(activeVals);
 
   if (farkled) {
+    const word = bustWord(state.bustCount || 0);
     return {
       state: {
         ...state,
@@ -124,7 +136,9 @@ export function confirmAndReroll(state) {
         turnScore: 0,
         hasRolled: true,
         farkle: true,
-        message: `💥 FARKLE! ${state.players[state.currentIndex].name} loses ${newTurnScore}.`,
+        bustCount: (state.bustCount || 0) + 1,
+        lastBustWord: word,
+        message: `💥 ${word} ${state.players[state.currentIndex].name} loses ${newTurnScore}.`,
         messageVariant: "danger",
       },
     };

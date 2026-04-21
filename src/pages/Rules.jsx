@@ -25,7 +25,7 @@ export default function Rules() {
             <li>Roll all 6 dice.</li>
             <li>Select at least one scoring die to set aside.</li>
             <li>Choose: <b>Bank</b> your points (end turn) or <b>Roll</b> the remaining dice for more.</li>
-            <li>If a roll has NO scoring dice → <b className="text-rose-400">Farkle!</b> You lose the whole turn.</li>
+            <li>If a roll has NO scoring dice → <b className="text-rose-400">YEEET! / SKEERT!</b> You lose the whole turn.</li>
             <li>Score with all 6 dice → <b className="text-emerald-400">Hot Dice!</b> All 6 re-roll.</li>
           </ol>
         </section>

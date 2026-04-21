@@ -26,7 +26,7 @@ export default function RulesSheet() {
               <li>Roll all 6 dice.</li>
               <li>Select at least one scoring die to keep.</li>
               <li>Bank your points and end turn — or risk it and re-roll the remaining dice.</li>
-              <li>If a roll has NO scoring dice → <b>Farkle!</b> You lose all points this turn.</li>
+              <li>If a roll has NO scoring dice → <b>YEEET! / SKEERT!</b> You lose all points this turn.</li>
               <li>If you score with all 6 dice → <b>Hot Dice!</b> Re-roll all 6 and keep adding.</li>
             </ol>
           </section>

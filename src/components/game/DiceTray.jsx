@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
  * Visual tray for the 6 dice. Rendered on a felt-green surface.
  * dice: array of { id, value, used (banked), held (in active selection) }
  */
-export default function DiceTray({ dice, rolling, onToggle, disabled }) {
+export default function DiceTray({ dice, rolling, onToggle, disabled, skinId, pipsId }) {
   return (
     <div
       className="relative rounded-3xl p-6 overflow-hidden border-4 border-amber-900/60 shadow-2xl"
@@ -41,6 +41,8 @@ export default function DiceTray({ dice, rolling, onToggle, disabled }) {
               rolling={rolling && !d.used}
               onClick={() => !disabled && !d.used && onToggle && onToggle(d.id)}
               size={72}
+              skinId={skinId}
+              pipsId={pipsId}
             />
           </motion.div>
         ))}

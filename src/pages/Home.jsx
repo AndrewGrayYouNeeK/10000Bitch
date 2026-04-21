@@ -2,10 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Dices, Users, BookOpen } from "lucide-react";
+import { Dices, Users, BookOpen, Sparkles, Coins } from "lucide-react";
 import RulesSheet from "@/components/game/RulesSheet";
+import { useCosmetics } from "@/hooks/useCosmetics";
+import BadgePreview from "@/components/shop/BadgePreview";
 
 export default function Home() {
+  const { coins, isLoading, equippedBadge } = useCosmetics();
+
   return (
     <div
       className="min-h-screen flex flex-col items-center justify-center p-6 overflow-hidden relative"
@@ -39,8 +43,21 @@ export default function Home() {
         ))}
       </div>
 
-      <div className="absolute top-4 right-4 z-10">
-        <RulesSheet />
+      {/* Top bar: coins + badge + rules */}
+      <div className="absolute top-4 left-4 right-4 z-10 flex items-center justify-between">
+        <Link
+          to="/shop"
+          className="flex items-center gap-1.5 bg-amber-500/20 border border-amber-500/40 rounded-full px-3 py-1.5 hover:bg-amber-500/30 transition-colors"
+        >
+          <Coins className="w-4 h-4 text-amber-400" />
+          <span className="font-black tabular-nums text-amber-300 text-sm">
+            {isLoading ? "…" : coins.toLocaleString()}
+          </span>
+        </Link>
+        <div className="flex items-center gap-2">
+          {equippedBadge && <BadgePreview badge={equippedBadge} size={36} />}
+          <RulesSheet />
+        </div>
       </div>
 
       <motion.div
@@ -74,6 +91,17 @@ export default function Home() {
             <Link to="/setup">
               <Dices className="w-6 h-6 mr-2" />
               Play Pass & Play
+            </Link>
+          </Button>
+
+          <Button
+            asChild
+            size="lg"
+            className="w-full h-14 text-base font-semibold bg-gradient-to-r from-indigo-600 to-purple-700 hover:from-indigo-500 hover:to-purple-600 text-white border-0"
+          >
+            <Link to="/shop">
+              <Sparkles className="w-5 h-5 mr-2" />
+              Shop
             </Link>
           </Button>
 

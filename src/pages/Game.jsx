@@ -19,11 +19,17 @@ import ScorePanel from "@/components/game/ScorePanel";
 import TurnBanner from "@/components/game/TurnBanner";
 import GameOverDialog from "@/components/game/GameOverDialog";
 import RulesSheet from "@/components/game/RulesSheet";
+import BigPopup from "@/components/game/BigPopup";
+import { useCosmetics } from "@/hooks/useCosmetics";
 
 export default function Game() {
   const navigate = useNavigate();
   const [state, setState] = useState(null);
   const [rollAnim, setRollAnim] = useState(false);
+  const [popup, setPopup] = useState(null); // { word, variant }
+  const { equippedSkinId, equippedPipsId, addCoins } = useCosmetics();
+  const prevBustRef = React.useRef(0);
+  const winnerAwardedRef = React.useRef(false);
 
   useEffect(() => {
     const stored = sessionStorage.getItem("dice10k_players");
@@ -32,7 +38,26 @@ export default function Game() {
       return;
     }
     setState(createInitialState(JSON.parse(stored)));
+    prevBustRef.current = 0;
+    winnerAwardedRef.current = false;
   }, [navigate]);
+
+  // Show big pop-up when bust count increases
+  useEffect(() => {
+    if (!state) return;
+    if ((state.bustCount || 0) > prevBustRef.current && state.lastBustWord) {
+      setPopup({ word: state.lastBustWord, variant: "danger" });
+      prevBustRef.current = state.bustCount;
+    }
+  }, [state]);
+
+  // Award 200 coin bonus on win
+  useEffect(() => {
+    if (state?.winner && !winnerAwardedRef.current) {
+      winnerAwardedRef.current = true;
+      addCoins(200);
+    }
+  }, [state?.winner, addCoins]);
 
   const doRoll = useCallback(() => {
     if (!state) return;
@@ -62,7 +87,21 @@ export default function Game() {
   };
 
   const onBank = () => {
-    setState(bankAndPass(state));
+    const prevScore = state.players[state.currentIndex].score;
+    const next = bankAndPass(state);
+    // Award 1 coin per 100 points actually banked (diff in this player's score).
+    const gained = next.players[state.currentIndex].score - prevScore;
+    // bankAndPass advances currentIndex unless there's a winner — look up by matching name instead
+    if (gained <= 0) {
+      // Player might have advanced; recompute from the player who just banked.
+      const prevName = state.players[state.currentIndex].name;
+      const after = next.players.find(p => p.name === prevName);
+      const delta = (after?.score || prevScore) - prevScore;
+      if (delta > 0) addCoins(Math.floor(delta / 100));
+    } else {
+      addCoins(Math.floor(gained / 100));
+    }
+    setState(next);
   };
 
   const onPassFarkle = () => {
@@ -138,6 +177,8 @@ export default function Game() {
             rolling={rollAnim}
             onToggle={onToggle}
             disabled={!state.hasRolled || state.farkle || !!state.winner}
+            skinId={equippedSkinId}
+            pipsId={equippedPipsId}
           />
           {info.held.length > 0 && (
             <div className="mt-2 text-center text-sm">
@@ -197,6 +238,13 @@ export default function Game() {
         open={!!state.winner}
         winner={state.winner}
         onPlayAgain={playAgain}
+      />
+
+      <BigPopup
+        open={!!popup}
+        word={popup?.word}
+        variant={popup?.variant}
+        onClose={() => setPopup(null)}
       />
     </div>
   );
