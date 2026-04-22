@@ -9,13 +9,14 @@ import { useCosmetics } from "@/hooks/useCosmetics";
 import ShopItemCard from "@/components/shop/ShopItemCard";
 import DicePreview from "@/components/shop/DicePreview";
 import BadgePreview from "@/components/shop/BadgePreview";
+import BuyCoinsDialog from "@/components/shop/BuyCoinsDialog";
 
 export default function Shop() {
   const {
     coins, isLoading,
     ownedSkins, ownedPips, ownedBadges,
     equippedSkinId, equippedPipsId, equippedBadgeId,
-    buyItem, equipItem,
+    buyItem, equipItem, addCoins,
   } = useCosmetics();
   const [tab, setTab] = useState("skins");
 
@@ -45,11 +46,14 @@ export default function Shop() {
             <Sparkles className="w-5 h-5 text-amber-400" /> Shop
           </h1>
         </div>
-        <div className="flex items-center gap-1.5 bg-amber-500/20 border border-amber-500/40 rounded-full px-3 py-1.5">
-          <Coins className="w-4 h-4 text-amber-400" />
-          <span className="font-black tabular-nums text-amber-300">
-            {isLoading ? "…" : coins.toLocaleString()}
-          </span>
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 bg-amber-500/20 border border-amber-500/40 rounded-full px-3 py-1.5">
+            <Coins className="w-4 h-4 text-amber-400" />
+            <span className="font-black tabular-nums text-amber-300">
+              {isLoading ? "…" : coins.toLocaleString()}
+            </span>
+          </div>
+          <BuyCoinsDialog onPurchase={(amount) => addCoins(amount)} />
         </div>
       </div>
 

@@ -89,6 +89,28 @@ export default function Die({
           background: "linear-gradient(to bottom, rgba(255,255,255,0.7), transparent)",
         }}
       />
+
+      {/* Diamond facets + shimmer overlay */}
+      {skin.special === "diamond" && (
+        <>
+          <div
+            className="absolute inset-0 rounded-2xl pointer-events-none opacity-80 mix-blend-overlay"
+            style={{
+              background:
+                "conic-gradient(from 45deg at 50% 50%, rgba(255,255,255,0.9) 0deg, rgba(186,230,253,0.2) 60deg, rgba(255,255,255,0.8) 120deg, rgba(125,211,252,0.3) 180deg, rgba(255,255,255,0.9) 240deg, rgba(186,230,253,0.2) 300deg, rgba(255,255,255,0.9) 360deg)",
+            }}
+          />
+          <motion.div
+            className="absolute inset-0 rounded-2xl pointer-events-none"
+            animate={{ opacity: [0.3, 0.9, 0.3] }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+            style={{
+              background:
+                "radial-gradient(circle at 30% 25%, rgba(255,255,255,0.95) 0%, transparent 40%), radial-gradient(circle at 75% 70%, rgba(186,230,253,0.7) 0%, transparent 35%)",
+            }}
+          />
+        </>
+      )}
     </motion.button>
   );
 }

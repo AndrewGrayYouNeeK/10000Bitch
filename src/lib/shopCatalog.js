@@ -82,6 +82,25 @@ export const DICE_SKINS = [
     glow: "shadow-orange-500/70",
     description: "Molten hot dice.",
   },
+  {
+    id: "diamond",
+    name: "Diamond",
+    price: 2000,
+    gradient: "from-cyan-100 via-white to-sky-200",
+    border: "border-cyan-200",
+    pipColor: "bg-sky-400",
+    glow: "shadow-cyan-300/80",
+    description: "Pure crystal. The legendary tier.",
+    special: "diamond",
+  },
+];
+
+// Coin packs — direct-buy alternative for players who don't want to grind.
+export const COIN_PACKS = [
+  { id: "pack_handful", name: "Handful", coins: 250, emoji: "🎲" },
+  { id: "pack_stack",   name: "Stack",   coins: 750, emoji: "💰" },
+  { id: "pack_roll",    name: "Big Roll", coins: 2000, emoji: "💎" },
+  { id: "pack_jackpot", name: "Jackpot", coins: 5000, emoji: "👑" },
 ];
 
 export const PIP_STYLES = [
