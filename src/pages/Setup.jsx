@@ -33,7 +33,7 @@ export default function Setup() {
         <Button asChild variant="ghost" size="icon" className="text-white hover:bg-white/10">
           <Link to="/"><ArrowLeft className="w-5 h-5" /></Link>
         </Button>
-        <h1 className="text-xl font-bold text-white">Setup Game</h1>
+        <h1 className="text-xl font-bold text-white">10,000 — Setup</h1>
       </div>
 
       <div className="flex-1 max-w-md w-full mx-auto">
