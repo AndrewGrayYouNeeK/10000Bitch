@@ -38,7 +38,9 @@ export default function Die({
               y: [0, -30, -10, -20, 0],
               scale: [1, 1.1, 0.95, 1.05, 1],
             }
-          : { rotate: 0, y: 0, scale: 1 }
+          : held && !used
+            ? { rotate: 0, y: -10, scale: 1.08 }
+            : { rotate: 0, y: 0, scale: 1 }
       }
       transition={
         rolling
@@ -53,7 +55,7 @@ export default function Die({
         skin.border,
         skin.glow && `shadow-xl ${skin.glow}`,
         used && "opacity-20 grayscale cursor-not-allowed",
-        held && !used && "ring-4 ring-amber-300/70 shadow-lg shadow-amber-500/50",
+        held && !used && "ring-[5px] ring-amber-300 shadow-2xl shadow-amber-400/80 brightness-110",
         selected && !used && !held && "ring-4 ring-emerald-300/60 shadow-lg shadow-emerald-500/40"
       )}
       style={{
@@ -89,6 +91,29 @@ export default function Die({
           background: "linear-gradient(to bottom, rgba(255,255,255,0.7), transparent)",
         }}
       />
+
+      {/* Selected (held) indicator — pulsing glow + checkmark badge */}
+      {held && !used && (
+        <>
+          <motion.div
+            className="absolute -inset-1 rounded-2xl pointer-events-none"
+            animate={{ opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+            style={{
+              boxShadow: "0 0 20px 4px rgba(252, 211, 77, 0.9), inset 0 0 12px rgba(252, 211, 77, 0.5)",
+              borderRadius: "1rem",
+            }}
+          />
+          <motion.div
+            initial={{ scale: 0, rotate: -30 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ type: "spring", stiffness: 500, damping: 18 }}
+            className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-amber-400 border-2 border-white flex items-center justify-center text-black font-black text-xs shadow-lg pointer-events-none"
+          >
+            ✓
+          </motion.div>
+        </>
+      )}
 
       {/* Diamond facets + shimmer overlay */}
       {skin.special === "diamond" && (
