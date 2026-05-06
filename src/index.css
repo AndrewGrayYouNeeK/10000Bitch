@@ -89,6 +89,12 @@
     -webkit-tap-highlight-color: transparent;
   }
 
+  button, a, [role="button"], [role="tab"], [role="menuitem"], label {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
   /* Allow text selection inside inputs/textareas */
   input, textarea, [contenteditable="true"] {
     -webkit-user-select: text;
