@@ -5,7 +5,7 @@ import { ArrowLeft } from "lucide-react";
 
 export default function Rules() {
   return (
-    <div className="min-h-screen bg-slate-950 text-white p-4">
+    <div className="pt-safe pb-safe-nav min-h-screen bg-slate-950 text-white p-4">
       <div className="flex items-center gap-2 mb-4 max-w-lg mx-auto">
         <Button asChild variant="ghost" size="icon" className="text-white hover:bg-white/10">
           <Link to="/"><ArrowLeft className="w-5 h-5" /></Link>

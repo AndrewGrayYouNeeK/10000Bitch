@@ -123,7 +123,7 @@ export default function Game() {
     (!needsEntry || potentialTotal >= ENTRY_THRESHOLD);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white flex flex-col">
+    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white flex flex-col pt-safe pb-safe">
       {/* Header */}
       <div className="flex items-center justify-between p-3 border-b border-white/10">
         <Button asChild variant="ghost" size="icon" className="text-white hover:bg-white/10">

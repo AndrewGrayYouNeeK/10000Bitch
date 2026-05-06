@@ -28,7 +28,7 @@ export default function Setup() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 p-4 flex flex-col">
+    <div className="min-h-screen bg-slate-950 p-4 pt-safe pb-safe flex flex-col">
       <div className="flex items-center gap-2 mb-6">
         <Button asChild variant="ghost" size="icon" className="text-white hover:bg-white/10">
           <Link to="/"><ArrowLeft className="w-5 h-5" /></Link>
