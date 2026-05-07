@@ -64,21 +64,21 @@ export default function Die({
         width: size,
         height: size,
         transform: isObsidian ? undefined : "perspective(300px) rotateX(15deg) rotateY(-10deg)",
-        borderRadius: isObsidian ? "22%" : undefined,
+        borderRadius: isObsidian ? "28%" : undefined,
         background: isObsidian
-          ? "radial-gradient(ellipse 110% 90% at 55% 25%, #6b7a9a 0%, #3d4a6a 15%, #1a1f35 35%, #0a0c18 60%, #000000 100%)"
+          ? "linear-gradient(145deg, #1a1d2e 0%, #0d0f1a 40%, #060709 100%)"
           : undefined,
         boxShadow: used
           ? "inset 0 -4px 6px rgba(0,0,0,0.1)"
           : isObsidian
-            ? "0 6px 18px rgba(0,0,0,0.8), 0 2px 6px rgba(0,0,0,0.5)"
+            ? "0 8px 24px rgba(0,0,0,0.9), 0 2px 8px rgba(0,0,0,0.7), inset 0 1px 1px rgba(80,90,140,0.3)"
             : "inset 0 -6px 10px rgba(0,0,0,0.25), inset 0 4px 6px rgba(255,255,255,0.5), 0 8px 14px rgba(0,0,0,0.4)",
       }}
     >
       {/* Pips */}
       <div
-        className="absolute inset-[13%] grid grid-cols-3 grid-rows-3"
-        style={{ gap: size * 0.04, zIndex: 2 }}
+        className="absolute inset-[12%] grid grid-cols-3 grid-rows-3"
+        style={{ gap: size * 0.03, zIndex: 2 }}
       >
         {layout.map((p, i) => (
           <div key={i} className="flex items-center justify-center">
@@ -87,10 +87,10 @@ export default function Die({
                 <div
                   className="rounded-full"
                   style={{
-                    width: size * 0.19,
-                    height: size * 0.19,
-                    background: "radial-gradient(circle at 40% 35%, #ffffff 0%, #e8e8e8 50%, #cccccc 100%)",
-                    boxShadow: "inset 0 2px 3px rgba(0,0,0,0.35), 0 1px 2px rgba(0,0,0,0.5)",
+                    width: size * 0.2,
+                    height: size * 0.2,
+                    background: "radial-gradient(circle at 38% 32%, #ffffff 0%, #f0f0f0 45%, #d8d8d8 100%)",
+                    boxShadow: "inset 0 2px 4px rgba(0,0,0,0.5), inset 0 1px 2px rgba(0,0,0,0.3), 0 1px 2px rgba(255,255,255,0.15)",
                   }}
                 />
               ) : (
@@ -109,15 +109,34 @@ export default function Die({
         />
       )}
 
-      {/* Obsidian: single large sweeping reflection like the photo */}
+      {/* Obsidian: broad sweeping blue-grey reflection across upper-left, matching photo */}
       {isObsidian && (
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            borderRadius: "22%",
-            background: "radial-gradient(ellipse 85% 75% at 62% 28%, rgba(140,160,210,0.55) 0%, rgba(80,100,160,0.25) 35%, transparent 65%)",
-          }}
-        />
+        <>
+          {/* Main broad reflection — covers upper-left ~40% of face */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              borderRadius: "28%",
+              background: "radial-gradient(ellipse 95% 80% at 30% 25%, rgba(100,120,190,0.45) 0%, rgba(60,80,150,0.20) 40%, transparent 68%)",
+            }}
+          />
+          {/* Edge rim light on left side */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              borderRadius: "28%",
+              background: "linear-gradient(to right, rgba(90,110,170,0.18) 0%, transparent 30%)",
+            }}
+          />
+          {/* Subtle top edge highlight */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              borderRadius: "28%",
+              background: "linear-gradient(to bottom, rgba(120,140,200,0.12) 0%, transparent 25%)",
+            }}
+          />
+        </>
       )}
 
       {/* Selected (held) indicator — pulsing glow + checkmark badge */}
