@@ -50,8 +50,9 @@ export default function Die({
       whileTap={!used && !rolling ? { scale: 0.92 } : {}}
       whileHover={!used && !rolling ? { y: -5, rotate: 3 } : {}}
       className={cn(
-        "relative rounded-2xl flex-shrink-0 transition-all duration-200 bg-gradient-to-br border-2",
-        skin.gradient,
+        "relative rounded-2xl flex-shrink-0 transition-all duration-200 border-2 overflow-hidden",
+        !skin.image && "bg-gradient-to-br",
+        !skin.image && skin.gradient,
         skin.border,
         skin.glow && `shadow-xl ${skin.glow}`,
         used && "opacity-20 grayscale cursor-not-allowed",
@@ -67,6 +68,15 @@ export default function Die({
           : "inset 0 -6px 10px rgba(0,0,0,0.25), inset 0 4px 6px rgba(255,255,255,0.5), 0 8px 14px rgba(0,0,0,0.4)",
       }}
     >
+      {skin.image && (
+        <img
+          src={skin.image}
+          alt=""
+          draggable={false}
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          style={{ objectPosition: "20% 30%" }}
+        />
+      )}
       <div
         className="absolute inset-[12%] grid grid-cols-3 grid-rows-3"
         style={{ gap: size * 0.04 }}
