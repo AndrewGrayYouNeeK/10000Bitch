@@ -18,7 +18,7 @@ export default function Die({
   rolling = false,
   onClick,
   size = 64,
-  skinId = "classic_white",
+  skinId = "obsidian",
   pipsId = "classic_dots",
 }) {
   const layout = PIP_LAYOUTS[value] || PIP_LAYOUTS[1];
