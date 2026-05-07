@@ -66,7 +66,15 @@ export default function Die({
         transform: isObsidian ? undefined : "perspective(300px) rotateX(15deg) rotateY(-10deg)",
         borderRadius: isObsidian ? "28%" : undefined,
         background: isObsidian
-          ? "url('https://media.base44.com/images/public/69e7669b223d37093cd03879/637854a9a_IMG_1317.png') center/cover no-repeat"
+          ? (() => {
+              // Image is ~1024×512 with 6 dice in a 3-col × 2-row grid
+              // Each cell is ~341×256px
+              // Map value to [col, row] (0-indexed)
+              const pos = { 1: [0,0], 2: [1,0], 3: [2,0], 4: [0,1], 5: [1,1], 6: [2,1] };
+              const [col, row] = pos[value] || [0,0];
+              // background-size: 300% wide × 200% tall so each cell fills the element
+              return `url('https://media.base44.com/images/public/69e7669b223d37093cd03879/06f26e92d_IMG_1317.png') ${col * 50}% ${row * 100}% / 300% 200% no-repeat`;
+            })()
           : undefined,
         boxShadow: used
           ? "inset 0 -4px 6px rgba(0,0,0,0.1)"
@@ -75,31 +83,21 @@ export default function Die({
             : "inset 0 -6px 10px rgba(0,0,0,0.25), inset 0 4px 6px rgba(255,255,255,0.5), 0 8px 14px rgba(0,0,0,0.4)",
       }}
     >
-      {/* Pips */}
-      <div
-        className="absolute inset-[12%] grid grid-cols-3 grid-rows-3"
-        style={{ gap: size * 0.03, zIndex: 2 }}
-      >
-        {layout.map((p, i) => (
-          <div key={i} className="flex items-center justify-center">
-            {p === 1 && (
-              isObsidian ? (
-                <div
-                  className="rounded-full"
-                  style={{
-                    width: size * 0.2,
-                    height: size * 0.2,
-                    background: "radial-gradient(circle at 38% 32%, #ffffff 0%, #f0f0f0 45%, #d8d8d8 100%)",
-                    boxShadow: "inset 0 2px 4px rgba(0,0,0,0.5), inset 0 1px 2px rgba(0,0,0,0.3), 0 1px 2px rgba(255,255,255,0.15)",
-                  }}
-                />
-              ) : (
+      {/* Pips — only render for non-obsidian; obsidian uses photo texture */}
+      {!isObsidian && (
+        <div
+          className="absolute inset-[12%] grid grid-cols-3 grid-rows-3"
+          style={{ gap: size * 0.03, zIndex: 2 }}
+        >
+          {layout.map((p, i) => (
+            <div key={i} className="flex items-center justify-center">
+              {p === 1 && (
                 <Pip shape={pipStyle.shape} size={size * 0.18} colorClass={skin.pipColor} />
-              )
-            )}
-          </div>
-        ))}
-      </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Glossy highlight for non-obsidian */}
       {!isObsidian && (
@@ -109,35 +107,7 @@ export default function Die({
         />
       )}
 
-      {/* Obsidian: broad sweeping blue-grey reflection across upper-left, matching photo */}
-      {isObsidian && (
-        <>
-          {/* Main broad reflection — covers upper-left ~40% of face */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              borderRadius: "28%",
-              background: "radial-gradient(ellipse 95% 80% at 30% 25%, rgba(100,120,190,0.45) 0%, rgba(60,80,150,0.20) 40%, transparent 68%)",
-            }}
-          />
-          {/* Edge rim light on left side */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              borderRadius: "28%",
-              background: "linear-gradient(to right, rgba(90,110,170,0.18) 0%, transparent 30%)",
-            }}
-          />
-          {/* Subtle top edge highlight */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              borderRadius: "28%",
-              background: "linear-gradient(to bottom, rgba(120,140,200,0.12) 0%, transparent 25%)",
-            }}
-          />
-        </>
-      )}
+
 
       {/* Selected (held) indicator — pulsing glow + checkmark badge */}
       {held && !used && (
