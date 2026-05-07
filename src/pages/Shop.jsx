@@ -36,8 +36,8 @@ export default function Shop() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-green-700 via-emerald-800 to-green-950 text-white">
-      <div className="sticky top-0 z-10 backdrop-blur bg-green-950/80 border-b border-white/10 p-3 flex items-center justify-between">
+    <div className="min-h-screen bg-gradient-to-b from-indigo-950 via-slate-950 to-black text-white">
+      <div className="sticky top-0 z-10 backdrop-blur bg-slate-950/80 border-b border-white/10 p-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Button asChild variant="ghost" size="icon" className="text-white hover:bg-white/10">
             <Link to="/"><ArrowLeft className="w-5 h-5" /></Link>
