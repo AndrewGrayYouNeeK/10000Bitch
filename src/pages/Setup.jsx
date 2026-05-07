@@ -23,12 +23,12 @@ export default function Setup() {
 
   const startGame = () => {
     const names = players.map((n, i) => n.trim() || `Player ${i + 1}`);
-    try { sessionStorage.setItem("dice10k_players", JSON.stringify(names)); } catch {}
-    navigate("/game", { state: { players: names } });
+    sessionStorage.setItem("dice10k_players", JSON.stringify(names));
+    navigate("/game");
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 p-4 pt-safe pb-safe-nav flex flex-col">
+    <div className="min-h-screen bg-slate-950 p-4 flex flex-col">
       <div className="flex items-center gap-2 mb-6">
         <Button asChild variant="ghost" size="icon" className="text-white hover:bg-white/10">
           <Link to="/"><ArrowLeft className="w-5 h-5" /></Link>

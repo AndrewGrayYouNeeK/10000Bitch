@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Dices, PiggyBank, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -24,7 +24,6 @@ import { useCosmetics } from "@/hooks/useCosmetics";
 
 export default function Game() {
   const navigate = useNavigate();
-  const location = useLocation();
   const [state, setState] = useState(null);
   const [rollAnim, setRollAnim] = useState(false);
   const [popup, setPopup] = useState(null); // { word, variant }
@@ -33,21 +32,15 @@ export default function Game() {
   const winnerAwardedRef = React.useRef(false);
 
   useEffect(() => {
-    let names = location.state?.players;
-    if (!names) {
-      try {
-        const stored = sessionStorage.getItem("dice10k_players");
-        if (stored) names = JSON.parse(stored);
-      } catch {}
-    }
-    if (!names || names.length < 2) {
+    const stored = sessionStorage.getItem("dice10k_players");
+    if (!stored) {
       navigate("/setup");
       return;
     }
-    setState(createInitialState(names));
+    setState(createInitialState(JSON.parse(stored)));
     prevBustRef.current = 0;
     winnerAwardedRef.current = false;
-  }, [navigate, location.state]);
+  }, [navigate]);
 
   // Show big pop-up when bust count increases
   useEffect(() => {
@@ -116,14 +109,8 @@ export default function Game() {
   };
 
   const playAgain = () => {
-    let names = location.state?.players;
-    if (!names) {
-      try {
-        const stored = sessionStorage.getItem("dice10k_players");
-        if (stored) names = JSON.parse(stored);
-      } catch {}
-    }
-    if (names) setState(createInitialState(names));
+    const stored = sessionStorage.getItem("dice10k_players");
+    if (stored) setState(createInitialState(JSON.parse(stored)));
   };
 
   if (!state) return null;
@@ -136,7 +123,7 @@ export default function Game() {
     (!needsEntry || potentialTotal >= ENTRY_THRESHOLD);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white flex flex-col pt-safe pb-safe">
+    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white flex flex-col">
       {/* Header */}
       <div className="flex items-center justify-between p-3 border-b border-white/10">
         <Button asChild variant="ghost" size="icon" className="text-white hover:bg-white/10">
@@ -177,11 +164,6 @@ export default function Game() {
               <div className={potentialTotal >= ENTRY_THRESHOLD ? "text-emerald-400" : "text-slate-500"}>
                 {potentialTotal >= ENTRY_THRESHOLD ? "✓ On the board" : `${ENTRY_THRESHOLD - potentialTotal} to go`}
               </div>
-            </div>
-          )}
-          {!needsEntry && (
-            <div className="text-right text-xs">
-              <div className="text-amber-400 font-bold">{Math.max(0, 10000 - currentPlayer.score).toLocaleString()} to go</div>
             </div>
           )}
         </motion.div>

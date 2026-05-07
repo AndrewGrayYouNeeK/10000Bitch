@@ -17,7 +17,6 @@ export default function TurnBanner({ message, variant = "info" }) {
         initial={{ opacity: 0, y: -10, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 10, scale: 0.95 }}
-        style={{ marginTop: "max(0px, calc(var(--safe-top) - 0.25rem))" }}
         className={cn(
           "rounded-xl px-4 py-2 text-center font-bold text-white shadow-lg bg-gradient-to-r",
           colors[variant]

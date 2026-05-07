@@ -10,8 +10,6 @@ import ShopItemCard from "@/components/shop/ShopItemCard";
 import DicePreview from "@/components/shop/DicePreview";
 import BadgePreview from "@/components/shop/BadgePreview";
 import BuyCoinsDialog from "@/components/shop/BuyCoinsDialog";
-import PullToRefresh from "@/components/shop/PullToRefresh";
-import { useQueryClient } from "@tanstack/react-query";
 
 export default function Shop() {
   const {
@@ -21,12 +19,6 @@ export default function Shop() {
     buyItem, equipItem, addCoins,
   } = useCosmetics();
   const [tab, setTab] = useState("skins");
-  const queryClient = useQueryClient();
-
-  const handleRefresh = async () => {
-    await queryClient.invalidateQueries({ queryKey: ["me"] });
-    toast.success("Coin balance refreshed");
-  };
 
   const handleBuy = (type, item) => {
     const res = buyItem(type, item);
@@ -44,8 +36,8 @@ export default function Shop() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-indigo-950 via-slate-950 to-black text-white pb-safe-nav">
-      <div className="sticky z-10 backdrop-blur bg-slate-950/80 border-b border-white/10 p-3 flex items-center justify-between pt-safe" style={{ top: 0 }}>
+    <div className="min-h-screen bg-gradient-to-b from-indigo-950 via-slate-950 to-black text-white">
+      <div className="sticky top-0 z-10 backdrop-blur bg-slate-950/80 border-b border-white/10 p-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Button asChild variant="ghost" size="icon" className="text-white hover:bg-white/10">
             <Link to="/"><ArrowLeft className="w-5 h-5" /></Link>
@@ -65,7 +57,6 @@ export default function Shop() {
         </div>
       </div>
 
-      <PullToRefresh onRefresh={handleRefresh}>
       <div className="p-4 max-w-2xl mx-auto">
         <Tabs value={tab} onValueChange={setTab}>
           <TabsList className="grid grid-cols-3 w-full bg-slate-900 border border-slate-800">
@@ -141,7 +132,6 @@ export default function Shop() {
           Earn coins by banking points & winning games. 1 coin per 100 points banked + 200 bonus for wins.
         </p>
       </div>
-      </PullToRefresh>
     </div>
   );
 }

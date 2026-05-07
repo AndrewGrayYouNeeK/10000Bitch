@@ -6,14 +6,13 @@ import { Dices, Users, BookOpen, Sparkles, Coins } from "lucide-react";
 import RulesSheet from "@/components/game/RulesSheet";
 import { useCosmetics } from "@/hooks/useCosmetics";
 import BadgePreview from "@/components/shop/BadgePreview";
-import SettingsDialog from "@/components/home/SettingsDialog";
 
 export default function Home() {
   const { coins, isLoading, equippedBadge } = useCosmetics();
 
   return (
     <div
-      className="min-h-screen flex flex-col items-center justify-center p-6 pt-safe pb-safe-nav overflow-hidden relative"
+      className="min-h-screen flex flex-col items-center justify-center p-6 overflow-hidden relative"
       style={{
         background:
           "radial-gradient(ellipse at top, #1e293b 0%, #020617 70%), #000",
@@ -45,7 +44,7 @@ export default function Home() {
       </div>
 
       {/* Top bar: coins + badge + rules */}
-      <div className="absolute left-4 right-4 z-10 flex items-center justify-between" style={{ top: "calc(var(--safe-top) + 1rem)" }}>
+      <div className="absolute top-4 left-4 right-4 z-10 flex items-center justify-between">
         <Link
           to="/shop"
           className="flex items-center gap-1.5 bg-amber-500/20 border border-amber-500/40 rounded-full px-3 py-1.5 hover:bg-amber-500/30 transition-colors"
@@ -58,7 +57,6 @@ export default function Home() {
         <div className="flex items-center gap-2">
           {equippedBadge && <BadgePreview badge={equippedBadge} size={36} />}
           <RulesSheet />
-          <SettingsDialog />
         </div>
       </div>
 
