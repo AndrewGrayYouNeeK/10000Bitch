@@ -35,10 +35,6 @@ export default function RulesSheet() {
             <p>You must bank at least <b>1,000 points in a single turn</b> to get "on the board". Until then, banking less than 1,000 scores 0.</p>
           </section>
           <section>
-            <h3 className="font-bold text-base mb-1">🎯 Exact Finish</h3>
-            <p>You must land <b>exactly on 10,000</b>. If banking would push you over 10,000, it's a <b>bust</b> and you lose your turn score. Example: with 9,700 banked and a roll of four 1s, the three-of-a-kind 1s scores 1,000 (= 10,700) — bust. You'd need two 1s + two 5s (100+100+50+50 = 300) to hit 10,000 exactly.</p>
-          </section>
-          <section>
             <h3 className="font-bold text-base mb-1">🏆 Scoring</h3>
             <ul className="space-y-1">
               <li>Single <b>1</b> = 100</li>
