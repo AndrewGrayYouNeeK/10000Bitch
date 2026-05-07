@@ -31,7 +31,7 @@ function AnimatedPage({ children }) {
       animate="center"
       exit="exit"
       transition={{ type: "tween", ease: "easeInOut", duration: 0.28 }}
-      className="w-full"
+      className="absolute inset-0"
     >
       {children}
     </motion.div>
@@ -41,7 +41,7 @@ function AnimatedPage({ children }) {
 export default function AnimatedRoutes() {
   const location = useLocation();
   return (
-    <div className="relative overflow-x-hidden">
+    <div className="relative min-h-screen overflow-x-hidden">
       <AnimatePresence mode="wait" initial={false}>
         <AnimatedPage key={location.pathname}>
           <Routes location={location}>
