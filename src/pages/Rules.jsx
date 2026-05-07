@@ -20,6 +20,13 @@ export default function Rules() {
         </section>
 
         <section className="bg-slate-900 rounded-2xl p-5 border border-slate-800">
+          <h2 className="text-lg font-bold text-amber-400 mb-2">🎯 Land it Exactly</h2>
+          <p className="text-slate-300 text-sm">
+            You must finish on <b className="text-white">exactly 10,000</b>. If banking would put you over, the turn busts and you score <b className="text-white">0</b> for that turn — plan your rolls carefully on the home stretch.
+          </p>
+        </section>
+
+        <section className="bg-slate-900 rounded-2xl p-5 border border-slate-800">
           <h2 className="text-lg font-bold text-amber-400 mb-2">🎲 Your Turn</h2>
           <ol className="list-decimal ml-5 space-y-2 text-slate-300 text-sm">
             <li>Roll all 6 dice.</li>

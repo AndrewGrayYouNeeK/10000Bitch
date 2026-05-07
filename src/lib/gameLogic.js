@@ -176,6 +176,10 @@ export function bankAndPass(state) {
     // Didn't make entry
     message = `${player.name} needs 1,000 to get on the board. Banked 0.`;
     variant = "warning";
+  } else if (player.score + finalTurn > TARGET_SCORE) {
+    // Overshoot — must land exactly on 10,000
+    message = `💥 Overshoot! ${player.name} needed exactly ${TARGET_SCORE - player.score} — banked 0.`;
+    variant = "danger";
   } else {
     newPlayers[state.currentIndex] = {
       ...player,
