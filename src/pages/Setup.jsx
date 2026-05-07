@@ -23,8 +23,8 @@ export default function Setup() {
 
   const startGame = () => {
     const names = players.map((n, i) => n.trim() || `Player ${i + 1}`);
-    sessionStorage.setItem("dice10k_players", JSON.stringify(names));
-    navigate("/game");
+    try { sessionStorage.setItem("dice10k_players", JSON.stringify(names)); } catch {}
+    navigate("/game", { state: { players: names } });
   };
 
   return (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Dices, PiggyBank, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -24,6 +24,7 @@ import { useCosmetics } from "@/hooks/useCosmetics";
 
 export default function Game() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [state, setState] = useState(null);
   const [rollAnim, setRollAnim] = useState(false);
   const [popup, setPopup] = useState(null); // { word, variant }
@@ -32,15 +33,21 @@ export default function Game() {
   const winnerAwardedRef = React.useRef(false);
 
   useEffect(() => {
-    const stored = sessionStorage.getItem("dice10k_players");
-    if (!stored) {
+    let names = location.state?.players;
+    if (!names) {
+      try {
+        const stored = sessionStorage.getItem("dice10k_players");
+        if (stored) names = JSON.parse(stored);
+      } catch {}
+    }
+    if (!names || names.length < 2) {
       navigate("/setup");
       return;
     }
-    setState(createInitialState(JSON.parse(stored)));
+    setState(createInitialState(names));
     prevBustRef.current = 0;
     winnerAwardedRef.current = false;
-  }, [navigate]);
+  }, [navigate, location.state]);
 
   // Show big pop-up when bust count increases
   useEffect(() => {
@@ -109,8 +116,14 @@ export default function Game() {
   };
 
   const playAgain = () => {
-    const stored = sessionStorage.getItem("dice10k_players");
-    if (stored) setState(createInitialState(JSON.parse(stored)));
+    let names = location.state?.players;
+    if (!names) {
+      try {
+        const stored = sessionStorage.getItem("dice10k_players");
+        if (stored) names = JSON.parse(stored);
+      } catch {}
+    }
+    if (names) setState(createInitialState(names));
   };
 
   if (!state) return null;
