@@ -66,7 +66,7 @@ export default function Die({
         transform: isObsidian ? undefined : "perspective(300px) rotateX(15deg) rotateY(-10deg)",
         borderRadius: isObsidian ? "28%" : undefined,
         background: isObsidian
-          ? "linear-gradient(145deg, #1a1d2e 0%, #0d0f1a 40%, #060709 100%)"
+          ? "url('https://media.base44.com/images/public/69e7669b223d37093cd03879/637854a9a_IMG_1317.png') center/cover no-repeat"
           : undefined,
         boxShadow: used
           ? "inset 0 -4px 6px rgba(0,0,0,0.1)"
