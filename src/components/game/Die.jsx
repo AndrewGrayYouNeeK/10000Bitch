@@ -24,6 +24,7 @@ export default function Die({
   const layout = PIP_LAYOUTS[value] || PIP_LAYOUTS[1];
   const skin = getSkin(skinId);
   const pipStyle = getPipStyle(pipsId);
+  const isObsidian = skinId === "obsidian";
 
   return (
     <motion.button
@@ -50,8 +51,9 @@ export default function Die({
       whileTap={!used && !rolling ? { scale: 0.92 } : {}}
       whileHover={!used && !rolling ? { y: -5, rotate: 3 } : {}}
       className={cn(
-        "relative rounded-2xl flex-shrink-0 transition-all duration-200 bg-gradient-to-br border-2",
-        skin.gradient,
+        "relative rounded-2xl flex-shrink-0 transition-all duration-200 border-2",
+        !isObsidian && "bg-gradient-to-br",
+        !isObsidian && skin.gradient,
         skin.border,
         skin.glow && `shadow-xl ${skin.glow}`,
         used && "opacity-20 grayscale cursor-not-allowed",
@@ -62,9 +64,14 @@ export default function Die({
         width: size,
         height: size,
         transform: "perspective(300px) rotateX(15deg) rotateY(-10deg)",
+        background: isObsidian
+          ? "radial-gradient(ellipse at 30% 25%, #1e2540 0%, #0a0a14 45%, #000000 100%)"
+          : undefined,
         boxShadow: used
           ? "inset 0 -4px 6px rgba(0,0,0,0.1)"
-          : "inset 0 -6px 10px rgba(0,0,0,0.25), inset 0 4px 6px rgba(255,255,255,0.5), 0 8px 14px rgba(0,0,0,0.4)",
+          : isObsidian
+            ? "inset 0 -8px 14px rgba(0,0,0,0.9), inset 0 6px 10px rgba(80,110,180,0.35), inset 4px 0 8px rgba(40,60,120,0.25), 0 10px 18px rgba(0,0,0,0.7)"
+            : "inset 0 -6px 10px rgba(0,0,0,0.25), inset 0 4px 6px rgba(255,255,255,0.5), 0 8px 14px rgba(0,0,0,0.4)",
       }}
     >
       <div
@@ -86,11 +93,25 @@ export default function Die({
 
       {/* Glossy highlight */}
       <div
-        className="absolute top-1 left-1 right-1 h-1/3 rounded-t-2xl pointer-events-none opacity-50"
+        className="absolute top-1 left-1 right-1 h-1/3 rounded-t-2xl pointer-events-none"
         style={{
-          background: "linear-gradient(to bottom, rgba(255,255,255,0.7), transparent)",
+          background: isObsidian
+            ? "linear-gradient(to bottom, rgba(180,200,255,0.55), rgba(120,150,220,0.15) 50%, transparent)"
+            : "linear-gradient(to bottom, rgba(255,255,255,0.7), transparent)",
+          opacity: isObsidian ? 0.9 : 0.5,
         }}
       />
+
+      {/* Obsidian extra specular shine */}
+      {isObsidian && (
+        <div
+          className="absolute top-[8%] left-[12%] w-[35%] h-[20%] rounded-full pointer-events-none"
+          style={{
+            background: "radial-gradient(ellipse, rgba(220,230,255,0.7) 0%, transparent 70%)",
+            filter: "blur(2px)",
+          }}
+        />
+      )}
 
       {/* Selected (held) indicator — pulsing glow + checkmark badge */}
       {held && !used && (

@@ -4,13 +4,13 @@
 export const DICE_SKINS = [
   {
     id: "classic_white",
-    name: "Glossy Black",
+    name: "Classic White",
     price: 0,
-    gradient: "from-slate-900 via-black to-slate-950",
-    border: "border-black",
-    pipColor: "bg-white",
-    glow: "shadow-black/70",
-    description: "Deep black with a glossy shine.",
+    gradient: "from-white via-slate-50 to-slate-200",
+    border: "border-slate-300",
+    pipColor: "bg-slate-900",
+    glow: "",
+    description: "The original. Timeless.",
   },
   {
     id: "obsidian",
