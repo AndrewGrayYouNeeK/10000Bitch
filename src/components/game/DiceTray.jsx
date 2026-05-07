@@ -11,18 +11,17 @@ export default function DiceTray({ dice, rolling, onToggle, disabled, skinId, pi
     <div
       className="relative rounded-3xl p-6 overflow-hidden border-4 border-amber-900/60 shadow-2xl"
       style={{
-        background:
-          "radial-gradient(ellipse at center, #1f6b3a 0%, #134524 70%, #0b2e18 100%)",
+        background: "radial-gradient(ellipse at center, #2d7a45 0%, #1a5530 60%, #0e3320 100%)",
         boxShadow:
-          "inset 0 0 40px rgba(0,0,0,0.5), inset 0 4px 10px rgba(255,255,255,0.08), 0 10px 30px rgba(0,0,0,0.5)",
+          "inset 0 0 40px rgba(0,0,0,0.5), inset 0 4px 10px rgba(255,255,255,0.06), 0 10px 30px rgba(0,0,0,0.5)",
       }}
     >
-      {/* Felt texture */}
+      {/* Felt weave texture */}
       <div
-        className="absolute inset-0 opacity-20 pointer-events-none"
+        className="absolute inset-0 opacity-15 pointer-events-none"
         style={{
           backgroundImage:
-            "repeating-linear-gradient(45deg, rgba(0,0,0,0.1) 0, rgba(0,0,0,0.1) 1px, transparent 1px, transparent 3px)",
+            "repeating-linear-gradient(45deg, rgba(0,0,0,0.15) 0, rgba(0,0,0,0.15) 1px, transparent 1px, transparent 4px), repeating-linear-gradient(-45deg, rgba(0,0,0,0.1) 0, rgba(0,0,0,0.1) 1px, transparent 1px, transparent 4px)",
         }}
       />
 
