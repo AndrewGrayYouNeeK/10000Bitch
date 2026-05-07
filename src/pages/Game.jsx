@@ -119,8 +119,9 @@ export default function Game() {
   const currentPlayer = state.players[state.currentIndex];
   const potentialTotal = state.turnScore + (info.valid ? info.score : 0);
   const needsEntry = !currentPlayer.onBoard;
+  const wouldOvershoot = currentPlayer.score + potentialTotal > 10000;
   const canBank = state.hasRolled && !state.farkle && info.valid && info.score > 0 &&
-    (!needsEntry || potentialTotal >= ENTRY_THRESHOLD);
+    (!needsEntry || potentialTotal >= ENTRY_THRESHOLD) && !wouldOvershoot;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white flex flex-col pt-safe pb-safe">
@@ -163,6 +164,14 @@ export default function Game() {
               <div className="text-amber-400 font-bold">Entry: 1,000</div>
               <div className={potentialTotal >= ENTRY_THRESHOLD ? "text-emerald-400" : "text-slate-500"}>
                 {potentialTotal >= ENTRY_THRESHOLD ? "✓ On the board" : `${ENTRY_THRESHOLD - potentialTotal} to go`}
+              </div>
+            </div>
+          )}
+          {!needsEntry && (
+            <div className="text-right text-xs">
+              <div className="text-amber-400 font-bold">{(10000 - currentPlayer.score).toLocaleString()} to go</div>
+              <div className={wouldOvershoot ? "text-rose-400 font-semibold" : "text-slate-500"}>
+                {wouldOvershoot ? "⚠ Overshoots — bust" : "Must land on 10,000"}
               </div>
             </div>
           )}

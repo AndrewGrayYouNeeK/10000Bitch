@@ -38,6 +38,16 @@ export default function Rules() {
         </section>
 
         <section className="bg-slate-900 rounded-2xl p-5 border border-slate-800">
+          <h2 className="text-lg font-bold text-amber-400 mb-2">🎯 Exact Finish</h2>
+          <p className="text-slate-300 text-sm mb-2">
+            You must land <b className="text-white">exactly on 10,000</b>. If banking would push your total <b className="text-rose-400">over 10,000</b>, it's a bust — you lose your turn score and pass.
+          </p>
+          <p className="text-slate-400 text-xs">
+            Example: 9,700 banked and you roll four 1s. The three-of-a-kind 1s scores 1,000 (= 10,700) → bust. You'd need to land on exactly 300 (e.g. two 1s + two 5s = 100+100+50+50) to win.
+          </p>
+        </section>
+
+        <section className="bg-slate-900 rounded-2xl p-5 border border-slate-800">
           <h2 className="text-lg font-bold text-amber-400 mb-3">🏆 Scoring</h2>
           <div className="space-y-2 text-sm">
             {[

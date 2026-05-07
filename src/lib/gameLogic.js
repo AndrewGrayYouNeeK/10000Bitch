@@ -169,6 +169,25 @@ export function bankAndPass(state) {
   const player = state.players[state.currentIndex];
   const newPlayers = [...state.players];
 
+  // Exact-finish rule: banking past 10,000 is a bust.
+  if (player.score + finalTurn > TARGET_SCORE) {
+    const word = bustWord(state.bustCount || 0);
+    const nextIndex = (state.currentIndex + 1) % state.players.length;
+    return {
+      ...state,
+      players: newPlayers,
+      currentIndex: nextIndex,
+      dice: makeFreshDice(),
+      turnScore: 0,
+      hasRolled: false,
+      farkle: false,
+      bustCount: (state.bustCount || 0) + 1,
+      lastBustWord: word,
+      message: `💥 ${word} ${player.name} overshot 10,000. ${newPlayers[nextIndex].name}'s turn.`,
+      messageVariant: "danger",
+    };
+  }
+
   let message;
   let variant;
 
