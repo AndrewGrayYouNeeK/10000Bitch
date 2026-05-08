@@ -11,6 +11,7 @@ import Setup from '@/pages/Setup';
 import Game from '@/pages/Game';
 import Rules from '@/pages/Rules';
 import Shop from '@/pages/Shop';
+import SkinShop from '@/pages/SkinShop';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -43,6 +44,7 @@ const AuthenticatedApp = () => {
       <Route path="/game" element={<Game />} />
       <Route path="/rules" element={<Rules />} />
       <Route path="/shop" element={<Shop />} />
+      <Route path="/skin-shop" element={<SkinShop />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

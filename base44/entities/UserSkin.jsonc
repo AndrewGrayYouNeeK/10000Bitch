@@ -1,0 +1,23 @@
+{
+  "name": "UserSkin",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "The user's email or ID"
+    },
+    "skin_id": {
+      "type": "string",
+      "description": "The skin_id from AvailableSkin"
+    },
+    "purchased_at": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the skin was purchased"
+    }
+  },
+  "required": [
+    "user_id",
+    "skin_id"
+  ]
+}
