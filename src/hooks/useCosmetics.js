@@ -24,7 +24,7 @@ export function useCosmetics() {
   const ownedSkins = user?.owned_skins ?? ["classic_white"];
   const ownedPips = user?.owned_pips ?? ["classic_dots"];
   const ownedBadges = user?.owned_badges ?? [];
-  const equippedSkinId = user?.equipped_skin || "obsidian";
+  const equippedSkinId = user?.equipped_skin || "classic_white";
   const equippedPipsId = user?.equipped_pips || "classic_dots";
   const equippedBadgeId = user?.equipped_badge || "";
 

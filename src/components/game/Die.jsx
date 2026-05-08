@@ -24,7 +24,6 @@ export default function Die({
   const layout = PIP_LAYOUTS[value] || PIP_LAYOUTS[1];
   const skin = getSkin(skinId);
   const pipStyle = getPipStyle(pipsId);
-  const isObsidian = skinId === "obsidian";
 
   return (
     <motion.button
@@ -51,10 +50,10 @@ export default function Die({
       whileTap={!used && !rolling ? { scale: 0.92 } : {}}
       whileHover={!used && !rolling ? { y: -5, rotate: 3 } : {}}
       className={cn(
-        "relative flex-shrink-0 transition-all duration-200",
-        !isObsidian && "rounded-2xl bg-gradient-to-br border-2",
-        !isObsidian && skin.gradient,
-        !isObsidian && skin.border,
+        "relative rounded-2xl flex-shrink-0 transition-all duration-200 border-2 overflow-hidden",
+        !skin.image && "bg-gradient-to-br",
+        !skin.image && skin.gradient,
+        skin.border,
         skin.glow && `shadow-xl ${skin.glow}`,
         used && "opacity-20 grayscale cursor-not-allowed",
         held && !used && "ring-[5px] ring-amber-300 shadow-2xl shadow-amber-400/80 brightness-110",
@@ -63,51 +62,45 @@ export default function Die({
       style={{
         width: size,
         height: size,
-        transform: isObsidian ? undefined : "perspective(300px) rotateX(15deg) rotateY(-10deg)",
-        borderRadius: isObsidian ? "28%" : undefined,
-        background: isObsidian
-          ? (() => {
-              // Image is ~1024×512 with 6 dice in a 3-col × 2-row grid
-              // Each cell is ~341×256px
-              // Map value to [col, row] (0-indexed)
-              const pos = { 1: [0,0], 2: [1,0], 3: [2,0], 4: [0,1], 5: [1,1], 6: [2,1] };
-              const [col, row] = pos[value] || [0,0];
-              // background-size: 300% wide × 200% tall so each cell fills the element
-              return `url('https://media.base44.com/images/public/69e7669b223d37093cd03879/06f26e92d_IMG_1317.png') ${col * 50}% ${row * 100}% / 300% 200% no-repeat`;
-            })()
-          : undefined,
+        transform: "perspective(300px) rotateX(15deg) rotateY(-10deg)",
         boxShadow: used
           ? "inset 0 -4px 6px rgba(0,0,0,0.1)"
-          : isObsidian
-            ? "0 8px 24px rgba(0,0,0,0.9), 0 2px 8px rgba(0,0,0,0.7), inset 0 1px 1px rgba(80,90,140,0.3)"
-            : "inset 0 -6px 10px rgba(0,0,0,0.25), inset 0 4px 6px rgba(255,255,255,0.5), 0 8px 14px rgba(0,0,0,0.4)",
+          : "inset 0 -6px 10px rgba(0,0,0,0.25), inset 0 4px 6px rgba(255,255,255,0.5), 0 8px 14px rgba(0,0,0,0.4)",
       }}
     >
-      {/* Pips — only render for non-obsidian; obsidian uses photo texture */}
-      {!isObsidian && (
-        <div
-          className="absolute inset-[12%] grid grid-cols-3 grid-rows-3"
-          style={{ gap: size * 0.03, zIndex: 2 }}
-        >
-          {layout.map((p, i) => (
-            <div key={i} className="flex items-center justify-center">
-              {p === 1 && (
-                <Pip shape={pipStyle.shape} size={size * 0.18} colorClass={skin.pipColor} />
-              )}
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* Glossy highlight for non-obsidian */}
-      {!isObsidian && (
-        <div
-          className="absolute top-1 left-1 right-1 h-1/3 rounded-t-2xl pointer-events-none opacity-50"
-          style={{ background: "linear-gradient(to bottom, rgba(255,255,255,0.7), transparent)" }}
+      {skin.image && (
+        <img
+          src={skin.image}
+          alt=""
+          draggable={false}
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          style={{ objectPosition: "20% 30%" }}
         />
       )}
+      <div
+        className="absolute inset-[12%] grid grid-cols-3 grid-rows-3"
+        style={{ gap: size * 0.04 }}
+      >
+        {layout.map((p, i) => (
+          <div key={i} className="flex items-center justify-center">
+            {p === 1 && (
+              <Pip
+                shape={pipStyle.shape}
+                size={size * 0.18}
+                colorClass={skin.pipColor}
+              />
+            )}
+          </div>
+        ))}
+      </div>
 
-
+      {/* Glossy highlight */}
+      <div
+        className="absolute top-1 left-1 right-1 h-1/3 rounded-t-2xl pointer-events-none opacity-50"
+        style={{
+          background: "linear-gradient(to bottom, rgba(255,255,255,0.7), transparent)",
+        }}
+      />
 
       {/* Selected (held) indicator — pulsing glow + checkmark badge */}
       {held && !used && (
