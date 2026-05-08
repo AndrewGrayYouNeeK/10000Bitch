@@ -62,14 +62,13 @@ export default function Die({
       onClick={onClick}
       disabled={used || rolling}
       className={cn(
-        "relative w-full h-full bg-gradient-to-br border-2",
+        "relative w-full h-full bg-gradient-to-br",
         skin.gradient,
-        skin.border,
         used && "opacity-20 grayscale cursor-not-allowed",
       )}
       style={{
-        borderRadius: size * 0.28,
-        boxShadow,
+        borderRadius: Math.round(size * 0.20),
+        boxShadow: boxShadow + (skin.realistic ? ", 0 0 0 1.5px rgba(160,160,175,0.45)" : ""),
       }}
     >
       <div
@@ -106,12 +105,12 @@ export default function Die({
       {held && !used && (
         <>
           <motion.div
-            className="absolute -inset-1 rounded-2xl pointer-events-none"
+            className="absolute -inset-1 pointer-events-none"
             animate={{ opacity: [0.5, 1, 0.5] }}
             transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
             style={{
               boxShadow: "0 0 20px 4px rgba(252, 211, 77, 0.9), inset 0 0 12px rgba(252, 211, 77, 0.5)",
-              borderRadius: "1rem",
+              borderRadius: Math.round(size * 0.22),
             }}
           />
           <motion.div
