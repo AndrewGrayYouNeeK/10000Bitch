@@ -145,10 +145,15 @@ export default function Die({
         type="button"
         onClick={onClick}
         disabled={used || rolling}
-        className={`relative w-full h-full bg-gradient-to-br ${skin.gradient} ${used ? "opacity-20 grayscale cursor-not-allowed" : ""}`}
+        className={`relative w-full h-full ${skin.id !== "classic_white" ? `bg-gradient-to-br ${skin.gradient}` : ""} ${used ? "opacity-20 grayscale cursor-not-allowed" : ""}`}
         style={{
           borderRadius: radius,
           boxShadow: buildShadow(),
+          ...(skin.id === "classic_white" && {
+            backgroundImage: `url('https://media.base44.com/images/public/69e7669b223d37093cd03879/49189089f_IMG_1356.png')`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }),
         }}
       >
         {/* Pip grid */}
@@ -172,8 +177,8 @@ export default function Die({
           ))}
         </div>
 
-        {/* Top-left gloss highlight — the bright specular spot from the photo */}
-        {skin.realistic && (
+        {/* Top-left gloss highlight — only for non-photo skins */}
+        {skin.realistic && skin.id !== "classic_white" && (
           <div
             className="absolute pointer-events-none"
             style={{
