@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { PIP_LAYOUTS } from "@/lib/diceAssets";
 import { getSkin, getPipStyle } from "@/lib/shopCatalog";
@@ -10,6 +10,23 @@ import { cn } from "@/lib/utils";
  * States: held (locked in current selection), selected (picking this roll), used (already banked).
  * Accepts `skinId` and `pipsId` to dynamically style the die from the shop catalog.
  */
+// Generate a unique random roll animation per die instance
+function useRollVariants() {
+  const ref = React.useRef(null);
+  if (!ref.current) {
+    const dir = Math.random() > 0.5 ? 1 : -1;
+    const spins = (3 + Math.floor(Math.random() * 3)) * 360 * dir;
+    const bounceH = 18 + Math.random() * 28;
+    ref.current = {
+      rotate: [0, spins * 0.3, spins * 0.6, spins * 0.85, spins * 0.95, spins],
+      y: [0, -bounceH, -bounceH * 0.4, -bounceH * 0.6, -bounceH * 0.15, 0],
+      x: [0, (Math.random() - 0.5) * 12, (Math.random() - 0.5) * 8, (Math.random() - 0.5) * 4, 0, 0],
+      scale: [1, 1.15, 1.05, 1.1, 0.97, 1],
+    };
+  }
+  return ref.current;
+}
+
 export default function Die({
   value = 1,
   held = false,
@@ -24,6 +41,22 @@ export default function Die({
   const layout = PIP_LAYOUTS[value] || PIP_LAYOUTS[1];
   const skin = getSkin(skinId);
   const pipStyle = getPipStyle(pipsId);
+  const rollVariants = useRollVariants();
+
+  // Regenerate random path each time rolling starts
+  const rollKey = React.useRef(0);
+  const wasRolling = React.useRef(false);
+  if (rolling && !wasRolling.current) {
+    rollKey.current += 1;
+    const dir = Math.random() > 0.5 ? 1 : -1;
+    const spins = (3 + Math.floor(Math.random() * 3)) * 360 * dir;
+    const bounceH = 18 + Math.random() * 28;
+    rollVariants.rotate = [0, spins * 0.3, spins * 0.65, spins * 0.88, spins * 0.97, spins];
+    rollVariants.y = [0, -bounceH, -bounceH * 0.35, -bounceH * 0.55, -bounceH * 0.12, 0];
+    rollVariants.x = [0, (Math.random() - 0.5) * 14, (Math.random() - 0.5) * 10, (Math.random() - 0.5) * 5, 0, 0];
+    rollVariants.scale = [1, 1.18, 1.06, 1.12, 0.96, 1];
+  }
+  wasRolling.current = rolling;
 
   const baseShadow = skin.realistic
     ? "inset 0 3px 8px rgba(255,255,255,1), inset 0 -4px 10px rgba(200,200,210,0.6), inset 3px 0 8px rgba(255,255,255,0.8), inset -3px 0 6px rgba(180,180,190,0.3), 0 6px 20px rgba(0,0,0,0.35), 0 2px 6px rgba(0,0,0,0.2)"
@@ -39,19 +72,24 @@ export default function Die({
 
   return (
     <motion.div
+      key={rolling ? rollKey.current : "idle"}
       className="flex-shrink-0"
       style={{ width: size, height: size }}
       initial={false}
       animate={
         rolling
-          ? { rotate: [0, 180, 540, 900, 1080], y: [0, -30, -10, -20, 0], scale: [1, 1.1, 0.95, 1.05, 1] }
+          ? { rotate: rollVariants.rotate, y: rollVariants.y, x: rollVariants.x, scale: rollVariants.scale }
           : held && !used
-            ? { rotate: 0, y: -10, scale: 1.08 }
-            : { rotate: 0, y: 0, scale: 1 }
+            ? { rotate: 0, y: -10, x: 0, scale: 1.08 }
+            : { rotate: 0, y: 0, x: 0, scale: 1 }
       }
       transition={
         rolling
-          ? { duration: 0.7, ease: "easeOut" }
+          ? {
+              duration: 0.85,
+              ease: [0.25, 0.46, 0.45, 0.94],
+              times: [0, 0.2, 0.45, 0.65, 0.85, 1],
+            }
           : { type: "spring", stiffness: 300, damping: 18 }
       }
       whileTap={!used && !rolling ? { scale: 0.92 } : {}}

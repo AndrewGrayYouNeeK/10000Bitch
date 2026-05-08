@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Dices, PiggyBank, ChevronRight } from "lucide-react";
@@ -27,6 +27,7 @@ export default function Game() {
   const [state, setState] = useState(null);
   const [rollAnim, setRollAnim] = useState(false);
   const [popup, setPopup] = useState(null); // { word, variant }
+  const [shakeTriggered, setShakeTriggered] = useState(0);
   const { equippedSkinId, equippedPipsId, addCoins } = useCosmetics();
   const prevBustRef = React.useRef(0);
   const winnerAwardedRef = React.useRef(false);
@@ -59,6 +60,57 @@ export default function Game() {
     }
   }, [state?.winner, addCoins]);
 
+  // Shake-to-roll via DeviceMotion
+  useEffect(() => {
+    let lastShake = 0;
+    const THRESHOLD = 18;
+    const COOLDOWN = 1500;
+
+    const handleMotion = (e) => {
+      const acc = e.accelerationIncludingGravity;
+      if (!acc) return;
+      const total = Math.sqrt((acc.x || 0) ** 2 + (acc.y || 0) ** 2 + (acc.z || 0) ** 2);
+      const now = Date.now();
+      if (total > THRESHOLD && now - lastShake > COOLDOWN) {
+        lastShake = now;
+        // Only roll if the game is in a rollable state
+        setState(s => {
+          if (!s || s.farkle || s.winner || rollAnim) return s;
+          return s; // trigger via side effect below
+        });
+        setShakeTriggered(t => t + 1);
+      }
+    };
+
+    if (typeof DeviceMotionEvent !== "undefined") {
+      if (typeof DeviceMotionEvent.requestPermission === "function") {
+        // iOS 13+ requires permission — request it on first user interaction
+        const requestPerm = async () => {
+          try {
+            const res = await DeviceMotionEvent.requestPermission();
+            if (res === "granted") window.addEventListener("devicemotion", handleMotion);
+          } catch {}
+          document.removeEventListener("click", requestPerm);
+        };
+        document.addEventListener("click", requestPerm);
+      } else {
+        window.addEventListener("devicemotion", handleMotion);
+      }
+    }
+    return () => window.removeEventListener("devicemotion", handleMotion);
+  }, [rollAnim]);
+
+  useEffect(() => {
+    if (shakeTriggered === 0) return;
+    if (!state || state.farkle || state.winner || rollAnim) return;
+    if (!state.hasRolled) {
+      doRoll();
+    } else {
+      const info = getHeldInfo(state);
+      if (info.valid && info.score > 0) onRollAgain();
+    }
+  }, [shakeTriggered]);
+
   const doRoll = useCallback(() => {
     if (!state) return;
     setRollAnim(true);
@@ -67,7 +119,7 @@ export default function Game() {
     setTimeout(() => {
       setRollAnim(false);
       setState(s => evaluateRoll(s));
-    }, 650);
+    }, 900);
   }, [state]);
 
   const onToggle = (dieId) => {
@@ -83,7 +135,7 @@ export default function Game() {
     }
     setRollAnim(true);
     setState(next);
-    setTimeout(() => setRollAnim(false), 650);
+    setTimeout(() => setRollAnim(false), 900);
   };
 
   const onBank = () => {
