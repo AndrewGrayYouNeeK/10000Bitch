@@ -25,19 +25,26 @@ export default function Die({
   const skin = getSkin(skinId);
   const pipStyle = getPipStyle(pipsId);
 
+  const baseShadow = skin.realistic
+    ? "inset 0 -8px 14px rgba(0,0,0,0.18), inset 0 6px 10px rgba(255,255,255,0.95), inset -4px 0 8px rgba(0,0,0,0.08), 0 10px 28px rgba(0,0,0,0.45), 0 2px 6px rgba(0,0,0,0.25)"
+    : "inset 0 -6px 10px rgba(0,0,0,0.25), inset 0 4px 6px rgba(255,255,255,0.5), 0 8px 14px rgba(0,0,0,0.4)";
+
+  const boxShadow = used
+    ? "inset 0 -3px 5px rgba(0,0,0,0.1)"
+    : held
+      ? `${baseShadow}, 0 0 0 5px #fcd34d, 0 0 24px 4px rgba(252,211,77,0.8)`
+      : selected
+        ? `${baseShadow}, 0 0 0 4px rgba(52,211,153,0.6)`
+        : baseShadow;
+
   return (
-    <motion.button
-      type="button"
-      onClick={onClick}
-      disabled={used || rolling}
+    <motion.div
+      className="flex-shrink-0"
+      style={{ width: size, height: size }}
       initial={false}
       animate={
         rolling
-          ? {
-              rotate: [0, 180, 540, 900, 1080],
-              y: [0, -30, -10, -20, 0],
-              scale: [1, 1.1, 0.95, 1.05, 1],
-            }
+          ? { rotate: [0, 180, 540, 900, 1080], y: [0, -30, -10, -20, 0], scale: [1, 1.1, 0.95, 1.05, 1] }
           : held && !used
             ? { rotate: 0, y: -10, scale: 1.08 }
             : { rotate: 0, y: 0, scale: 1 }
@@ -49,30 +56,21 @@ export default function Die({
       }
       whileTap={!used && !rolling ? { scale: 0.92 } : {}}
       whileHover={!used && !rolling ? { y: -5, rotate: 3 } : {}}
+    >
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={used || rolling}
       className={cn(
-        "relative flex-shrink-0 transition-all duration-200 bg-gradient-to-br border-2",
+        "relative w-full h-full bg-gradient-to-br border-2",
         skin.gradient,
         skin.border,
         used && "opacity-20 grayscale cursor-not-allowed",
       )}
       style={{
-        width: size,
-        height: size,
-        transform: "perspective(300px) rotateX(15deg) rotateY(-10deg)",
         borderRadius: size * 0.22,
-        boxShadow: used
-          ? "inset 0 -3px 5px rgba(0,0,0,0.1)"
-          : held && !used
-            ? (skin.realistic
-                ? "inset 0 -8px 14px rgba(0,0,0,0.18), inset 0 6px 10px rgba(255,255,255,0.95), inset -4px 0 8px rgba(0,0,0,0.08), 0 0 0 5px #fcd34d, 0 0 24px 4px rgba(252,211,77,0.8), 0 10px 28px rgba(0,0,0,0.45)"
-                : "inset 0 -6px 10px rgba(0,0,0,0.25), inset 0 4px 6px rgba(255,255,255,0.5), 0 0 0 5px #fcd34d, 0 0 24px 4px rgba(252,211,77,0.8), 0 8px 14px rgba(0,0,0,0.4)")
-            : selected && !used
-              ? (skin.realistic
-                  ? "inset 0 -8px 14px rgba(0,0,0,0.18), inset 0 6px 10px rgba(255,255,255,0.95), 0 0 0 4px rgba(52,211,153,0.6), 0 8px 20px rgba(0,0,0,0.4)"
-                  : "inset 0 -6px 10px rgba(0,0,0,0.25), inset 0 4px 6px rgba(255,255,255,0.5), 0 0 0 4px rgba(52,211,153,0.6), 0 8px 14px rgba(0,0,0,0.4)")
-              : skin.realistic
-                ? "inset 0 -8px 14px rgba(0,0,0,0.18), inset 0 6px 10px rgba(255,255,255,0.95), inset -4px 0 8px rgba(0,0,0,0.08), 0 10px 28px rgba(0,0,0,0.45), 0 2px 6px rgba(0,0,0,0.25)"
-                : "inset 0 -6px 10px rgba(0,0,0,0.25), inset 0 4px 6px rgba(255,255,255,0.5), 0 8px 14px rgba(0,0,0,0.4)",
+        transform: "perspective(300px) rotateX(15deg) rotateY(-10deg)",
+        boxShadow,
       }}
     >
       <div
@@ -145,6 +143,7 @@ export default function Die({
           />
         </>
       )}
-    </motion.button>
+    </button>
+    </motion.div>
   );
 }
