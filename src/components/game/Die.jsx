@@ -62,9 +62,12 @@ export default function Die({
         width: size,
         height: size,
         transform: "perspective(300px) rotateX(15deg) rotateY(-10deg)",
+        borderRadius: size * 0.22,
         boxShadow: used
-          ? "inset 0 -4px 6px rgba(0,0,0,0.1)"
-          : "inset 0 -6px 10px rgba(0,0,0,0.25), inset 0 4px 6px rgba(255,255,255,0.5), 0 8px 14px rgba(0,0,0,0.4)",
+          ? "inset 0 -3px 5px rgba(0,0,0,0.1)"
+          : skin.realistic
+            ? "inset 0 -8px 14px rgba(0,0,0,0.18), inset 0 6px 10px rgba(255,255,255,0.95), inset -4px 0 8px rgba(0,0,0,0.08), 0 10px 28px rgba(0,0,0,0.45), 0 2px 6px rgba(0,0,0,0.25)"
+            : "inset 0 -6px 10px rgba(0,0,0,0.25), inset 0 4px 6px rgba(255,255,255,0.5), 0 8px 14px rgba(0,0,0,0.4)",
       }}
     >
       <div
@@ -78,6 +81,7 @@ export default function Die({
                 shape={pipStyle.shape}
                 size={size * 0.18}
                 colorClass={skin.pipColor}
+                inset={skin.realistic}
               />
             )}
           </div>

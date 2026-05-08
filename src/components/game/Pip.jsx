@@ -2,9 +2,11 @@ import React from "react";
 
 // Renders a single pip in the shape defined by the equipped pip style.
 // `colorClass` is a tailwind bg-* class for dots/squares, or fill color for svg shapes.
-export default function Pip({ shape = "dot", size, colorClass = "bg-slate-900" }) {
+export default function Pip({ shape = "dot", size, colorClass = "bg-slate-900", inset = false }) {
   const s = size || 10;
-  const shadow = "inset 0 2px 3px rgba(0,0,0,0.6), inset 0 -1px 1px rgba(255,255,255,0.1)";
+  const shadow = inset
+    ? "inset 0 2px 4px rgba(0,0,0,0.55), inset 0 1px 2px rgba(0,0,0,0.4), 0 1px 1px rgba(255,255,255,0.6)"
+    : "inset 0 2px 3px rgba(0,0,0,0.6), inset 0 -1px 1px rgba(255,255,255,0.1)";
 
   if (shape === "square") {
     return (
@@ -49,15 +51,20 @@ export default function Pip({ shape = "dot", size, colorClass = "bg-slate-900" }
   return (
     <div
       className={`rounded-full ${colorClass}`}
-      style={{ width: s, height: s, boxShadow: shadow }}
+      style={{
+        width: s,
+        height: s,
+        boxShadow: shadow,
+      }}
     />
   );
 }
 
 function bgClassToFill(cls) {
-  if (!cls) return "#0f172a";
+  if (!cls) return "#111827";
   if (cls.includes("white")) return "#ffffff";
   if (cls.includes("yellow-200")) return "#fef08a";
   if (cls.includes("slate-900")) return "#0f172a";
-  return "#0f172a";
+  if (cls.includes("gray-900")) return "#111827";
+  return "#111827";
 }
