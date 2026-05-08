@@ -26,11 +26,11 @@ export default function Die({
   const pipStyle = getPipStyle(pipsId);
 
   const baseShadow = skin.realistic
-    ? "inset 0 -8px 14px rgba(0,0,0,0.18), inset 0 6px 10px rgba(255,255,255,0.95), inset -4px 0 8px rgba(0,0,0,0.08), 0 10px 28px rgba(0,0,0,0.45), 0 2px 6px rgba(0,0,0,0.25)"
+    ? "inset 0 3px 8px rgba(255,255,255,1), inset 0 -4px 10px rgba(200,200,210,0.6), inset 3px 0 8px rgba(255,255,255,0.8), inset -3px 0 6px rgba(180,180,190,0.3), 0 6px 20px rgba(0,0,0,0.35), 0 2px 6px rgba(0,0,0,0.2)"
     : "inset 0 -6px 10px rgba(0,0,0,0.25), inset 0 4px 6px rgba(255,255,255,0.5), 0 8px 14px rgba(0,0,0,0.4)";
 
   const boxShadow = used
-    ? "inset 0 -3px 5px rgba(0,0,0,0.1)"
+    ? "inset 0 2px 4px rgba(255,255,255,0.6), 0 2px 6px rgba(0,0,0,0.15)"
     : held
       ? `${baseShadow}, 0 0 0 5px #fcd34d, 0 0 24px 4px rgba(252,211,77,0.8)`
       : selected
@@ -68,8 +68,7 @@ export default function Die({
         used && "opacity-20 grayscale cursor-not-allowed",
       )}
       style={{
-        borderRadius: size * 0.22,
-        transform: "perspective(300px) rotateX(15deg) rotateY(-10deg)",
+        borderRadius: size * 0.28,
         boxShadow,
       }}
     >
@@ -82,7 +81,7 @@ export default function Die({
             {p === 1 && (
               <Pip
                 shape={pipStyle.shape}
-                size={size * 0.18}
+                size={skin.realistic ? size * 0.21 : size * 0.18}
                 colorClass={skin.pipColor}
                 inset={skin.realistic}
               />
@@ -91,13 +90,17 @@ export default function Die({
         ))}
       </div>
 
-      {/* Glossy highlight */}
-      <div
-        className="absolute top-1 left-1 right-1 h-1/3 rounded-t-2xl pointer-events-none opacity-50"
-        style={{
-          background: "linear-gradient(to bottom, rgba(255,255,255,0.7), transparent)",
-        }}
-      />
+      {/* Subtle top-left gloss for realism */}
+      {skin.realistic && (
+        <div
+          className="absolute pointer-events-none"
+          style={{
+            top: "6%", left: "6%", right: "30%", bottom: "55%",
+            borderRadius: size * 0.22,
+            background: "radial-gradient(ellipse at 30% 30%, rgba(255,255,255,0.6) 0%, transparent 70%)",
+          }}
+        />
+      )}
 
       {/* Selected (held) indicator — pulsing glow + checkmark badge */}
       {held && !used && (

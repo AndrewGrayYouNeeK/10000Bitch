@@ -5,7 +5,7 @@ import React from "react";
 export default function Pip({ shape = "dot", size, colorClass = "bg-slate-900", inset = false }) {
   const s = size || 10;
   const shadow = inset
-    ? "inset 0 2px 4px rgba(0,0,0,0.55), inset 0 1px 2px rgba(0,0,0,0.4), 0 1px 1px rgba(255,255,255,0.6)"
+    ? "inset 0 3px 6px rgba(0,0,0,0.7), inset 0 1px 3px rgba(0,0,0,0.5), 0 1px 2px rgba(255,255,255,0.5)"
     : "inset 0 2px 3px rgba(0,0,0,0.6), inset 0 -1px 1px rgba(255,255,255,0.1)";
 
   if (shape === "square") {
