@@ -150,9 +150,16 @@ export default function Die({
           borderRadius: radius,
           boxShadow: buildShadow(),
           ...(skin.id === "classic_white" && {
-            backgroundImage: `url('https://media.base44.com/images/public/69e7669b223d37093cd03879/49189089f_IMG_1356.png')`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
+            backgroundImage: `url('https://v3b.fal.media/files/b/0a996e7d/Dgc9VAOMxeIRsZGOSbKJh_KZutNRiP.png')`,
+            backgroundSize: "300% 200%",
+            backgroundPosition: (() => {
+              // Image is a 3x2 grid: columns = values 1,2,3 (top row) and 4,5,6 (bottom row)
+              const col = (value - 1) % 3; // 0, 1, 2
+              const row = Math.floor((value - 1) / 3); // 0 or 1
+              const xPercent = (col / 2) * 100;
+              const yPercent = (row / 1) * 100;
+              return `${xPercent}% ${yPercent}%`;
+            })(),
           }),
         }}
       >
@@ -166,7 +173,7 @@ export default function Die({
         >
           {layout.flat().map((p, i) => (
             <div key={i} className="flex items-center justify-center">
-              {p === 1 && (
+              {p === 1 && skin.id !== "classic_white" && (
                 <Pip
                   size={pipSize}
                   colorClass={skin.pipColor}
@@ -178,7 +185,7 @@ export default function Die({
         </div>
 
         {/* Top-left gloss highlight — only for non-photo skins */}
-        {skin.realistic && skin.id !== "classic_white" && (
+        {skin.realistic && skin.id !== "classic_white" && skin.id !== "classic_white" && (
           <div
             className="absolute pointer-events-none"
             style={{
