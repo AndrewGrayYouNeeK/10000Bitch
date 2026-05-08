@@ -1,16 +1,43 @@
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
-import { PIP_LAYOUTS } from "@/lib/diceAssets";
 import { getSkin, getPipStyle } from "@/lib/shopCatalog";
 import Pip from "./Pip";
-import { cn } from "@/lib/utils";
 
-/**
- * 3D-styled die rendered with CSS. Shows the given `value` face.
- * States: held (locked in current selection), selected (picking this roll), used (already banked).
- * Accepts `skinId` and `pipsId` to dynamically style the die from the shop catalog.
- */
-// Generate a unique random roll animation per die instance
+// Pip grid positions for each face value.
+// Grid is 3x3. 1 = pip present, 0 = empty.
+const PIP_LAYOUTS = {
+  1: [
+    [0, 0, 0],
+    [0, 1, 0],
+    [0, 0, 0],
+  ],
+  2: [
+    [1, 0, 0],
+    [0, 0, 0],
+    [0, 0, 1],
+  ],
+  3: [
+    [1, 0, 0],
+    [0, 1, 0],
+    [0, 0, 1],
+  ],
+  4: [
+    [1, 0, 1],
+    [0, 0, 0],
+    [1, 0, 1],
+  ],
+  5: [
+    [1, 0, 1],
+    [0, 1, 0],
+    [1, 0, 1],
+  ],
+  6: [
+    [1, 0, 1],
+    [1, 0, 1],
+    [1, 0, 1],
+  ],
+};
+
 function useRollVariants() {
   const ref = React.useRef(null);
   if (!ref.current) {
@@ -40,10 +67,8 @@ export default function Die({
 }) {
   const layout = PIP_LAYOUTS[value] || PIP_LAYOUTS[1];
   const skin = getSkin(skinId);
-  const pipStyle = getPipStyle(pipsId);
   const rollVariants = useRollVariants();
 
-  // Regenerate random path each time rolling starts
   const rollKey = React.useRef(0);
   const wasRolling = React.useRef(false);
   if (rolling && !wasRolling.current) {
@@ -58,17 +83,38 @@ export default function Die({
   }
   wasRolling.current = rolling;
 
-  const baseShadow = skin.realistic
-    ? "inset 0 3px 8px rgba(255,255,255,1), inset 0 -4px 10px rgba(200,200,210,0.6), inset 3px 0 8px rgba(255,255,255,0.8), inset -3px 0 6px rgba(180,180,190,0.3), 0 6px 20px rgba(0,0,0,0.35), 0 2px 6px rgba(0,0,0,0.2)"
-    : "inset 0 -6px 10px rgba(0,0,0,0.25), inset 0 4px 6px rgba(255,255,255,0.5), 0 8px 14px rgba(0,0,0,0.4)";
+  // Squircle corner radius — matches the photo's very rounded dice
+  const radius = Math.round(size * 0.28);
 
-  const boxShadow = used
-    ? "inset 0 2px 4px rgba(255,255,255,0.6), 0 2px 6px rgba(0,0,0,0.15)"
-    : held
-      ? `${baseShadow}, 0 0 0 5px #fcd34d, 0 0 24px 4px rgba(252,211,77,0.8)`
-      : selected
-        ? `${baseShadow}, 0 0 0 4px rgba(52,211,153,0.6)`
-        : baseShadow;
+  // Pip size scales nicely with die size
+  const pipSize = Math.round(size * 0.145);
+
+  // Padding inside die before the pip grid
+  const padding = Math.round(size * 0.13);
+
+  // The 3D box shadow: top-left highlight, bottom-right shadow, drop shadow
+  const buildShadow = () => {
+    const base = skin.realistic
+      ? [
+          `inset 0 ${size * 0.05}px ${size * 0.12}px rgba(255,255,255,0.95)`,   // top highlight
+          `inset ${size * 0.04}px 0 ${size * 0.08}px rgba(255,255,255,0.7)`,    // left highlight
+          `inset 0 -${size * 0.06}px ${size * 0.12}px rgba(190,190,205,0.55)`,  // bottom shadow
+          `inset -${size * 0.04}px 0 ${size * 0.08}px rgba(180,180,195,0.35)`,  // right shadow
+          `0 ${size * 0.08}px ${size * 0.25}px rgba(0,0,0,0.38)`,               // drop shadow
+          `0 ${size * 0.02}px ${size * 0.06}px rgba(0,0,0,0.22)`,               // close shadow
+          `0 0 0 1.5px rgba(150,150,165,0.4)`,                                  // subtle border
+        ].join(", ")
+      : [
+          `inset 0 -${size * 0.06}px ${size * 0.1}px rgba(0,0,0,0.25)`,
+          `inset 0 ${size * 0.04}px ${size * 0.06}px rgba(255,255,255,0.5)`,
+          `0 ${size * 0.08}px ${size * 0.14}px rgba(0,0,0,0.4)`,
+        ].join(", ");
+
+    if (used) return `inset 0 2px 4px rgba(255,255,255,0.5), 0 2px 6px rgba(0,0,0,0.12)`;
+    if (held) return `${base}, 0 0 0 ${Math.round(size * 0.07)}px #fcd34d, 0 0 ${size * 0.35}px ${size * 0.06}px rgba(252,211,77,0.75)`;
+    if (selected) return `${base}, 0 0 0 ${Math.round(size * 0.05)}px rgba(52,211,153,0.6)`;
+    return base;
+  };
 
   return (
     <motion.div
@@ -95,95 +141,100 @@ export default function Die({
       whileTap={!used && !rolling ? { scale: 0.92 } : {}}
       whileHover={!used && !rolling ? { y: -5, rotate: 3 } : {}}
     >
-    <button
-      type="button"
-      onClick={onClick}
-      disabled={used || rolling}
-      className={cn(
-        "relative w-full h-full bg-gradient-to-br",
-        skin.gradient,
-        used && "opacity-20 grayscale cursor-not-allowed",
-      )}
-      style={{
-        borderRadius: Math.round(size * 0.15),
-        boxShadow: boxShadow + (skin.realistic ? ", 0 0 0 1.5px rgba(160,160,175,0.45)" : ""),
-      }}
-    >
-      <div
-        className="absolute inset-[12%] grid grid-cols-3 grid-rows-3"
-        style={{ gap: size * 0.04 }}
+      <button
+        type="button"
+        onClick={onClick}
+        disabled={used || rolling}
+        className={`relative w-full h-full bg-gradient-to-br ${skin.gradient} ${used ? "opacity-20 grayscale cursor-not-allowed" : ""}`}
+        style={{
+          borderRadius: radius,
+          boxShadow: buildShadow(),
+        }}
       >
-        {layout.map((p, i) => (
-          <div key={i} className="flex items-center justify-center">
-            {p === 1 && (
-              <Pip
-                shape={pipStyle.shape}
-                size={skin.realistic ? size * 0.21 : size * 0.18}
-                colorClass={skin.pipColor}
-                inset={skin.realistic}
-              />
-            )}
-          </div>
-        ))}
-      </div>
-
-      {/* Subtle top-left gloss for realism */}
-      {skin.realistic && (
+        {/* Pip grid */}
         <div
-          className="absolute pointer-events-none"
+          className="absolute grid grid-cols-3 grid-rows-3"
           style={{
-            top: "6%", left: "6%", right: "30%", bottom: "55%",
-            borderRadius: size * 0.22,
-            background: "radial-gradient(ellipse at 30% 30%, rgba(255,255,255,0.6) 0%, transparent 70%)",
+            inset: padding,
+            gap: Math.round(size * 0.045),
           }}
-        />
-      )}
+        >
+          {layout.flat().map((p, i) => (
+            <div key={i} className="flex items-center justify-center">
+              {p === 1 && (
+                <Pip
+                  size={pipSize}
+                  colorClass={skin.pipColor}
+                  inset={skin.realistic}
+                />
+              )}
+            </div>
+          ))}
+        </div>
 
-      {/* Selected (held) indicator — pulsing glow + checkmark badge */}
-      {held && !used && (
-        <>
-          <motion.div
-            className="absolute -inset-1 pointer-events-none"
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
-            style={{
-              boxShadow: "0 0 20px 4px rgba(252, 211, 77, 0.9), inset 0 0 12px rgba(252, 211, 77, 0.5)",
-              borderRadius: Math.round(size * 0.17),
-            }}
-          />
-          <motion.div
-            initial={{ scale: 0, rotate: -30 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{ type: "spring", stiffness: 500, damping: 18 }}
-            className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-amber-400 border-2 border-white flex items-center justify-center text-black font-black text-xs shadow-lg pointer-events-none"
-          >
-            ✓
-          </motion.div>
-        </>
-      )}
-
-      {/* Diamond facets + shimmer overlay */}
-      {skin.special === "diamond" && (
-        <>
+        {/* Top-left gloss highlight — the bright specular spot from the photo */}
+        {skin.realistic && (
           <div
-            className="absolute inset-0 rounded-2xl pointer-events-none opacity-80 mix-blend-overlay"
+            className="absolute pointer-events-none"
             style={{
+              top: "5%",
+              left: "5%",
+              width: "48%",
+              height: "42%",
+              borderRadius: `${radius}px ${radius * 0.6}px ${radius * 0.3}px ${radius * 0.6}px`,
               background:
-                "conic-gradient(from 45deg at 50% 50%, rgba(255,255,255,0.9) 0deg, rgba(186,230,253,0.2) 60deg, rgba(255,255,255,0.8) 120deg, rgba(125,211,252,0.3) 180deg, rgba(255,255,255,0.9) 240deg, rgba(186,230,253,0.2) 300deg, rgba(255,255,255,0.9) 360deg)",
+                "radial-gradient(ellipse at 28% 28%, rgba(255,255,255,0.82) 0%, rgba(255,255,255,0.3) 40%, transparent 70%)",
             }}
           />
-          <motion.div
-            className="absolute inset-0 rounded-2xl pointer-events-none"
-            animate={{ opacity: [0.3, 0.9, 0.3] }}
-            transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-            style={{
-              background:
-                "radial-gradient(circle at 30% 25%, rgba(255,255,255,0.95) 0%, transparent 40%), radial-gradient(circle at 75% 70%, rgba(186,230,253,0.7) 0%, transparent 35%)",
-            }}
-          />
-        </>
-      )}
-    </button>
+        )}
+
+        {/* Diamond shimmer overlay */}
+        {skin.special === "diamond" && (
+          <>
+            <div
+              className="absolute inset-0 pointer-events-none opacity-80 mix-blend-overlay"
+              style={{
+                borderRadius: radius,
+                background:
+                  "conic-gradient(from 45deg at 50% 50%, rgba(255,255,255,0.9) 0deg, rgba(186,230,253,0.2) 60deg, rgba(255,255,255,0.8) 120deg, rgba(125,211,252,0.3) 180deg, rgba(255,255,255,0.9) 240deg, rgba(186,230,253,0.2) 300deg, rgba(255,255,255,0.9) 360deg)",
+              }}
+            />
+            <motion.div
+              className="absolute inset-0 pointer-events-none"
+              animate={{ opacity: [0.3, 0.9, 0.3] }}
+              transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+              style={{
+                borderRadius: radius,
+                background:
+                  "radial-gradient(circle at 30% 25%, rgba(255,255,255,0.95) 0%, transparent 40%), radial-gradient(circle at 75% 70%, rgba(186,230,253,0.7) 0%, transparent 35%)",
+              }}
+            />
+          </>
+        )}
+
+        {/* Held indicator — pulsing amber glow + checkmark */}
+        {held && !used && (
+          <>
+            <motion.div
+              className="absolute -inset-1 pointer-events-none"
+              animate={{ opacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+              style={{
+                boxShadow: "0 0 20px 4px rgba(252,211,77,0.9), inset 0 0 12px rgba(252,211,77,0.5)",
+                borderRadius: radius + 4,
+              }}
+            />
+            <motion.div
+              initial={{ scale: 0, rotate: -30 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{ type: "spring", stiffness: 500, damping: 18 }}
+              className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-amber-400 border-2 border-white flex items-center justify-center text-black font-black text-xs shadow-lg pointer-events-none"
+            >
+              ✓
+            </motion.div>
+          </>
+        )}
+      </button>
     </motion.div>
   );
 }
