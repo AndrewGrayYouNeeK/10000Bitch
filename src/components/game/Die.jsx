@@ -67,7 +67,7 @@ export default function Die({
         used && "opacity-20 grayscale cursor-not-allowed",
       )}
       style={{
-        borderRadius: Math.round(size * 0.20),
+        borderRadius: Math.round(size * 0.15),
         boxShadow: boxShadow + (skin.realistic ? ", 0 0 0 1.5px rgba(160,160,175,0.45)" : ""),
       }}
     >
@@ -110,7 +110,7 @@ export default function Die({
             transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
             style={{
               boxShadow: "0 0 20px 4px rgba(252, 211, 77, 0.9), inset 0 0 12px rgba(252, 211, 77, 0.5)",
-              borderRadius: Math.round(size * 0.22),
+              borderRadius: Math.round(size * 0.17),
             }}
           />
           <motion.div
