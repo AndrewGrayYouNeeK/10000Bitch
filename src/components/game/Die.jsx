@@ -149,21 +149,40 @@ export default function Die({
         style={{
           borderRadius: radius,
           boxShadow: buildShadow(),
-          ...(skin.id === "classic_white" && {
-            backgroundImage: `url('https://media.base44.com/images/public/69e7669b223d37093cd03879/0d77abf85_BZ7IpNFwyEj4180grYVrQ_pio3aMvf.jpg')`,
-            backgroundSize: "300% 200%",
-            backgroundPosition: (() => {
-              // Image is a 3x2 grid: columns = values 1,2,3 (top row) and 4,5,6 (bottom row)
-              const col = (value - 1) % 3; // 0, 1, 2
-              const row = Math.floor((value - 1) / 3); // 0 or 1
-              const xPercent = (col / 2) * 100;
-              const yPercent = (row / 1) * 100;
-              return `${xPercent}% ${yPercent}%`;
-            })(),
-          }),
+          overflow: "hidden",
+          background: skin.id === "classic_white" ? "transparent" : undefined,
         }}
       >
-        {/* Pip grid */}
+        {/* Photo texture: crop the correct face from the 3x2 sprite sheet */}
+        {skin.id === "classic_white" && (() => {
+          const imgW = 5632;
+          const imgH = 3008;
+          const faceW = imgW / 3;
+          const faceH = imgH / 2;
+          const col = (value - 1) % 3;
+          const row = Math.floor((value - 1) / 3);
+          const scale = size / faceW;
+          return (
+            <img
+              src="https://media.base44.com/images/public/69e7669b223d37093cd03879/0d77abf85_BZ7IpNFwyEj4180grYVrQ_pio3aMvf.jpg"
+              alt=""
+              draggable={false}
+              style={{
+                position: "absolute",
+                inset: 0,
+                width: imgW * scale,
+                height: imgH * scale,
+                maxWidth: "none",
+                objectFit: "none",
+                transform: `translate(${-col * faceW * scale}px, ${-row * faceH * scale}px)`,
+                pointerEvents: "none",
+                userSelect: "none",
+              }}
+            />
+          );
+        })()}
+
+        {/* Pip grid — only for non-photo skins */}
         <div
           className="absolute grid grid-cols-3 grid-rows-3"
           style={{
