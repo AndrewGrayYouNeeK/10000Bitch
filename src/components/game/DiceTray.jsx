@@ -1,5 +1,6 @@
 import React from "react";
 import Die from "./Die";
+import Die3D from "./Die3D";
 import { motion } from "framer-motion";
 
 /**
@@ -34,16 +35,27 @@ export default function DiceTray({ dice, rolling, onToggle, disabled, skinId, pi
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: idx * 0.04 }}
           >
-            <Die
-              value={d.value}
-              held={d.held}
-              used={d.used}
-              rolling={rolling && !d.used}
-              onClick={() => !disabled && !d.used && onToggle && onToggle(d.id)}
-              size={72}
-              skinId={skinId}
-              pipsId={pipsId}
-            />
+            {skinId === "classic_white" || !skinId ? (
+              <Die3D
+                value={d.value}
+                held={d.held}
+                used={d.used}
+                rolling={rolling && !d.used}
+                onClick={() => !disabled && !d.used && onToggle && onToggle(d.id)}
+                size={72}
+              />
+            ) : (
+              <Die
+                value={d.value}
+                held={d.held}
+                used={d.used}
+                rolling={rolling && !d.used}
+                onClick={() => !disabled && !d.used && onToggle && onToggle(d.id)}
+                size={72}
+                skinId={skinId}
+                pipsId={pipsId}
+              />
+            )}
           </motion.div>
         ))}
       </div>
