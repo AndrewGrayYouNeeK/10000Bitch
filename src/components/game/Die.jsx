@@ -150,7 +150,7 @@ export default function Die({
           borderRadius: radius,
           boxShadow: buildShadow(),
           ...(skin.id === "classic_white" && {
-            backgroundImage: `url('https://v3b.fal.media/files/b/0a996e7d/Dgc9VAOMxeIRsZGOSbKJh_KZutNRiP.png')`,
+            backgroundImage: `url('https://media.base44.com/images/public/69e7669b223d37093cd03879/0d77abf85_BZ7IpNFwyEj4180grYVrQ_pio3aMvf.jpg')`,
             backgroundSize: "300% 200%",
             backgroundPosition: (() => {
               // Image is a 3x2 grid: columns = values 1,2,3 (top row) and 4,5,6 (bottom row)
