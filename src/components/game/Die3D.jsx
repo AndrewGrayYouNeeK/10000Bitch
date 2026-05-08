@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useMemo } from "react";
 import * as THREE from "three";
 
-const SPRITE_URL = "https://media.base44.com/images/public/69e7669b223d37093cd03879/0d77abf85_BZ7IpNFwyEj4180grYVrQ_pio3aMvf.jpg";
+const SPRITE_URL = "https://v3b.fal.media/files/b/0a996e7d/Dgc9VAOMxeIRsZGOSbKJh_KZutNRiP.png";
 
 // The sprite sheet is 3 columns × 2 rows: faces 1-3 top, 4-6 bottom.
 // Three.js BoxGeometry face order: +X, -X, +Y, -Y, +Z, -Z

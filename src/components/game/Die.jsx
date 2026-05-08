@@ -164,7 +164,7 @@ export default function Die({
           const scale = size / faceW;
           return (
             <img
-              src="https://media.base44.com/images/public/69e7669b223d37093cd03879/0d77abf85_BZ7IpNFwyEj4180grYVrQ_pio3aMvf.jpg"
+              src="https://v3b.fal.media/files/b/0a996e7d/Dgc9VAOMxeIRsZGOSbKJh_KZutNRiP.png"
               alt=""
               draggable={false}
               style={{
