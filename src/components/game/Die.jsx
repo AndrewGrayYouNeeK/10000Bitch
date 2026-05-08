@@ -50,13 +50,10 @@ export default function Die({
       whileTap={!used && !rolling ? { scale: 0.92 } : {}}
       whileHover={!used && !rolling ? { y: -5, rotate: 3 } : {}}
       className={cn(
-        "relative rounded-2xl flex-shrink-0 transition-all duration-200 bg-gradient-to-br border-2",
+        "relative flex-shrink-0 transition-all duration-200 bg-gradient-to-br border-2",
         skin.gradient,
         skin.border,
-        skin.glow && `shadow-xl ${skin.glow}`,
         used && "opacity-20 grayscale cursor-not-allowed",
-        held && !used && "ring-[5px] ring-amber-300 shadow-2xl shadow-amber-400/80 brightness-110",
-        selected && !used && !held && "ring-4 ring-emerald-300/60 shadow-lg shadow-emerald-500/40"
       )}
       style={{
         width: size,
@@ -65,9 +62,17 @@ export default function Die({
         borderRadius: size * 0.22,
         boxShadow: used
           ? "inset 0 -3px 5px rgba(0,0,0,0.1)"
-          : skin.realistic
-            ? "inset 0 -8px 14px rgba(0,0,0,0.18), inset 0 6px 10px rgba(255,255,255,0.95), inset -4px 0 8px rgba(0,0,0,0.08), 0 10px 28px rgba(0,0,0,0.45), 0 2px 6px rgba(0,0,0,0.25)"
-            : "inset 0 -6px 10px rgba(0,0,0,0.25), inset 0 4px 6px rgba(255,255,255,0.5), 0 8px 14px rgba(0,0,0,0.4)",
+          : held && !used
+            ? (skin.realistic
+                ? "inset 0 -8px 14px rgba(0,0,0,0.18), inset 0 6px 10px rgba(255,255,255,0.95), inset -4px 0 8px rgba(0,0,0,0.08), 0 0 0 5px #fcd34d, 0 0 24px 4px rgba(252,211,77,0.8), 0 10px 28px rgba(0,0,0,0.45)"
+                : "inset 0 -6px 10px rgba(0,0,0,0.25), inset 0 4px 6px rgba(255,255,255,0.5), 0 0 0 5px #fcd34d, 0 0 24px 4px rgba(252,211,77,0.8), 0 8px 14px rgba(0,0,0,0.4)")
+            : selected && !used
+              ? (skin.realistic
+                  ? "inset 0 -8px 14px rgba(0,0,0,0.18), inset 0 6px 10px rgba(255,255,255,0.95), 0 0 0 4px rgba(52,211,153,0.6), 0 8px 20px rgba(0,0,0,0.4)"
+                  : "inset 0 -6px 10px rgba(0,0,0,0.25), inset 0 4px 6px rgba(255,255,255,0.5), 0 0 0 4px rgba(52,211,153,0.6), 0 8px 14px rgba(0,0,0,0.4)")
+              : skin.realistic
+                ? "inset 0 -8px 14px rgba(0,0,0,0.18), inset 0 6px 10px rgba(255,255,255,0.95), inset -4px 0 8px rgba(0,0,0,0.08), 0 10px 28px rgba(0,0,0,0.45), 0 2px 6px rgba(0,0,0,0.25)"
+                : "inset 0 -6px 10px rgba(0,0,0,0.25), inset 0 4px 6px rgba(255,255,255,0.5), 0 8px 14px rgba(0,0,0,0.4)",
       }}
     >
       <div
