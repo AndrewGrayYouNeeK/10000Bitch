@@ -155,8 +155,8 @@ export default function Die({
       >
         {/* Photo texture: crop the correct face from the 3x2 sprite sheet */}
         {skin.id === "classic_white" && (() => {
-          const imgW = 5632;
-          const imgH = 3008;
+          const imgW = 1080;
+          const imgH = 720;
           const faceW = imgW / 3;
           const faceH = imgH / 2;
           const col = (value - 1) % 3;
@@ -164,7 +164,7 @@ export default function Die({
           const scale = size / faceW;
           return (
             <img
-              src="https://v3b.fal.media/files/b/0a996e7d/Dgc9VAOMxeIRsZGOSbKJh_KZutNRiP.png"
+              src="https://media.base44.com/images/public/69e7669b223d37093cd03879/a1879bbbc_generated_image.png"
               alt=""
               draggable={false}
               style={{

@@ -3,7 +3,7 @@ import * as THREE from "three";
 
 // ─── Sprite sheet info ────────────────────────────────────────────────────────
 // The sheet is 3 cols × 2 rows.  Col order: 1, 2, 3 (top row)  4, 5, 6 (bottom row)
-const SPRITE_URL = "https://v3b.fal.media/files/b/0a996e7d/Dgc9VAOMxeIRsZGOSbKJh_KZutNRiP.png";
+const SPRITE_URL = "https://media.base44.com/images/public/69e7669b223d37093cd03879/a1879bbbc_generated_image.png";
 const COLS = 3;
 const ROWS = 2;
 
