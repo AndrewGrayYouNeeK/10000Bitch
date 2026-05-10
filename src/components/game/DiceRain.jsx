@@ -136,6 +136,14 @@ export default function DiceRain() {
         if (d.x > canvas.width - half) { d.x = canvas.width - half; d.vx = -Math.abs(d.vx) * 0.65; }
         if (d.y < half) { d.y = half; d.vy = Math.abs(d.vy) * 0.65; }
         if (d.y > canvas.height - half) { d.y = canvas.height - half; d.vy = -Math.abs(d.vy) * 0.65; }
+        
+        // Respawn at top when falling off bottom
+        if (d.y > canvas.height + SIZE) {
+          d.x = randomBetween(0, canvas.width);
+          d.y = -SIZE;
+          d.vx = randomBetween(-0.4, 0.4);
+          d.vy = randomBetween(-0.4, 0.4);
+        }
 
         // Draw
         ctx.save();
