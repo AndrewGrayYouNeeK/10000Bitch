@@ -94,8 +94,6 @@ export default function DiceRain() {
 
     const DAMPING = 0.93;
     const MAX_SPEED = 8;
-    const SETTLE_THRESHOLD = 0.2;
-    const PILE_HEIGHT = SIZE * 9; // ~9 dice high = half screen approx
 
     let frame;
     const draw = () => {
@@ -124,16 +122,6 @@ export default function DiceRain() {
         if (speed > MAX_SPEED) {
           d.vx = (d.vx / speed) * MAX_SPEED;
           d.vy = (d.vy / speed) * MAX_SPEED;
-        }
-
-        // Settle at bottom when nearly still — stack up
-        if (speed < SETTLE_THRESHOLD) {
-          const stackY = canvas.height - PILE_HEIGHT;
-          if (d.y > stackY) {
-            d.vx = 0;
-            d.vy = 0;
-            d.y = stackY;
-          }
         }
 
         // Spin faster when moving faster
