@@ -77,7 +77,7 @@ export default function DiceRain() {
     };
     window.addEventListener("devicemotion", handleMotion);
 
-    const COUNT = 22;
+    const COUNT = 50;
     const SIZE = 38;
 
     diceRef.current = Array.from({ length: COUNT }, () => ({
@@ -109,9 +109,9 @@ export default function DiceRain() {
           d.flipTimer = Math.floor(randomBetween(40, 120));
         }
 
-        // Apply gravity from device tilt
+        // Apply gravity from device tilt + constant downward gravity
         d.vx += gx * 0.35;
-        d.vy += gy * 0.35;
+        d.vy += (gy * 0.35) + 0.15;
 
         // Dampen velocity
         d.vx *= DAMPING;
