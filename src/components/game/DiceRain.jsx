@@ -90,8 +90,9 @@ export default function DiceRain() {
       opacity: randomBetween(0.10, 0.28),
     }));
 
-    const DAMPING = 0.97;
-    const MAX_SPEED = 10;
+    const DAMPING = 0.93;
+    const MAX_SPEED = 8;
+    const SETTLE_THRESHOLD = 0.3;
 
     let frame;
     const draw = () => {
@@ -122,6 +123,13 @@ export default function DiceRain() {
           d.vy = (d.vy / speed) * MAX_SPEED;
         }
 
+        // Settle at bottom when nearly still
+        if (speed < SETTLE_THRESHOLD && d.y > canvas.height - SIZE) {
+          d.vx = 0;
+          d.vy = 0;
+          d.y = canvas.height - SIZE / 2;
+        }
+
         // Spin faster when moving faster
         d.rot += d.spin * (1 + speed * 0.3);
 
@@ -130,10 +138,10 @@ export default function DiceRain() {
 
         // Bounce off edges
         const half = SIZE / 2;
-        if (d.x < half) { d.x = half; d.vx = Math.abs(d.vx) * 0.6; }
-        if (d.x > canvas.width - half) { d.x = canvas.width - half; d.vx = -Math.abs(d.vx) * 0.6; }
-        if (d.y < half) { d.y = half; d.vy = Math.abs(d.vy) * 0.6; }
-        if (d.y > canvas.height - half) { d.y = canvas.height - half; d.vy = -Math.abs(d.vy) * 0.6; }
+        if (d.x < half) { d.x = half; d.vx = Math.abs(d.vx) * 0.65; }
+        if (d.x > canvas.width - half) { d.x = canvas.width - half; d.vx = -Math.abs(d.vx) * 0.65; }
+        if (d.y < half) { d.y = half; d.vy = Math.abs(d.vy) * 0.65; }
+        if (d.y > canvas.height - half) { d.y = canvas.height - half; d.vy = -Math.abs(d.vy) * 0.65; }
 
         // Draw
         ctx.save();
