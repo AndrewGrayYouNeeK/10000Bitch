@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 const DICE_FACES = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
-const COLORS = ["#00ffc8", "#a855f7", "#00b8ff", "#ff3296"];
+const COLORS = ["#00ffc8"];
 
 export default function DiceRain() {
   const canvasRef = useRef(null);
@@ -23,18 +23,18 @@ export default function DiceRain() {
     // Each column: y position, speed, color, current face
     const drops = Array.from({ length: cols }, (_, i) => ({
       y: Math.random() * -canvas.height,
-      speed: 0.8 + Math.random() * 1.6,
-      color: COLORS[i % COLORS.length],
+      speed: 0.25 + Math.random() * 0.35,
+      color: "#00ffc8",
       face: DICE_FACES[Math.floor(Math.random() * 6)],
-      opacity: 0.15 + Math.random() * 0.5,
-      swapTimer: Math.random() * 30,
+      opacity: 0.08 + Math.random() * 0.18,
+      swapTimer: Math.random() * 60,
     }));
 
     let frame;
     const draw = () => {
       // Dark translucent overlay = trail fade
-      ctx.fillStyle = "rgba(2, 4, 8, 0.18)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "rgba(2, 4, 8, 0.08)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       ctx.font = `${FONT_SIZE}px serif`;
       ctx.textAlign = "center";
@@ -66,13 +66,13 @@ export default function DiceRain() {
         ctx.globalAlpha = 1;
         ctx.shadowBlur = 0;
 
-        drop.y += FONT_SIZE * drop.speed * 0.35;
+        drop.y += FONT_SIZE * drop.speed * 0.2;
 
         if (drop.y > canvas.height + FONT_SIZE * 2) {
           drop.y = -FONT_SIZE * (2 + Math.random() * 10);
-          drop.speed = 0.8 + Math.random() * 1.6;
-          drop.color = COLORS[Math.floor(Math.random() * COLORS.length)];
-          drop.opacity = 0.15 + Math.random() * 0.5;
+          drop.speed = 0.25 + Math.random() * 0.35;
+          drop.color = "#00ffc8";
+          drop.opacity = 0.08 + Math.random() * 0.18;
         }
       });
 
