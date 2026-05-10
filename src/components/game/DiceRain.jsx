@@ -65,31 +65,7 @@ export default function DiceRain() {
         ctx.rotate(d.rot);
         ctx.globalAlpha = d.opacity;
 
-        // Rounded square background
-        const r = SIZE * 0.22;
-        const half = SIZE / 2;
-        ctx.beginPath();
-        ctx.moveTo(-half + r, -half);
-        ctx.lineTo(half - r, -half);
-        ctx.quadraticCurveTo(half, -half, half, -half + r);
-        ctx.lineTo(half, half - r);
-        ctx.quadraticCurveTo(half, half, half - r, half);
-        ctx.lineTo(-half + r, half);
-        ctx.quadraticCurveTo(-half, half, -half, half - r);
-        ctx.lineTo(-half, -half + r);
-        ctx.quadraticCurveTo(-half, -half, -half + r, -half);
-        ctx.closePath();
-
-        ctx.fillStyle = "rgba(0, 255, 200, 0.06)";
-        ctx.fill();
-        ctx.strokeStyle = "rgba(0, 255, 200, 0.35)";
-        ctx.lineWidth = 1.2;
-        ctx.shadowColor = "rgba(0, 255, 200, 0.5)";
-        ctx.shadowBlur = 10;
-        ctx.stroke();
-
         // Die face emoji
-        ctx.shadowBlur = 0;
         ctx.font = `${SIZE * 0.7}px serif`;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
