@@ -111,7 +111,7 @@ export default function DiceRain() {
 
         // Apply gravity from device tilt + constant downward gravity
         d.vx += gx * 0.35;
-        d.vy += (gy * 0.35) + 0.15;
+        d.vy += (gy * 0.35) + 0.08;
 
         // Dampen velocity
         d.vx *= DAMPING;
