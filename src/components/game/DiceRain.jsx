@@ -1,7 +1,10 @@
 import { useEffect, useRef } from "react";
 
-const DICE_FACES = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
-const COLORS = ["#00ffc8"];
+const FACES = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
+
+function randomBetween(a, b) {
+  return a + Math.random() * (b - a);
+}
 
 export default function DiceRain() {
   const canvasRef = useRef(null);
@@ -17,63 +20,84 @@ export default function DiceRain() {
     resize();
     window.addEventListener("resize", resize);
 
-    const FONT_SIZE = 20;
-    const cols = Math.floor(canvas.width / FONT_SIZE);
+    const COUNT = 22;
+    const SIZE = 38;
 
-    // Each column: y position, speed, color, current face
-    const drops = Array.from({ length: cols }, (_, i) => ({
-      y: Math.random() * -canvas.height,
-      speed: 0.25 + Math.random() * 0.35,
-      color: "#00ffc8",
-      face: DICE_FACES[Math.floor(Math.random() * 6)],
-      opacity: 0.08 + Math.random() * 0.18,
-      swapTimer: Math.random() * 60,
+    // Each die: position, velocity, rotation, spin speed, face, flip timer
+    const dice = Array.from({ length: COUNT }, () => ({
+      x: randomBetween(0, canvas.width),
+      y: randomBetween(0, canvas.height),
+      vx: randomBetween(-0.4, 0.4),
+      vy: randomBetween(-0.4, 0.4),
+      rot: randomBetween(0, Math.PI * 2),
+      spin: randomBetween(-0.012, 0.012),
+      face: FACES[Math.floor(Math.random() * 6)],
+      flipTimer: Math.floor(randomBetween(40, 120)),
+      opacity: randomBetween(0.10, 0.28),
     }));
 
     let frame;
     const draw = () => {
-      // Dark translucent overlay = trail fade
-      ctx.fillStyle = "rgba(2, 4, 8, 0.08)";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      ctx.font = `${FONT_SIZE}px serif`;
-      ctx.textAlign = "center";
-
-      drops.forEach((drop, i) => {
-        // Randomly swap face
-        drop.swapTimer--;
-        if (drop.swapTimer <= 0) {
-          drop.face = DICE_FACES[Math.floor(Math.random() * 6)];
-          drop.swapTimer = 8 + Math.random() * 25;
+      dice.forEach((d) => {
+        // Flip face randomly
+        d.flipTimer--;
+        if (d.flipTimer <= 0) {
+          d.face = FACES[Math.floor(Math.random() * 6)];
+          d.flipTimer = Math.floor(randomBetween(40, 120));
         }
 
-        // Lead character — bright white glow
-        ctx.shadowColor = drop.color;
-        ctx.shadowBlur = 8;
-        ctx.fillStyle = "#ffffff";
-        ctx.globalAlpha = drop.opacity * 1.4;
-        ctx.fillText(drop.face, i * FONT_SIZE + FONT_SIZE / 2, drop.y);
+        // Move
+        d.x += d.vx;
+        d.y += d.vy;
+        d.rot += d.spin;
 
-        // Trail — dimmer colored
-        ctx.fillStyle = drop.color;
-        ctx.globalAlpha = drop.opacity * 0.5;
-        ctx.fillText(
-          DICE_FACES[Math.floor(Math.random() * 6)],
-          i * FONT_SIZE + FONT_SIZE / 2,
-          drop.y - FONT_SIZE
-        );
+        // Wrap around edges
+        if (d.x < -SIZE) d.x = canvas.width + SIZE;
+        if (d.x > canvas.width + SIZE) d.x = -SIZE;
+        if (d.y < -SIZE) d.y = canvas.height + SIZE;
+        if (d.y > canvas.height + SIZE) d.y = -SIZE;
 
-        ctx.globalAlpha = 1;
+        // Draw
+        ctx.save();
+        ctx.translate(d.x, d.y);
+        ctx.rotate(d.rot);
+        ctx.globalAlpha = d.opacity;
+
+        // Rounded square background
+        const r = SIZE * 0.22;
+        const half = SIZE / 2;
+        ctx.beginPath();
+        ctx.moveTo(-half + r, -half);
+        ctx.lineTo(half - r, -half);
+        ctx.quadraticCurveTo(half, -half, half, -half + r);
+        ctx.lineTo(half, half - r);
+        ctx.quadraticCurveTo(half, half, half - r, half);
+        ctx.lineTo(-half + r, half);
+        ctx.quadraticCurveTo(-half, half, -half, half - r);
+        ctx.lineTo(-half, -half + r);
+        ctx.quadraticCurveTo(-half, -half, -half + r, -half);
+        ctx.closePath();
+
+        ctx.fillStyle = "rgba(0, 255, 200, 0.06)";
+        ctx.fill();
+        ctx.strokeStyle = "rgba(0, 255, 200, 0.35)";
+        ctx.lineWidth = 1.2;
+        ctx.shadowColor = "rgba(0, 255, 200, 0.5)";
+        ctx.shadowBlur = 10;
+        ctx.stroke();
+
+        // Die face emoji
         ctx.shadowBlur = 0;
+        ctx.font = `${SIZE * 0.7}px serif`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillStyle = "rgba(0, 255, 200, 0.7)";
+        ctx.globalAlpha = d.opacity * 2.5;
+        ctx.fillText(d.face, 0, 2);
 
-        drop.y += FONT_SIZE * drop.speed * 0.2;
-
-        if (drop.y > canvas.height + FONT_SIZE * 2) {
-          drop.y = -FONT_SIZE * (2 + Math.random() * 10);
-          drop.speed = 0.25 + Math.random() * 0.35;
-          drop.color = "#00ffc8";
-          drop.opacity = 0.08 + Math.random() * 0.18;
-        }
+        ctx.restore();
       });
 
       frame = requestAnimationFrame(draw);
