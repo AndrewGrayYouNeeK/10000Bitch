@@ -69,7 +69,7 @@ export default function DiceRain() {
         lastShakeTime = now;
         diceRef.current.forEach((d) => {
           const angle = Math.random() * Math.PI * 2;
-          const power = 3 + Math.random() * 4;
+          const power = 8 + Math.random() * 8;
           d.vx += Math.cos(angle) * power;
           d.vy += Math.sin(angle) * power;
         });
