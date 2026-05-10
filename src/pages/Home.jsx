@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Dices, Users, BookOpen, Sparkles, Coins, Zap } from "lucide-react";
 import RulesSheet from "@/components/game/RulesSheet";
 import { useCosmetics } from "@/hooks/useCosmetics";
+import DiceRain from "@/components/game/DiceRain";
 
 export default function Home() {
   const { coins, isLoading } = useCosmetics();
@@ -14,6 +15,9 @@ export default function Home() {
       className="min-h-screen flex flex-col items-center justify-center p-6 overflow-hidden relative"
       style={{ background: "#020408" }}
     >
+      {/* Matrix dice rain */}
+      <DiceRain />
+
       {/* Animated scanlines */}
       <div className="absolute inset-0 pointer-events-none z-0"
         style={{
