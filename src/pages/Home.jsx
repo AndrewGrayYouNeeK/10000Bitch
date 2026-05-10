@@ -14,32 +14,26 @@ export default function Home() {
     <div
       className="min-h-screen flex flex-col items-center justify-center p-6 overflow-hidden relative"
       style={{
-        background:
-          "radial-gradient(ellipse at top, #1e293b 0%, #020617 70%), #000",
+        background: "radial-gradient(ellipse at 50% 30%, #2a1f0e 0%, #1a1206 40%, #0a0804 100%)",
       }}
     >
-      {/* Floating dice background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
-        {[...Array(8)].map((_, i) => (
+      {/* Gold particle shimmer overlay */}
+      <div className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: "radial-gradient(ellipse at 50% 0%, rgba(180,140,40,0.18) 0%, transparent 60%), radial-gradient(ellipse at 20% 80%, rgba(120,90,20,0.1) 0%, transparent 50%)",
+        }}
+      />
+
+      {/* Floating subtle sparkles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(10)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute text-5xl"
-            initial={{
-              x: `${(i * 127) % 100}%`,
-              y: `${(i * 73) % 100}%`,
-            }}
-            animate={{
-              y: [`${(i * 73) % 100}%`, `${((i * 73) % 100) - 15}%`, `${(i * 73) % 100}%`],
-              rotate: [0, 360],
-            }}
-            transition={{
-              duration: 8 + (i % 4),
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          >
-            🎲
-          </motion.div>
+            className="absolute w-1 h-1 rounded-full bg-amber-300/40"
+            initial={{ x: `${(i * 97) % 100}%`, y: `${(i * 61) % 100}%`, opacity: 0 }}
+            animate={{ opacity: [0, 0.8, 0], y: [`${(i * 61) % 100}%`, `${((i * 61) % 100) - 20}%`] }}
+            transition={{ duration: 4 + (i % 3), repeat: Infinity, delay: i * 0.7, ease: "easeOut" }}
+          />
         ))}
       </div>
 
@@ -47,7 +41,8 @@ export default function Home() {
       <div className="absolute top-4 left-4 right-4 z-10 flex items-center justify-between">
         <Link
           to="/shop"
-          className="flex items-center gap-1.5 bg-amber-500/20 border border-amber-500/40 rounded-full px-3 py-1.5 hover:bg-amber-500/30 transition-colors"
+          className="flex items-center gap-1.5 rounded-full px-3 py-1.5 transition-colors border"
+          style={{ background: "rgba(180,140,40,0.15)", borderColor: "rgba(180,140,40,0.4)" }}
         >
           <Coins className="w-4 h-4 text-amber-400" />
           <span className="font-black tabular-nums text-amber-300 text-sm">
@@ -63,29 +58,39 @@ export default function Home() {
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center relative z-10 max-w-md w-full"
+        className="text-center relative z-10 max-w-sm w-full"
       >
+        {/* Logo */}
         <motion.div
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mb-4"
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="mb-2"
         >
           <img
             src="https://media.base44.com/images/public/69e7669b223d37093cd03879/02645f1df_J-pkVgoLigDTfwK1sZ0Qt_3RwWpqbD.png"
             alt="10,000 The Ultimate Roll"
-            className="w-72 h-72 object-contain mx-auto drop-shadow-2xl"
+            className="w-80 h-80 object-contain mx-auto"
+            style={{ filter: "drop-shadow(0 8px 32px rgba(180,140,20,0.5))" }}
           />
         </motion.div>
-        <p className="text-slate-400 mb-10 text-lg">
+
+        {/* Tagline */}
+        <p className="mb-8 text-sm font-semibold tracking-[0.25em] uppercase"
+          style={{ color: "rgba(200,165,80,0.75)" }}>
           Roll. Risk. Reach ten thousand.
         </p>
 
+        {/* Buttons */}
         <div className="space-y-3">
           <Button
             asChild
             size="lg"
-            className="w-full h-16 text-lg font-bold bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white shadow-lg shadow-amber-500/30 border-0"
+            className="w-full h-16 text-lg font-bold border-0 text-black"
+            style={{
+              background: "linear-gradient(135deg, #c9a227 0%, #f0d060 40%, #b8860b 100%)",
+              boxShadow: "0 4px 24px rgba(180,140,20,0.45), inset 0 1px 0 rgba(255,255,255,0.3)",
+            }}
           >
             <Link to="/setup">
               <Dices className="w-6 h-6 mr-2" />
@@ -96,7 +101,8 @@ export default function Home() {
           <Button
             asChild
             size="lg"
-            className="w-full h-14 text-base font-semibold bg-gradient-to-r from-indigo-600 to-purple-700 hover:from-indigo-500 hover:to-purple-600 text-white border-0"
+            className="w-full h-14 text-base font-semibold border text-amber-200 bg-transparent hover:bg-amber-900/20"
+            style={{ borderColor: "rgba(180,140,40,0.5)" }}
           >
             <Link to="/shop">
               <Sparkles className="w-5 h-5 mr-2" />
@@ -106,9 +112,9 @@ export default function Home() {
 
           <Button
             asChild
-            variant="outline"
             size="lg"
-            className="w-full h-14 text-base font-semibold bg-white/5 border-white/20 text-white hover:bg-white/10"
+            className="w-full h-14 text-base font-semibold text-amber-200/60 bg-transparent hover:bg-white/5 border"
+            style={{ borderColor: "rgba(180,140,40,0.2)" }}
           >
             <Link to="/rules">
               <BookOpen className="w-5 h-5 mr-2" />
@@ -117,7 +123,8 @@ export default function Home() {
           </Button>
         </div>
 
-        <div className="mt-8 text-xs text-slate-500 flex items-center justify-center gap-1">
+        <div className="mt-8 text-xs flex items-center justify-center gap-1"
+          style={{ color: "rgba(180,140,40,0.45)" }}>
           <Users className="w-3 h-3" /> 2–4 players on one device
         </div>
       </motion.div>
