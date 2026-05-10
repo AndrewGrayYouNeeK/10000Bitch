@@ -102,6 +102,39 @@ export default function DiceRain() {
 
       const { x: gx, y: gy } = gravityRef.current;
 
+      // Collision detection between dice
+      for (let i = 0; i < diceRef.current.length; i++) {
+        for (let j = i + 1; j < diceRef.current.length; j++) {
+          const d1 = diceRef.current[i];
+          const d2 = diceRef.current[j];
+          const dx = d2.x - d1.x;
+          const dy = d2.y - d1.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const minDist = SIZE;
+          
+          if (dist < minDist) {
+            const angle = Math.atan2(dy, dx);
+            const sin = Math.sin(angle);
+            const cos = Math.cos(angle);
+            
+            // Separate overlapping dice
+            const overlap = (minDist - dist) / 2;
+            d1.x -= overlap * cos;
+            d1.y -= overlap * sin;
+            d2.x += overlap * cos;
+            d2.y += overlap * sin;
+            
+            // Exchange velocity components along collision normal
+            const v1n = d1.vx * cos + d1.vy * sin;
+            const v2n = d2.vx * cos + d2.vy * sin;
+            d1.vx += (v2n - v1n) * cos;
+            d1.vy += (v2n - v1n) * sin;
+            d2.vx += (v1n - v2n) * cos;
+            d2.vy += (v1n - v2n) * sin;
+          }
+        }
+      }
+
       diceRef.current.forEach((d) => {
         // Flip face randomly
         d.flipTimer--;
