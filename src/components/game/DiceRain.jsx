@@ -27,8 +27,8 @@ export default function DiceRain() {
       const gx = (e.gamma || 0) / 90;   // -1 to 1
       const gy = (e.beta  || 0) / 90;   // -1 to 1
       gravityRef.current = {
-        x: gx * 0.4,
-        y: Math.max(0.05, gy * 0.5),
+        x: gx * 0.9,
+        y: Math.max(0.05, gy * 0.9),
       };
     };
 
@@ -65,8 +65,8 @@ export default function DiceRain() {
       opacity: randomBetween(0.10, 0.28),
     }));
 
-    const DAMPING = 0.98;
-    const MAX_SPEED = 4;
+    const DAMPING = 0.97;
+    const MAX_SPEED = 10;
 
     let frame;
     const draw = () => {
@@ -83,8 +83,8 @@ export default function DiceRain() {
         }
 
         // Apply gravity from device tilt
-        d.vx += gx * 0.08;
-        d.vy += gy * 0.08;
+        d.vx += gx * 0.35;
+        d.vy += gy * 0.35;
 
         // Dampen velocity
         d.vx *= DAMPING;
