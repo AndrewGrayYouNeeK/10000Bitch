@@ -9,6 +9,7 @@ function randomBetween(a, b) {
 export default function DiceRain() {
   const canvasRef = useRef(null);
   const gravityRef = useRef({ x: 0, y: 0.15 });
+  const diceRef = useRef([]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -50,10 +51,34 @@ export default function DiceRain() {
     // Also try immediately for Android / non-restricted browsers
     requestOrientation();
 
+    // Shake detection via devicemotion
+    let lastShakeTime = 0;
+    let lastAcc = { x: 0, y: 0, z: 0 };
+    const handleMotion = (e) => {
+      const acc = e.accelerationIncludingGravity;
+      if (!acc) return;
+      const dx = (acc.x || 0) - lastAcc.x;
+      const dy = (acc.y || 0) - lastAcc.y;
+      const dz = (acc.z || 0) - lastAcc.z;
+      lastAcc = { x: acc.x || 0, y: acc.y || 0, z: acc.z || 0 };
+      const delta = Math.sqrt(dx * dx + dy * dy + dz * dz);
+      const now = Date.now();
+      if (delta > 25 && now - lastShakeTime > 600) {
+        lastShakeTime = now;
+        diceRef.current.forEach((d) => {
+          const angle = Math.random() * Math.PI * 2;
+          const power = 4 + Math.random() * 5;
+          d.vx = Math.cos(angle) * power;
+          d.vy = Math.sin(angle) * power;
+        });
+      }
+    };
+    window.addEventListener("devicemotion", handleMotion);
+
     const COUNT = 22;
     const SIZE = 38;
 
-    const dice = Array.from({ length: COUNT }, () => ({
+    diceRef.current = Array.from({ length: COUNT }, () => ({
       x: randomBetween(0, canvas.width),
       y: randomBetween(0, canvas.height),
       vx: randomBetween(-0.4, 0.4),
@@ -74,7 +99,7 @@ export default function DiceRain() {
 
       const { x: gx, y: gy } = gravityRef.current;
 
-      dice.forEach((d) => {
+      diceRef.current.forEach((d) => {
         // Flip face randomly
         d.flipTimer--;
         if (d.flipTimer <= 0) {
@@ -131,6 +156,7 @@ export default function DiceRain() {
       cancelAnimationFrame(frame);
       window.removeEventListener("resize", resize);
       window.removeEventListener("deviceorientation", handleOrientation);
+      window.removeEventListener("devicemotion", handleMotion);
     };
   }, []);
 
