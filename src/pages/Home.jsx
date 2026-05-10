@@ -66,18 +66,17 @@ export default function Home() {
         className="text-center relative z-10 max-w-md w-full"
       >
         <motion.div
-          animate={{ rotate: [0, -8, 8, 0] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          className="text-8xl mb-4 inline-block"
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="mb-4"
         >
-          🎲
+          <img
+            src="https://media.base44.com/images/public/69e7669b223d37093cd03879/02645f1df_J-pkVgoLigDTfwK1sZ0Qt_3RwWpqbD.png"
+            alt="10,000 The Ultimate Roll"
+            className="w-72 h-72 object-contain mx-auto drop-shadow-2xl"
+          />
         </motion.div>
-        <h1 className="text-6xl font-black text-white mb-2 tracking-tight">
-          DICE
-        </h1>
-        <div className="text-7xl font-black bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 bg-clip-text text-transparent mb-3">
-          10,000
-        </div>
         <p className="text-slate-400 mb-10 text-lg">
           Roll. Risk. Reach ten thousand.
         </p>
