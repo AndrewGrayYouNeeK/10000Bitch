@@ -27,9 +27,11 @@ export default function DiceRain() {
       // gamma = left/right tilt (-90 to 90), beta = front/back tilt (-180 to 180)
       const gx = (e.gamma || 0) / 90;   // -1 to 1
       const gy = (e.beta  || 0) / 90;   // -1 to 1
+      // When level (beta near 0), gravity should be minimal
+      const gravY = Math.abs(gy) < 0.1 ? 0 : gy * 0.9;
       gravityRef.current = {
         x: gx * 0.9,
-        y: Math.max(0.05, gy * 0.9),
+        y: gravY,
       };
     };
 
@@ -92,7 +94,8 @@ export default function DiceRain() {
 
     const DAMPING = 0.93;
     const MAX_SPEED = 8;
-    const SETTLE_THRESHOLD = 0.3;
+    const SETTLE_THRESHOLD = 0.2;
+    const PILE_HEIGHT = SIZE * 9; // ~9 dice high = half screen approx
 
     let frame;
     const draw = () => {
@@ -123,11 +126,14 @@ export default function DiceRain() {
           d.vy = (d.vy / speed) * MAX_SPEED;
         }
 
-        // Settle at bottom when nearly still
-        if (speed < SETTLE_THRESHOLD && d.y > canvas.height - SIZE) {
-          d.vx = 0;
-          d.vy = 0;
-          d.y = canvas.height - SIZE / 2;
+        // Settle at bottom when nearly still — stack up
+        if (speed < SETTLE_THRESHOLD) {
+          const stackY = canvas.height - PILE_HEIGHT;
+          if (d.y > stackY) {
+            d.vx = 0;
+            d.vy = 0;
+            d.y = stackY;
+          }
         }
 
         // Spin faster when moving faster
