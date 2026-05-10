@@ -92,8 +92,9 @@ export default function DiceRain() {
       opacity: randomBetween(0.10, 0.28),
     }));
 
-    const DAMPING = 0.93;
+    const DAMPING = 0.91;
     const MAX_SPEED = 8;
+    const BOUNCE = 0.8;
 
     let frame;
     const draw = () => {
@@ -132,10 +133,10 @@ export default function DiceRain() {
 
         // Bounce off edges
         const half = SIZE / 2;
-        if (d.x < half) { d.x = half; d.vx = Math.abs(d.vx) * 0.65; }
-        if (d.x > canvas.width - half) { d.x = canvas.width - half; d.vx = -Math.abs(d.vx) * 0.65; }
-        if (d.y < half) { d.y = half; d.vy = Math.abs(d.vy) * 0.65; }
-        if (d.y > canvas.height - half) { d.y = canvas.height - half; d.vy = -Math.abs(d.vy) * 0.65; }
+        if (d.x < half) { d.x = half; d.vx = Math.abs(d.vx) * BOUNCE; }
+        if (d.x > canvas.width - half) { d.x = canvas.width - half; d.vx = -Math.abs(d.vx) * BOUNCE; }
+        if (d.y < half) { d.y = half; d.vy = Math.abs(d.vy) * BOUNCE; }
+        if (d.y > canvas.height - half) { d.y = canvas.height - half; d.vy = -Math.abs(d.vy) * BOUNCE; }
         
         // Respawn at top when falling off bottom
         if (d.y > canvas.height + SIZE) {
