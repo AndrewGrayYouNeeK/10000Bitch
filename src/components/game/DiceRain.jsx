@@ -8,6 +8,7 @@ function randomBetween(a, b) {
 
 export default function DiceRain() {
   const canvasRef = useRef(null);
+  const gravityRef = useRef({ x: 0, y: 0.15 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -20,10 +21,38 @@ export default function DiceRain() {
     resize();
     window.addEventListener("resize", resize);
 
+    // Device orientation → gravity
+    const handleOrientation = (e) => {
+      // gamma = left/right tilt (-90 to 90), beta = front/back tilt (-180 to 180)
+      const gx = (e.gamma || 0) / 90;   // -1 to 1
+      const gy = (e.beta  || 0) / 90;   // -1 to 1
+      gravityRef.current = {
+        x: gx * 0.4,
+        y: Math.max(0.05, gy * 0.5),
+      };
+    };
+
+    const requestOrientation = () => {
+      if (typeof DeviceOrientationEvent !== "undefined" &&
+          typeof DeviceOrientationEvent.requestPermission === "function") {
+        DeviceOrientationEvent.requestPermission()
+          .then((res) => {
+            if (res === "granted") window.addEventListener("deviceorientation", handleOrientation);
+          })
+          .catch(() => {});
+      } else {
+        window.addEventListener("deviceorientation", handleOrientation);
+      }
+    };
+
+    // Request on first user interaction (needed for iOS 13+)
+    document.addEventListener("click", requestOrientation, { once: true });
+    // Also try immediately for Android / non-restricted browsers
+    requestOrientation();
+
     const COUNT = 22;
     const SIZE = 38;
 
-    // Each die: position, velocity, rotation, spin speed, face, flip timer
     const dice = Array.from({ length: COUNT }, () => ({
       x: randomBetween(0, canvas.width),
       y: randomBetween(0, canvas.height),
@@ -36,9 +65,14 @@ export default function DiceRain() {
       opacity: randomBetween(0.10, 0.28),
     }));
 
+    const DAMPING = 0.98;
+    const MAX_SPEED = 4;
+
     let frame;
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const { x: gx, y: gy } = gravityRef.current;
 
       dice.forEach((d) => {
         // Flip face randomly
@@ -48,31 +82,44 @@ export default function DiceRain() {
           d.flipTimer = Math.floor(randomBetween(40, 120));
         }
 
-        // Move
+        // Apply gravity from device tilt
+        d.vx += gx * 0.08;
+        d.vy += gy * 0.08;
+
+        // Dampen velocity
+        d.vx *= DAMPING;
+        d.vy *= DAMPING;
+
+        // Clamp speed
+        const speed = Math.sqrt(d.vx * d.vx + d.vy * d.vy);
+        if (speed > MAX_SPEED) {
+          d.vx = (d.vx / speed) * MAX_SPEED;
+          d.vy = (d.vy / speed) * MAX_SPEED;
+        }
+
+        // Spin faster when moving faster
+        d.rot += d.spin * (1 + speed * 0.3);
+
         d.x += d.vx;
         d.y += d.vy;
-        d.rot += d.spin;
 
-        // Wrap around edges
-        if (d.x < -SIZE) d.x = canvas.width + SIZE;
-        if (d.x > canvas.width + SIZE) d.x = -SIZE;
-        if (d.y < -SIZE) d.y = canvas.height + SIZE;
-        if (d.y > canvas.height + SIZE) d.y = -SIZE;
+        // Bounce off edges
+        const half = SIZE / 2;
+        if (d.x < half) { d.x = half; d.vx = Math.abs(d.vx) * 0.6; }
+        if (d.x > canvas.width - half) { d.x = canvas.width - half; d.vx = -Math.abs(d.vx) * 0.6; }
+        if (d.y < half) { d.y = half; d.vy = Math.abs(d.vy) * 0.6; }
+        if (d.y > canvas.height - half) { d.y = canvas.height - half; d.vy = -Math.abs(d.vy) * 0.6; }
 
         // Draw
         ctx.save();
         ctx.translate(d.x, d.y);
         ctx.rotate(d.rot);
-        ctx.globalAlpha = d.opacity;
-
-        // Die face emoji
+        ctx.globalAlpha = d.opacity * 2.5;
         ctx.font = `${SIZE * 0.7}px serif`;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillStyle = "rgba(0, 255, 200, 0.7)";
-        ctx.globalAlpha = d.opacity * 2.5;
         ctx.fillText(d.face, 0, 2);
-
         ctx.restore();
       });
 
@@ -83,6 +130,7 @@ export default function DiceRain() {
     return () => {
       cancelAnimationFrame(frame);
       window.removeEventListener("resize", resize);
+      window.removeEventListener("deviceorientation", handleOrientation);
     };
   }, []);
 
