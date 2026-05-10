@@ -2,62 +2,111 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Dices, Users, BookOpen, Sparkles, Coins } from "lucide-react";
+import { Dices, Users, BookOpen, Sparkles, Coins, Zap } from "lucide-react";
 import RulesSheet from "@/components/game/RulesSheet";
 import { useCosmetics } from "@/hooks/useCosmetics";
-import BadgePreview from "@/components/shop/BadgePreview";
 
 export default function Home() {
-  const { coins, isLoading, equippedBadge } = useCosmetics();
+  const { coins, isLoading } = useCosmetics();
 
   return (
     <div
       className="min-h-screen flex flex-col items-center justify-center p-6 overflow-hidden relative"
-      style={{
-        background: "radial-gradient(ellipse at 50% 30%, #2a1f0e 0%, #1a1206 40%, #0a0804 100%)",
-      }}
+      style={{ background: "#020408" }}
     >
-      {/* Gold particle shimmer overlay */}
-      <div className="absolute inset-0 pointer-events-none"
+      {/* Animated scanlines */}
+      <div className="absolute inset-0 pointer-events-none z-0"
         style={{
-          backgroundImage: "radial-gradient(ellipse at 50% 0%, rgba(180,140,40,0.18) 0%, transparent 60%), radial-gradient(ellipse at 20% 80%, rgba(120,90,20,0.1) 0%, transparent 50%)",
+          backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,200,0.015) 2px, rgba(0,255,200,0.015) 4px)",
         }}
       />
 
-      {/* Floating subtle sparkles */}
+      {/* Cyan glow orb top */}
+      <motion.div
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none"
+        animate={{ opacity: [0.4, 0.7, 0.4] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        style={{
+          background: "radial-gradient(ellipse at 50% 0%, rgba(0,255,200,0.12) 0%, transparent 70%)",
+        }}
+      />
+
+      {/* Purple glow orb bottom */}
+      <motion.div
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[300px] pointer-events-none"
+        animate={{ opacity: [0.3, 0.6, 0.3] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        style={{
+          background: "radial-gradient(ellipse at 50% 100%, rgba(180,0,255,0.13) 0%, transparent 70%)",
+        }}
+      />
+
+      {/* Grid floor perspective */}
+      <div className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none overflow-hidden"
+        style={{
+          backgroundImage: "linear-gradient(rgba(0,255,200,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,200,0.08) 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
+          maskImage: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%)",
+          WebkitMaskImage: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%)",
+          transform: "perspective(300px) rotateX(40deg)",
+          transformOrigin: "bottom center",
+        }}
+      />
+
+      {/* Floating neon particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(10)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 rounded-full bg-amber-300/40"
-            initial={{ x: `${(i * 97) % 100}%`, y: `${(i * 61) % 100}%`, opacity: 0 }}
-            animate={{ opacity: [0, 0.8, 0], y: [`${(i * 61) % 100}%`, `${((i * 61) % 100) - 20}%`] }}
-            transition={{ duration: 4 + (i % 3), repeat: Infinity, delay: i * 0.7, ease: "easeOut" }}
-          />
-        ))}
+        {[...Array(14)].map((_, i) => {
+          const colors = ["rgba(0,255,200,0.7)", "rgba(180,0,255,0.7)", "rgba(255,50,150,0.7)", "rgba(0,180,255,0.7)"];
+          return (
+            <motion.div
+              key={i}
+              className="absolute rounded-full"
+              style={{
+                width: i % 3 === 0 ? 3 : 2,
+                height: i % 3 === 0 ? 3 : 2,
+                background: colors[i % colors.length],
+                boxShadow: `0 0 6px 2px ${colors[i % colors.length]}`,
+                left: `${(i * 71) % 100}%`,
+                top: `${(i * 53) % 100}%`,
+              }}
+              animate={{
+                y: [0, -30, 0],
+                opacity: [0, 1, 0],
+              }}
+              transition={{
+                duration: 3 + (i % 4),
+                repeat: Infinity,
+                delay: i * 0.5,
+                ease: "easeInOut",
+              }}
+            />
+          );
+        })}
       </div>
 
-      {/* Top bar: coins + badge + rules */}
+      {/* Top bar */}
       <div className="absolute top-4 left-4 right-4 z-10 flex items-center justify-between">
         <Link
           to="/shop"
-          className="flex items-center gap-1.5 rounded-full px-3 py-1.5 transition-colors border"
-          style={{ background: "rgba(180,140,40,0.15)", borderColor: "rgba(180,140,40,0.4)" }}
+          className="flex items-center gap-1.5 rounded px-3 py-1.5 transition-all border font-black tabular-nums text-sm"
+          style={{
+            background: "rgba(0,255,200,0.07)",
+            borderColor: "rgba(0,255,200,0.35)",
+            color: "#00ffc8",
+            boxShadow: "0 0 12px rgba(0,255,200,0.15)",
+          }}
         >
-          <Coins className="w-4 h-4 text-amber-400" />
-          <span className="font-black tabular-nums text-amber-300 text-sm">
-            {isLoading ? "…" : coins.toLocaleString()}
-          </span>
+          <Coins className="w-4 h-4" />
+          {isLoading ? "…" : coins.toLocaleString()}
         </Link>
-        <div className="flex items-center gap-2">
-          {equippedBadge && <BadgePreview badge={equippedBadge} size={36} />}
-          <RulesSheet />
-        </div>
+        <RulesSheet />
       </div>
 
+      {/* Main content */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
         className="text-center relative z-10 max-w-sm w-full"
       >
         {/* Logo */}
@@ -65,67 +114,95 @@ export default function Home() {
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="mb-2"
+          className="mb-1 relative"
         >
+          {/* Neon ring behind logo */}
+          <motion.div
+            className="absolute inset-0 rounded-full pointer-events-none"
+            animate={{ opacity: [0.3, 0.7, 0.3] }}
+            transition={{ duration: 3, repeat: Infinity }}
+            style={{
+              background: "radial-gradient(circle, rgba(0,255,200,0.08) 0%, transparent 70%)",
+              filter: "blur(20px)",
+            }}
+          />
           <img
             src="https://media.base44.com/images/public/69e7669b223d37093cd03879/02645f1df_J-pkVgoLigDTfwK1sZ0Qt_3RwWpqbD.png"
             alt="10,000 The Ultimate Roll"
-            className="w-80 h-80 object-contain mx-auto"
-            style={{ filter: "drop-shadow(0 8px 32px rgba(180,140,20,0.5))" }}
+            className="w-80 h-80 object-contain mx-auto relative"
+            style={{ filter: "drop-shadow(0 0 30px rgba(0,255,200,0.3)) drop-shadow(0 0 60px rgba(180,0,255,0.2))" }}
           />
         </motion.div>
 
-        {/* Tagline */}
-        <p className="mb-8 text-sm font-semibold tracking-[0.25em] uppercase"
-          style={{ color: "rgba(200,165,80,0.75)" }}>
-          Roll. Risk. Reach ten thousand.
-        </p>
+        {/* Glitch tagline */}
+        <motion.p
+          className="mb-8 text-xs font-bold tracking-[0.35em] uppercase"
+          animate={{ opacity: [0.6, 1, 0.6] }}
+          transition={{ duration: 2.5, repeat: Infinity }}
+          style={{ color: "#00ffc8", textShadow: "0 0 10px rgba(0,255,200,0.6)" }}
+        >
+          ⚡ Roll. Risk. Reach ten thousand. ⚡
+        </motion.p>
 
         {/* Buttons */}
         <div className="space-y-3">
-          <Button
-            asChild
-            size="lg"
-            className="w-full h-16 text-lg font-bold border-0 text-black"
-            style={{
-              background: "linear-gradient(135deg, #c9a227 0%, #f0d060 40%, #b8860b 100%)",
-              boxShadow: "0 4px 24px rgba(180,140,20,0.45), inset 0 1px 0 rgba(255,255,255,0.3)",
-            }}
-          >
-            <Link to="/setup">
-              <Dices className="w-6 h-6 mr-2" />
-              Play Pass & Play
+          {/* Primary CTA */}
+          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
+            <Link
+              to="/setup"
+              className="flex items-center justify-center w-full h-16 text-lg font-black rounded-lg gap-2 relative overflow-hidden"
+              style={{
+                background: "linear-gradient(135deg, #00ffc8 0%, #00b8ff 50%, #a855f7 100%)",
+                color: "#000",
+                boxShadow: "0 0 30px rgba(0,255,200,0.4), 0 0 60px rgba(0,180,255,0.2)",
+              }}
+            >
+              <motion.div
+                className="absolute inset-0 opacity-30"
+                animate={{ x: ["-100%", "100%"] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
+                style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)" }}
+              />
+              <Zap className="w-6 h-6" />
+              PLAY NOW
             </Link>
-          </Button>
+          </motion.div>
 
-          <Button
-            asChild
-            size="lg"
-            className="w-full h-14 text-base font-semibold border text-amber-200 bg-transparent hover:bg-amber-900/20"
-            style={{ borderColor: "rgba(180,140,40,0.5)" }}
-          >
-            <Link to="/shop">
-              <Sparkles className="w-5 h-5 mr-2" />
-              Shop
-            </Link>
-          </Button>
-
-          <Button
-            asChild
-            size="lg"
-            className="w-full h-14 text-base font-semibold text-amber-200/60 bg-transparent hover:bg-white/5 border"
-            style={{ borderColor: "rgba(180,140,40,0.2)" }}
-          >
-            <Link to="/rules">
-              <BookOpen className="w-5 h-5 mr-2" />
-              How to Play
-            </Link>
-          </Button>
+          <div className="grid grid-cols-2 gap-3">
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+              <Link
+                to="/shop"
+                className="flex items-center justify-center w-full h-13 py-3 text-sm font-bold rounded-lg gap-2 border"
+                style={{
+                  background: "rgba(168,85,247,0.1)",
+                  borderColor: "rgba(168,85,247,0.5)",
+                  color: "#c084fc",
+                  boxShadow: "0 0 15px rgba(168,85,247,0.15)",
+                }}
+              >
+                <Sparkles className="w-4 h-4" /> Shop
+              </Link>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+              <Link
+                to="/rules"
+                className="flex items-center justify-center w-full h-13 py-3 text-sm font-bold rounded-lg gap-2 border"
+                style={{
+                  background: "rgba(0,255,200,0.06)",
+                  borderColor: "rgba(0,255,200,0.25)",
+                  color: "#5eead4",
+                  boxShadow: "0 0 15px rgba(0,255,200,0.08)",
+                }}
+              >
+                <BookOpen className="w-4 h-4" /> Rules
+              </Link>
+            </motion.div>
+          </div>
         </div>
 
         <div className="mt-8 text-xs flex items-center justify-center gap-1"
-          style={{ color: "rgba(180,140,40,0.45)" }}>
-          <Users className="w-3 h-3" /> 2–4 players on one device
+          style={{ color: "rgba(0,255,200,0.3)" }}>
+          <Users className="w-3 h-3" /> 2–4 players · one device
         </div>
       </motion.div>
     </div>
