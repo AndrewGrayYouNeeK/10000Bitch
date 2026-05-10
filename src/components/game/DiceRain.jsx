@@ -69,9 +69,9 @@ export default function DiceRain() {
         lastShakeTime = now;
         diceRef.current.forEach((d) => {
           const angle = Math.random() * Math.PI * 2;
-          const power = 25 + Math.random() * 25;
-          d.vx = Math.cos(angle) * power;
-          d.vy = Math.sin(angle) * power;
+          const power = 3 + Math.random() * 4;
+          d.vx += Math.cos(angle) * power;
+          d.vy += Math.sin(angle) * power;
         });
       }
     };
