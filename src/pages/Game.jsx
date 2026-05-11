@@ -176,7 +176,7 @@ export default function Game() {
     (!needsEntry || potentialTotal >= ENTRY_THRESHOLD);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white flex flex-col">
+    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white flex flex-col pb-6">
       {/* Header */}
       <div className="flex items-center justify-between p-3 border-b border-white/10">
         <Button asChild variant="ghost" size="icon" className="text-white hover:bg-white/10">
@@ -254,7 +254,7 @@ export default function Game() {
       </div>
 
       {/* Actions */}
-      <div className="p-3 space-y-2 border-t border-white/10 bg-slate-950/80">
+      <div className="p-3 space-y-2 border-t border-white/10 bg-slate-950/80 mt-4">
         {state.farkle ? (
           <Button
             onClick={onPassFarkle}
