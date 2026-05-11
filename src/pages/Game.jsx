@@ -229,7 +229,7 @@ export default function Game() {
       </div>
 
       {/* Dice tray */}
-      <div className="px-3 flex-1 flex items-center">
+      <div className="px-3 flex-1 flex items-center justify-center">
         <div className="w-full">
           <DiceTray
             dice={state.dice}
@@ -254,7 +254,7 @@ export default function Game() {
       </div>
 
       {/* Actions */}
-      <div className="p-3 space-y-2 border-t border-white/10 bg-slate-950/80 mt-4">
+      <div className="p-3 space-y-2 border-t border-white/10 bg-slate-950/80">
         {state.farkle ? (
           <Button
             onClick={onPassFarkle}
