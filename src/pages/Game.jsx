@@ -229,7 +229,7 @@ export default function Game() {
       </div>
 
       {/* Dice tray */}
-      <div className="px-3 flex-1 flex items-center justify-center">
+      <div className="px-3 flex items-center justify-center">
         <div className="w-full">
           <DiceTray
             dice={state.dice}
