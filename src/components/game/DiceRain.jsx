@@ -204,11 +204,21 @@ export default function DiceRain() {
     };
   }, []);
 
+  const triggerShake = () => {
+    diceRef.current.forEach((d) => {
+      const angle = Math.random() * Math.PI * 2;
+      const power = 20 + Math.random() * 20;
+      d.vx += Math.cos(angle) * power;
+      d.vy += Math.sin(angle) * power;
+    });
+  };
+
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none"
+      className="absolute inset-0 w-full h-full cursor-pointer"
       style={{ zIndex: 1 }}
+      onDoubleClick={triggerShake}
     />
   );
 }
