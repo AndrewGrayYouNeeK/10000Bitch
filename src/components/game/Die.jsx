@@ -199,6 +199,8 @@ export default function Die({
           const DRAGON_X_OFFSET = { 2: size * 0.015, 3: size * 0.015, 5: size * 0.01, 6: size * 0.015 };
           const MARBLE_X_OFFSET = { 1: size * 0.01, 2: size * 0.015, 3: size * 0.005, 4: size * 0.012, 5: size * 0.005, 6: size * 0.015 };
           const AMETHYST_X_OFFSET = { 2: size * 0.015, 3: -size * 0.005, 6: size * 0.015 };
+          const LAVA_X_OFFSET = { 2: size * 0.015, 3: size * 0.015, 5: size * 0.015, 6: size * 0.015 };
+          const LAVA_Y_OFFSET = { 1: -size * 0.02, 2: -size * 0.02, 3: -size * 0.02, 4: -size * 0.02 };
           const MOONSTONE_X_OFFSET = { 2: size * 0.005, 3: size * 0.005, 4: size * 0.01, 5: size * 0.005, 6: size * 0.005 };
           const MOONSTONE_Y_OFFSET = { 1: -size * 0.005, 2: -size * 0.01, 3: -size * 0.0075, 4: -size * 0.022, 5: -size * 0.022, 6: -size * 0.022 };
           const MARBLE_Y_OFFSET = { 1: -size * 0.005, 2: -size * 0.01, 3: -size * 0.005, 4: -size * 0.019, 5: -size * 0.015, 6: -size * 0.015 };
@@ -220,6 +222,8 @@ export default function Die({
             ? (AMETHYST_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "moonstone"
             ? (MOONSTONE_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
+            : skin.id === "lava"
+            ? (LAVA_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : (FACE_X_OFFSET[value] || 0);
           const yNudge = skin.id === "classic_white"
             ? (CLASSIC_WHITE_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
@@ -241,6 +245,8 @@ export default function Die({
             ? (AMETHYST_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : skin.id === "moonstone"
             ? (MOONSTONE_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
+            : skin.id === "lava"
+            ? (LAVA_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : (FACE_Y_OFFSET[value] || 0);
           return (
             <div
