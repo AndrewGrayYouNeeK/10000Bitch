@@ -192,9 +192,9 @@ export default function Die({
               className="absolute pointer-events-none"
               style={{
                 top: `${-size * 0.14 + yNudge}px`,
-                bottom: `${-size * 0.8 - yNudge}px`,
+                bottom: `${-size * 0.8 + yNudge}px`,
                 left: `${-size * 0.35 + xNudge}px`,
-                right: `${-size * 0.35 - xNudge}px`,
+                right: `${-size * 0.35 + xNudge}px`,
                 borderRadius: radius,
                 backgroundImage: `url(${skin.spriteUrl})`,
                 backgroundSize: `${cellW * cols}px ${cellH * rows}px`,
