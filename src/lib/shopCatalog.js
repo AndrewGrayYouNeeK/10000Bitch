@@ -12,7 +12,7 @@ export const DICE_SKINS = [
     glow: "",
     description: "The original. Timeless.",
     realistic: true,
-    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/e3c042b9e_hPLMjJ1wVsJG0mW-UisgC_GgpVeRAE.png",
+    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/a120601c7_generated_image.png",
   },
   {
     id: "obsidian",
