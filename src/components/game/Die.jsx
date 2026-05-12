@@ -178,10 +178,10 @@ export default function Die({
         <div
           className="absolute pointer-events-none"
           style={{
-            top: `${-size * 0.12}px`,
-            bottom: `${-size * 0.8}px`,
+            top: `${size * 0.15}px`,
             left: `${-size * 0.14}px`,
-            right: `${-size * 0.14}px`,
+            width: `${size * 1.28}px`,
+            height: `${size * 1.28}px`,
             borderRadius: radius,
             ...getSpriteStyle(skin, value, size * 1.28)
           }} /> :
