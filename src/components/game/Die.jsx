@@ -178,9 +178,9 @@ export default function Die({
         <div
           className="absolute pointer-events-none"
           style={{
-            top: 0,
+            top: `${-size * 0.12}px`,
             bottom: `${-size * 0.8}px`,
-            left: 0,
+            left: `${-size * 0.28}px`,
             right: `${-size * 0.45}px`,
             borderRadius: radius,
             ...getSpriteStyle(skin, value, size * 1.28)
