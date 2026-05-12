@@ -182,14 +182,17 @@ export default function Die({
           const rows = skin.spriteGrid?.rows ?? 2;
           const col = (value - 1) % cols;
           const row = Math.floor((value - 1) / cols);
+          // Per-face horizontal nudge (in px) — corrects misaligned sprite cells
+          const FACE_X_OFFSET = { 2: -size * 0.08 };
+          const xNudge = FACE_X_OFFSET[value] || 0;
           return (
             <div
               className="absolute pointer-events-none"
               style={{
                 top: `${-size * 0.14}px`,
                 bottom: `${-size * 0.8}px`,
-                left: `${-size * 0.35}px`,
-                right: `${-size * 0.35}px`,
+                left: `${-size * 0.35 + xNudge}px`,
+                right: `${-size * 0.35 - xNudge}px`,
                 borderRadius: radius,
                 backgroundImage: `url(${skin.spriteUrl})`,
                 backgroundSize: `${cellW * cols}px ${cellH * rows}px`,
