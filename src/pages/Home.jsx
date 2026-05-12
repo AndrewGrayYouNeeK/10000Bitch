@@ -145,7 +145,7 @@ export default function Home() {
           transition={{ duration: 2.5, repeat: Infinity }}
           style={{ color: "#00ffc8", textShadow: "0 0 10px rgba(0,255,200,0.6)" }}
         >
-          ⚡ Roll. Risk. Reach ten thousand. ⚡
+          Roll. Risk. Reach ten thousand.
         </motion.p>
 
         {/* Buttons */}
