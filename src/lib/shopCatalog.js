@@ -36,7 +36,7 @@ export const DICE_SKINS = [
     glow: "shadow-blue-500/50",
     description: "Cool and confident.",
     realistic: true,
-    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/631ed04d0_LZmPx9m7bqJyACwXQcfNu_Lwtd1VVk.png",
+    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/92e4ca73e_generated_image.png",
   },
   {
     id: "gold",
