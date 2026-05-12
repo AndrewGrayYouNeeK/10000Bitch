@@ -176,7 +176,7 @@ export default function Die({
         {/* Sprite sheet texture or pip grid */}
         {skin.spriteUrl ?
         (() => {
-          const cellW = size * 1.55;
+          const cellW = size * 1.65;
           const cellH = size * 1.32;
           const cols = skin.spriteGrid?.cols ?? 3;
           const rows = skin.spriteGrid?.rows ?? 2;
