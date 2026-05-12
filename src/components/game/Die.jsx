@@ -174,6 +174,19 @@ export default function Die({
           ...squircleStyle
         }}>
         
+        {/* Video background skin */}
+        {skin.videoUrl && (
+          <video
+            src={skin.videoUrl}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+            style={{ borderRadius: radius }}
+          />
+        )}
+
         {/* Sprite sheet texture or pip grid */}
         {skin.spriteUrl ?
         (() => {

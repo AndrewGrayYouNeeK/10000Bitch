@@ -157,6 +157,18 @@ export const DICE_SKINS = [
     description: "Pure crystal. The legendary tier.",
     special: "diamond",
   },
+  {
+    id: "tesla",
+    name: "Tesla",
+    price: 1200,
+    gradient: "from-slate-900 via-purple-950 to-black",
+    border: "border-purple-700",
+    pipColor: "bg-white",
+    glow: "shadow-purple-500/70",
+    description: "Crackling electric arcs.",
+    realistic: true,
+    videoUrl: "https://media.base44.com/videos/public/69e7669b223d37093cd03879/fde6fe169_ca9c480e8677452185635915c4d441a5.mp4",
+  },
 ];
 
 // Coin packs — direct-buy alternative for players who don't want to grind.
