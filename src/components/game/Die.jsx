@@ -176,10 +176,11 @@ export default function Die({
         {/* Sprite sheet texture or pip grid */}
         {skin.spriteUrl ?
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="absolute pointer-events-none"
           style={{
+            inset: `${-size * b}px`,
             borderRadius: radius,
-            ...getSpriteStyle(skin, value, size)
+            ...getSpriteStyle(skin, value, size * (1 + 2 * b))
           }} /> :
 
 
