@@ -175,16 +175,26 @@ export default function Die({
         
         {/* Sprite sheet texture or pip grid */}
         {skin.spriteUrl ?
-        <div
-          className="absolute pointer-events-none"
-          style={{
-            top: `${-size * 0.12}px`,
-            bottom: `${-size * 0.34}px`,
-            left: `${-size * 0.14}px`,
-            right: `${-size * 0.14}px`,
-            borderRadius: radius,
-            ...getSpriteStyle(skin, value, size * 1.28)
-          }} /> :
+        (() => {
+          const spriteStyle = getSpriteStyle(skin, value, size * 1.28);
+          // Nudge the background image downward inside its container
+          const yNudge = size * 0.06;
+          const [bx, by] = (spriteStyle.backgroundPosition || "0px 0px").split(" ");
+          const byNum = parseFloat(by) + yNudge;
+          spriteStyle.backgroundPosition = `${bx} ${byNum}px`;
+          return (
+            <div
+              className="absolute pointer-events-none"
+              style={{
+                top: `${-size * 0.12}px`,
+                bottom: `${-size * 0.34}px`,
+                left: `${-size * 0.14}px`,
+                right: `${-size * 0.14}px`,
+                borderRadius: radius,
+                ...spriteStyle
+              }} />
+          );
+        })() :
 
 
         <div
