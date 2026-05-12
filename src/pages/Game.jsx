@@ -20,7 +20,6 @@ import TurnBanner from "@/components/game/TurnBanner";
 import GameOverDialog from "@/components/game/GameOverDialog";
 import RulesSheet from "@/components/game/RulesSheet";
 import BigPopup from "@/components/game/BigPopup";
-import FeltBackground from "@/components/game/FeltBackground";
 import { useCosmetics } from "@/hooks/useCosmetics";
 
 export default function Game() {
@@ -177,8 +176,7 @@ export default function Game() {
     (!needsEntry || potentialTotal >= ENTRY_THRESHOLD);
 
   return (
-    <div className="relative min-h-screen text-white flex flex-col pb-6">
-      <FeltBackground />
+    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white flex flex-col pb-6">
       {/* Header */}
       <div className="flex items-center justify-between p-3 border-b border-white/10">
         <Button asChild variant="ghost" size="icon" className="text-white hover:bg-white/10">

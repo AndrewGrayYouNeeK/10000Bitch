@@ -11,20 +11,14 @@ export default function DiceTray({ dice, rolling, onToggle, disabled, skinId, pi
     <div
       className="relative rounded-3xl p-6 overflow-hidden border-4 border-amber-900/60 shadow-2xl"
       style={{
-        background:
-          "radial-gradient(ellipse at center, #1f6b3a 0%, #134524 70%, #0b2e18 100%)",
+        backgroundImage:
+          "url(https://media.base44.com/images/public/69e7669b223d37093cd03879/c8d0f5ce6_ziA4KOYCS_QY2BcnEzQGb_sNgQTA4n.png)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
         boxShadow:
           "inset 0 0 40px rgba(0,0,0,0.5), inset 0 4px 10px rgba(255,255,255,0.08), 0 10px 30px rgba(0,0,0,0.5)",
       }}
     >
-      {/* Felt texture */}
-      <div
-        className="absolute inset-0 opacity-20 pointer-events-none"
-        style={{
-          backgroundImage:
-            "repeating-linear-gradient(45deg, rgba(0,0,0,0.1) 0, rgba(0,0,0,0.1) 1px, transparent 1px, transparent 3px)",
-        }}
-      />
 
       <div className="relative grid grid-cols-3 gap-3 justify-items-center sm:grid-cols-6">
         {dice.map((d, idx) => (
