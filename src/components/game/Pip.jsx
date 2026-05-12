@@ -1,8 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-// Renders a single pip that looks like a real physical die indentation.
-// `animationEffect` can be "glow", "shinyStar", or "blackHole" — applied only when set.
+// Renders a single pip. Supports special animated effects for premium skins.
+// `animationEffect` values: "glow" | "shinyStar" | "blackHole" | null
 export default function Pip({ size, colorClass = "bg-gray-900", inset = false, animationEffect = null }) {
   const s = size || 10;
 
@@ -11,95 +11,168 @@ export default function Pip({ size, colorClass = "bg-gray-900", inset = false, a
     height: s,
     borderRadius: "50%",
     flexShrink: 0,
+    position: "relative",
   };
 
+  // --- GLOW: pulsing neon orb with bloom ---
   if (animationEffect === "glow") {
     return (
       <motion.div
         style={{
           ...baseStyle,
-          background: "radial-gradient(circle at 40% 35%, #e0f2fe 0%, #38bdf8 60%, #0369a1 100%)",
+          background:
+            "radial-gradient(circle at 38% 32%, #ffffff 0%, #bae6fd 25%, #38bdf8 55%, #0c4a6e 100%)",
+          overflow: "visible",
         }}
         animate={{
           boxShadow: [
-            "0 0 4px 1px rgba(56,189,248,0.6), inset 0 1px 2px rgba(255,255,255,0.5)",
-            "0 0 14px 4px rgba(125,211,252,1), inset 0 1px 2px rgba(255,255,255,0.8)",
-            "0 0 4px 1px rgba(56,189,248,0.6), inset 0 1px 2px rgba(255,255,255,0.5)",
+            "0 0 6px 2px rgba(56,189,248,0.5), 0 0 14px 4px rgba(56,189,248,0.25), inset 0 1px 2px rgba(255,255,255,0.7)",
+            "0 0 14px 5px rgba(125,211,252,1), 0 0 26px 10px rgba(56,189,248,0.55), inset 0 1px 3px rgba(255,255,255,1)",
+            "0 0 6px 2px rgba(56,189,248,0.5), 0 0 14px 4px rgba(56,189,248,0.25), inset 0 1px 2px rgba(255,255,255,0.7)",
           ],
         }}
         transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-      />
-    );
-  }
-
-  if (animationEffect === "shinyStar") {
-    return (
-      <motion.div
-        style={{
-          ...baseStyle,
-          background: "radial-gradient(circle at 40% 35%, #fff 0%, #fde68a 50%, #f59e0b 100%)",
-          boxShadow: "0 0 6px 2px rgba(253,224,71,0.7), inset 0 1px 2px rgba(255,255,255,0.9)",
-          position: "relative",
-          overflow: "hidden",
-        }}
-        animate={{ rotate: [0, 360] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
       >
-        <motion.div
+        {/* highlight specular */}
+        <div
           style={{
             position: "absolute",
-            inset: 0,
+            top: "12%",
+            left: "18%",
+            width: "40%",
+            height: "30%",
             borderRadius: "50%",
-            background:
-              "conic-gradient(from 0deg, transparent 0deg, rgba(255,255,255,0.95) 20deg, transparent 40deg, transparent 180deg, rgba(255,255,255,0.95) 200deg, transparent 220deg, transparent 360deg)",
-            mixBlendMode: "overlay",
+            background: "radial-gradient(circle, rgba(255,255,255,0.95) 0%, transparent 70%)",
+            pointerEvents: "none",
           }}
-          animate={{ opacity: [0.4, 1, 0.4] }}
-          transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
         />
       </motion.div>
     );
   }
 
-  if (animationEffect === "blackHole") {
+  // --- SHINY STAR: golden orb with rotating sunburst + sparkle ---
+  if (animationEffect === "shinyStar") {
     return (
-      <motion.div
-        style={{
-          ...baseStyle,
-          background: "radial-gradient(circle at 50% 50%, #000 0%, #1e1b4b 60%, #4c1d95 100%)",
-          boxShadow:
-            "inset 0 0 6px 2px rgba(0,0,0,1), 0 0 8px 1px rgba(124,58,237,0.6)",
-          position: "relative",
-          overflow: "hidden",
-        }}
-        animate={{ scale: [1, 0.85, 1] }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-      >
+      <div style={{ ...baseStyle, overflow: "visible" }}>
+        {/* rotating sunburst rays (behind) */}
+        <motion.div
+          style={{
+            position: "absolute",
+            top: "-25%",
+            left: "-25%",
+            width: "150%",
+            height: "150%",
+            borderRadius: "50%",
+            background:
+              "conic-gradient(from 0deg, rgba(253,224,71,0) 0deg, rgba(253,224,71,0.9) 10deg, rgba(253,224,71,0) 30deg, rgba(253,224,71,0) 90deg, rgba(253,224,71,0.9) 100deg, rgba(253,224,71,0) 120deg, rgba(253,224,71,0) 180deg, rgba(253,224,71,0.9) 190deg, rgba(253,224,71,0) 210deg, rgba(253,224,71,0) 270deg, rgba(253,224,71,0.9) 280deg, rgba(253,224,71,0) 300deg)",
+            filter: "blur(1px)",
+            opacity: 0.7,
+          }}
+          animate={{ rotate: 360 }}
+          transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+        />
+        {/* golden core */}
         <motion.div
           style={{
             position: "absolute",
             inset: 0,
             borderRadius: "50%",
             background:
-              "conic-gradient(from 0deg, rgba(168,85,247,0.8), rgba(0,0,0,0) 60%, rgba(56,189,248,0.6), rgba(0,0,0,0) 120%)",
+              "radial-gradient(circle at 38% 30%, #ffffff 0%, #fef08a 30%, #fbbf24 65%, #b45309 100%)",
+            boxShadow:
+              "0 0 8px 2px rgba(251,191,36,0.85), inset 0 1px 3px rgba(255,255,255,0.95), inset 0 -2px 4px rgba(180,83,9,0.6)",
           }}
-          animate={{ rotate: [0, -360] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+          animate={{
+            boxShadow: [
+              "0 0 8px 2px rgba(251,191,36,0.85), inset 0 1px 3px rgba(255,255,255,0.95), inset 0 -2px 4px rgba(180,83,9,0.6)",
+              "0 0 16px 4px rgba(253,224,71,1), inset 0 1px 3px rgba(255,255,255,1), inset 0 -2px 4px rgba(180,83,9,0.7)",
+              "0 0 8px 2px rgba(251,191,36,0.85), inset 0 1px 3px rgba(255,255,255,0.95), inset 0 -2px 4px rgba(180,83,9,0.6)",
+            ],
+          }}
+          transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
         />
+        {/* twinkling sparkle highlight */}
+        <motion.div
+          style={{
+            position: "absolute",
+            top: "15%",
+            left: "20%",
+            width: "35%",
+            height: "35%",
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(255,255,255,1) 0%, transparent 70%)",
+            pointerEvents: "none",
+          }}
+          animate={{ opacity: [0.6, 1, 0.6], scale: [0.9, 1.15, 0.9] }}
+          transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
+    );
+  }
+
+  // --- BLACK HOLE: swirling accretion disk + event horizon + lensing ring ---
+  if (animationEffect === "blackHole") {
+    return (
+      <div style={{ ...baseStyle, overflow: "visible" }}>
+        {/* outer lensing ring (gravitational glow) */}
+        <motion.div
+          style={{
+            position: "absolute",
+            top: "-15%",
+            left: "-15%",
+            width: "130%",
+            height: "130%",
+            borderRadius: "50%",
+            boxShadow:
+              "0 0 6px 1px rgba(168,85,247,0.6), 0 0 14px 3px rgba(56,189,248,0.4)",
+            background:
+              "radial-gradient(circle, transparent 55%, rgba(168,85,247,0.35) 65%, transparent 80%)",
+            pointerEvents: "none",
+          }}
+          animate={{ opacity: [0.6, 1, 0.6] }}
+          transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+        />
+        {/* swirling accretion disk */}
+        <motion.div
+          style={{
+            position: "absolute",
+            inset: 0,
+            borderRadius: "50%",
+            background:
+              "conic-gradient(from 0deg, #f97316 0deg, #a855f7 80deg, #1e1b4b 160deg, #000 200deg, #38bdf8 280deg, #f97316 360deg)",
+            filter: "blur(0.5px)",
+          }}
+          animate={{ rotate: -360 }}
+          transition={{ duration: 3.5, repeat: Infinity, ease: "linear" }}
+        />
+        {/* inner shadow ring (curve) */}
         <div
+          style={{
+            position: "absolute",
+            inset: "15%",
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle, transparent 40%, rgba(0,0,0,0.7) 70%, #000 100%)",
+          }}
+        />
+        {/* event horizon — pure black core with subtle pulse */}
+        <motion.div
           style={{
             position: "absolute",
             top: "50%",
             left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: s * 0.4,
-            height: s * 0.4,
+            width: "50%",
+            height: "50%",
             borderRadius: "50%",
             background: "#000",
-            boxShadow: "0 0 4px 2px rgba(0,0,0,1)",
+            boxShadow:
+              "0 0 6px 2px rgba(0,0,0,1), inset 0 0 4px 2px rgba(0,0,0,1)",
+            transform: "translate(-50%, -50%)",
           }}
+          animate={{ scale: [1, 0.85, 1] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         />
-      </motion.div>
+      </div>
     );
   }
 
