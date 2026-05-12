@@ -185,8 +185,12 @@ export default function Die({
           // Per-face nudges (in px) — corrects misaligned sprite cells
           const FACE_X_OFFSET = { 2: -size * 0.015, 3: -size * 0.022, 5: -size * 0.022, 6: -size * 0.032 };
           const FACE_Y_OFFSET = { 4: -size * 0.03, 5: -size * 0.05, 6: -size * 0.035 };
+          // Classic White needs slightly different per-face Y tuning
+          const CLASSIC_WHITE_Y_OFFSET = { 1: size * 0.012, 2: size * 0.012, 3: size * 0.012, 4: -size * 0.045 };
           const xNudge = FACE_X_OFFSET[value] || 0;
-          const yNudge = FACE_Y_OFFSET[value] || 0;
+          const yNudge = skin.id === "classic_white"
+            ? (CLASSIC_WHITE_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
+            : (FACE_Y_OFFSET[value] || 0);
           return (
             <div
               className="absolute pointer-events-none"
