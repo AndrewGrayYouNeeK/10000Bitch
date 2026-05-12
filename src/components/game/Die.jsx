@@ -180,8 +180,8 @@ export default function Die({
           style={{
             top: `${-size * 0.12}px`,
             bottom: `${-size * 0.8}px`,
-            left: `${-size * 0.14}px`,
-            right: `${-size * 0.14}px`,
+            left: `${-size * 0.28}px`,
+            right: `${-size * 0.28}px`,
             borderRadius: radius,
             ...getSpriteStyle(skin, value, size * 1.28)
           }} /> :
