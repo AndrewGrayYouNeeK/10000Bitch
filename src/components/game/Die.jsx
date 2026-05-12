@@ -188,8 +188,8 @@ export default function Die({
               style={{
                 top: `${-size * 0.14}px`,
                 bottom: `${-size * 0.8}px`,
-                left: `${-size * 0.35}px`,
-                right: `${-size * 0.35}px`,
+                left: `${-size * 0.3}px`,
+                right: `${-size * 0.3}px`,
                 borderRadius: radius,
                 backgroundImage: `url(${skin.spriteUrl})`,
                 backgroundSize: `${cellW * cols}px ${cellH * rows}px`,
