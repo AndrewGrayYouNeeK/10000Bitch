@@ -208,6 +208,12 @@ export default function Home() {
           style={{ color: "rgba(0,255,200,0.3)" }}>
           <Users className="w-3 h-3" /> 2–4 players · one device
         </div>
+
+        <div className="mt-4 text-xs flex items-center justify-center gap-4"
+          style={{ color: "rgba(0,255,200,0.25)" }}>
+          <Link to="/about" className="hover:opacity-70 transition-opacity">About</Link>
+          <Link to="/contact" className="hover:opacity-70 transition-opacity">Contact</Link>
+        </div>
       </motion.div>
     </div>
   );
