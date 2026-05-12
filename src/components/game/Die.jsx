@@ -84,7 +84,7 @@ export default function Die({
   wasRolling.current = rolling;
 
   // Standard dice corner radius
-  const radius = Math.round(size * 0.16);
+  const radius = Math.round(size * 0.12);
 
   // Pip size scales nicely with die size
   const pipSize = Math.round(size * 0.145);
