@@ -198,11 +198,12 @@ export default function Die({
           const GALAXY_X_OFFSET = { 6: size * 0.015 };
           const DRAGON_X_OFFSET = { 2: size * 0.015, 3: size * 0.015, 5: size * 0.01, 6: size * 0.015 };
           const MARBLE_X_OFFSET = { 1: size * 0.01, 2: size * 0.015, 3: size * 0.005, 4: size * 0.012, 5: size * 0.005, 6: size * 0.015 };
+          const AMETHYST_X_OFFSET = { 2: size * 0.015, 3: size * 0.015, 6: size * 0.015 };
           const MARBLE_Y_OFFSET = { 1: -size * 0.005, 2: -size * 0.01, 3: -size * 0.005, 4: -size * 0.019, 5: -size * 0.015, 6: -size * 0.015 };
           const SILVER_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.015 };
           const GALAXY_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.015 };
           const DRAGON_Y_OFFSET = { 5: -size * 0.005 };
-          const AMETHYST_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.015, 4: -size * 0.015, 5: -size * 0.015, 6: -size * 0.015 };
+          const AMETHYST_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.015, 4: -size * 0.025, 5: -size * 0.025, 6: -size * 0.025 };
           const xNudge = skin.id === "wood"
             ? (WOOD_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "silver"
@@ -213,6 +214,8 @@ export default function Die({
             ? (DRAGON_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "marble"
             ? (MARBLE_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
+            : skin.id === "amethyst"
+            ? (AMETHYST_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : (FACE_X_OFFSET[value] || 0);
           const yNudge = skin.id === "classic_white"
             ? (CLASSIC_WHITE_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
