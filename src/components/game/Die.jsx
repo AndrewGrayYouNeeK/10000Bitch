@@ -177,7 +177,7 @@ export default function Die({
         {skin.spriteUrl ?
         (() => {
           const cellW = size * 1.55;
-          const cellH = size * 1.4;
+          const cellH = size * 1.32;
           const cols = skin.spriteGrid?.cols ?? 3;
           const rows = skin.spriteGrid?.rows ?? 2;
           const col = (value - 1) % cols;
