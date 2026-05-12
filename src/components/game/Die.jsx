@@ -86,6 +86,25 @@ export default function Die({
   // Standard dice corner radius
   const radius = Math.round(size * 0.06);
 
+  // Squircle mask — bows the edges outward between the corners like a real die.
+  // b = bulge amount (fraction of size that the midpoint of each edge extends past the square)
+  const b = 0.04;
+  const vb = `${-b} ${-b} ${1 + 2 * b} ${1 + 2 * b}`;
+  const cr = 0.08; // corner radius in path units
+  const squirclePath = `M ${cr},0 L ${1 - cr},0 Q ${1 + b},${0.5} ${1 - cr},1 L ${cr},1 Q ${-b},${0.5} ${cr},0 Z`
+    .replace(`L ${1 - cr},0 Q`, `L ${1 - cr},0 Q ${1 + b * 0.3},${-b * 0.3} ${1},${cr} L ${1},${1 - cr} Q`)
+    .replace(`L ${cr},1 Q`, `L ${cr},1 Q ${-b * 0.3},${1 + b * 0.3} ${0},${1 - cr} L ${0},${cr} Q`);
+  const squircleSvg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='${vb}' preserveAspectRatio='none'><path d='M ${cr} 0 Q ${0.5} ${-b} ${1 - cr} 0 Q 1 0 1 ${cr} Q ${1 + b} ${0.5} 1 ${1 - cr} Q 1 1 ${1 - cr} 1 Q ${0.5} ${1 + b} ${cr} 1 Q 0 1 0 ${1 - cr} Q ${-b} ${0.5} 0 ${cr} Q 0 0 ${cr} 0 Z' fill='black'/></svg>`;
+  const squircleMaskUrl = `url("data:image/svg+xml;utf8,${encodeURIComponent(squircleSvg)}")`;
+  const squircleStyle = {
+    WebkitMaskImage: squircleMaskUrl,
+    maskImage: squircleMaskUrl,
+    WebkitMaskSize: "100% 100%",
+    maskSize: "100% 100%",
+    WebkitMaskRepeat: "no-repeat",
+    maskRepeat: "no-repeat",
+  };
+
   // Pip size scales nicely with die size
   const pipSize = Math.round(size * 0.145);
 
@@ -145,12 +164,13 @@ export default function Die({
         type="button"
         onClick={onClick}
         disabled={used || rolling}
-        className={`relative w-full h-full rounded-[48px] ${skin.id !== "classic_white" ? `bg-gradient-to-br ${skin.gradient}` : ""} ${used ? "opacity-20 grayscale cursor-not-allowed" : ""}`}
+        className={`relative w-full h-full ${skin.id !== "classic_white" ? `bg-gradient-to-br ${skin.gradient}` : ""} ${used ? "opacity-20 grayscale cursor-not-allowed" : ""}`}
         style={{
           borderRadius: radius,
           boxShadow: buildShadow(),
           overflow: "hidden",
-          background: skin.id === "classic_white" ? "transparent" : undefined
+          background: skin.id === "classic_white" ? "transparent" : undefined,
+          ...squircleStyle
         }}>
         
         {/* Sprite sheet texture or pip grid */}
