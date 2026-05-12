@@ -183,7 +183,7 @@ export default function Die({
             left: `${-size * 0.28}px`,
             right: `${-size * 1.5}px`,
             borderRadius: radius,
-            ...getSpriteStyle(skin, value, size * 1.28)
+            ...getSpriteStyle(skin, value, size * 1.6)
           }} /> :
 
 
