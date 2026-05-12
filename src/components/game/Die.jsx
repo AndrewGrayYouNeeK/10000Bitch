@@ -270,11 +270,23 @@ export default function Die({
           className="absolute grid grid-cols-3 grid-rows-3"
           style={{ inset: padding, gap: Math.round(size * 0.045) }}>
           
-            {layout.flat().map((p, i) =>
-          <div key={i} className="flex items-center justify-center">
-                {p === 1 && <Pip size={pipSize} colorClass={skin.pipColor} inset={skin.realistic} />}
-              </div>
-          )}
+            {layout.flat().map((p, i) => {
+              // For the Diamond skin, cycle pip animations: glow → shinyStar → blackHole
+              const diamondEffects = ["glow", "shinyStar", "blackHole"];
+              const effect = skin.id === "diamond" ? diamondEffects[i % 3] : null;
+              return (
+                <div key={i} className="flex items-center justify-center">
+                  {p === 1 && (
+                    <Pip
+                      size={pipSize}
+                      colorClass={skin.pipColor}
+                      inset={skin.realistic}
+                      animationEffect={effect}
+                    />
+                  )}
+                </div>
+              );
+            })}
           </div>
         }
 
