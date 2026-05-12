@@ -183,7 +183,7 @@ export default function Die({
           const col = (value - 1) % cols;
           const row = Math.floor((value - 1) / cols);
           // Per-face horizontal nudge (in px) — corrects misaligned sprite cells
-          const FACE_X_OFFSET = { 2: -size * 0.08 };
+          const FACE_X_OFFSET = { 2: -size * 0.08, 3: -size * 0.08 };
           const xNudge = FACE_X_OFFSET[value] || 0;
           return (
             <div
