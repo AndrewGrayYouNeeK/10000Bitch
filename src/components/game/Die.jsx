@@ -83,8 +83,8 @@ export default function Die({
   }
   wasRolling.current = rolling;
 
-  // Pillowy real-dice corner radius — matches the rounded shape of physical dice
-  const radius = Math.round(size * 0.28);
+  // Standard dice corner radius
+  const radius = Math.round(size * 0.16);
 
   // Pip size scales nicely with die size
   const pipSize = Math.round(size * 0.145);
