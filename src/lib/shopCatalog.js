@@ -27,18 +27,6 @@ export const DICE_SKINS = [
     spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/0aba8ef3e_3WGKngcFo6eWV9kOIGywM_0CERzNWO.png",
   },
   {
-    id: "sapphire",
-    name: "Sapphire",
-    price: 250,
-    gradient: "from-sky-300 via-blue-500 to-indigo-800",
-    border: "border-indigo-900",
-    pipColor: "bg-white",
-    glow: "shadow-blue-500/50",
-    description: "Cool and confident.",
-    realistic: true,
-    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/92e4ca73e_generated_image.png",
-  },
-  {
     id: "gold",
     name: "Molten Gold",
     price: 500,
