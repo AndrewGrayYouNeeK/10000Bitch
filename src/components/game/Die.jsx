@@ -175,16 +175,29 @@ export default function Die({
         
         {/* Sprite sheet texture or pip grid */}
         {skin.spriteUrl ?
-        <div
-          className="absolute pointer-events-none"
-          style={{
-            top: `${-size * 0.12}px`,
-            bottom: `${-size * 0.8}px`,
-            left: `${-size * 0.28}px`,
-            right: `${-size * 1.4}px`,
-            borderRadius: radius,
-            ...getSpriteStyle(skin, value, size * 1.28)
-          }} /> :
+        (() => {
+          const cellW = size * 1.7;
+          const cellH = size * 1.28;
+          const cols = skin.spriteGrid?.cols ?? 3;
+          const rows = skin.spriteGrid?.rows ?? 2;
+          const col = (value - 1) % cols;
+          const row = Math.floor((value - 1) / cols);
+          return (
+            <div
+              className="absolute pointer-events-none"
+              style={{
+                top: `${-size * 0.12}px`,
+                bottom: `${-size * 0.8}px`,
+                left: `${-size * 0.28}px`,
+                right: `${-size * 0.7}px`,
+                borderRadius: radius,
+                backgroundImage: `url(${skin.spriteUrl})`,
+                backgroundSize: `${cellW * cols}px ${cellH * rows}px`,
+                backgroundPosition: `${-(col * cellW)}px ${-(row * cellH)}px`,
+                backgroundRepeat: 'no-repeat',
+              }} />
+          );
+        })() :
 
 
         <div
