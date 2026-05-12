@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { getSkin, getPipStyle, getSpriteStyle } from "@/lib/shopCatalog";
 import Pip from "./Pip";
+import LightningOverlay from "./LightningOverlay";
 
 // Pip grid positions for each face value.
 // Grid is 3x3. 1 = pip present, 0 = empty.
@@ -329,6 +330,9 @@ export default function Die({
           
           </>
         }
+
+        {/* Lightning / electric overlay — only when die is held (touched) */}
+        {held && !used && <LightningOverlay size={size} radius={radius} />}
 
         {/* Held indicator — pulsing amber glow + checkmark */}
         {held && !used &&
