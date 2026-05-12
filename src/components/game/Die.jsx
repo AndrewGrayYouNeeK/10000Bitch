@@ -199,8 +199,8 @@ export default function Die({
           const DRAGON_X_OFFSET = { 2: size * 0.015, 3: size * 0.015, 5: size * 0.01, 6: size * 0.015 };
           const MARBLE_X_OFFSET = { 1: size * 0.01, 2: size * 0.015, 3: size * 0.005, 4: size * 0.012, 5: size * 0.005, 6: size * 0.015 };
           const AMETHYST_X_OFFSET = { 2: size * 0.015, 3: -size * 0.005, 6: size * 0.015 };
-          const MOONSTONE_X_OFFSET = { 2: size * 0.005, 3: size * 0.005, 4: size * 0.005, 5: size * 0.005, 6: size * 0.005 };
-          const MOONSTONE_Y_OFFSET = { 1: -size * 0.005, 2: -size * 0.015, 3: -size * 0.0125, 4: -size * 0.01, 5: -size * 0.01, 6: -size * 0.01 };
+          const MOONSTONE_X_OFFSET = { 2: size * 0.005, 3: size * 0.005, 4: size * 0.01, 5: size * 0.005, 6: size * 0.005 };
+          const MOONSTONE_Y_OFFSET = { 1: -size * 0.005, 2: -size * 0.01, 3: -size * 0.0075, 4: -size * 0.025, 5: -size * 0.025, 6: -size * 0.025 };
           const MARBLE_Y_OFFSET = { 1: -size * 0.005, 2: -size * 0.01, 3: -size * 0.005, 4: -size * 0.019, 5: -size * 0.015, 6: -size * 0.015 };
           const SILVER_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.015 };
           const GALAXY_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.015 };
