@@ -137,16 +137,15 @@ export function getBadge(id) {
  * Assumes the sprite sheet is a 3-column × 2-row grid of faces (values 1–6).
  */
 export function getSpriteStyle(skin, value, size) {
-  if (!skin.spriteUrl) return {};
-  const cols = 3;
-  const rows = 2;
+  if (!skin?.spriteUrl) return null;
+  const cols = skin.spriteGrid?.cols ?? 3;
+  const rows = skin.spriteGrid?.rows ?? 2;
   const col = (value - 1) % cols;
   const row = Math.floor((value - 1) / cols);
-  // We don't know the exact pixel dimensions ahead of time, so use background-size percentages.
   return {
     backgroundImage: `url(${skin.spriteUrl})`,
-    backgroundSize: `${cols * 100}% ${rows * 100}%`,
-    backgroundPosition: `${col * (100 / (cols - 1))}% ${row * (100 / (rows - 1))}%`,
-    backgroundRepeat: "no-repeat",
+    backgroundSize: `${size * cols}px ${size * rows}px`,
+    backgroundPosition: `${-(col * size)}px ${-(row * size)}px`,
+    backgroundRepeat: 'no-repeat',
   };
 }

@@ -159,6 +159,7 @@ export default function Die({
             className="absolute inset-0 pointer-events-none"
             style={{
               borderRadius: radius,
+              backgroundColor: 'white',
               ...getSpriteStyle(skin, value, size),
             }}
           />
