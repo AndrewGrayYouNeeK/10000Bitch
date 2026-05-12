@@ -193,7 +193,7 @@ export default function Die({
           const OBSIDIAN_Y_OFFSET = { 5: -size * 0.03 };
           // Burl Wood per-face tuning
           const WOOD_Y_OFFSET = { 1: -size * 0.02, 2: -size * 0.02, 3: -size * 0.025, 5: -size * 0.035, 6: -size * 0.02 };
-          const WOOD_X_OFFSET = { 3: size * 0.02 };
+          const WOOD_X_OFFSET = { 3: size * 0.02, 5: size * 0.02, 6: size * 0.02 };
           const xNudge = skin.id === "wood"
             ? (WOOD_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : (FACE_X_OFFSET[value] || 0);
