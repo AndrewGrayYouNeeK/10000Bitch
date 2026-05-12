@@ -145,7 +145,7 @@ export default function Die({
         type="button"
         onClick={onClick}
         disabled={used || rolling}
-        className={`relative w-full h-full rounded-[10px] ${skin.id !== "classic_white" ? `bg-gradient-to-br ${skin.gradient}` : ""} ${used ? "opacity-20 grayscale cursor-not-allowed" : ""}`}
+        className={`relative w-full h-full rounded-xl ${skin.id !== "classic_white" ? `bg-gradient-to-br ${skin.gradient}` : ""} ${used ? "opacity-20 grayscale cursor-not-allowed" : ""}`}
         style={{
           borderRadius: radius,
           boxShadow: buildShadow(),
