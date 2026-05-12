@@ -187,9 +187,9 @@ export default function Die({
               className="absolute pointer-events-none"
               style={{
                 top: `${-size * 0.12}px`,
-                bottom: `${-size * 0.95}px`,
-                left: `${-size * 0.42}px`,
-                right: `${-size * 0.85}px`,
+                bottom: `${-size * 0.8}px`,
+                left: `${-size * 0.28}px`,
+                right: `${-size * 0.7}px`,
                 borderRadius: radius,
                 backgroundImage: `url(${skin.spriteUrl})`,
                 backgroundSize: `${cellW * cols}px ${cellH * rows}px`,
