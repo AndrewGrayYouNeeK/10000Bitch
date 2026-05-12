@@ -178,7 +178,7 @@ export default function Die({
         (() => {
           const spriteStyle = getSpriteStyle(skin, value, size * 1.28);
           // Nudge the background image downward inside its container
-          const yNudge = size * 0.06;
+          const yNudge = size * 0.12;
           const [bx, by] = (spriteStyle.backgroundPosition || "0px 0px").split(" ");
           const byNum = parseFloat(by) + yNudge;
           spriteStyle.backgroundPosition = `${bx} ${byNum}px`;
