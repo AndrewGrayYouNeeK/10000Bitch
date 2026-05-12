@@ -243,7 +243,7 @@ export default function Game() {
             rolling={false}
             onToggle={() => {}}
             disabled={true}
-            skinId="wood"
+            skinId="silver"
             pipsId={equippedPipsId}
           />
           {info.held.length > 0 && (
