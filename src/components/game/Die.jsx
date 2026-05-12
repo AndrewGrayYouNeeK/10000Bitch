@@ -83,8 +83,8 @@ export default function Die({
   }
   wasRolling.current = rolling;
 
-  // Squircle corner radius — matches the photo's very rounded dice
-  const radius = Math.round(size * 0.28);
+  // Standard dice corner radius — matches real-world dice proportions
+  const radius = Math.round(size * 0.16);
 
   // Pip size scales nicely with die size
   const pipSize = Math.round(size * 0.145);

@@ -40,7 +40,7 @@ export default function DiceTray({ dice, rolling, onToggle, disabled, skinId, pi
               used={d.used}
               rolling={rolling && !d.used}
               onClick={() => !disabled && !d.used && onToggle && onToggle(d.id)}
-              size={72}
+              size={92}
               skinId={skinId || "classic_white"}
               pipsId={pipsId}
             />
