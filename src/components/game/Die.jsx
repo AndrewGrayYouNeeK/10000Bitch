@@ -331,9 +331,6 @@ export default function Die({
           </>
         }
 
-        {/* Lightning / electric overlay — only when die is held (touched) */}
-        {held && !used && <LightningOverlay size={size} radius={radius} />}
-
         {/* Held indicator — pulsing amber glow + checkmark */}
         {held && !used &&
         <>
