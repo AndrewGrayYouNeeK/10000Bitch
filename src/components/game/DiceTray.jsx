@@ -35,7 +35,7 @@ export default function DiceTray({ dice, rolling, onToggle, disabled, skinId, pi
             transition={{ delay: idx * 0.04 }}
           >
             <Die
-              value={d.value}
+              value={idx + 1}
               held={d.held}
               used={d.used}
               rolling={rolling && !d.used}
