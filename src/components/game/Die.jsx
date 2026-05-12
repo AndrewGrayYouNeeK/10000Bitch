@@ -179,7 +179,7 @@ export default function Die({
           className="absolute pointer-events-none"
           style={{
             top: `${-size * 0.12}px`,
-            bottom: `${-size * 1.32}px`,
+            bottom: `${-size * 0.8}px`,
             left: `${-size * 0.14}px`,
             right: `${-size * 0.14}px`,
             borderRadius: radius,
