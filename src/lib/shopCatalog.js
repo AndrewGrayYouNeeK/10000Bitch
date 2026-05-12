@@ -12,6 +12,7 @@ export const DICE_SKINS = [
     glow: "",
     description: "The original. Timeless.",
     realistic: true,
+    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/a1879bbbc_generated_image.png",
   },
   {
     id: "obsidian",
@@ -129,4 +130,23 @@ export function getPipStyle(id) {
 }
 export function getBadge(id) {
   return BADGES.find(b => b.id === id) || null;
+}
+
+/**
+ * Returns inline styles to crop the correct face from a skin's sprite sheet.
+ * Assumes the sprite sheet is a 3-column × 2-row grid of faces (values 1–6).
+ */
+export function getSpriteStyle(skin, value, size) {
+  if (!skin.spriteUrl) return {};
+  const cols = 3;
+  const rows = 2;
+  const col = (value - 1) % cols;
+  const row = Math.floor((value - 1) / cols);
+  // We don't know the exact pixel dimensions ahead of time, so use background-size percentages.
+  return {
+    backgroundImage: `url(${skin.spriteUrl})`,
+    backgroundSize: `${cols * 100}% ${rows * 100}%`,
+    backgroundPosition: `${col * (100 / (cols - 1))}% ${row * (100 / (rows - 1))}%`,
+    backgroundRepeat: "no-repeat",
+  };
 }

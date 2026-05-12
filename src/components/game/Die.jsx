@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
-import { getSkin, getPipStyle } from "@/lib/shopCatalog";
+import { getSkin, getPipStyle, getSpriteStyle } from "@/lib/shopCatalog";
 import Pip from "./Pip";
 
 // Pip grid positions for each face value.
@@ -153,55 +153,27 @@ export default function Die({
           background: skin.id === "classic_white" ? "transparent" : undefined,
         }}
       >
-        {/* Photo texture: crop the correct face from the 3x2 sprite sheet */}
-        {skin.id === "classic_white" && (() => {
-          const imgW = 1080;
-          const imgH = 720;
-          const faceW = imgW / 3;
-          const faceH = imgH / 2;
-          const col = (value - 1) % 3;
-          const row = Math.floor((value - 1) / 3);
-          const scale = size / faceW;
-          return (
-            <img
-              src="https://media.base44.com/images/public/69e7669b223d37093cd03879/a1879bbbc_generated_image.png"
-              alt=""
-              draggable={false}
-              style={{
-                position: "absolute",
-                inset: 0,
-                width: imgW * scale,
-                height: imgH * scale,
-                maxWidth: "none",
-                objectFit: "none",
-                transform: `translate(${-col * faceW * scale}px, ${-row * faceH * scale}px)`,
-                pointerEvents: "none",
-                userSelect: "none",
-              }}
-            />
-          );
-        })()}
-
-        {/* Pip grid — only for non-photo skins */}
-        <div
-          className="absolute grid grid-cols-3 grid-rows-3"
-          style={{
-            inset: padding,
-            gap: Math.round(size * 0.045),
-          }}
-        >
-          {layout.flat().map((p, i) => (
-            <div key={i} className="flex items-center justify-center">
-              {p === 1 && skin.id !== "classic_white" && (
-                <Pip
-                  size={pipSize}
-                  colorClass={skin.pipColor}
-                  inset={skin.realistic}
-                />
-              )}
-            </div>
-          ))}
-        </div>
+        {/* Sprite sheet texture or pip grid */}
+        {skin.spriteUrl ? (
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              borderRadius: radius,
+              ...getSpriteStyle(skin, value, size),
+            }}
+          />
+        ) : (
+          <div
+            className="absolute grid grid-cols-3 grid-rows-3"
+            style={{ inset: padding, gap: Math.round(size * 0.045) }}
+          >
+            {layout.flat().map((p, i) => (
+              <div key={i} className="flex items-center justify-center">
+                {p === 1 && <Pip size={pipSize} colorClass={skin.pipColor} inset={skin.realistic} />}
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Top-left gloss highlight — only for non-photo skins */}
         {skin.realistic && skin.id !== "classic_white" && skin.id !== "classic_white" && (
