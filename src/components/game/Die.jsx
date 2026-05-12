@@ -196,6 +196,7 @@ export default function Die({
           const WOOD_X_OFFSET = { 3: size * 0.02, 5: size * 0.02, 6: size * 0.02 };
           const SILVER_X_OFFSET = { 1: size * 0.02, 2: size * 0.02, 3: size * 0.02, 4: size * 0.02, 5: size * 0.02, 6: size * 0.02 };
           const GALAXY_X_OFFSET = { 6: size * 0.015 };
+          const DRAGON_X_OFFSET = { 2: size * 0.015, 3: size * 0.015, 6: size * 0.015 };
           const SILVER_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.015 };
           const GALAXY_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.015 };
           const xNudge = skin.id === "wood"
@@ -204,6 +205,8 @@ export default function Die({
             ? (SILVER_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "galaxy"
             ? (GALAXY_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
+            : skin.id === "dragon_scale"
+            ? (DRAGON_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : (FACE_X_OFFSET[value] || 0);
           const yNudge = skin.id === "classic_white"
             ? (CLASSIC_WHITE_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
