@@ -202,6 +202,7 @@ export default function Die({
           const SILVER_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.015 };
           const GALAXY_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.015 };
           const DRAGON_Y_OFFSET = { 5: -size * 0.005 };
+          const AMETHYST_Y_OFFSET = { 1: size * 0.015, 2: size * 0.015, 3: size * 0.015, 4: -size * 0.015, 5: -size * 0.015, 6: -size * 0.015 };
           const xNudge = skin.id === "wood"
             ? (WOOD_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "silver"
@@ -229,6 +230,8 @@ export default function Die({
             ? (DRAGON_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : skin.id === "marble"
             ? (MARBLE_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
+            : skin.id === "amethyst"
+            ? (AMETHYST_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : (FACE_Y_OFFSET[value] || 0);
           return (
             <div
