@@ -199,7 +199,7 @@ export default function Die({
           const DRAGON_X_OFFSET = { 2: size * 0.015, 3: size * 0.015, 6: size * 0.015 };
           const SILVER_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.015 };
           const GALAXY_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.015 };
-          const DRAGON_Y_OFFSET = { 5: size * 0.015 };
+          const DRAGON_Y_OFFSET = { 5: size * 0.007 };
           const xNudge = skin.id === "wood"
             ? (WOOD_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "silver"
