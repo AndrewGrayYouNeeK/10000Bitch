@@ -12,7 +12,7 @@ export const DICE_SKINS = [
     glow: "",
     description: "The original. Timeless.",
     realistic: true,
-    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/2e074a658_hPLMjJ1wVsJG0mW-UisgC_GgpVeRAE.png",
+    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/eeff2712e_generated_image.png",
   },
   {
     id: "obsidian",
@@ -54,7 +54,7 @@ export const DICE_SKINS = [
     glow: "shadow-blue-500/50",
     description: "Cool and confident.",
     realistic: true,
-    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/6e363d54f_DRZho-gmvIe_9TlYpOWpv_j01Yx5ih.png",
+    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/9f9ade204_generated_image.png",
   },
   {
     id: "gold",
@@ -66,7 +66,7 @@ export const DICE_SKINS = [
     glow: "shadow-amber-400/70",
     description: "High roller essential.",
     realistic: true,
-    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/b772244e9_0OrPuZGcSxsD9S11V1dhN_h4wApnCl.png",
+    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/f7606ea3f_generated_image.png",
   },
   {
     id: "galaxy",
@@ -78,7 +78,7 @@ export const DICE_SKINS = [
     glow: "shadow-fuchsia-500/60",
     description: "Cosmic energy.",
     realistic: true,
-    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/f37f857cb_qT4RfNfgMat_WgdmZ9UA-_0jGTKBXb.png",
+    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/3011423ae_generated_image.png",
   },
   {
     id: "amethyst",
@@ -90,7 +90,7 @@ export const DICE_SKINS = [
     glow: "shadow-purple-500/60",
     description: "Royal crystal.",
     realistic: true,
-    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/fdbf24154_387TtzBbla0juqzqDSGfg_FgHZypft.png",
+    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/c5a79b22b_generated_image.png",
   },
   {
     id: "moonstone",
@@ -102,7 +102,7 @@ export const DICE_SKINS = [
     glow: "shadow-indigo-200/70",
     description: "Iridescent shimmer.",
     realistic: true,
-    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/b29a1e08f_Ub3rBdwrMd_RZcipohKxd_EQnQspfS1.png",
+    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/a10940f82_generated_image.png",
   },
   {
     id: "lava",
