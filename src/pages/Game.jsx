@@ -232,11 +232,18 @@ export default function Game() {
       <div className="px-3 flex-[0.85] flex items-center justify-center">
         <div className="w-full">
           <DiceTray
-            dice={state.dice}
-            rolling={rollAnim}
-            onToggle={onToggle}
-            disabled={!state.hasRolled || state.farkle || !!state.winner}
-            skinId={equippedSkinId}
+            dice={[
+              { id: 1, value: 1, used: false, held: false },
+              { id: 2, value: 2, used: false, held: false },
+              { id: 3, value: 3, used: false, held: false },
+              { id: 4, value: 4, used: false, held: false },
+              { id: 5, value: 5, used: false, held: false },
+              { id: 6, value: 6, used: false, held: false },
+            ]}
+            rolling={false}
+            onToggle={() => {}}
+            disabled={true}
+            skinId="obsidian"
             pipsId={equippedPipsId}
           />
           {info.held.length > 0 && (
