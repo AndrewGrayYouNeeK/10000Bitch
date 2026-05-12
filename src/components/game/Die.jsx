@@ -176,7 +176,7 @@ export default function Die({
         {/* Sprite sheet texture or pip grid */}
         {skin.spriteUrl ?
         (() => {
-          const cellW = size * 1.55;
+          const cellW = size * 1.7;
           const cellH = size * 1.32;
           const cols = skin.spriteGrid?.cols ?? 3;
           const rows = skin.spriteGrid?.rows ?? 2;
@@ -188,8 +188,8 @@ export default function Die({
               style={{
                 top: `${-size * 0.14}px`,
                 bottom: `${-size * 0.8}px`,
-                left: `${-size * 0.33}px`,
-                right: `${-size * 0.33}px`,
+                left: `${-size * 0.35}px`,
+                right: `${-size * 0.35}px`,
                 borderRadius: radius,
                 backgroundImage: `url(${skin.spriteUrl})`,
                 backgroundSize: `${cellW * cols}px ${cellH * rows}px`,
