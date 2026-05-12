@@ -243,7 +243,7 @@ export default function Game() {
             rolling={false}
             onToggle={() => {}}
             disabled={true}
-            skinId="dragon_scale"
+            skinId="galaxy"
             pipsId={equippedPipsId}
           />
           {info.held.length > 0 && (
