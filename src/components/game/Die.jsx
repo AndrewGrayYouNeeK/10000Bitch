@@ -194,8 +194,11 @@ export default function Die({
           // Burl Wood per-face tuning
           const WOOD_Y_OFFSET = { 1: -size * 0.02, 2: -size * 0.02, 3: -size * 0.025, 5: -size * 0.035, 6: -size * 0.02 };
           const WOOD_X_OFFSET = { 3: size * 0.02, 5: size * 0.02, 6: size * 0.02 };
+          const SILVER_X_OFFSET = { 1: size * 0.02, 2: size * 0.02, 3: size * 0.02, 4: size * 0.02, 5: size * 0.02, 6: size * 0.02 };
           const xNudge = skin.id === "wood"
             ? (WOOD_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
+            : skin.id === "silver"
+            ? (SILVER_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : (FACE_X_OFFSET[value] || 0);
           const yNudge = skin.id === "classic_white"
             ? (CLASSIC_WHITE_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
