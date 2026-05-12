@@ -15,6 +15,7 @@ import {
   ENTRY_THRESHOLD,
 } from "@/lib/gameLogic";
 import DiceTray from "@/components/game/DiceTray";
+import Die from "@/components/game/Die";
 import ScorePanel from "@/components/game/ScorePanel";
 import TurnBanner from "@/components/game/TurnBanner";
 import GameOverDialog from "@/components/game/GameOverDialog";
@@ -226,6 +227,18 @@ export default function Game() {
             </div>
           )}
         </motion.div>
+      </div>
+
+      {/* Tesla skin showcase — all 6 faces */}
+      <div className="px-3 mb-3">
+        <div className="rounded-2xl bg-slate-900/60 border border-purple-700/40 p-3">
+          <div className="text-xs uppercase tracking-wide text-purple-300 mb-2 text-center font-bold">Tesla Skin — All Faces</div>
+          <div className="grid grid-cols-6 gap-2 justify-items-center">
+            {[1, 2, 3, 4, 5, 6].map((v) => (
+              <Die key={v} value={v} size={56} skinId="tesla" pipsId="classic_dots" />
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Dice tray */}
