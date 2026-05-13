@@ -95,8 +95,8 @@ export default function FishOverlay({ size, radius, count = 1, bigFishVariantInd
   const fish = React.useMemo(() => {
     const arr = [];
     const n = Math.max(1, count);
-    // Pick which fish on this die will be the "big one"
-    const bigIdx = Math.floor(Math.random() * n);
+    // Pick which fish on this die will be the "big one" (skip for value=2).
+    const bigIdx = n === 2 ? -1 : Math.floor(Math.random() * n);
     // The big fish uses a deterministic variant (unique per die).
     const bigVariant = FISH_VARIANTS[bigFishVariantIndex % FISH_VARIANTS.length];
     // Smaller fish use any variant EXCEPT the big one's, shuffled.
