@@ -282,7 +282,7 @@ export default function Die({
             : skin.id === "leather"
             ? (LEATHER_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : (FACE_Y_OFFSET[value] || 0);
-          const stretch = skin.id === "moonstone" ? size * 0.015 : 0;
+          const stretch = skin.id === "moonstone" ? size * 0.0225 : 0;
           return (
             <div
               className="absolute pointer-events-none"
