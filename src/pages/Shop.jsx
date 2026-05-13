@@ -105,7 +105,10 @@ export default function Shop() {
             <div className="grid grid-cols-2 gap-3">
               {(() => {
                 const dupes = getDuplicateGroups(DICE_SKINS);
-                return DICE_SKINS.map(skin => {
+                const sortedSkins = [...DICE_SKINS].sort(
+                  (a, b) => getSkinEffectivePrice(a) - getSkinEffectivePrice(b)
+                );
+                return sortedSkins.map(skin => {
                   const tier = getSkinTier(skin.id);
                   const tierLocked = !checkUnlocked(skin.id, xp);
                   const achievementOnly = isSkinAchievementOnly(skin.id, xp);
