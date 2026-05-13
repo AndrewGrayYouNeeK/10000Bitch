@@ -220,7 +220,7 @@ export default function Die({
           const MARBLE_Y_OFFSET = { 1: -size * 0.005, 2: -size * 0.01, 3: -size * 0.005, 4: -size * 0.019, 5: -size * 0.015, 6: -size * 0.015 };
           const SILVER_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.015 };
           const GALAXY_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.015 };
-          const DRAGON_Y_OFFSET = { 5: -size * 0.005 };
+          const DRAGON_Y_OFFSET = { 5: -size * 0.025 };
           const AMETHYST_Y_OFFSET = { 1: -size * 0.025, 2: -size * 0.025, 3: -size * 0.025, 4: -size * 0.035, 5: -size * 0.035, 6: -size * 0.035 };
           const PLASMA_X_OFFSET = { 1: -size * 0.02, 2: -size * 0.06, 3: -size * 0.11, 4: -size * 0.02, 5: -size * 0.07, 6: -size * 0.12 };
           const PLASMA_Y_OFFSET = { 1: size * 0.04, 2: size * 0.02, 3: size * 0.02, 4: -size * 0.06, 6: -size * 0.045 };
