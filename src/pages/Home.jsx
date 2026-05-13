@@ -133,6 +133,7 @@ export default function Home() {
             }}
           />
           <img
+            data-dice-obstacle
             src="https://media.base44.com/images/public/69e7669b223d37093cd03879/02645f1df_J-pkVgoLigDTfwK1sZ0Qt_3RwWpqbD.png"
             alt="10,000 The Ultimate Roll"
             className="w-80 h-80 object-contain mx-auto relative"
@@ -157,6 +158,7 @@ export default function Home() {
           {/* Primary CTA */}
           <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
             <Link
+              data-dice-obstacle
               to="/setup"
               className="flex items-center justify-center w-full h-16 text-lg font-black rounded-lg gap-2 relative overflow-hidden"
               style={{
@@ -179,6 +181,7 @@ export default function Home() {
           {/* Online play */}
           <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
             <Link
+              data-dice-obstacle
               to="/online"
               className="flex items-center justify-center w-full h-14 text-base font-black rounded-lg gap-2 relative overflow-hidden border"
               style={{
@@ -199,6 +202,7 @@ export default function Home() {
           <div className="grid grid-cols-2 gap-3">
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
               <Link
+                data-dice-obstacle
                 to="/shop"
                 className="flex items-center justify-center w-full h-13 py-3 text-sm font-bold rounded-lg gap-2 border"
                 style={{
@@ -213,6 +217,7 @@ export default function Home() {
             </motion.div>
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
               <Link
+                data-dice-obstacle
                 to="/rules"
                 className="flex items-center justify-center w-full h-13 py-3 text-sm font-bold rounded-lg gap-2 border"
                 style={{
