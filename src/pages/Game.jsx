@@ -237,7 +237,7 @@ export default function Game() {
             rolling={rollAnim}
             onToggle={onToggle}
             disabled={!state.hasRolled || state.farkle || !!state.winner}
-            skinId="neon_grid"
+            skinId="circuit_board"
             pipsId={equippedPipsId}
             feltId={equippedFeltId}
           />
