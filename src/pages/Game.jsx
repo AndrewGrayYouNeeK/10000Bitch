@@ -21,6 +21,7 @@ import TurnBanner from "@/components/game/TurnBanner";
 import GameOverDialog from "@/components/game/GameOverDialog";
 import RulesSheet from "@/components/game/RulesSheet";
 import BigPopup from "@/components/game/BigPopup";
+import CyberBackground from "@/components/game/CyberBackground";
 import { useCosmetics } from "@/hooks/useCosmetics";
 import { XP_REWARDS } from "@/lib/progression";
 
@@ -206,13 +207,28 @@ export default function Game() {
     (!needsEntry || potentialTotal >= ENTRY_THRESHOLD);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white flex flex-col pb-6">
+    <div className="min-h-screen text-white flex flex-col pb-6 relative">
+      <CyberBackground />
+      <div className="relative z-10 flex flex-col flex-1">
       {/* Header */}
-      <div className="flex items-center justify-between p-3 border-b border-white/10">
+      <div
+        className="flex items-center justify-between p-3 border-b"
+        style={{
+          borderColor: "rgba(0,255,200,0.25)",
+          background: "rgba(3,4,10,0.6)",
+          backdropFilter: "blur(6px)",
+          boxShadow: "0 1px 0 rgba(255,0,170,0.25), 0 8px 24px rgba(0,255,200,0.08)",
+        }}
+      >
         <Button asChild variant="ghost" size="icon" className="text-white hover:bg-white/10">
           <Link to="/"><ArrowLeft className="w-5 h-5" /></Link>
         </Button>
-        <div className="text-sm font-bold text-slate-300">Goal: 10,000</div>
+        <div
+          className="text-sm font-black uppercase tracking-[0.25em]"
+          style={{ color: "#00ffc8", textShadow: "0 0 10px rgba(0,255,200,0.7)" }}
+        >
+          ▸ GOAL: 10,000 ◂
+        </div>
         <RulesSheet />
       </div>
 
@@ -230,14 +246,38 @@ export default function Game() {
       <div className="px-3 mb-3">
         <motion.div
           animate={{ scale: info.valid && info.score > 0 ? 1.02 : 1 }}
-          className="rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 p-3 flex items-center justify-between"
+          className="rounded-2xl border p-3 flex items-center justify-between relative overflow-hidden"
+          style={{
+            background: "linear-gradient(135deg, rgba(8,10,20,0.85), rgba(20,5,30,0.85))",
+            borderColor: info.valid && info.score > 0 ? "rgba(0,255,200,0.6)" : "rgba(255,0,170,0.35)",
+            boxShadow:
+              info.valid && info.score > 0
+                ? "0 0 20px rgba(0,255,200,0.4), inset 0 0 0 1px rgba(0,255,200,0.2)"
+                : "0 0 16px rgba(255,0,170,0.2), inset 0 0 0 1px rgba(255,0,170,0.15)",
+          }}
         >
-          <div>
-            <div className="text-xs uppercase tracking-wide text-slate-400">Turn Score</div>
-            <div className="text-3xl font-black tabular-nums">
+          <div className="relative">
+            <div
+              className="text-[10px] uppercase tracking-[0.3em] font-bold"
+              style={{ color: "#ff00aa", textShadow: "0 0 6px rgba(255,0,170,0.6)" }}
+            >
+              ▸ Turn Score
+            </div>
+            <div
+              className="text-3xl font-black tabular-nums"
+              style={{
+                color: "#ffffff",
+                textShadow: "0 0 12px rgba(0,255,200,0.7), 0 0 4px rgba(255,255,255,0.6)",
+              }}
+            >
               {state.turnScore.toLocaleString()}
               {info.valid && info.score > 0 && (
-                <span className="text-emerald-400 text-xl"> +{info.score}</span>
+                <span
+                  className="text-xl ml-1"
+                  style={{ color: "#7effc4", textShadow: "0 0 10px rgba(0,255,170,0.9)" }}
+                >
+                  +{info.score}
+                </span>
               )}
             </div>
           </div>
@@ -285,12 +325,26 @@ export default function Game() {
       </div>
 
       {/* Actions */}
-      <div className="p-3 space-y-2 border-t border-white/10 bg-slate-950/80">
+      <div
+        className="p-3 space-y-2 border-t"
+        style={{
+          borderColor: "rgba(0,255,200,0.25)",
+          background: "rgba(3,4,10,0.85)",
+          backdropFilter: "blur(8px)",
+          boxShadow: "0 -1px 0 rgba(255,0,170,0.25), 0 -8px 24px rgba(0,255,200,0.08)",
+        }}
+      >
         {state.farkle ? (
           <Button
             onClick={onPassFarkle}
             size="lg"
-            className="w-full h-14 text-lg bg-rose-600 hover:bg-rose-500 text-white"
+            className="w-full h-14 text-lg text-white font-black uppercase tracking-widest border-2"
+            style={{
+              background: "linear-gradient(135deg, rgba(255,0,90,0.3), rgba(120,0,50,0.5))",
+              borderColor: "#ff2858",
+              boxShadow: "0 0 24px rgba(255,40,90,0.6), inset 0 0 0 1px rgba(255,255,255,0.1)",
+              textShadow: "0 0 8px rgba(255,40,90,0.9)",
+            }}
           >
             <ChevronRight className="w-5 h-5 mr-2" /> Next Player
           </Button>
@@ -298,7 +352,13 @@ export default function Game() {
           <Button
             onClick={doRoll}
             size="lg"
-            className="w-full h-14 text-lg bg-gradient-to-r from-amber-500 to-orange-600 text-white"
+            className="w-full h-14 text-lg text-white font-black uppercase tracking-widest border-2 relative overflow-hidden"
+            style={{
+              background: "linear-gradient(135deg, rgba(255,0,170,0.25), rgba(0,255,200,0.25))",
+              borderColor: "#00ffc8",
+              boxShadow: "0 0 28px rgba(0,255,200,0.55), 0 0 28px rgba(255,0,170,0.3), inset 0 0 0 1px rgba(255,255,255,0.1)",
+              textShadow: "0 0 10px rgba(0,255,200,0.9)",
+            }}
           >
             <Dices className="w-5 h-5 mr-2" /> Roll Dice
           </Button>
@@ -308,7 +368,13 @@ export default function Game() {
               onClick={onRollAgain}
               disabled={!info.valid || info.score === 0 || rollAnim}
               size="lg"
-              className="h-14 bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white disabled:opacity-40"
+              className="h-14 text-white font-black uppercase tracking-wider border-2 disabled:opacity-30 disabled:grayscale"
+              style={{
+                background: "linear-gradient(135deg, rgba(255,0,170,0.25), rgba(120,0,180,0.4))",
+                borderColor: "#ff00aa",
+                boxShadow: "0 0 20px rgba(255,0,170,0.55), inset 0 0 0 1px rgba(255,255,255,0.1)",
+                textShadow: "0 0 8px rgba(255,0,170,0.9)",
+              }}
             >
               <Dices className="w-5 h-5 mr-1" /> Roll Again
             </Button>
@@ -316,12 +382,19 @@ export default function Game() {
               onClick={onBank}
               disabled={!canBank}
               size="lg"
-              className="h-14 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-white disabled:opacity-40"
+              className="h-14 text-white font-black uppercase tracking-wider border-2 disabled:opacity-30 disabled:grayscale"
+              style={{
+                background: "linear-gradient(135deg, rgba(0,255,200,0.25), rgba(0,140,110,0.4))",
+                borderColor: "#00ffc8",
+                boxShadow: "0 0 20px rgba(0,255,200,0.55), inset 0 0 0 1px rgba(255,255,255,0.1)",
+                textShadow: "0 0 8px rgba(0,255,200,0.9)",
+              }}
             >
               <PiggyBank className="w-5 h-5 mr-1" /> Bank
             </Button>
           </div>
         )}
+      </div>
       </div>
 
       <GameOverDialog
