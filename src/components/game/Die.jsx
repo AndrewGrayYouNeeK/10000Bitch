@@ -254,6 +254,9 @@ export default function Die({
           // Shattered (cracked) per-face tuning
           const CRACKED_X_OFFSET = { 3: -3, 4: 0 };
           const CRACKED_Y_OFFSET = { 1: 1, 2: 1, 3: 1, 4: -4 };
+          // Bloodstone per-face tuning
+          const BLOODSTONE_X_OFFSET = { 2: -10, 3: -15, 5: -9, 6: -17 };
+          const BLOODSTONE_Y_OFFSET = { 4: -3, 6: -2 };
           // Labradorite per-face tuning
           const LABRADORITE_X_OFFSET = { 2: 2, 3: 4, 4: 2, 5: 2, 6: 2 };
           const LABRADORITE_Y_OFFSET = {};
@@ -313,6 +316,8 @@ export default function Die({
             ? (BULLET_HOLES_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "cracked"
             ? (CRACKED_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
+            : skin.id === "bloodstone"
+            ? (BLOODSTONE_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "labradorite"
             ? (LABRADORITE_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "labradorite_polished"
@@ -376,6 +381,8 @@ export default function Die({
             ? (BULLET_HOLES_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : skin.id === "cracked"
             ? (CRACKED_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
+            : skin.id === "bloodstone"
+            ? (BLOODSTONE_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : skin.id === "labradorite"
             ? (LABRADORITE_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : skin.id === "labradorite_polished"
