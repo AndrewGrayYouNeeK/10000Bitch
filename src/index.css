@@ -86,3 +86,51 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* === NEON / CYBERPUNK utilities === */
+.font-pixel { font-family: 'Press Start 2P', monospace; }
+.font-term { font-family: 'VT323', monospace; }
+
+@keyframes neon-glitch {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(-2px, 1px); }
+  40% { transform: translate(2px, -1px); }
+  60% { transform: translate(-1px, -1px); }
+  80% { transform: translate(1px, 1px); }
+}
+.neon-glitch { animation: neon-glitch 1.8s infinite steps(1); }
+
+@keyframes neon-rain {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 800px; }
+}
+.neon-rain-overlay {
+  background-image: repeating-linear-gradient(
+    180deg,
+    transparent 0,
+    transparent 18px,
+    rgba(0, 255, 234, 0.18) 18px,
+    rgba(0, 255, 234, 0.18) 20px
+  );
+  background-size: 100% 800px;
+  animation: neon-rain 0.9s linear infinite;
+}
+
+@keyframes neon-pulse {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.25); }
+}
+.neon-pulse { animation: neon-pulse 2.4s ease-in-out infinite; }
+
+.neon-text-magenta {
+  color: #fff;
+  text-shadow: 0 0 6px #ff00ea, 0 0 14px #ff00ea, 0 0 28px #00ffff;
+}
+.neon-text-cyan {
+  color: #fff;
+  text-shadow: 0 0 6px #00ffea, 0 0 14px #00ffea, 0 0 28px #ff00ea;
+}
+.neon-border-double {
+  border: 2px solid #ff00ea;
+  box-shadow: 0 0 18px #00ffff, 0 0 36px #ff00ea, inset 0 0 0 1px rgba(255,255,255,0.08);
+}

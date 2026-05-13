@@ -45,6 +45,9 @@ export default function CyberBackground() {
         }}
       />
 
+      {/* Neon digital rain */}
+      <div className="absolute inset-0 opacity-40 neon-rain-overlay mix-blend-screen" />
+
       {/* Slow scanline sweep */}
       <motion.div
         className="absolute inset-x-0 h-32 pointer-events-none"

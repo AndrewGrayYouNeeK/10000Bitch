@@ -223,11 +223,13 @@ export default function Game() {
         <Button asChild variant="ghost" size="icon" className="text-white hover:bg-white/10">
           <Link to="/"><ArrowLeft className="w-5 h-5" /></Link>
         </Button>
-        <div
-          className="text-sm font-black uppercase tracking-[0.25em]"
-          style={{ color: "#00ffc8", textShadow: "0 0 10px rgba(0,255,200,0.7)" }}
-        >
-          ▸ GOAL: 10,000 ◂
+        <div className="text-center leading-tight">
+          <div className="font-pixel neon-text-magenta neon-glitch text-[11px] tracking-[0.18em]">
+            NEON 10,000
+          </div>
+          <div className="font-term text-[11px] tracking-[0.25em] mt-0.5" style={{ color: "#ffff66", textShadow: "0 0 6px rgba(255,255,102,0.7)" }}>
+            DICE HACK // GOAL 10K
+          </div>
         </div>
         <RulesSheet />
       </div>
