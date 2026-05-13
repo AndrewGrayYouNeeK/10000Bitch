@@ -423,7 +423,7 @@ export const DICE_SKINS = [
   },
   {
     id: "blue_gel",
-    name: "COLD Fish",
+    name: "Cold Fish",
     price: 400,
     gradient: "from-sky-300 via-blue-400 to-blue-600",
     border: "border-blue-500",
