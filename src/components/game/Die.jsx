@@ -273,7 +273,7 @@ export default function Die({
             <div
               className="absolute pointer-events-none"
               style={{
-                top: isMarble ? `${-size * 0.14 + yNudge * 1.5}px` : `${-size * 0.14 + yNudge}px`,
+                top: isMarble ? `${-size * 0.14 + yNudge * 2}px` : `${-size * 0.14 + yNudge}px`,
                 bottom: isMarble ? `${-size * 0.8}px` : `${-size * 0.8 + yNudge}px`,
                 left: `${-size * 0.35 + xNudge}px`,
                 right: `${-size * 0.35 + xNudge}px`,
