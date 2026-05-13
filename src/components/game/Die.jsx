@@ -215,6 +215,9 @@ export default function Die({
           const LOVE_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.02, 4: -size * 0.04, 5: -size * 0.04, 6: -size * 0.04 };
           const CRYSTAL_CUT_X_OFFSET = { 2: -size * 0.0925, 3: -size * 0.175, 4: -size * 0.03, 5: -size * 0.105, 6: -size * 0.19 };
           const CRYSTAL_CUT_Y_OFFSET = { 4: -size * 0.06, 5: -size * 0.0525, 6: -size * 0.0525 };
+          // Football (leather) per-face tuning
+          const LEATHER_X_OFFSET = { 1: -size * 0.01, 2: -size * 0.06, 3: -size * 0.10, 4: -size * 0.01, 5: -size * 0.08, 6: -size * 0.11 };
+          const LEATHER_Y_OFFSET = { 1: size * 0.01, 2: size * 0.01, 3: size * 0.01, 4: -size * 0.02, 5: -size * 0.01, 6: -size * 0.01 };
           const xNudge = skin.id === "wood"
             ? (WOOD_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "silver"
@@ -241,6 +244,8 @@ export default function Die({
             ? (LOVE_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "crystal_cut"
             ? (CRYSTAL_CUT_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
+            : skin.id === "leather"
+            ? (LEATHER_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : (FACE_X_OFFSET[value] || 0);
           const yNudge = skin.id === "classic_white"
             ? (CLASSIC_WHITE_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
@@ -274,6 +279,8 @@ export default function Die({
             ? (LOVE_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : skin.id === "crystal_cut"
             ? (CRYSTAL_CUT_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
+            : skin.id === "leather"
+            ? (LEATHER_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : (FACE_Y_OFFSET[value] || 0);
           return (
             <div
