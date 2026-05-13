@@ -72,11 +72,10 @@ export default function GlitchNeonBanner({ src, alt = "Neon sign", objectPositio
           className="absolute inset-0 w-full h-full object-cover"
           style={{ objectPosition }}
         />
-        {/* Glitch layers — clipped to the billboard region only */}
+        {/* Glitch layers — clipped to billboard area, blended so only the bright neon text glitches */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            // Roughly isolates the billboard area in the center of the image
             clipPath: "inset(18% 18% 22% 18%)",
             WebkitClipPath: "inset(18% 18% 22% 18%)",
           }}
@@ -86,29 +85,32 @@ export default function GlitchNeonBanner({ src, alt = "Neon sign", objectPositio
             alt=""
             aria-hidden
             className="absolute inset-0 w-full h-full object-cover glitch-base"
-            style={{ objectPosition }}
+            style={{
+              objectPosition,
+              mixBlendMode: "screen",
+              filter: "brightness(1.4) contrast(1.6)",
+            }}
           />
           <img
             src={src}
             alt=""
             aria-hidden
             className="absolute inset-0 w-full h-full object-cover glitch-r"
-            style={{ objectPosition }}
+            style={{
+              objectPosition,
+              mixBlendMode: "screen",
+              filter: "brightness(1.4) contrast(1.6) drop-shadow(2px 0 0 #ff0066)",
+            }}
           />
           <img
             src={src}
             alt=""
             aria-hidden
             className="absolute inset-0 w-full h-full object-cover glitch-b"
-            style={{ objectPosition }}
-          />
-          {/* Moving bright scan bar — only across the billboard */}
-          <div
-            className="absolute left-0 right-0 h-6 glitch-scanline"
             style={{
-              background:
-                "linear-gradient(to bottom, transparent, rgba(0,255,234,0.25) 50%, transparent)",
+              objectPosition,
               mixBlendMode: "screen",
+              filter: "brightness(1.4) contrast(1.6) drop-shadow(-2px 0 0 #00ffff)",
             }}
           />
         </div>
