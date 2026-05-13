@@ -238,7 +238,7 @@ export default function Die({
           const TENNIS_Y_OFFSET = { 4: -size * 0.07, 5: -size * 0.08, 6: -size * 0.07 };
           // Circuit Board per-face tuning
           const CIRCUIT_X_OFFSET = { 1: -2, 2: -10 };
-          const CIRCUIT_Y_OFFSET = { 1: 2, 2: 4 };
+          const CIRCUIT_Y_OFFSET = { 1: 4, 2: 4 };
 
           const xNudge = skin.id === "wood"
             ? (WOOD_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
