@@ -242,6 +242,18 @@ export const DICE_SKINS = [
     spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/54a32749c_generated_image.png",
   },
   {
+    id: "paper",
+    name: "Recycled Paper",
+    price: 250,
+    gradient: "from-stone-100 via-stone-200 to-stone-300",
+    border: "border-stone-400",
+    pipColor: "bg-slate-900",
+    glow: "shadow-stone-300/60",
+    description: "Eco-friendly handmade.",
+    realistic: true,
+    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/f059af972_CLC6gYkVPlWgxZQOsp_68_4WosypFv.png",
+  },
+  {
     id: "plasma",
     name: "Plasma Ball",
     price: 1100,
