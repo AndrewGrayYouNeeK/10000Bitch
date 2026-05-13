@@ -234,8 +234,8 @@ export default function Die({
           const PRIDE_X_OFFSET = { 1: -size * 0.01, 2: -size * 0.14, 3: -size * 0.26, 4: -size * 0.02, 5: -size * 0.15, 6: -size * 0.24 };
           const PRIDE_Y_OFFSET = { 2: size * 0.02, 3: size * 0.03, 4: -size * 0.07, 5: -size * 0.06, 6: -size * 0.06 };
           // Tennis Ball (yellow_felt) per-face tuning
-          const TENNIS_X_OFFSET = { 1: -size * 0.01, 2: -size * 0.08, 3: -size * 0.08, 4: -size * 0.02, 5: -size * 0.08, 6: -size * 0.08 };
-          const TENNIS_Y_OFFSET = { 4: -size * 0.02, 5: -size * 0.01, 6: -size * 0.02 };
+          const TENNIS_X_OFFSET = { 1: -size * 0.02, 2: -size * 0.13, 3: -size * 0.18, 4: -size * 0.02, 5: -size * 0.12, 6: -size * 0.18 };
+          const TENNIS_Y_OFFSET = { 4: -size * 0.06, 5: -size * 0.05, 6: -size * 0.07 };
           const xNudge = skin.id === "wood"
             ? (WOOD_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "silver"
