@@ -242,8 +242,8 @@ export default function Die({
           // Amber Wasp per-face tuning
           const AMBER_WASP_X_OFFSET = { 1: 1, 2: 1, 3: 1, 4: 2.5, 5: 0.5, 6: 2 };
           const AMBER_WASP_Y_OFFSET = { 1: -1, 2: -1, 3: -1, 4: -1, 5: -2, 6: -2 };
-          // Toxic Plasma Glow per-face tuning
-          const TOXIC2_X_OFFSET = { 2: -2, 3: -4, 4: -1, 5: -2, 6: -4 };
+          // Radiation (toxic_plasma_v2) per-face tuning
+          const TOXIC2_X_OFFSET = { 2: -3, 3: -7, 4: -1, 5: -4, 6: -7 };
           const TOXIC2_Y_OFFSET = {};
 
           const xNudge = skin.id === "wood"
