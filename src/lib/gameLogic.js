@@ -93,7 +93,7 @@ export function confirmAndReroll(state) {
   if (!info.valid || (info.score === 0 && !info.sixOfAKind)) return { state };
 
   if (info.sixOfAKind) {
-    // Instant win
+    // Instant win — all 6 dice showing the same number in one roll = Perfect 10,000
     const players = state.players.map((p, i) =>
       i === state.currentIndex ? { ...p, score: TARGET_SCORE, onBoard: true } : p
     );
@@ -102,7 +102,8 @@ export function confirmAndReroll(state) {
         ...state,
         players,
         winner: players[state.currentIndex],
-        message: `🎉 SIX OF A KIND — INSTANT WIN!`,
+        perfectTenK: true,
+        message: `🎯 PERFECT 10,000 — SIX OF A KIND INSTANT WIN!`,
         messageVariant: "success",
       },
       instantWin: true,
@@ -198,18 +199,11 @@ export function bankAndPass(state) {
     : null;
 
   if (winner) {
-    // Ultra-rare achievement: landed EXACTLY on 10,000 with all 6 dice
-    // contributing to the final bank (every die either previously used or held now).
-    const allSixUsed = state.dice.every(d => d.used || d.held);
-    const perfectTenK = winner.score === TARGET_SCORE && allSixUsed;
     return {
       ...state,
       players: newPlayers,
       winner,
-      perfectTenK,
-      message: perfectTenK
-        ? `🎯 PERFECT 10,000! ${winner.name} wins with all 6 dice!`
-        : `🎉 ${winner.name} wins with ${winner.score.toLocaleString()}!`,
+      message: `🎉 ${winner.name} wins with ${winner.score.toLocaleString()}!`,
       messageVariant: "success",
     };
   }
