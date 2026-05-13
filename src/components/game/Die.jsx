@@ -188,8 +188,8 @@ export default function Die({
           const yNudge = AQUA_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0);
           return (
             <>
-              {/* Fish swims behind */}
-              <FishOverlay size={size} radius={radius} />
+              {/* Fish swim behind — one per pip on the face */}
+              <FishOverlay size={size} radius={radius} count={value} />
               {/* Aquamarine sprite as a translucent glass shell — on top of the fish */}
               <div
                 className="absolute pointer-events-none"
