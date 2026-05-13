@@ -217,7 +217,7 @@ export default function Die({
           const CRYSTAL_CUT_Y_OFFSET = { 4: -size * 0.06, 5: -size * 0.0525, 6: -size * 0.0525 };
           // Football (leather) per-face tuning
           const LEATHER_X_OFFSET = { 1: -size * 0.01, 2: -size * 0.12, 3: -size * 0.16, 4: -size * 0.01, 5: -size * 0.08, 6: -size * 0.11 };
-          const LEATHER_Y_OFFSET = { 1: size * 0.01, 2: size * 0.02, 3: size * 0.02, 4: -size * 0.02, 5: -size * 0.01, 6: -size * 0.01 };
+          const LEATHER_Y_OFFSET = { 1: size * 0.01, 2: size * 0.02, 3: size * 0.03, 4: -size * 0.02, 5: -size * 0.01, 6: -size * 0.01 };
           const xNudge = skin.id === "wood"
             ? (WOOD_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "silver"
