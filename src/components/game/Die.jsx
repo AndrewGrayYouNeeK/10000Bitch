@@ -217,7 +217,7 @@ export default function Die({
           const LAVA_Y_OFFSET = { 1: -size * 0.02, 2: -size * 0.02, 3: -size * 0.02, 4: -size * 0.03 };
           const MOONSTONE_X_OFFSET = { 2: size * 0.005, 3: size * 0.005, 4: size * 0.01, 5: size * 0.005, 6: size * 0.005 };
           const MOONSTONE_Y_OFFSET = { 1: -size * 0.005, 2: -size * 0.01, 3: -size * 0.0075, 4: -size * 0.022, 5: -size * 0.022, 6: -size * 0.022 };
-          const MARBLE_Y_OFFSET = { 1: -size * 0.025 + 1, 2: -size * 0.03 + 1, 3: -size * 0.025 + 1, 4: -size * 0.039 + 1, 5: -size * 0.035 + 1, 6: -size * 0.035 + 1 };
+          const MARBLE_Y_OFFSET = { 1: -size * 0.025 + 2, 2: -size * 0.03 + 2, 3: -size * 0.025 + 2, 4: -size * 0.039 + 2, 5: -size * 0.035 + 2, 6: -size * 0.035 + 2 };
           const SILVER_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.015 };
           const GALAXY_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.015 };
           const DRAGON_Y_OFFSET = { 5: -size * 0.025 };
@@ -281,6 +281,7 @@ export default function Die({
                 backgroundSize: `${cellW * cols}px ${cellH * rows}px`,
                 backgroundPosition: `${-(col * cellW)}px ${-(row * cellH)}px`,
                 backgroundRepeat: 'no-repeat',
+                filter: skin.id === "marble" ? "contrast(1.25) brightness(0.92)" : undefined,
               }} />
           );
         })() :
