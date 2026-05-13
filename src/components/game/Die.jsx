@@ -248,6 +248,9 @@ export default function Die({
           // Labradorite per-face tuning
           const LABRADORITE_X_OFFSET = { 2: 2, 3: 4, 4: 2, 5: 2, 6: 2 };
           const LABRADORITE_Y_OFFSET = {};
+          // Labradorite Polished per-face tuning
+          const LABRADORITE_POLISHED_X_OFFSET = { 2: -4, 3: -12, 4: -2, 5: -8, 6: -12 };
+          const LABRADORITE_POLISHED_Y_OFFSET = { 4: -2, 5: -2, 6: -2 };
 
           const xNudge = skin.id === "wood"
             ? (WOOD_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
@@ -297,6 +300,8 @@ export default function Die({
             ? (TOXIC2_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "labradorite"
             ? (LABRADORITE_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
+            : skin.id === "labradorite_polished"
+            ? (LABRADORITE_POLISHED_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : (FACE_X_OFFSET[value] || 0);
           const yNudge = skin.id === "classic_white"
             ? (CLASSIC_WHITE_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
@@ -352,6 +357,8 @@ export default function Die({
             ? (TOXIC2_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : skin.id === "labradorite"
             ? (LABRADORITE_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
+            : skin.id === "labradorite_polished"
+            ? (LABRADORITE_POLISHED_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : (FACE_Y_OFFSET[value] || 0);
           const MOONSTONE_EXTRA_STRETCH = { 3: size * 0.015, 4: size * 0.015, 5: size * 0.015, 6: size * 0.015 };
           const AMBER_WASP_STRETCH = { 1: size * 0.030, 2: size * 0.030, 3: size * 0.030, 4: size * 0.030, 5: size * 0.030, 6: size * 0.030 };
