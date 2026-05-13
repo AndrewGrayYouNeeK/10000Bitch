@@ -363,18 +363,6 @@ export const DICE_SKINS = [
     spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/95bd85fb4_RdaZRnY8n4MYNGmhbire2_jIN9S0Pd.png",
   },
   {
-    id: "live_video",
-    name: "Live Motion",
-    price: 1500,
-    gradient: "from-slate-700 via-slate-800 to-black",
-    border: "border-slate-900",
-    pipColor: "bg-white",
-    glow: "shadow-cyan-400/60",
-    description: "A die that moves.",
-    realistic: true,
-    videoUrl: "https://media.base44.com/videos/public/69e7669b223d37093cd03879/fa88a338d_video.mp4",
-  },
-  {
     id: "pride_v2",
     name: "Pride Glossy",
     price: 500,
