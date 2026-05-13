@@ -72,14 +72,32 @@ export default function GlitchNeonBanner({ src, alt = "Neon sign", objectPositio
           className="absolute inset-0 w-full h-full object-cover"
           style={{ objectPosition }}
         />
-        {/* Glitch layers — clipped to billboard area, blended so only the bright neon text glitches */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            clipPath: "inset(8% 14% 42% 14% round 12px)",
-            WebkitClipPath: "inset(8% 14% 42% 14% round 12px)",
-          }}
-        >
+        {/* SVG edge-detection filter — extracts the bright neon outline of the billboard */}
+        <svg width="0" height="0" style={{ position: "absolute" }}>
+          <defs>
+            <filter id="neon-edge" x="0" y="0" width="100%" height="100%">
+              {/* Boost brightness, then extract edges via convolution */}
+              <feColorMatrix
+                type="matrix"
+                values="0 0 0 0 0
+                        0 0 0 0 0
+                        0 0 0 0 0
+                        2 2 2 0 -1.2"
+                result="bright"
+              />
+              <feConvolveMatrix
+                in="bright"
+                order="3"
+                kernelMatrix="-1 -1 -1 -1  8 -1 -1 -1 -1"
+                result="edges"
+              />
+              <feComposite in="SourceGraphic" in2="edges" operator="in" />
+            </filter>
+          </defs>
+        </svg>
+
+        {/* Glitch layers — outline-only, traces the billboard's neon edges */}
+        <div className="absolute inset-0 pointer-events-none">
           <img
             src={src}
             alt=""
@@ -88,7 +106,7 @@ export default function GlitchNeonBanner({ src, alt = "Neon sign", objectPositio
             style={{
               objectPosition,
               mixBlendMode: "screen",
-              filter: "brightness(1.4) contrast(1.6)",
+              filter: "url(#neon-edge) brightness(1.6) contrast(2)",
             }}
           />
           <img
@@ -99,7 +117,7 @@ export default function GlitchNeonBanner({ src, alt = "Neon sign", objectPositio
             style={{
               objectPosition,
               mixBlendMode: "screen",
-              filter: "brightness(1.4) contrast(1.6) drop-shadow(2px 0 0 #ff0066)",
+              filter: "url(#neon-edge) brightness(1.6) contrast(2) drop-shadow(2px 0 0 #ff0066)",
             }}
           />
           <img
@@ -110,7 +128,7 @@ export default function GlitchNeonBanner({ src, alt = "Neon sign", objectPositio
             style={{
               objectPosition,
               mixBlendMode: "screen",
-              filter: "brightness(1.4) contrast(1.6) drop-shadow(-2px 0 0 #00ffff)",
+              filter: "url(#neon-edge) brightness(1.6) contrast(2) drop-shadow(-2px 0 0 #00ffff)",
             }}
           />
         </div>
