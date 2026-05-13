@@ -228,16 +228,21 @@ export default function Game() {
         <RulesSheet />
       </div>
 
-      {/* Night City tagline */}
-      <div
-        className="text-center font-term tracking-[0.18em] py-1.5 text-[13px]"
-        style={{
-          color: "#ffff66",
-          textShadow: "0 0 10px rgba(255,255,102,0.7), 0 0 18px rgba(255,0,170,0.4)",
-          background: "linear-gradient(90deg, rgba(255,0,170,0.05), rgba(0,255,200,0.08), rgba(255,0,170,0.05))",
-        }}
-      >
-        10,000 PROTOCOL • ROLL HARD OR BUST
+      {/* Neon 10000 sign banner */}
+      <div className="px-3 pt-3">
+        <div
+          className="rounded-2xl overflow-hidden border-2"
+          style={{
+            borderColor: "#ff00ea",
+            boxShadow: "0 0 18px #00ffff, 0 0 36px rgba(255,0,234,0.6)",
+          }}
+        >
+          <img
+            src="https://media.base44.com/images/public/69e7669b223d37093cd03879/31b37da45_generated_image.png"
+            alt="Neon 10000 sign"
+            className="w-full h-24 sm:h-32 object-cover"
+          />
+        </div>
       </div>
 
       {/* Score panel */}
