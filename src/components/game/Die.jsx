@@ -231,8 +231,8 @@ export default function Die({
           const AQUA_LIGHT_X_OFFSET = { 1: size * 0.005, 2: -size * 0.02, 3: -size * 0.03, 4: -size * 0.01, 5: -size * 0.025, 6: -size * 0.035 };
           const AQUA_LIGHT_Y_OFFSET = { 1: 0, 2: 0, 3: 0, 4: -size * 0.05, 5: -size * 0.045, 6: -size * 0.05 };
           // Pride per-face tuning
-          const PRIDE_X_OFFSET = { 1: -size * 0.01, 2: -size * 0.14, 3: -size * 0.25, 4: -size * 0.02, 5: -size * 0.15, 6: -size * 0.23 };
-          const PRIDE_Y_OFFSET = { 2: size * 0.02, 3: size * 0.04, 4: -size * 0.07, 5: -size * 0.05, 6: -size * 0.06 };
+          const PRIDE_X_OFFSET = { 1: -size * 0.01, 2: -size * 0.14, 3: -size * 0.26, 4: -size * 0.02, 5: -size * 0.15, 6: -size * 0.24 };
+          const PRIDE_Y_OFFSET = { 2: size * 0.02, 3: size * 0.03, 4: -size * 0.07, 5: -size * 0.06, 6: -size * 0.06 };
           const xNudge = skin.id === "wood"
             ? (WOOD_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "silver"
