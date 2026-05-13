@@ -237,7 +237,7 @@ export default function Game() {
             rolling={rollAnim}
             onToggle={onToggle}
             disabled={!state.hasRolled || state.farkle || !!state.winner}
-            skinId={equippedSkinId}
+            skinId="love_is_love"
             pipsId={equippedPipsId}
             feltId={equippedFeltId}
           />

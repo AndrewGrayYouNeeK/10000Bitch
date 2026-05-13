@@ -4,8 +4,7 @@ import { useCosmetics } from "@/hooks/useCosmetics";
 
 // Continuously rolling row of 6 dice for the Home screen — uses the equipped skin.
 export default function DiamondShowcase() {
-  const { equippedPipsId } = useCosmetics();
-  const equippedSkinId = "love_is_love";
+  const { equippedSkinId, equippedPipsId } = useCosmetics();
   const [dice, setDice] = useState([1, 2, 3, 4, 5, 6]);
   const [rolling, setRolling] = useState(false);
 
