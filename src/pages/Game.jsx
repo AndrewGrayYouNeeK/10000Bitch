@@ -237,7 +237,7 @@ export default function Game() {
           background: "linear-gradient(90deg, rgba(255,0,170,0.05), rgba(0,255,200,0.08), rgba(255,0,170,0.05))",
         }}
       >
-        NIGHT CITY DICE PROTOCOL • RUN HARD OR FARKLE
+        10,000 PROTOCOL • ROLL HARD OR BUST
       </div>
 
       {/* Score panel */}
