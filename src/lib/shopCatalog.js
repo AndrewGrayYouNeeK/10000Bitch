@@ -464,6 +464,111 @@ export const PIP_STYLES = [
   { id: "diamond_pips", name: "Diamond Pips", price: 300, shape: "diamond", description: "Cut above." },
 ];
 
+// Table felt colors. `inner`, `mid`, `outer` define the radial gradient stops.
+// `border` is the wooden/edge border color class.
+export const FELT_COLORS = [
+  {
+    id: "classic_green",
+    name: "Classic Green",
+    price: 0,
+    inner: "#2a8049",
+    mid: "#1f6b3a",
+    outer: "#154a28",
+    border: "border-amber-900/70",
+    description: "Traditional casino felt.",
+  },
+  {
+    id: "royal_blue",
+    name: "Royal Blue",
+    price: 200,
+    inner: "#3b6ec2",
+    mid: "#2451a0",
+    outer: "#13306b",
+    border: "border-slate-900/80",
+    description: "Cool, regal, and crisp.",
+  },
+  {
+    id: "crimson_red",
+    name: "Crimson Red",
+    price: 250,
+    inner: "#a83a3a",
+    mid: "#7d2424",
+    outer: "#4a1414",
+    border: "border-stone-900/80",
+    description: "Bold and dramatic.",
+  },
+  {
+    id: "midnight_black",
+    name: "Midnight",
+    price: 300,
+    inner: "#3a3a44",
+    mid: "#22222a",
+    outer: "#0a0a10",
+    border: "border-slate-950/90",
+    description: "After-hours luxury.",
+  },
+  {
+    id: "burgundy",
+    name: "Burgundy",
+    price: 350,
+    inner: "#7a2a3c",
+    mid: "#561c2a",
+    outer: "#2e0e17",
+    border: "border-stone-950/80",
+    description: "Vintage gentlemen's club.",
+  },
+  {
+    id: "forest_pine",
+    name: "Forest Pine",
+    price: 250,
+    inner: "#2d5a3d",
+    mid: "#1f4029",
+    outer: "#0f2516",
+    border: "border-emerald-950/80",
+    description: "Deep, earthy green.",
+  },
+  {
+    id: "amethyst_purple",
+    name: "Amethyst",
+    price: 400,
+    inner: "#6b46b8",
+    mid: "#4d2f8a",
+    outer: "#28184d",
+    border: "border-purple-950/80",
+    description: "Mystic violet.",
+  },
+  {
+    id: "graphite",
+    name: "Graphite",
+    price: 300,
+    inner: "#5a5e66",
+    mid: "#3c4046",
+    outer: "#1f2226",
+    border: "border-slate-900/80",
+    description: "Modern industrial gray.",
+  },
+  {
+    id: "ocean_teal",
+    name: "Ocean Teal",
+    price: 350,
+    inner: "#1f8a8a",
+    mid: "#136767",
+    outer: "#073e3e",
+    border: "border-teal-950/80",
+    description: "Deep sea calm.",
+  },
+  {
+    id: "sahara_sand",
+    name: "Sahara Sand",
+    price: 300,
+    inner: "#b58a5a",
+    mid: "#8a6440",
+    outer: "#503c26",
+    border: "border-amber-950/80",
+    description: "Warm desert tones.",
+  },
+];
+
 export const BADGES = [
   { id: "rookie", name: "Rookie", price: 100, emoji: "🎲", color: "from-slate-400 to-slate-600", description: "Every legend starts here." },
   { id: "hot_hand", name: "Hot Hand", price: 300, emoji: "🔥", color: "from-orange-400 to-red-600", description: "You're on fire." },
@@ -481,6 +586,9 @@ export function getPipStyle(id) {
 }
 export function getBadge(id) {
   return BADGES.find(b => b.id === id) || null;
+}
+export function getFelt(id) {
+  return FELT_COLORS.find(f => f.id === id) || FELT_COLORS[0];
 }
 
 /**

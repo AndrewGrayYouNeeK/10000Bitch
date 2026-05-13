@@ -29,7 +29,7 @@ export default function Game() {
   const [rollAnim, setRollAnim] = useState(false);
   const [popup, setPopup] = useState(null); // { word, variant }
   const [shakeTriggered, setShakeTriggered] = useState(0);
-  const { equippedSkinId, equippedPipsId, addCoins } = useCosmetics();
+  const { equippedSkinId, equippedPipsId, equippedFeltId, addCoins } = useCosmetics();
   const prevBustRef = React.useRef(0);
   const winnerAwardedRef = React.useRef(false);
 
@@ -239,6 +239,7 @@ export default function Game() {
             disabled={!state.hasRolled || state.farkle || !!state.winner}
             skinId={equippedSkinId}
             pipsId={equippedPipsId}
+            feltId={equippedFeltId}
           />
           {info.held.length > 0 && (
             <div className="mt-2 text-center text-sm">

@@ -1,18 +1,19 @@
 import React from "react";
 import Die from "./Die";
 import { motion } from "framer-motion";
+import { getFelt } from "@/lib/shopCatalog";
 
 /**
- * Visual tray for the 6 dice. Rendered on a felt-green surface.
+ * Visual tray for the 6 dice. Rendered on a felt surface whose color is controlled by `feltId`.
  * dice: array of { id, value, used (banked), held (in active selection) }
  */
-export default function DiceTray({ dice, rolling, onToggle, disabled, skinId, pipsId }) {
+export default function DiceTray({ dice, rolling, onToggle, disabled, skinId, pipsId, feltId = "classic_green" }) {
+  const felt = getFelt(feltId);
   return (
     <div
-      className="relative rounded-3xl p-6 overflow-hidden border-4 border-amber-900/70"
+      className={`relative rounded-3xl p-6 overflow-hidden border-4 ${felt.border}`}
       style={{
-        background:
-          "radial-gradient(ellipse at 50% 40%, #2a8049 0%, #1f6b3a 45%, #154a28 95%)",
+        background: `radial-gradient(ellipse at 50% 40%, ${felt.inner} 0%, ${felt.mid} 45%, ${felt.outer} 95%)`,
         boxShadow:
           "inset 0 0 40px rgba(0,0,0,0.45), inset 0 4px 12px rgba(255,255,255,0.06)",
       }}

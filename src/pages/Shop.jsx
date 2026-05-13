@@ -4,19 +4,20 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { ArrowLeft, Coins, Sparkles } from "lucide-react";
 import { toast } from "sonner";
-import { DICE_SKINS, BADGES } from "@/lib/shopCatalog";
+import { DICE_SKINS, BADGES, FELT_COLORS, getFelt } from "@/lib/shopCatalog";
 import { getDuplicateGroups } from "@/lib/duplicateSkins";
 import { useCosmetics } from "@/hooks/useCosmetics";
 import ShopItemCard from "@/components/shop/ShopItemCard";
 import DicePreview from "@/components/shop/DicePreview";
 import BadgePreview from "@/components/shop/BadgePreview";
+import FeltPreview from "@/components/shop/FeltPreview";
 import BuyCoinsDialog from "@/components/shop/BuyCoinsDialog";
 
 export default function Shop() {
   const {
     coins, isLoading,
-    ownedSkins, ownedPips, ownedBadges,
-    equippedSkinId, equippedPipsId, equippedBadgeId,
+    ownedSkins, ownedPips, ownedBadges, ownedFelts,
+    equippedSkinId, equippedPipsId, equippedBadgeId, equippedFeltId,
     buyItem, equipItem, addCoins,
   } = useCosmetics();
   const [tab, setTab] = useState("skins");
@@ -60,8 +61,9 @@ export default function Shop() {
 
       <div className="p-4 max-w-2xl mx-auto">
         <Tabs value={tab} onValueChange={setTab}>
-          <TabsList className="grid grid-cols-2 w-full bg-slate-900 border border-slate-800">
+          <TabsList className="grid grid-cols-3 w-full bg-slate-900 border border-slate-800">
             <TabsTrigger value="skins">Dice Skins</TabsTrigger>
+            <TabsTrigger value="felts">Felts</TabsTrigger>
             <TabsTrigger value="badges">Badges</TabsTrigger>
           </TabsList>
 
@@ -83,6 +85,23 @@ export default function Shop() {
                   />
                 ));
               })()}
+            </div>
+          </TabsContent>
+
+          <TabsContent value="felts" className="mt-4">
+            <div className="grid grid-cols-2 gap-3">
+              {FELT_COLORS.map(felt => (
+                <ShopItemCard
+                  key={felt.id}
+                  item={felt}
+                  owned={ownedFelts.includes(felt.id)}
+                  equipped={equippedFeltId === felt.id}
+                  canAfford={coins >= felt.price}
+                  onBuy={() => handleBuy("felt", felt)}
+                  onEquip={() => handleEquip("felt", felt)}
+                  preview={<FeltPreview felt={felt} />}
+                />
+              ))}
             </div>
           </TabsContent>
 

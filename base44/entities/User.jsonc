@@ -35,6 +35,16 @@
       "default": [],
       "description": "IDs of player badges the user owns"
     },
+    "owned_felts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [
+        "classic_green"
+      ],
+      "description": "IDs of game table felt colors the user owns"
+    },
     "equipped_skin": {
       "type": "string",
       "default": "classic_white",
@@ -49,6 +59,11 @@
       "type": "string",
       "default": "",
       "description": "Currently equipped player badge id"
+    },
+    "equipped_felt": {
+      "type": "string",
+      "default": "classic_green",
+      "description": "Currently equipped table felt color id"
     }
   },
   "required": []
