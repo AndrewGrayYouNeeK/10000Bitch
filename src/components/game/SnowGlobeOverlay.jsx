@@ -18,7 +18,7 @@ function Snowflake({ size, leftPct, delay, duration, drift, scale, shaking, star
       animate={
         shaking
           ? {
-              x: [0, size * 0.9, -size * 0.9, size * 0.7, -size * 0.7, 0],
+              x: [0, size * 1.0, -size * 1.0, size * 1.0, -size * 1.0, 0],
               y: [0, 0, 0, 0, 0, 0],
               rotate: [0, 0, 0, 0, 0, 0],
               opacity: [1, 1, 1, 1, 1, 1],
@@ -34,7 +34,7 @@ function Snowflake({ size, leftPct, delay, duration, drift, scale, shaking, star
         shaking
           ? {
               duration: 0.85,
-              ease: "easeInOut",
+              ease: "linear",
               times: [0, 0.2, 0.4, 0.6, 0.8, 1],
             }
           : {
