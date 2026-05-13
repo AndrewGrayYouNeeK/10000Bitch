@@ -28,17 +28,17 @@ export default function DiceTray({ dice, rolling, onToggle, disabled, skinId, pi
 
       {/* Top corner shadows */}
       <div
-        className="absolute top-0 left-0 w-2/3 h-2/3 pointer-events-none"
+        className="absolute -top-4 -left-4 w-3/4 h-3/4 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse at top left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 25%, rgba(0,0,0,0.6) 50%, transparent 80%)",
+            "radial-gradient(circle at top left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.95) 35%, rgba(0,0,0,0.7) 60%, transparent 90%)",
         }}
       />
       <div
-        className="absolute top-0 right-0 w-2/3 h-2/3 pointer-events-none"
+        className="absolute -top-4 -right-4 w-3/4 h-3/4 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse at top right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 25%, rgba(0,0,0,0.6) 50%, transparent 80%)",
+            "radial-gradient(circle at top right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.95) 35%, rgba(0,0,0,0.7) 60%, transparent 90%)",
         }}
       />
 
