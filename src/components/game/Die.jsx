@@ -311,13 +311,15 @@ export default function Die({
         }
 
         {/* Corner shadow vignette — darkens the corners to hide tray bleed-through (skipped for silver) */}
-        {skin.id !== "silver" && skin.id !== "marble" && (
+        {skin.id !== "silver" && (
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
               borderRadius: radius,
               background:
-                "radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.45) 85%, rgba(0,0,0,0.75) 100%)",
+                skin.id === "marble"
+                  ? "radial-gradient(ellipse at center, transparent 55%, rgba(255,255,255,0.5) 85%, rgba(255,255,255,0.85) 100%)"
+                  : "radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.45) 85%, rgba(0,0,0,0.75) 100%)",
             }}
           />
         )}
