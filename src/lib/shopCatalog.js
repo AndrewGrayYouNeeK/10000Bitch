@@ -327,18 +327,6 @@ export const DICE_SKINS = [
     spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/823a86262_zIRb81kXhGo3xU-pd4xpr_yf8rZsgh.png",
   },
   {
-    id: "moonstone_v2",
-    name: "Pearl Moonstone",
-    price: 450,
-    gradient: "from-slate-100 via-blue-100 to-indigo-200",
-    border: "border-indigo-200",
-    pipColor: "bg-slate-200",
-    glow: "shadow-indigo-200/70",
-    description: "Pearlescent moonstone.",
-    realistic: true,
-    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/cdba5fcc9_Ub3rBdwrMd_RZcipohKxd_EQnQspfS1.png",
-  },
-  {
     id: "love_is_love",
     name: "Love Is Love",
     price: 1500,
