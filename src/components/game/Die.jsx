@@ -80,50 +80,22 @@ export default function Die({
   if (rolling && !wasRolling.current) {
     rollKey.current += 1;
     const dir = Math.random() > 0.5 ? 1 : -1;
-    // More spins, decelerating toward the end (big jumps early, tiny jumps late)
-    const spins = (6 + Math.floor(Math.random() * 4)) * 360 * dir;
-    const bounceH = 20 + Math.random() * 30;
-    const rand = (mag) => (Math.random() - 0.5) * mag;
-    rollVariants.rotate = [
-      0,
-      spins * 0.25,
-      spins * 0.55,
-      spins * 0.78,
-      spins * 0.92,
-      spins * 0.98,
-      spins,
-    ];
-    // Chaotic vertical bouncing — random heights at every keyframe
-    rollVariants.y = [
-      0,
-      -bounceH * (0.8 + Math.random() * 0.4),
-      -bounceH * (0.3 + Math.random() * 0.5) * (Math.random() > 0.5 ? 1 : -1),
-      -bounceH * (0.5 + Math.random() * 0.4),
-      -bounceH * (0.1 + Math.random() * 0.3),
-      -bounceH * 0.05,
-      0,
-    ];
-    // Chaotic horizontal — random direction at every keyframe
-    rollVariants.x = [
-      0,
-      rand(28),
-      rand(24),
-      rand(18),
-      rand(10),
-      rand(4),
-      0,
-    ];
-    rollVariants.scale = [1, 1.2, 1.05, 1.12, 0.97, 1.02, 1];
+    const spins = (3 + Math.floor(Math.random() * 3)) * 360 * dir;
+    const bounceH = 18 + Math.random() * 28;
+    rollVariants.rotate = [0, spins * 0.3, spins * 0.65, spins * 0.88, spins * 0.97, spins];
+    rollVariants.y = [0, -bounceH, -bounceH * 0.35, -bounceH * 0.55, -bounceH * 0.12, 0];
+    rollVariants.x = [0, (Math.random() - 0.5) * 14, (Math.random() - 0.5) * 10, (Math.random() - 0.5) * 5, 0, 0];
+    rollVariants.scale = [1, 1.18, 1.06, 1.12, 0.96, 1];
   }
   React.useEffect(() => {
     let startTimer, endTimer;
     if (rolling && !wasRolling.current) {
-      // Start the wild snow ~1.1s into the 1.6s roll, so it begins before the die stops.
-      startTimer = setTimeout(() => setSettling(true), 1100);
+      // Start the wild snow ~0.55s into the 0.85s roll, so it begins before the die stops.
+      startTimer = setTimeout(() => setSettling(true), 550);
       wasRolling.current = true;
     } else if (!rolling && wasRolling.current) {
       // Keep it going briefly after the die lands, then calm down.
-      endTimer = setTimeout(() => setSettling(false), 900);
+      endTimer = setTimeout(() => setSettling(false), 700);
       wasRolling.current = false;
     }
     return () => {
@@ -183,9 +155,9 @@ export default function Die({
       transition={
       rolling ?
       {
-        duration: 1.6,
-        ease: [0.15, 0.6, 0.25, 1],
-        times: [0, 0.15, 0.32, 0.5, 0.7, 0.88, 1]
+        duration: 0.85,
+        ease: [0.25, 0.46, 0.45, 0.94],
+        times: [0, 0.2, 0.45, 0.65, 0.85, 1]
       } :
       { type: "spring", stiffness: 300, damping: 18 }
       }
