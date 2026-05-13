@@ -380,21 +380,7 @@ export default function Die({
           />
         )}
 
-        {/* Top-left gloss highlight — only for non-photo skins */}
-        {skin.realistic && skin.id !== "classic_white" && skin.id !== "classic_white" &&
-        <div
-          className="absolute pointer-events-none"
-          style={{
-            top: "5%",
-            left: "5%",
-            width: "48%",
-            height: "42%",
-            borderRadius: `${radius}px ${radius * 0.6}px ${radius * 0.3}px ${radius * 0.6}px`,
-            background:
-            "radial-gradient(ellipse at 28% 28%, rgba(255,255,255,0.82) 0%, rgba(255,255,255,0.3) 40%, transparent 70%)"
-          }} />
 
-        }
 
         {/* Diamond shimmer overlay */}
         {skin.special === "diamond" &&
