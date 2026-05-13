@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { ArrowLeft, Coins, Sparkles } from "lucide-react";
 import { toast } from "sonner";
-import { DICE_SKINS, PIP_STYLES, BADGES } from "@/lib/shopCatalog";
+import { DICE_SKINS, BADGES } from "@/lib/shopCatalog";
 import { useCosmetics } from "@/hooks/useCosmetics";
 import ShopItemCard from "@/components/shop/ShopItemCard";
 import DicePreview from "@/components/shop/DicePreview";
@@ -59,9 +59,8 @@ export default function Shop() {
 
       <div className="p-4 max-w-2xl mx-auto">
         <Tabs value={tab} onValueChange={setTab}>
-          <TabsList className="grid grid-cols-3 w-full bg-slate-900 border border-slate-800">
+          <TabsList className="grid grid-cols-2 w-full bg-slate-900 border border-slate-800">
             <TabsTrigger value="skins">Dice Skins</TabsTrigger>
-            <TabsTrigger value="pips">Pips</TabsTrigger>
             <TabsTrigger value="badges">Badges</TabsTrigger>
           </TabsList>
 
@@ -77,23 +76,6 @@ export default function Shop() {
                   onBuy={() => handleBuy("skin", skin)}
                   onEquip={() => handleEquip("skin", skin)}
                   preview={<DicePreview skinId={skin.id} pipsId={equippedPipsId} />}
-                />
-              ))}
-            </div>
-          </TabsContent>
-
-          <TabsContent value="pips" className="mt-4">
-            <div className="grid grid-cols-2 gap-3">
-              {PIP_STYLES.map(pip => (
-                <ShopItemCard
-                  key={pip.id}
-                  item={pip}
-                  owned={ownedPips.includes(pip.id)}
-                  equipped={equippedPipsId === pip.id}
-                  canAfford={coins >= pip.price}
-                  onBuy={() => handleBuy("pips", pip)}
-                  onEquip={() => handleEquip("pips", pip)}
-                  preview={<DicePreview skinId={equippedSkinId} pipsId={pip.id} />}
                 />
               ))}
             </div>
