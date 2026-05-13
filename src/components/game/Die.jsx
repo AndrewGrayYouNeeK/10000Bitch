@@ -379,7 +379,7 @@ export default function Die({
           const TEAL2_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.02, 4: -size * 0.04, 5: -size * 0.04, 6: -size * 0.04 };
           const COPPER2_X_OFFSET = { 2: size * 0.01, 3: size * 0.01, 5: size * 0.01, 6: size * 0.01 };
           const COPPER2_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.02, 4: -size * 0.04, 5: -size * 0.04, 6: -size * 0.04 };
-          const LOVE_X_OFFSET = { 2: -size * 0.11, 3: -size * 0.23, 4: -size * 0.01, 5: size * 0.01, 6: size * 0.01 };
+          const LOVE_X_OFFSET = { 2: -size * 0.11, 3: -size * 0.23, 4: -size * 0.01, 5: size * 0.01 - 15, 6: size * 0.01 - 18 };
           const LOVE_Y_OFFSET = { 1: -size * 0.005, 2: -size * 0.005, 3: -size * 0.005, 4: -size * 0.05, 5: -size * 0.04, 6: -size * 0.04 };
           const CRYSTAL_CUT_X_OFFSET = { 2: -size * 0.0925, 3: -size * 0.175, 4: -size * 0.03, 5: -size * 0.105, 6: -size * 0.19 };
           const CRYSTAL_CUT_Y_OFFSET = { 4: -size * 0.06, 5: -size * 0.0525, 6: -size * 0.0525 };
