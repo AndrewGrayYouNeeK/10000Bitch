@@ -219,18 +219,6 @@ export const DICE_SKINS = [
     spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/397f4c284_8KTW9qvIkitDTb0vG9fhu_7KfGY6c1.png",
   },
   {
-    id: "aquamarine_dark",
-    name: "Aquamarine Crystal",
-    price: 500,
-    gradient: "from-sky-100 via-cyan-200 to-sky-300",
-    border: "border-sky-300",
-    pipColor: "bg-slate-900",
-    glow: "shadow-sky-200/70",
-    description: "Raw crystalline beauty.",
-    realistic: true,
-    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/404a5c7ed_8KTW9qvIkitDTb0vG9fhu_7KfGY6c1.png",
-  },
-  {
     id: "baseball",
     name: "Baseball",
     price: 350,
