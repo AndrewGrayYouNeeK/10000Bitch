@@ -148,11 +148,12 @@ export default function Die({
         type="button"
         onClick={onClick}
         disabled={used || rolling}
-        className={`relative w-full h-full ${skin.id !== "classic_white" ? `bg-gradient-to-br ${skin.gradient}` : "bg-white"} ${used ? "opacity-20 grayscale cursor-not-allowed" : ""}`}
+        className={`relative w-full h-full ${skin.id !== "classic_white" ? `bg-gradient-to-br ${skin.gradient}` : ""} ${used ? "opacity-20 grayscale cursor-not-allowed" : ""}`}
         style={{
           borderRadius: radius,
           boxShadow: buildShadow(),
           overflow: "hidden",
+          background: skin.id === "classic_white" ? "transparent" : undefined,
           ...squircleStyle
         }}>
         
@@ -180,7 +181,7 @@ export default function Die({
           const row = Math.floor((value - 1) / cols);
           // Per-face nudges (in px) — corrects misaligned sprite cells
           const FACE_X_OFFSET = { 2: -size * 0.015, 3: -size * 0.022, 5: -size * 0.022, 6: -size * 0.032 };
-          const FACE_Y_OFFSET = { 4: -size * 0.03, 5: -size * 0.05, 6: -size * 0.035 };
+          const FACE_Y_OFFSET = { 1: -size * 0.02, 2: -size * 0.02, 3: -size * 0.02, 4: -size * 0.05, 5: -size * 0.07, 6: -size * 0.055 };
           // Classic White needs slightly different per-face Y tuning
           const CLASSIC_WHITE_Y_OFFSET = { 1: size * 0.012, 2: size * 0.012, 3: size * 0.018, 4: -size * 0.045, 6: -size * 0.05 };
           // Gold needs slightly different per-face Y tuning
