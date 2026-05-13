@@ -177,13 +177,22 @@ export default function Die({
           ...squircleStyle
         }}>
         
-        {/* Video background skin — cropped 3x2 grid (zoomed 3x) so each face shows its own cell */}
+        {/* Video background skin — cropped 3x2 grid, zoomed 3x centered in each cell */}
         {skin.videoUrl && (() => {
           const zoom = 3;
           const cols = 3;
           const rows = 2;
           const col = (value - 1) % cols;
           const row = Math.floor((value - 1) / cols);
+          // Container is the die. Video is sized so one cell == one die.
+          // Zoom in by scaling video to (cols*zoom) x (rows*zoom) of die size,
+          // and translating so the centered region of the cell aligns with the die.
+          const videoW = cols * zoom; // multiples of die width
+          const videoH = rows * zoom; // multiples of die height
+          // Center of the cell in video units (die widths): col + 0.5
+          // Translate so that center lands at die center (0.5, 0.5)
+          const tx = (col + 0.5) * zoom - 0.5; // in die widths
+          const ty = (row + 0.5) * zoom - 0.5; // in die heights
           return (
             <div
               className="absolute inset-0 overflow-hidden pointer-events-none"
@@ -197,9 +206,9 @@ export default function Die({
                 playsInline
                 className="absolute top-0 left-0 pointer-events-none"
                 style={{
-                  width: `${cols * 100 * zoom}%`,
-                  height: `${rows * 100 * zoom}%`,
-                  transform: `translate(${-col * zoom * (100 / cols) * zoom}%, ${-row * zoom * (100 / rows) * zoom}%)`,
+                  width: `${videoW * 100}%`,
+                  height: `${videoH * 100}%`,
+                  transform: `translate(${(-tx / videoW) * 100}%, ${(-ty / videoH) * 100}%)`,
                   transformOrigin: "top left",
                   objectFit: "cover",
                 }}
