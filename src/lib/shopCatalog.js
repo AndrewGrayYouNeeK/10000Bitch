@@ -147,18 +147,6 @@ export const DICE_SKINS = [
     videoUrl: "https://media.base44.com/videos/public/69e7669b223d37093cd03879/fde6fe169_ca9c480e8677452185635915c4d441a5.mp4",
   },
   {
-    id: "copper",
-    name: "Copper",
-    price: 400,
-    gradient: "from-orange-300 via-orange-500 to-amber-800",
-    border: "border-amber-900",
-    pipColor: "bg-slate-900",
-    glow: "shadow-orange-400/60",
-    description: "Hand-forged copper.",
-    realistic: true,
-    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/4e9b41491_BmfP_o5DAVeLg2qIRGbt6_NB0TmCXi.png",
-  },
-  {
     id: "teal_crackle",
     name: "Antarctic Blue Ice",
     price: 450,
