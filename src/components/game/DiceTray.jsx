@@ -26,8 +26,8 @@ export default function DiceTray({ dice, rolling, onToggle, disabled, skinId, pi
             backgroundImage: `url(${felt.textureUrl})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            mixBlendMode: "multiply",
-            opacity: 0.85,
+            mixBlendMode: "soft-light",
+            opacity: 0.5,
           }}
         />
       )}
