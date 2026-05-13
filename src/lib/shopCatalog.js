@@ -147,18 +147,6 @@ export const DICE_SKINS = [
     videoUrl: "https://media.base44.com/videos/public/69e7669b223d37093cd03879/fde6fe169_ca9c480e8677452185635915c4d441a5.mp4",
   },
   {
-    id: "basketball",
-    name: "Basketball",
-    price: 350,
-    gradient: "from-orange-400 via-orange-600 to-orange-800",
-    border: "border-orange-900",
-    pipColor: "bg-slate-900",
-    glow: "shadow-orange-500/60",
-    description: "Nothin' but net.",
-    realistic: true,
-    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/09f8e124d_-YksA32g2e98HuzfhqQ0E_ZRhF0K2b.png",
-  },
-  {
     id: "copper",
     name: "Copper",
     price: 400,
