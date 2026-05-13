@@ -227,9 +227,6 @@ export default function Die({
           // Baseball per-face tuning
           const BASEBALL_X_OFFSET = { 1: -size * 0.03, 2: -size * 0.15, 3: -size * 0.27, 4: -size * 0.02, 5: -size * 0.1, 6: -size * 0.15 };
           const BASEBALL_Y_OFFSET = { 1: size * 0.01, 2: size * 0.01, 3: size * 0.02, 4: -size * 0.02 };
-          // Aquamarine Ice per-face tuning
-          const AQUA_LIGHT_X_OFFSET = { 1: size * 0.12, 2: size * 0.12 };
-          const AQUA_LIGHT_Y_OFFSET = { 1: size * 0.01, 2: size * 0.01 };
           const xNudge = skin.id === "wood"
             ? (WOOD_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "silver"
@@ -264,8 +261,6 @@ export default function Die({
             ? (AQUA_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "baseball"
             ? (BASEBALL_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
-            : skin.id === "aquamarine_light"
-            ? (AQUA_LIGHT_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : (FACE_X_OFFSET[value] || 0);
           const yNudge = skin.id === "classic_white"
             ? (CLASSIC_WHITE_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
@@ -307,8 +302,6 @@ export default function Die({
             ? (AQUA_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : skin.id === "baseball"
             ? (BASEBALL_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
-            : skin.id === "aquamarine_light"
-            ? (AQUA_LIGHT_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : (FACE_Y_OFFSET[value] || 0);
           const MOONSTONE_EXTRA_STRETCH = { 3: size * 0.015, 4: size * 0.015, 5: size * 0.015, 6: size * 0.015 };
           const stretch = skin.id === "moonstone" ? size * 0.0375 + (MOONSTONE_EXTRA_STRETCH[value] || 0) : 0;
