@@ -228,8 +228,8 @@ export default function Die({
           const BASEBALL_X_OFFSET = { 1: -size * 0.03, 2: -size * 0.15, 3: -size * 0.27, 4: -size * 0.02, 5: -size * 0.1, 6: -size * 0.15 };
           const BASEBALL_Y_OFFSET = { 1: size * 0.01, 2: size * 0.01, 3: size * 0.02, 4: -size * 0.02 };
           // Aquamarine Ice per-face tuning
-          const AQUA_LIGHT_X_OFFSET = { 1: size * 0.005, 2: -size * 0.02, 3: -size * 0.03, 4: 0, 5: -size * 0.025, 6: -size * 0.035 };
-          const AQUA_LIGHT_Y_OFFSET = { 1: 0, 2: 0, 3: 0, 4: -size * 0.04, 5: -size * 0.045, 6: -size * 0.05 };
+          const AQUA_LIGHT_X_OFFSET = { 1: size * 0.005, 2: -size * 0.02, 3: -size * 0.03, 4: -size * 0.01, 5: -size * 0.025, 6: -size * 0.035 };
+          const AQUA_LIGHT_Y_OFFSET = { 1: 0, 2: 0, 3: 0, 4: -size * 0.05, 5: -size * 0.045, 6: -size * 0.05 };
           const xNudge = skin.id === "wood"
             ? (WOOD_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "silver"
