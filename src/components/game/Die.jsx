@@ -313,8 +313,8 @@ export default function Die({
           const LABRADORITE_POLISHED_X_OFFSET = { 2: -10, 3: -18, 4: -2, 5: -10, 6: -18 };
           const LABRADORITE_POLISHED_Y_OFFSET = { 4: -8, 5: -8, 6: -8 };
           // Blue Gel per-face tuning
-          const BLUE_GEL_X_OFFSET = { 1: -1 };
-          const BLUE_GEL_Y_OFFSET = { 1: 1 };
+          const BLUE_GEL_X_OFFSET = { 1: -1, 3: -size * 0.01 };
+          const BLUE_GEL_Y_OFFSET = { 1: 1, 2: size * 0.01 };
           // Ruby per-face tuning
           const RUBY_X_OFFSET = {};
           const RUBY_Y_OFFSET = { 1: -size * 0.01 - 1, 2: -size * 0.01 - 1, 3: -size * 0.01 - 1, 4: -size * 0.04 - 1, 5: -size * 0.05 - 1, 6: -size * 0.045 - 1 };
