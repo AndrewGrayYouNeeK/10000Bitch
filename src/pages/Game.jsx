@@ -22,6 +22,7 @@ import GameOverDialog from "@/components/game/GameOverDialog";
 import RulesSheet from "@/components/game/RulesSheet";
 import BigPopup from "@/components/game/BigPopup";
 import { useCosmetics } from "@/hooks/useCosmetics";
+import { DICE_SKINS } from "@/lib/shopCatalog";
 
 export default function Game() {
   const navigate = useNavigate();
@@ -32,6 +33,18 @@ export default function Game() {
   const { equippedSkinId, equippedPipsId, equippedFeltId, addCoins } = useCosmetics();
   const prevBustRef = React.useRef(0);
   const winnerAwardedRef = React.useRef(false);
+
+  // Cycle through every dice skin twice, 5 seconds each
+  const [skinCycleIndex, setSkinCycleIndex] = useState(0);
+  const cycleLength = DICE_SKINS.length * 2;
+  useEffect(() => {
+    const id = setInterval(() => {
+      setSkinCycleIndex(i => (i + 1 < cycleLength ? i + 1 : i));
+    }, 5000);
+    return () => clearInterval(id);
+  }, [cycleLength]);
+  const currentSkinId = DICE_SKINS[skinCycleIndex % DICE_SKINS.length].id;
+  const currentSkinName = DICE_SKINS[skinCycleIndex % DICE_SKINS.length].name;
 
   useEffect(() => {
     const stored = sessionStorage.getItem("dice10k_players");
@@ -183,7 +196,9 @@ export default function Game() {
         <Button asChild variant="ghost" size="icon" className="text-white hover:bg-white/10">
           <Link to="/"><ArrowLeft className="w-5 h-5" /></Link>
         </Button>
-        <div className="text-sm font-bold text-slate-300">Goal: 10,000</div>
+        <div className="text-sm font-bold text-slate-300">
+          {currentSkinName} ({(skinCycleIndex % DICE_SKINS.length) + 1}/{DICE_SKINS.length} · pass {Math.floor(skinCycleIndex / DICE_SKINS.length) + 1}/2)
+        </div>
         <RulesSheet />
       </div>
 
@@ -237,7 +252,7 @@ export default function Game() {
             rolling={rollAnim}
             onToggle={onToggle}
             disabled={!state.hasRolled || state.farkle || !!state.winner}
-            skinId="circuit_board"
+            skinId={currentSkinId}
             pipsId={equippedPipsId}
             feltId={equippedFeltId}
           />
