@@ -30,7 +30,7 @@ export default function DiceRain() {
       vy: randomBetween(0.6, 1.8),
       face: FACES[Math.floor(Math.random() * 6)],
       flipTimer: Math.floor(randomBetween(40, 140)),
-      opacity: randomBetween(0.03, 0.12),
+      opacity: randomBetween(0.15, 0.45),
       size: randomBetween(SIZE * 0.6, SIZE * 1.2),
     });
 
@@ -60,9 +60,9 @@ export default function DiceRain() {
         ctx.font = `${d.size}px serif`;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.shadowColor = "rgba(0, 255, 200, 0.2)";
-        ctx.shadowBlur = 3;
-        ctx.fillStyle = "rgba(0, 180, 140, 0.4)";
+        ctx.shadowColor = "rgba(0, 255, 200, 0.5)";
+        ctx.shadowBlur = 6;
+        ctx.fillStyle = "rgba(0, 220, 170, 0.75)";
         ctx.fillText(d.face, d.x, d.y);
         ctx.restore();
       });
