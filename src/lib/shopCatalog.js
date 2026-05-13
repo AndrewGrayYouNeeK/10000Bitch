@@ -219,18 +219,6 @@ export const DICE_SKINS = [
     spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/397f4c284_8KTW9qvIkitDTb0vG9fhu_7KfGY6c1.png",
   },
   {
-    id: "rose_gold",
-    name: "Rose Gold",
-    price: 650,
-    gradient: "from-rose-200 via-pink-300 to-rose-500",
-    border: "border-rose-600",
-    pipColor: "bg-rose-950",
-    glow: "shadow-rose-400/70",
-    description: "Blushing metallic luxury.",
-    realistic: true,
-    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/54a32749c_generated_image.png",
-  },
-  {
     id: "aquamarine_dark",
     name: "Aquamarine Crystal",
     price: 500,
