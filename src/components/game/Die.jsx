@@ -245,6 +245,9 @@ export default function Die({
           // Radiation (toxic_plasma_v2) per-face tuning
           const TOXIC2_X_OFFSET = { 2: -4, 3: -7, 4: -1, 5: -4, 6: -7 };
           const TOXIC2_Y_OFFSET = { 4: -4 };
+          // Cash per-face tuning
+          const CASH_X_OFFSET = { 1: -1, 2: -6 };
+          const CASH_Y_OFFSET = { 1: 1 };
           // Labradorite per-face tuning
           const LABRADORITE_X_OFFSET = { 2: 2, 3: 4, 4: 2, 5: 2, 6: 2 };
           const LABRADORITE_Y_OFFSET = {};
@@ -298,6 +301,8 @@ export default function Die({
             ? (AMBER_WASP_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "toxic_plasma_v2"
             ? (TOXIC2_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
+            : skin.id === "cash"
+            ? (CASH_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "labradorite"
             ? (LABRADORITE_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "labradorite_polished"
@@ -355,6 +360,8 @@ export default function Die({
             ? (AMBER_WASP_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : skin.id === "toxic_plasma_v2"
             ? (TOXIC2_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
+            : skin.id === "cash"
+            ? (CASH_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : skin.id === "labradorite"
             ? (LABRADORITE_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : skin.id === "labradorite_polished"
