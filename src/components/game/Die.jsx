@@ -252,7 +252,7 @@ export default function Die({
           const BULLET_HOLES_X_OFFSET = { 3: -3, 4: 0, 5: -2.5, 6: -3.5 };
           const BULLET_HOLES_Y_OFFSET = { 1: 1, 2: 1, 3: 1, 4: -5 };
           // Shattered (cracked) per-face tuning
-          const CRACKED_X_OFFSET = { 3: -2, 4: -1 };
+          const CRACKED_X_OFFSET = { 3: -3, 4: 0 };
           const CRACKED_Y_OFFSET = { 1: 1, 2: 1, 3: 1, 4: -4 };
           // Labradorite per-face tuning
           const LABRADORITE_X_OFFSET = { 2: 2, 3: 4, 4: 2, 5: 2, 6: 2 };
