@@ -198,7 +198,7 @@ export default function Die({
           return (
             <div
               className="absolute overflow-hidden pointer-events-none"
-              style={{ borderRadius: radius, top: -8, left: -8, right: -8, bottom: -8 }}
+              style={{ borderRadius: radius, top: -4, left: -4, right: -4, bottom: -4 }}
             >
               <video
                 src={skin.videoUrl}
