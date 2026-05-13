@@ -521,7 +521,7 @@ export const DICE_SKINS = [
   },
   {
     id: "toxic_plasma_v2",
-    name: "Toxic Plasma Glow",
+    name: "Radiation",
     price: 1400,
     gradient: "from-green-400 via-purple-700 to-emerald-900",
     border: "border-emerald-600",
