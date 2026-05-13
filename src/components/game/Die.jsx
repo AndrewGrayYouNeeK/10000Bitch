@@ -166,7 +166,7 @@ export default function Die({
             muted
             playsInline
             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-            style={{ borderRadius: radius }}
+            style={{ borderRadius: radius, transform: "scale(1.4)", transformOrigin: "center" }}
           />
         )}
 
