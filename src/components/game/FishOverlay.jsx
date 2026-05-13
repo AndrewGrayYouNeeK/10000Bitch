@@ -121,7 +121,7 @@ function Fish({ size, top, duration, delay, dir = 1, scale = 1, variant }) {
  * Animated cartoon fish swimming inside the die.
  * `count` controls how many fish appear (matches the die's face value).
  */
-export default function FishOverlay({ size, radius, count = 1, bigFishVariantIndex = 0 }) {
+export default function FishOverlay({ size, radius, count = 1, bigFishVariantIndex = 0, bigFishExtraScale = 1 }) {
   // Distribute fish vertically across the die. Stagger timing & direction for variety.
   const fish = React.useMemo(() => {
     const arr = [];
@@ -144,12 +144,12 @@ export default function FishOverlay({ size, radius, count = 1, bigFishVariantInd
         duration: 5 + ((i * 0.7) % 2.5),
         delay: -(i * 1.3 + Math.random() * 1.5),
         dir: i % 2 === 0 ? 1 : -1,
-        scale: isBig ? baseScale * 1.6 : baseScale,
+        scale: isBig ? baseScale * 1.6 * bigFishExtraScale : baseScale,
         variant: isBig ? bigVariant : smallPool[smallCursor++ % smallPool.length],
       });
     }
     return arr;
-  }, [count, bigFishVariantIndex]);
+  }, [count, bigFishVariantIndex, bigFishExtraScale]);
 
   return (
     <div
