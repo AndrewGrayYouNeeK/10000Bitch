@@ -411,6 +411,18 @@ export const DICE_SKINS = [
     spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/5784136aa_KkADf2cqhZJ_5eX9yaSRr_AbX94tDb1.png",
   },
   {
+    id: "blue_gel",
+    name: "Blue Gel",
+    price: 400,
+    gradient: "from-sky-300 via-blue-400 to-blue-600",
+    border: "border-blue-500",
+    pipColor: "bg-white",
+    glow: "shadow-blue-400/60",
+    description: "Translucent blue jelly.",
+    realistic: true,
+    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/9fb931ac6_LZmPx9m7bqJyACwXQcfNu_Lwtd1VVk.png",
+  },
+  {
     id: "plasma",
     name: "Plasma Ball",
     price: 1100,
