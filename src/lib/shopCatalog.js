@@ -315,18 +315,6 @@ export const DICE_SKINS = [
     spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/1f8e20d7a_Aefo3mZm6pYMmwcs9AaPi_cY70s0I3.png",
   },
   {
-    id: "lightning_loop",
-    name: "Lightning Loop",
-    price: 1300,
-    gradient: "from-slate-900 via-purple-950 to-black",
-    border: "border-purple-700",
-    pipColor: "bg-white",
-    glow: "shadow-purple-500/70",
-    description: "Endless electric storm.",
-    realistic: true,
-    videoUrl: "https://media.base44.com/videos/public/69e7669b223d37093cd03879/fd733f844_ca9c480e8677452185635915c4d441a5.mp4",
-  },
-  {
     id: "paper",
     name: "Prison Dice",
     price: 250,
