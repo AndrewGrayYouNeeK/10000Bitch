@@ -438,7 +438,7 @@ export default function Die({
           const RUBY_X_OFFSET = {};
           const RUBY_Y_OFFSET = { 1: -size * 0.01 - 1, 2: -size * 0.01 - 1, 3: -size * 0.01 - 1, 4: -size * 0.04 - 1, 5: -size * 0.05 - 1, 6: -size * 0.045 - 1 };
           // Neon Grid per-face tuning
-          const NEON_GRID_X_OFFSET = { 1: -1, 2: -14, 3: -23, 4: -2, 5: -13, 6: -20 };
+          const NEON_GRID_X_OFFSET = { 1: -1, 2: -14, 3: -23, 4: -2, 5: -13, 6: -23 };
           const NEON_GRID_Y_OFFSET = { 4: -8, 5: -7, 6: -7 };
 
           const xNudge = skin.id === "wood"
