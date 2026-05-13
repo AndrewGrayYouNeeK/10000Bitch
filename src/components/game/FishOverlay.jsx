@@ -20,6 +20,8 @@ const FISH_VARIANTS = [
   { tail: "#15803d", body: "#22c55e", highlight: "#86efac", fin: "#14532d", mouth: "#166534", stripe: null },
   // Angelfish — silver body with bold black vertical bars and yellow fins
   { tail: "#facc15", body: "#e5e7eb", highlight: "#f9fafb", fin: "#facc15", mouth: "#1f2937", stripe: "#0f172a", angelfish: true },
+  // Angelfish (coral) — warm orange body with deep red bars and magenta fins
+  { tail: "#ec4899", body: "#fb923c", highlight: "#fed7aa", fin: "#ec4899", mouth: "#7f1d1d", stripe: "#7f1d1d", angelfish: true },
 ];
 
 /**
