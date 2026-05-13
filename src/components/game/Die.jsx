@@ -255,8 +255,8 @@ export default function Die({
           const CRACKED_X_OFFSET = { 3: -3, 4: 0 };
           const CRACKED_Y_OFFSET = { 1: 1, 2: 1, 3: 1, 4: -4 };
           // Bloodstone per-face tuning
-          const BLOODSTONE_X_OFFSET = { 1: -4, 2: -14, 3: -25, 4: -4, 5: -9, 6: -17 };
-          const BLOODSTONE_Y_OFFSET = { 4: -3, 5: -5, 6: -2 };
+          const BLOODSTONE_X_OFFSET = { 1: -4, 2: -14, 3: -25, 4: -4, 5: -15, 6: -17 };
+          const BLOODSTONE_Y_OFFSET = { 4: -3, 5: -11, 6: -2 };
           // Labradorite per-face tuning
           const LABRADORITE_X_OFFSET = { 2: 2, 3: 4, 4: 2, 5: 2, 6: 2 };
           const LABRADORITE_Y_OFFSET = {};
