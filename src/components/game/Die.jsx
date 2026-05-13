@@ -211,13 +211,11 @@ export default function Die({
           const SILVER_X_OFFSET = { 1: size * 0.02, 2: size * 0.02, 3: size * 0.02, 4: size * 0.02, 5: size * 0.02, 6: size * 0.02 };
           const GALAXY_X_OFFSET = { 3: size * 0.025, 5: size * 0.02, 6: size * 0.015 };
           const DRAGON_X_OFFSET = { 2: size * 0.015, 3: size * 0.015, 5: size * 0.01, 6: size * 0.015 };
-          const MARBLE_X_OFFSET = { 1: size * 0.01, 2: size * 0.015, 3: size * 0.005, 4: size * 0.012, 5: size * 0.005, 6: size * 0.015 };
           const AMETHYST_X_OFFSET = { 2: size * 0.015, 3: -size * 0.005, 6: size * 0.015 };
           const LAVA_X_OFFSET = { 2: size * 0.015, 3: size * 0.015, 5: size * 0.015, 6: size * 0.015 };
           const LAVA_Y_OFFSET = { 1: -size * 0.02, 2: -size * 0.02, 3: -size * 0.02, 4: -size * 0.03 };
           const MOONSTONE_X_OFFSET = { 2: size * 0.005, 3: size * 0.005, 4: size * 0.01, 5: size * 0.005, 6: size * 0.005 };
           const MOONSTONE_Y_OFFSET = { 1: -size * 0.005, 2: -size * 0.01, 3: -size * 0.0075, 4: -size * 0.022, 5: -size * 0.022, 6: -size * 0.022 };
-          const MARBLE_Y_OFFSET = { 1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 1 };
           const SILVER_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.015 };
           const GALAXY_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.015 };
           const DRAGON_Y_OFFSET = { 5: -size * 0.025 };
@@ -232,8 +230,6 @@ export default function Die({
             ? (GALAXY_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "dragon_scale"
             ? (DRAGON_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
-            : skin.id === "marble"
-            ? (MARBLE_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "amethyst"
             ? (AMETHYST_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "moonstone"
@@ -257,8 +253,6 @@ export default function Die({
             ? (GALAXY_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : skin.id === "dragon_scale"
             ? (DRAGON_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
-            : skin.id === "marble"
-            ? (MARBLE_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : skin.id === "amethyst"
             ? (AMETHYST_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : skin.id === "moonstone"
@@ -272,7 +266,7 @@ export default function Die({
             <div
               className="absolute pointer-events-none"
               style={{
-                top: `${(skin.id === "marble" ? -size * 0.22 : -size * 0.14) + yNudge}px`,
+                top: `${-size * 0.14 + yNudge}px`,
                 bottom: `${-size * 0.8 + yNudge}px`,
                 left: `${-size * 0.35 + xNudge}px`,
                 right: `${-size * 0.35 + xNudge}px`,
@@ -281,7 +275,6 @@ export default function Die({
                 backgroundSize: `${cellW * cols}px ${cellH * rows}px`,
                 backgroundPosition: `${-(col * cellW)}px ${-(row * cellH)}px`,
                 backgroundRepeat: 'no-repeat',
-                filter: skin.id === "marble" ? "contrast(1.25) brightness(0.92)" : undefined,
               }} />
           );
         })() :
@@ -317,10 +310,7 @@ export default function Die({
             className="absolute inset-0 pointer-events-none"
             style={{
               borderRadius: radius,
-              background:
-                skin.id === "marble"
-                  ? "radial-gradient(ellipse at center, transparent 55%, rgba(255,255,255,0.5) 85%, rgba(255,255,255,0.85) 100%)"
-                  : "radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.45) 85%, rgba(0,0,0,0.75) 100%)",
+              background: "radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.45) 85%, rgba(0,0,0,0.75) 100%)",
             }}
           />
         )}

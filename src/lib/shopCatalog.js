@@ -99,18 +99,6 @@ export const DICE_SKINS = [
     spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/0b8e61811_XeN1JIPeKj6ML7YQ3gk99_VqSR7BSl.png",
   },
   {
-    id: "marble",
-    name: "Gold Vein Marble",
-    price: 400,
-    gradient: "from-white via-stone-100 to-stone-200",
-    border: "border-stone-300",
-    pipColor: "bg-stone-600",
-    glow: "shadow-amber-200/60",
-    description: "Carrara with gold veins.",
-    realistic: true,
-    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/9c8cefc58_vbPLonMl2TZqQp7Ev03Qo_X5WNso8c.png",
-  },
-  {
     id: "amethyst",
     name: "Amethyst",
     price: 400,

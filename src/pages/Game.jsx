@@ -237,7 +237,7 @@ export default function Game() {
             rolling={rollAnim}
             onToggle={onToggle}
             disabled={!state.hasRolled || state.farkle || !!state.winner}
-            skinId="marble"
+            skinId={equippedSkinId}
             pipsId={equippedPipsId}
           />
           {info.held.length > 0 && (
