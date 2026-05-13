@@ -222,6 +222,8 @@ export default function Die({
           const GALAXY_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.015 };
           const DRAGON_Y_OFFSET = { 5: -size * 0.005 };
           const AMETHYST_Y_OFFSET = { 1: -size * 0.025, 2: -size * 0.025, 3: -size * 0.025, 4: -size * 0.035, 5: -size * 0.035, 6: -size * 0.035 };
+          const PLASMA_X_OFFSET = { 1: -size * 0.04 };
+          const PLASMA_Y_OFFSET = { 1: size * 0.04 };
           const xNudge = skin.id === "wood"
             ? (WOOD_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "silver"
@@ -238,6 +240,8 @@ export default function Die({
             ? (MOONSTONE_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "lava"
             ? (LAVA_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
+            : skin.id === "plasma"
+            ? (PLASMA_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : (FACE_X_OFFSET[value] || 0);
           const yNudge = skin.id === "classic_white"
             ? (CLASSIC_WHITE_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
@@ -261,6 +265,8 @@ export default function Die({
             ? (MOONSTONE_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : skin.id === "lava"
             ? (LAVA_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
+            : skin.id === "plasma"
+            ? (PLASMA_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : (FACE_Y_OFFSET[value] || 0);
           return (
             <div
