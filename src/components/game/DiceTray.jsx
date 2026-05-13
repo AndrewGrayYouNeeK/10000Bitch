@@ -25,7 +25,7 @@ export default function DiceTray({ dice, rolling, onToggle, disabled, skinId, pi
 
       <div className="relative grid grid-cols-3 gap-3 justify-items-center sm:grid-cols-6">
         {dice.map((d, idx) => {
-          const prideSkins = ["copper", "labradorite_polished", "bullet_holes", "cracked", "cash", "ruby"];
+          const prideSkins = ["moonstone", "moonstone_v2", "moonstone", "moonstone_v2", "moonstone", "moonstone_v2"];
           return (
             <motion.div
               key={d.id}
