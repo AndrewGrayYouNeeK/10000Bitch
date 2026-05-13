@@ -1,7 +1,13 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { base44 } from "@/api/base44Client";
 import { getSkin, getPipStyle, getBadge, getFelt } from "@/lib/shopCatalog";
-import { getTierForXp, getNextTier, getSkinEffectivePrice, isSkinUnlockedByTier } from "@/lib/progression";
+import {
+  getTierForXp,
+  getNextTier,
+  getSkinEffectivePrice,
+  isSkinUnlockedByTier,
+  isSkinAchievementOnly,
+} from "@/lib/progression";
 
 // Fetches the current user (with cosmetics fields) and exposes equipped/owned helpers + mutations.
 export function useCosmetics() {
@@ -68,6 +74,11 @@ export function useCosmetics() {
   const buyItem = (type, item) => {
     if (!user) return { ok: false, reason: "not_loaded" };
 
+    // Mythic-tier skins are achievement-only — no shortcut purchase allowed.
+    if (type === "skin" && isSkinAchievementOnly(item.id, xp)) {
+      return { ok: false, reason: "achievement_only" };
+    }
+
     // For skins, apply the tier shortcut multiplier when buying above your tier.
     const effectivePrice = type === "skin" ? getSkinEffectivePrice(item, xp) : item.price;
     if (coins < effectivePrice) return { ok: false, reason: "insufficient" };
@@ -100,5 +111,6 @@ export function useCosmetics() {
     equipItem,
     getSkinEffectivePrice: (skin) => getSkinEffectivePrice(skin, xp),
     isSkinUnlockedByTier: (skinId) => isSkinUnlockedByTier(skinId, xp),
+    isSkinAchievementOnly: (skinId) => isSkinAchievementOnly(skinId, xp),
   };
 }

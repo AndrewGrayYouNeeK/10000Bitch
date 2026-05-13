@@ -89,9 +89,22 @@ export function isSkinUnlockedByTier(skinId, xp = 0) {
   return userTier >= skinTier;
 }
 
+// The top tier (Mythic) can ONLY be earned by reaching the XP threshold.
+// No shortcut purchase is allowed for these skins.
+export const MYTHIC_TIER_ID = 4;
+
+export function isSkinMythic(skinId) {
+  return (SKIN_TIERS[skinId] ?? 0) === MYTHIC_TIER_ID;
+}
+
 export function getSkinEffectivePrice(skin, xp = 0) {
   if (isSkinUnlockedByTier(skin.id, xp)) return skin.price;
   return skin.price * TIER_SHORTCUT_MULTIPLIER;
+}
+
+// True only if the skin is locked AND no shortcut is available (Mythic tier).
+export function isSkinAchievementOnly(skinId, xp = 0) {
+  return isSkinMythic(skinId) && !isSkinUnlockedByTier(skinId, xp);
 }
 
 // XP rewards

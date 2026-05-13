@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { DICE_SKINS, BADGES, FELT_COLORS, getFelt } from "@/lib/shopCatalog";
 import { getDuplicateGroups } from "@/lib/duplicateSkins";
 import { useCosmetics } from "@/hooks/useCosmetics";
-import { getSkinTier, isSkinUnlockedByTier as checkUnlocked } from "@/lib/progression";
+import { getSkinTier, isSkinUnlockedByTier as checkUnlocked, isSkinAchievementOnly } from "@/lib/progression";
 import ShopItemCard from "@/components/shop/ShopItemCard";
 import DicePreview from "@/components/shop/DicePreview";
 import BadgePreview from "@/components/shop/BadgePreview";
@@ -28,6 +28,7 @@ export default function Shop() {
     if (!res.ok) {
       if (res.reason === "insufficient") toast.error("Not enough coins!");
       else if (res.reason === "already_owned") toast.info("Already owned.");
+      else if (res.reason === "achievement_only") toast.error("Mythic dice are earned by playing — no shortcut.");
       return;
     }
     toast.success(`Unlocked ${item.name}!`);
@@ -107,6 +108,7 @@ export default function Shop() {
                 return DICE_SKINS.map(skin => {
                   const tier = getSkinTier(skin.id);
                   const tierLocked = !checkUnlocked(skin.id, xp);
+                  const achievementOnly = isSkinAchievementOnly(skin.id, xp);
                   const effectivePrice = getSkinEffectivePrice(skin);
                   return (
                     <ShopItemCard
@@ -121,6 +123,7 @@ export default function Shop() {
                       duplicateTag={dupes[skin.id]}
                       tier={tier}
                       tierLocked={tierLocked}
+                      achievementOnly={achievementOnly}
                       effectivePrice={effectivePrice}
                     />
                   );
@@ -176,7 +179,7 @@ export default function Shop() {
         </Tabs>
 
         <p className="text-center text-xs text-slate-500 mt-6 pb-10">
-          Earn coins by banking points & winning games. Earn <b className="text-amber-300">XP</b> by finishing games, winning, and hitting milestones — climb tiers to unlock the rarest dice. Locked dice can still be bought at a 10× shortcut price.
+          Earn coins by banking points & winning games. Earn <b className="text-amber-300">XP</b> by finishing games, winning, and hitting milestones — climb tiers to unlock the rarest dice. Locked dice can be bought at a 10× shortcut price, except <b className="text-fuchsia-300">Mythic</b> dice — those can only be earned by reaching the tier.
         </p>
       </div>
     </div>

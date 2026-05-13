@@ -65,10 +65,15 @@ export default function Game() {
       if (wins === 0) xpGain += XP_REWARDS.firstWin;
       if (wins + 1 === 10) xpGain += XP_REWARDS.tenWins;
       if ((state.bustCount || 0) === 0) xpGain += XP_REWARDS.noFarkleGame;
+      if (state.perfectTenK) {
+        xpGain += XP_REWARDS.perfectTenK;
+        addCoins(1000); // bonus coin payout for the ultra-rare achievement
+        setPopup({ word: "PERFECT 10,000!", variant: "success" });
+      }
 
       recordGameResult({ won: true, xpGain });
     }
-  }, [state?.winner, addCoins, recordGameResult, user, state?.bustCount]);
+  }, [state?.winner, state?.perfectTenK, addCoins, recordGameResult, user, state?.bustCount]);
 
   // Hot dice XP — awarded each time a player clears all 6 dice in a turn
   const prevDiceLeftRef = React.useRef(6);
