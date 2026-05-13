@@ -112,28 +112,11 @@ export default function Die({
   // Padding inside die before the pip grid
   const padding = Math.round(size * 0.13);
 
-  // The 3D box shadow: top-left highlight, bottom-right shadow, drop shadow
   const buildShadow = () => {
-    const base = skin.realistic ?
-    [
-    `inset 0 ${size * 0.05}px ${size * 0.12}px rgba(255,255,255,0.95)`, // top highlight
-    `inset ${size * 0.04}px 0 ${size * 0.08}px rgba(255,255,255,0.7)`, // left highlight
-    `inset 0 -${size * 0.06}px ${size * 0.12}px rgba(190,190,205,0.55)`, // bottom shadow
-    `inset -${size * 0.04}px 0 ${size * 0.08}px rgba(180,180,195,0.35)`, // right shadow
-    `0 ${size * 0.08}px ${size * 0.25}px rgba(0,0,0,0.38)`, // drop shadow
-    `0 ${size * 0.02}px ${size * 0.06}px rgba(0,0,0,0.22)`, // close shadow
-    `0 0 0 1.5px rgba(150,150,165,0.4)` // subtle border
-    ].join(", ") :
-    [
-    `inset 0 -${size * 0.06}px ${size * 0.1}px rgba(0,0,0,0.25)`,
-    `inset 0 ${size * 0.04}px ${size * 0.06}px rgba(255,255,255,0.5)`,
-    `0 ${size * 0.08}px ${size * 0.14}px rgba(0,0,0,0.4)`].
-    join(", ");
-
-    if (used) return `inset 0 2px 4px rgba(255,255,255,0.5), 0 2px 6px rgba(0,0,0,0.12)`;
-    if (held) return `${base}, 0 0 0 ${Math.round(size * 0.07)}px #fcd34d, 0 0 ${size * 0.35}px ${size * 0.06}px rgba(252,211,77,0.75)`;
-    if (selected) return `${base}, 0 0 0 ${Math.round(size * 0.05)}px rgba(52,211,153,0.6)`;
-    return base;
+    if (used) return "none";
+    if (held) return `0 0 0 ${Math.round(size * 0.07)}px #fcd34d`;
+    if (selected) return `0 0 0 ${Math.round(size * 0.05)}px rgba(52,211,153,0.6)`;
+    return "none";
   };
 
   return (
@@ -351,19 +334,10 @@ export default function Die({
         {held && !used &&
         <>
             <motion.div
-            className="absolute -inset-1 pointer-events-none"
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
-            style={{
-              boxShadow: "0 0 20px 4px rgba(252,211,77,0.9), inset 0 0 12px rgba(252,211,77,0.5)",
-              borderRadius: radius + 4
-            }} />
-          
-            <motion.div
             initial={{ scale: 0, rotate: -30 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ type: "spring", stiffness: 500, damping: 18 }}
-            className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-amber-400 border-2 border-white flex items-center justify-center text-black font-black text-xs shadow-lg pointer-events-none">
+            className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-amber-400 border-2 border-white flex items-center justify-center text-black font-black text-xs pointer-events-none">
             
               ✓
             </motion.div>
