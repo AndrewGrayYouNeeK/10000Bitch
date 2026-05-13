@@ -400,14 +400,15 @@ export const DICE_SKINS = [
   {
     id: "crystal_cut",
     name: "Diamond Cut",
-    price: 1800,
+    price: 2000,
     gradient: "from-cyan-100 via-white to-sky-200",
     border: "border-cyan-200",
     pipColor: "bg-slate-900",
     glow: "shadow-cyan-300/80",
-    description: "Brilliant faceted crystal.",
+    description: "Brilliant faceted crystal. The legendary tier.",
     realistic: true,
     spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/823a86262_zIRb81kXhGo3xU-pd4xpr_yf8rZsgh.png",
+    special: "diamond",
   },
   {
     id: "moonstone_v2",
