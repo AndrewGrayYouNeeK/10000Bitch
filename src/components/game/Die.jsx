@@ -221,6 +221,9 @@ export default function Die({
           // Frozen Ice per-face tuning — start with default + half-nudge down on all faces
           const ICE_Y_OFFSET = { 1: -size * 0.005, 2: -size * 0.005, 3: -size * 0.005, 4: -size * 0.035, 5: -size * 0.045, 6: -size * 0.04 };
           const ICE_X_OFFSET = { 3: -size * 0.03, 6: -size * 0.03 };
+          // Aquamarine per-face tuning
+          const AQUA_X_OFFSET = { 3: -size * 0.02, 5: -size * 0.04, 6: -size * 0.04 };
+          const AQUA_Y_OFFSET = { 1: size * 0.02, 3: -size * 0.02, 4: -size * 0.02 };
           const xNudge = skin.id === "wood"
             ? (WOOD_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "silver"
@@ -251,6 +254,8 @@ export default function Die({
             ? (LEATHER_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "ice"
             ? (ICE_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
+            : skin.id === "aquamarine"
+            ? (AQUA_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : (FACE_X_OFFSET[value] || 0);
           const yNudge = skin.id === "classic_white"
             ? (CLASSIC_WHITE_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
@@ -288,6 +293,8 @@ export default function Die({
             ? (LEATHER_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : skin.id === "ice"
             ? (ICE_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
+            : skin.id === "aquamarine"
+            ? (AQUA_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : (FACE_Y_OFFSET[value] || 0);
           const MOONSTONE_EXTRA_STRETCH = { 3: size * 0.015, 4: size * 0.015, 5: size * 0.015, 6: size * 0.015 };
           const stretch = skin.id === "moonstone" ? size * 0.0375 + (MOONSTONE_EXTRA_STRETCH[value] || 0) : 0;
