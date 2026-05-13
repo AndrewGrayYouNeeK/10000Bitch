@@ -94,7 +94,7 @@ export default function DiceTray({ dice, rolling, onToggle, disabled, skinId, pi
               rolling={rolling && !d.used}
               onClick={() => !disabled && !d.used && onToggle && onToggle(d.id)}
               size={100}
-              skinId="snow_globe"
+              skinId={skinId}
               pipsId={pipsId}
               bigFishVariantIndex={[7, 1, 6, 3, 1, 4][idx]}
               bigFishExtraScale={idx === 0 ? 2.1 : idx === 4 ? 2.0 : 1.15}
