@@ -399,18 +399,6 @@ export const DICE_SKINS = [
     spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/f059af972_CLC6gYkVPlWgxZQOsp_68_4WosypFv.png",
   },
   {
-    id: "toxic_plasma",
-    name: "Toxic Plasma",
-    price: 1400,
-    gradient: "from-green-500 via-purple-700 to-emerald-900",
-    border: "border-emerald-700",
-    pipColor: "bg-amber-500",
-    glow: "shadow-emerald-500/70",
-    description: "Radioactive plasma storm.",
-    realistic: true,
-    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/4ea2ebc40_AEVwA3ZnKA53oXNB1kVpd_lBugstGt.png",
-  },
-  {
     id: "neon_grid",
     name: "Neon Grid",
     price: 1100,
