@@ -224,7 +224,7 @@ export default function Game() {
         <Button asChild variant="ghost" size="icon" className="text-white hover:bg-white/10">
           <Link to="/"><ArrowLeft className="w-5 h-5" /></Link>
         </Button>
-        <NeonTitle dieSize={40} />
+        <div />
         <RulesSheet />
       </div>
 
