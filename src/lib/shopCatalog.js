@@ -399,7 +399,7 @@ export const DICE_SKINS = [
   },
   {
     id: "crystal_cut",
-    name: "Crystal Cut",
+    name: "Diamond Cut",
     price: 1800,
     gradient: "from-cyan-100 via-white to-sky-200",
     border: "border-cyan-200",
