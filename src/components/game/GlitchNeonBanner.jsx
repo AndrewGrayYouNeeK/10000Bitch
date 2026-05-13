@@ -49,6 +49,28 @@ export default function GlitchNeonBanner({ src, alt = "Neon sign", objectPositio
           0% { transform: translateY(-100%); }
           100% { transform: translateY(100%); }
         }
+        @keyframes billboard-blackout {
+          0%, 100% { opacity: 1; filter: brightness(1); }
+          /* random blackout flickers */
+          22% { opacity: 1; }
+          22.3% { opacity: 0; }
+          22.8% { opacity: 1; }
+          23.1% { opacity: 0; }
+          23.6% { opacity: 1; }
+          /* longer blackout */
+          58% { opacity: 1; }
+          58.4% { opacity: 0; filter: brightness(0); }
+          60.5% { opacity: 0; filter: brightness(0); }
+          60.8% { opacity: 1; filter: brightness(1.6); }
+          61% { opacity: 1; }
+          /* quick stutter */
+          84% { opacity: 1; }
+          84.2% { opacity: 0; }
+          84.5% { opacity: 1; }
+          84.8% { opacity: 0; }
+          85.1% { opacity: 1; }
+        }
+        .billboard-blackout { animation: billboard-blackout 9s infinite; }
         .glitch-base { animation: glitch-flicker 4s infinite; }
         .glitch-r {
           animation: glitch-shift-r 4s infinite, glitch-clip 4s infinite;
@@ -64,12 +86,12 @@ export default function GlitchNeonBanner({ src, alt = "Neon sign", objectPositio
           animation: glitch-scanline 3s linear infinite;
         }
       `}</style>
-      <div className="relative w-full h-48 sm:h-64 overflow-hidden">
-        {/* Base image — static, no glitch */}
+      <div className="relative w-full h-48 sm:h-64 overflow-hidden bg-black">
+        {/* Base image — flickers/blackouts periodically */}
         <img
           src={src}
           alt={alt}
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover billboard-blackout"
           style={{ objectPosition }}
         />
         {/* SVG edge-detection filter — extracts the bright neon outline of the billboard */}
