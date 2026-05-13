@@ -171,9 +171,6 @@ export default function Die({
           />
         )}
 
-        {/* Fish Tank overlay — swimming fish behind the Blue Gel sprite */}
-        {skin.id === "blue_gel" && <FishOverlay size={size} radius={radius} />}
-
         {/* Sprite sheet texture or pip grid */}
         {skin.spriteUrl ?
         (() => {
@@ -454,6 +451,13 @@ export default function Die({
             })}
           </div>
         }
+
+        {/* Fish Tank overlay — swimming fish on top of Blue Gel, blended with the sprite */}
+        {skin.id === "blue_gel" && (
+          <div className="absolute inset-0 pointer-events-none mix-blend-multiply opacity-90" style={{ borderRadius: radius }}>
+            <FishOverlay size={size} radius={radius} />
+          </div>
+        )}
 
         {/* Corner shadow vignette — Chrome Silver only */}
         {skin.id === "silver" && (
