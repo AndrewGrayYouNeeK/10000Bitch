@@ -105,9 +105,18 @@ export default function Shop() {
             <div className="grid grid-cols-2 gap-3">
               {(() => {
                 const dupes = getDuplicateGroups(DICE_SKINS);
-                const sortedSkins = [...DICE_SKINS].sort(
-                  (a, b) => getSkinEffectivePrice(a) - getSkinEffectivePrice(b)
-                );
+                const PINNED_LAST = ["snow_globe", "blue_gel"];
+                const rank = (id) => PINNED_LAST.indexOf(id);
+                const sortedSkins = [...DICE_SKINS].sort((a, b) => {
+                  const aPinned = rank(a.id);
+                  const bPinned = rank(b.id);
+                  if (aPinned !== -1 || bPinned !== -1) {
+                    if (aPinned === -1) return -1;
+                    if (bPinned === -1) return 1;
+                    return aPinned - bPinned;
+                  }
+                  return getSkinEffectivePrice(a) - getSkinEffectivePrice(b);
+                });
                 return sortedSkins.map(skin => {
                   const tier = getSkinTier(skin.id);
                   const tierLocked = !checkUnlocked(skin.id, xp);
