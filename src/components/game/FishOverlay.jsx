@@ -97,14 +97,17 @@ export default function FishOverlay({ size, radius, count = 1 }) {
     const n = Math.max(1, count);
     // Shuffle variant indices so the same fish doesn't repeat back-to-back.
     const indices = FISH_VARIANTS.map((_, i) => i).sort(() => Math.random() - 0.5);
+    // Pick one fish to be the "big one"
+    const bigIdx = Math.floor(Math.random() * n);
     for (let i = 0; i < n; i++) {
       const top = n === 1 ? 40 : 15 + (i * 65) / (n - 1);
+      const baseScale = n >= 5 ? 0.75 : n >= 3 ? 0.85 : 1;
       arr.push({
         top,
         duration: 5 + ((i * 0.7) % 2.5),
         delay: -(i * 1.3 + Math.random() * 1.5),
         dir: i % 2 === 0 ? 1 : -1,
-        scale: n >= 5 ? 0.75 : n >= 3 ? 0.85 : 1,
+        scale: i === bigIdx ? baseScale * 1.6 : baseScale,
         variant: FISH_VARIANTS[indices[i % indices.length]],
       });
     }
