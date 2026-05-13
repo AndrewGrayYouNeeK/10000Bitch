@@ -239,6 +239,7 @@ export const DICE_SKINS = [
     glow: "shadow-rose-400/70",
     description: "Blushing metallic luxury.",
     realistic: true,
+    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/54a32749c_generated_image.png",
   },
   {
     id: "plasma",
