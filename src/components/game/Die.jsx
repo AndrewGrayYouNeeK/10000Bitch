@@ -242,6 +242,9 @@ export default function Die({
           // Amber Wasp per-face tuning
           const AMBER_WASP_X_OFFSET = { 1: 1, 2: 1, 3: 1, 4: 2.5, 5: 0.5, 6: 2 };
           const AMBER_WASP_Y_OFFSET = { 1: -1, 2: -1, 3: -1, 4: -1, 5: -2, 6: -2 };
+          // Toxic Plasma Glow per-face tuning
+          const TOXIC2_X_OFFSET = { 2: -2, 3: -4, 4: -1, 5: -2, 6: -4 };
+          const TOXIC2_Y_OFFSET = {};
 
           const xNudge = skin.id === "wood"
             ? (WOOD_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
@@ -287,6 +290,8 @@ export default function Die({
             ? (CIRCUIT_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "amber_wasp"
             ? (AMBER_WASP_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
+            : skin.id === "toxic_plasma_v2"
+            ? (TOXIC2_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : (FACE_X_OFFSET[value] || 0);
           const yNudge = skin.id === "classic_white"
             ? (CLASSIC_WHITE_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
@@ -338,6 +343,8 @@ export default function Die({
             ? (CIRCUIT_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : skin.id === "amber_wasp"
             ? (AMBER_WASP_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
+            : skin.id === "toxic_plasma_v2"
+            ? (TOXIC2_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : (FACE_Y_OFFSET[value] || 0);
           const MOONSTONE_EXTRA_STRETCH = { 3: size * 0.015, 4: size * 0.015, 5: size * 0.015, 6: size * 0.015 };
           const AMBER_WASP_STRETCH = { 1: size * 0.030, 2: size * 0.030, 3: size * 0.030, 4: size * 0.030, 5: size * 0.030, 6: size * 0.030 };
