@@ -97,25 +97,28 @@ export default function FishOverlay({ size, radius, count = 1 }) {
       />
 
       {/* Bubbles drifting up */}
-      {[0, 1, 2].map((i) => (
-        <motion.div
-          key={i}
-          className="absolute rounded-full bg-white/60"
-          style={{
-            width: size * 0.04,
-            height: size * 0.04,
-            left: `${20 + i * 28}%`,
-            bottom: -size * 0.05,
-          }}
-          animate={{ y: [-0, -size * 1.1], opacity: [0, 0.7, 0] }}
-          transition={{
-            duration: 3 + i * 0.5,
-            repeat: Infinity,
-            delay: i * 1.2,
-            ease: "easeOut",
-          }}
-        />
-      ))}
+      {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => {
+        const sz = size * (0.025 + (i % 3) * 0.015);
+        return (
+          <motion.div
+            key={i}
+            className="absolute rounded-full bg-white/70"
+            style={{
+              width: sz,
+              height: sz,
+              left: `${8 + i * 11}%`,
+              bottom: -size * 0.05,
+            }}
+            animate={{ y: [0, -size * 1.15], opacity: [0, 0.8, 0] }}
+            transition={{
+              duration: 2.5 + (i % 4) * 0.6,
+              repeat: Infinity,
+              delay: i * 0.45,
+              ease: "easeOut",
+            }}
+          />
+        );
+      })}
 
       {/* Fish */}
       {fish.map((f, i) => (
