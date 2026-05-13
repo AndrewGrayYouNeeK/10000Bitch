@@ -239,6 +239,9 @@ export default function Die({
           // Circuit Board per-face tuning
           const CIRCUIT_X_OFFSET = { 1: -3, 2: -18, 3: -29, 4: -2, 5: -17, 6: -29 };
           const CIRCUIT_Y_OFFSET = { 1: 5, 2: 4, 3: 4, 4: -7, 5: -10, 6: -9 };
+          // Amber Wasp per-face tuning
+          const AMBER_WASP_X_OFFSET = { 1: 1, 2: 2, 3: 3, 4: 1, 5: 1, 6: 3 };
+          const AMBER_WASP_Y_OFFSET = { 1: -3, 2: -2, 3: -2, 4: 2, 5: 2, 6: 3 };
 
           const xNudge = skin.id === "wood"
             ? (WOOD_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
@@ -282,6 +285,8 @@ export default function Die({
             ? (TENNIS_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "circuit_board"
             ? (CIRCUIT_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
+            : skin.id === "amber_wasp"
+            ? (AMBER_WASP_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : (FACE_X_OFFSET[value] || 0);
           const yNudge = skin.id === "classic_white"
             ? (CLASSIC_WHITE_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
@@ -331,6 +336,8 @@ export default function Die({
             ? (TENNIS_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : skin.id === "circuit_board"
             ? (CIRCUIT_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
+            : skin.id === "amber_wasp"
+            ? (AMBER_WASP_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : (FACE_Y_OFFSET[value] || 0);
           const MOONSTONE_EXTRA_STRETCH = { 3: size * 0.015, 4: size * 0.015, 5: size * 0.015, 6: size * 0.015 };
           const stretch = skin.id === "moonstone" ? size * 0.0375 + (MOONSTONE_EXTRA_STRETCH[value] || 0) : 0;
