@@ -405,7 +405,7 @@ export default function Die({
           const TENNIS_X_OFFSET = { 1: -size * 0.02, 2: -size * 0.13, 3: -size * 0.25, 4: -size * 0.05, 5: -size * 0.15, 6: -size * 0.27 };
           const TENNIS_Y_OFFSET = { 4: -size * 0.07, 5: -size * 0.08, 6: -size * 0.07 };
           // Circuit Board per-face tuning
-          const CIRCUIT_X_OFFSET = { 1: -3, 2: -18, 3: -29, 4: -2, 5: -17, 6: -29 };
+          const CIRCUIT_X_OFFSET = { 1: -3, 2: -18, 3: -30, 4: -2, 5: -17, 6: -29 };
           const CIRCUIT_Y_OFFSET = { 1: 5, 2: 4, 3: 4, 4: -7, 5: -10, 6: -9 };
           // Amber Wasp per-face tuning
           const AMBER_WASP_X_OFFSET = { 1: 1, 2: 1, 3: 1, 4: 2.5, 5: 0.5, 6: 2 };
