@@ -220,7 +220,7 @@ export default function Die({
           const LEATHER_Y_OFFSET = { 1: size * 0.01, 2: size * 0.02, 3: size * 0.035, 4: -size * 0.065, 5: -size * 0.06, 6: -size * 0.07 };
           // Frozen Ice per-face tuning — start with default + half-nudge down on all faces
           const ICE_Y_OFFSET = { 1: -size * 0.005, 2: -size * 0.005, 3: -size * 0.005, 4: -size * 0.035, 5: -size * 0.045, 6: -size * 0.04 };
-          const ICE_X_OFFSET = { 3: -size * 0.025, 6: -size * 0.025 };
+          const ICE_X_OFFSET = { 3: -size * 0.03, 6: -size * 0.03 };
           const xNudge = skin.id === "wood"
             ? (WOOD_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "silver"
