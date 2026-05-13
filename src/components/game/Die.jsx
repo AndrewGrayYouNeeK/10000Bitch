@@ -188,9 +188,9 @@ export default function Die({
           const yNudge = AQUA_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0);
           return (
             <>
-              {/* Fish swims first (behind the glass) */}
+              {/* Fish swims behind */}
               <FishOverlay size={size} radius={radius} />
-              {/* Aquamarine sprite as a translucent glass shell */}
+              {/* Aquamarine sprite as a translucent glass shell — on top of the fish */}
               <div
                 className="absolute pointer-events-none"
                 style={{
@@ -202,8 +202,8 @@ export default function Die({
                   backgroundSize: `${cellW * cols}px ${cellH * rows}px`,
                   backgroundPosition: `${-(col * cellW)}px ${-(row * cellH)}px`,
                   backgroundRepeat: "no-repeat",
-                  opacity: 0.5,
-                  mixBlendMode: "screen",
+                  opacity: 0.7,
+                  mixBlendMode: "multiply",
                 }}
               />
               {/* Glass rim — thickness */}
