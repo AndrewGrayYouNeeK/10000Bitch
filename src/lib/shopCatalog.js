@@ -422,6 +422,17 @@ export const DICE_SKINS = [
     realistic: false,
   },
   {
+    id: "snow_globe",
+    name: "Snow Globe",
+    price: 400,
+    gradient: "from-sky-100 via-sky-200 to-blue-300",
+    border: "border-sky-300",
+    pipColor: "bg-white",
+    glow: "shadow-sky-200/70",
+    description: "A winter scene in glass.",
+    realistic: true,
+  },
+  {
     id: "blue_gel",
     name: "COLD Fish",
     price: 400,

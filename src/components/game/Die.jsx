@@ -4,6 +4,7 @@ import { getSkin, getPipStyle, getSpriteStyle } from "@/lib/shopCatalog";
 import Pip from "./Pip";
 import LightningOverlay from "./LightningOverlay";
 import FishOverlay from "./FishOverlay";
+import SnowGlobeOverlay from "./SnowGlobeOverlay";
 
 // Pip grid positions for each face value.
 // Grid is 3x3. 1 = pip present, 0 = empty.
@@ -173,6 +174,54 @@ export default function Die({
           />
         )}
 
+        {/* Snow Globe — borrows the Aquamarine glass shell with snowflakes drifting inside */}
+        {skin.id === "snow_globe" && (() => {
+          const aqua = getSkin("aquamarine");
+          const cellW = size * 1.7;
+          const cellH = size * 1.32;
+          const cols = aqua.spriteGrid?.cols ?? 3;
+          const rows = aqua.spriteGrid?.rows ?? 2;
+          const col = (value - 1) % cols;
+          const row = Math.floor((value - 1) / cols);
+          const AQUA_X_OFFSET = { 3: -size * 0.03, 4: -size * 0.01, 5: -size * 0.03, 6: -size * 0.04 };
+          const AQUA_Y_OFFSET = { 1: 0, 3: size * 0.01, 4: -size * 0.04 };
+          const FACE_X_OFFSET = { 2: -size * 0.015, 3: -size * 0.022, 5: -size * 0.022, 6: -size * 0.032 };
+          const FACE_Y_OFFSET = { 1: -size * 0.01, 2: -size * 0.01, 3: -size * 0.01, 4: -size * 0.04, 5: -size * 0.05, 6: -size * 0.045 };
+          const xNudge = AQUA_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0);
+          const yNudge = AQUA_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0);
+          return (
+            <>
+              {/* Snowflakes drift behind — density tied to face value */}
+              <SnowGlobeOverlay size={size} radius={radius} count={value} />
+              {/* Aquamarine sprite as a translucent glass shell */}
+              <div
+                className="absolute pointer-events-none"
+                style={{
+                  top: `${-size * 0.14 + yNudge}px`,
+                  bottom: `${-size * 0.8 + yNudge}px`,
+                  left: `${-size * 0.35 + xNudge}px`,
+                  right: `${-size * 0.35 + xNudge}px`,
+                  backgroundImage: `url(${aqua.spriteUrl})`,
+                  backgroundSize: `${cellW * cols}px ${cellH * rows}px`,
+                  backgroundPosition: `${-(col * cellW)}px ${-(row * cellH)}px`,
+                  backgroundRepeat: "no-repeat",
+                  opacity: 0.55,
+                  mixBlendMode: "multiply",
+                }}
+              />
+              {/* Glass rim */}
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  borderRadius: radius,
+                  boxShadow:
+                    "inset 0 0 0 2px rgba(255,255,255,0.5), inset 0 -6px 12px rgba(0,0,0,0.2), inset 0 4px 8px rgba(255,255,255,0.45)",
+                }}
+              />
+            </>
+          );
+        })()}
+
         {/* Blue Gel — borrows the Aquamarine glass shell with a fish swimming inside */}
         {skin.id === "blue_gel" && (() => {
           const aqua = getSkin("aquamarine");
@@ -222,7 +271,7 @@ export default function Die({
         })()}
 
         {/* Sprite sheet texture or pip grid */}
-        {skin.id !== "blue_gel" && skin.spriteUrl ?
+        {skin.id !== "blue_gel" && skin.id !== "snow_globe" && skin.spriteUrl ?
         (() => {
           const cellW = size * 1.7;
           const cellH = size * 1.32;
@@ -478,7 +527,7 @@ export default function Die({
         })() :
 
 
-        skin.id !== "blue_gel" && <div
+        skin.id !== "blue_gel" && skin.id !== "snow_globe" && <div
           className="absolute grid grid-cols-3 grid-rows-3"
           style={{ inset: padding, gap: Math.round(size * 0.045) }}>
           
