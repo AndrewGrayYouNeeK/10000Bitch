@@ -6,6 +6,7 @@ import { Dices, Users, BookOpen, Sparkles, Coins, Zap } from "lucide-react";
 import RulesSheet from "@/components/game/RulesSheet";
 import { useCosmetics } from "@/hooks/useCosmetics";
 import DiceRain from "@/components/game/DiceRain";
+import DiamondShowcase from "@/components/home/DiamondShowcase";
 
 export default function Home() {
   const { coins, isLoading } = useCosmetics();
@@ -147,6 +148,8 @@ export default function Home() {
         >
           Roll. Risk. Reach ten thousand.
         </motion.p>
+
+        <DiamondShowcase />
 
         {/* Buttons */}
         <div className="space-y-3">
