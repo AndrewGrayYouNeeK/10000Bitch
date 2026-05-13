@@ -268,12 +268,13 @@ export default function Die({
             : skin.id === "plasma"
             ? (PLASMA_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : (FACE_Y_OFFSET[value] || 0);
+          const isMarble = skin.id === "marble";
           return (
             <div
               className="absolute pointer-events-none"
               style={{
-                top: `${-size * 0.14 + yNudge}px`,
-                bottom: `${-size * 0.8 + yNudge}px`,
+                top: isMarble ? `${-size * 0.14 + yNudge / 2}px` : `${-size * 0.14 + yNudge}px`,
+                bottom: isMarble ? `${-size * 0.8}px` : `${-size * 0.8 + yNudge}px`,
                 left: `${-size * 0.35 + xNudge}px`,
                 right: `${-size * 0.35 + xNudge}px`,
                 borderRadius: radius,
@@ -281,7 +282,7 @@ export default function Die({
                 backgroundSize: `${cellW * cols}px ${cellH * rows}px`,
                 backgroundPosition: `${-(col * cellW)}px ${-(row * cellH)}px`,
                 backgroundRepeat: 'no-repeat',
-                filter: skin.id === "marble" ? "contrast(1.25) brightness(0.92)" : undefined,
+                filter: isMarble ? "contrast(1.25) brightness(0.92)" : undefined,
               }} />
           );
         })() :
