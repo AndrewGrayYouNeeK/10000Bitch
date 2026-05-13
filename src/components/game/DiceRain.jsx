@@ -27,7 +27,7 @@ export default function DiceRain() {
     const spawn = (initial = false) => ({
       x: randomBetween(0, canvas.width),
       y: initial ? randomBetween(-canvas.height, canvas.height) : randomBetween(-canvas.height * 0.5, -SIZE),
-      vy: randomBetween(0.6, 1.8),
+      vy: randomBetween(1.8, 4.2),
       face: FACES[Math.floor(Math.random() * 6)],
       flipTimer: Math.floor(randomBetween(40, 140)),
       opacity: randomBetween(0.15, 0.45),
