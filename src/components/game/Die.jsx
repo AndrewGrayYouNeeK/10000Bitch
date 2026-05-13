@@ -76,6 +76,7 @@ export default function Die({
 
   const rollKey = React.useRef(0);
   const wasRolling = React.useRef(false);
+  const [settling, setSettling] = React.useState(false);
   if (rolling && !wasRolling.current) {
     rollKey.current += 1;
     const dir = Math.random() > 0.5 ? 1 : -1;
@@ -86,7 +87,15 @@ export default function Die({
     rollVariants.x = [0, (Math.random() - 0.5) * 14, (Math.random() - 0.5) * 10, (Math.random() - 0.5) * 5, 0, 0];
     rollVariants.scale = [1, 1.18, 1.06, 1.12, 0.96, 1];
   }
-  wasRolling.current = rolling;
+  React.useEffect(() => {
+    if (!rolling && wasRolling.current) {
+      setSettling(true);
+      const t = setTimeout(() => setSettling(false), 1200);
+      wasRolling.current = false;
+      return () => clearTimeout(t);
+    }
+    wasRolling.current = rolling;
+  }, [rolling]);
 
   // Standard dice corner radius
   const radius = Math.round(size * 0.06);
@@ -191,8 +200,8 @@ export default function Die({
           const yNudge = AQUA_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0);
           return (
             <>
-              {/* Snowflakes drift behind — density tied to face value; goes crazy while rolling */}
-              <SnowGlobeOverlay size={size} radius={radius} count={value} shaking={rolling} />
+              {/* Snowflakes drift behind — density tied to face value; goes wild for a moment AFTER the roll */}
+              <SnowGlobeOverlay size={size} radius={radius} count={value} shaking={settling} />
               {/* Aquamarine sprite as a translucent glass shell */}
               <div
                 className="absolute pointer-events-none"
