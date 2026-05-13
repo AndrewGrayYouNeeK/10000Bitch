@@ -269,7 +269,7 @@ export default function Die({
             ? (PLASMA_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : (FACE_Y_OFFSET[value] || 0);
           const isMarble = skin.id === "marble";
-          const marbleShiftDown = size * 0.08;
+          const marbleShiftDown = size * 0.04;
           const marbleTopStretch = size * 0.18;
           return (
             <div
