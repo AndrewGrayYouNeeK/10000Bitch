@@ -267,18 +267,6 @@ export const DICE_SKINS = [
     spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/1513405c6_K2AuwW4Nme8GseI-EOXNE_4IoWBfjG.png",
   },
   {
-    id: "cracked",
-    name: "Shattered",
-    price: 700,
-    gradient: "from-stone-100 via-white to-stone-200",
-    border: "border-stone-400",
-    pipColor: "bg-slate-900",
-    glow: "shadow-red-500/40",
-    description: "Cracked under pressure.",
-    realistic: true,
-    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/0e3e70842_j7t9qFtWhBMjrSjMgNAbL_Uu9YKMgZ.png",
-  },
-  {
     id: "pride",
     name: "Pride",
     price: 500,
