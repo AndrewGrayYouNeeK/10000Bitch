@@ -25,7 +25,7 @@ export default function DiamondShowcase() {
           value={value}
           rolling={rolling}
           size={40}
-          skinId="diamond"
+          skinId="crystal_cut"
           pipsId="classic_dots"
         />
       ))}
