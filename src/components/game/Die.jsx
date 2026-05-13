@@ -171,11 +171,43 @@ export default function Die({
           />
         )}
 
-        {/* Fish Tank overlay — swims behind the translucent Blue Gel sprite */}
-        {skin.id === "blue_gel" && <FishOverlay size={size} radius={radius} />}
+        {/* Blue Gel — real translucent glass with a fish swimming inside */}
+        {skin.id === "blue_gel" && (
+          <>
+            {/* Tinted water base */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                borderRadius: radius,
+                background:
+                  "linear-gradient(135deg, rgba(125,211,252,0.55) 0%, rgba(59,130,246,0.55) 60%, rgba(29,78,216,0.6) 100%)",
+              }}
+            />
+            {/* Fish swims inside the glass */}
+            <FishOverlay size={size} radius={radius} />
+            {/* Glass highlight — top-left shine */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                borderRadius: radius,
+                background:
+                  "radial-gradient(ellipse at 25% 20%, rgba(255,255,255,0.55) 0%, transparent 45%), radial-gradient(ellipse at 80% 85%, rgba(255,255,255,0.25) 0%, transparent 40%)",
+              }}
+            />
+            {/* Inner rim — gives the glass thickness */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                borderRadius: radius,
+                boxShadow:
+                  "inset 0 0 0 2px rgba(255,255,255,0.35), inset 0 -6px 12px rgba(0,0,0,0.25), inset 0 4px 8px rgba(255,255,255,0.3)",
+              }}
+            />
+          </>
+        )}
 
         {/* Sprite sheet texture or pip grid */}
-        {skin.spriteUrl ?
+        {skin.id !== "blue_gel" && skin.spriteUrl ?
         (() => {
           const cellW = size * 1.7;
           const cellH = size * 1.32;
@@ -426,8 +458,6 @@ export default function Die({
                 backgroundSize: `${cellW * cols + stretch * 2}px ${cellH * rows + stretch * 2}px`,
                 backgroundPosition: `${-(col * (cellW + stretch * 2 / cols))}px ${-(row * (cellH + stretch * 2 / rows))}px`,
                 backgroundRepeat: 'no-repeat',
-                opacity: skin.id === "blue_gel" ? 0.55 : 1,
-                mixBlendMode: skin.id === "blue_gel" ? "screen" : undefined,
               }} />
           );
         })() :
