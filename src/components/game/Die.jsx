@@ -88,13 +88,20 @@ export default function Die({
     rollVariants.scale = [1, 1.18, 1.06, 1.12, 0.96, 1];
   }
   React.useEffect(() => {
-    if (!rolling && wasRolling.current) {
-      setSettling(true);
-      const t = setTimeout(() => setSettling(false), 1200);
+    let startTimer, endTimer;
+    if (rolling && !wasRolling.current) {
+      // Start the wild snow ~0.55s into the 0.85s roll, so it begins before the die stops.
+      startTimer = setTimeout(() => setSettling(true), 550);
+      wasRolling.current = true;
+    } else if (!rolling && wasRolling.current) {
+      // Keep it going briefly after the die lands, then calm down.
+      endTimer = setTimeout(() => setSettling(false), 700);
       wasRolling.current = false;
-      return () => clearTimeout(t);
     }
-    wasRolling.current = rolling;
+    return () => {
+      if (startTimer) clearTimeout(startTimer);
+      if (endTimer) clearTimeout(endTimer);
+    };
   }, [rolling]);
 
   // Standard dice corner radius
