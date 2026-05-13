@@ -249,8 +249,8 @@ export default function Die({
           const LABRADORITE_X_OFFSET = { 2: 2, 3: 4, 4: 2, 5: 2, 6: 2 };
           const LABRADORITE_Y_OFFSET = {};
           // Labradorite Polished per-face tuning
-          const LABRADORITE_POLISHED_X_OFFSET = { 2: -4, 3: -12, 4: -2, 5: -8, 6: -12 };
-          const LABRADORITE_POLISHED_Y_OFFSET = { 4: -2, 5: -2, 6: -2 };
+          const LABRADORITE_POLISHED_X_OFFSET = { 2: -10, 3: -18, 4: -2, 5: -8, 6: -18 };
+          const LABRADORITE_POLISHED_Y_OFFSET = { 4: -8, 5: -8, 6: -8 };
 
           const xNudge = skin.id === "wood"
             ? (WOOD_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
