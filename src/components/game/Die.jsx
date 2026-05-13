@@ -230,6 +230,9 @@ export default function Die({
           // Aquamarine Ice per-face tuning
           const AQUA_LIGHT_X_OFFSET = { 1: size * 0.005, 2: -size * 0.02, 3: -size * 0.03, 4: -size * 0.01, 5: -size * 0.025, 6: -size * 0.035 };
           const AQUA_LIGHT_Y_OFFSET = { 1: 0, 2: 0, 3: 0, 4: -size * 0.05, 5: -size * 0.045, 6: -size * 0.05 };
+          // Pride per-face tuning
+          const PRIDE_X_OFFSET = { 1: -size * 0.01, 2: -size * 0.08, 3: -size * 0.12, 4: -size * 0.02, 5: -size * 0.07, 6: -size * 0.12 };
+          const PRIDE_Y_OFFSET = { 2: size * 0.02, 3: size * 0.02, 4: -size * 0.01 };
           const xNudge = skin.id === "wood"
             ? (WOOD_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "silver"
@@ -266,6 +269,8 @@ export default function Die({
             ? (BASEBALL_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "aquamarine_light"
             ? (AQUA_LIGHT_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
+            : skin.id === "pride"
+            ? (PRIDE_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : (FACE_X_OFFSET[value] || 0);
           const yNudge = skin.id === "classic_white"
             ? (CLASSIC_WHITE_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
@@ -309,6 +314,8 @@ export default function Die({
             ? (BASEBALL_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : skin.id === "aquamarine_light"
             ? (AQUA_LIGHT_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
+            : skin.id === "pride"
+            ? (PRIDE_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : (FACE_Y_OFFSET[value] || 0);
           const MOONSTONE_EXTRA_STRETCH = { 3: size * 0.015, 4: size * 0.015, 5: size * 0.015, 6: size * 0.015 };
           const stretch = skin.id === "moonstone" ? size * 0.0375 + (MOONSTONE_EXTRA_STRETCH[value] || 0) : 0;
