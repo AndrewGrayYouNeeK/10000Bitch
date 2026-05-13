@@ -197,8 +197,8 @@ export default function Die({
           const ty = (row + 0.5) * zoom - 0.5 + (FACE_TY_OFFSET[value] || 0); // in die heights (per-face down shift)
           return (
             <div
-              className="absolute overflow-hidden pointer-events-none"
-              style={{ borderRadius: radius, top: -4, left: -4, right: -4, bottom: -4 }}
+              className="absolute inset-0 overflow-hidden pointer-events-none"
+              style={{ borderRadius: radius }}
             >
               <video
                 src={skin.videoUrl}
