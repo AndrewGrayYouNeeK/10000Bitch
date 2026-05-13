@@ -2,10 +2,30 @@ import React from "react";
 import { motion } from "framer-motion";
 
 /**
+ * Fish color palettes — each entry defines the colors used by the shared Fish SVG.
+ * tail/body/highlight/fin can be tuned per species.
+ */
+const FISH_VARIANTS = [
+  // Orange clownfish (original)
+  { tail: "#f97316", body: "#fb923c", highlight: "#fdba74", fin: "#f97316", mouth: "#ea580c", stripe: null },
+  // Blue tang (Dory)
+  { tail: "#1d4ed8", body: "#2563eb", highlight: "#60a5fa", fin: "#facc15", mouth: "#1e3a8a", stripe: "#0f172a" },
+  // Yellow tang
+  { tail: "#eab308", body: "#facc15", highlight: "#fde68a", fin: "#ca8a04", mouth: "#a16207", stripe: null },
+  // Pink/coral
+  { tail: "#db2777", body: "#ec4899", highlight: "#f9a8d4", fin: "#be185d", mouth: "#9d174d", stripe: null },
+  // Purple
+  { tail: "#7c3aed", body: "#a855f7", highlight: "#d8b4fe", fin: "#6b21a8", mouth: "#581c87", stripe: null },
+  // Green
+  { tail: "#15803d", body: "#22c55e", highlight: "#86efac", fin: "#14532d", mouth: "#166534", stripe: null },
+];
+
+/**
  * A single swimming cartoon fish.
  */
-function Fish({ size, top, duration, delay, dir = 1, scale = 1 }) {
+function Fish({ size, top, duration, delay, dir = 1, scale = 1, variant }) {
   const fishSize = size * 0.28 * scale;
+  const v = variant || FISH_VARIANTS[0];
   return (
     <motion.div
       className="absolute"
@@ -38,20 +58,26 @@ function Fish({ size, top, duration, delay, dir = 1, scale = 1 }) {
       >
         <motion.path
           d="M 8 20 L 0 8 L 4 20 L 0 32 Z"
-          fill="#f97316"
+          fill={v.tail}
           animate={{ rotate: [-8, 8, -8] }}
           transition={{ duration: 0.4, repeat: Infinity, ease: "easeInOut" }}
           style={{ originX: "20%", originY: "50%" }}
         />
-        <ellipse cx="32" cy="20" rx="22" ry="11" fill="#fb923c" />
-        <ellipse cx="32" cy="17" rx="20" ry="6" fill="#fdba74" opacity="0.7" />
-        <path d="M 26 10 Q 32 2 38 10 Z" fill="#f97316" />
-        <path d="M 28 30 Q 32 36 36 30 Z" fill="#f97316" />
+        <ellipse cx="32" cy="20" rx="22" ry="11" fill={v.body} />
+        <ellipse cx="32" cy="17" rx="20" ry="6" fill={v.highlight} opacity="0.7" />
+        {v.stripe && (
+          <>
+            <path d="M 20 12 Q 22 20 20 28 L 24 28 Q 26 20 24 12 Z" fill={v.stripe} opacity="0.6" />
+            <path d="M 38 11 Q 40 20 38 29 L 42 29 Q 44 20 42 11 Z" fill={v.stripe} opacity="0.6" />
+          </>
+        )}
+        <path d="M 26 10 Q 32 2 38 10 Z" fill={v.fin} />
+        <path d="M 28 30 Q 32 36 36 30 Z" fill={v.fin} />
         <circle cx="46" cy="18" r="2.5" fill="white" />
         <circle cx="46.5" cy="18" r="1.4" fill="#0f172a" />
         <path
           d="M 40 17 Q 38 20 40 23"
-          stroke="#ea580c"
+          stroke={v.mouth}
           strokeWidth="1"
           fill="none"
         />
@@ -69,6 +95,8 @@ export default function FishOverlay({ size, radius, count = 1 }) {
   const fish = React.useMemo(() => {
     const arr = [];
     const n = Math.max(1, count);
+    // Shuffle variant indices so the same fish doesn't repeat back-to-back.
+    const indices = FISH_VARIANTS.map((_, i) => i).sort(() => Math.random() - 0.5);
     for (let i = 0; i < n; i++) {
       const top = n === 1 ? 40 : 15 + (i * 65) / (n - 1);
       arr.push({
@@ -77,6 +105,7 @@ export default function FishOverlay({ size, radius, count = 1 }) {
         delay: -(i * 1.3 + Math.random() * 1.5),
         dir: i % 2 === 0 ? 1 : -1,
         scale: n >= 5 ? 0.75 : n >= 3 ? 0.85 : 1,
+        variant: FISH_VARIANTS[indices[i % indices.length]],
       });
     }
     return arr;
