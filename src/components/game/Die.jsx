@@ -476,7 +476,7 @@ export default function Die({
         })() :
 
 
-        <div
+        skin.id !== "blue_gel" && <div
           className="absolute grid grid-cols-3 grid-rows-3"
           style={{ inset: padding, gap: Math.round(size * 0.045) }}>
           
