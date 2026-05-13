@@ -177,8 +177,9 @@ export default function Die({
           ...squircleStyle
         }}>
         
-        {/* Video background skin — cropped 3x2 grid so each face shows its own cell */}
+        {/* Video background skin — cropped 3x2 grid (zoomed 3x) so each face shows its own cell */}
         {skin.videoUrl && (() => {
+          const zoom = 3;
           const cols = 3;
           const rows = 2;
           const col = (value - 1) % cols;
@@ -196,9 +197,9 @@ export default function Die({
                 playsInline
                 className="absolute top-0 left-0 pointer-events-none"
                 style={{
-                  width: `${cols * 100}%`,
-                  height: `${rows * 100}%`,
-                  transform: `translate(${-col * (100 / cols)}%, ${-row * (100 / rows)}%)`,
+                  width: `${cols * 100 * zoom}%`,
+                  height: `${rows * 100 * zoom}%`,
+                  transform: `translate(${-col * zoom * (100 / cols) * zoom}%, ${-row * zoom * (100 / rows) * zoom}%)`,
                   transformOrigin: "top left",
                   objectFit: "cover",
                 }}
