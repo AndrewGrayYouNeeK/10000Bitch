@@ -366,7 +366,7 @@ export default function Die({
           const GALAXY_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.015 };
           const DRAGON_Y_OFFSET = { 5: -size * 0.025 };
           const AMETHYST_Y_OFFSET = { 1: -size * 0.025, 2: -size * 0.025, 3: -size * 0.025, 4: -size * 0.035, 5: -size * 0.035, 6: -size * 0.035 };
-          const PLASMA_X_OFFSET = { 1: -size * 0.06, 2: -size * 0.09, 3: -size * 0.14, 4: -size * 0.05, 5: -size * 0.135, 6: -size * 0.15 };
+          const PLASMA_X_OFFSET = { 1: -size * 0.06, 2: -size * 0.09, 3: -size * 0.14, 4: -size * 0.05, 5: -size * 0.125, 6: -size * 0.15 };
           const PLASMA_Y_OFFSET = { 1: -size * 0.02, 2: -size * 0.01, 3: -size * 0.01, 4: -size * 0.09, 5: -size * 0.06, 6: -size * 0.045 };
           const PAPER_X_OFFSET = { 1: -2, 2: size * 0.01 - 11, 3: size * 0.01 - 18, 4: -3, 5: size * 0.01 - 12, 6: size * 0.01 - 19 };
           const PAPER_Y_OFFSET = { 1: -size * 0.015 + 2, 2: -size * 0.015 + 3, 3: -size * 0.02 + 3, 4: -size * 0.04 - 3, 5: -size * 0.04 - 3, 6: -size * 0.04 - 4 };
