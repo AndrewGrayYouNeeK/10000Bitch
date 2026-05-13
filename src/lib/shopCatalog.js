@@ -396,7 +396,7 @@ export const DICE_SKINS = [
     glow: "shadow-cyan-300/80",
     description: "Brilliant faceted crystal. The legendary tier.",
     realistic: true,
-    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/823a86262_zIRb81kXhGo3xU-pd4xpr_yf8rZsgh.png",
+    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/f15f604af_generated_image.png",
   },
   {
     id: "moonstone_v2",
