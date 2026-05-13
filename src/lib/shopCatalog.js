@@ -228,6 +228,7 @@ export const DICE_SKINS = [
     glow: "shadow-red-300/60",
     description: "Take me out to the ball game.",
     realistic: true,
+    unavailable: true,
     spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/bf461cd42_FxgNofsg4jT-Ou1Hl58xy_PK2Qz6R0.png",
   },
   {

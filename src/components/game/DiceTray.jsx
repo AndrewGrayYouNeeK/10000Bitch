@@ -38,7 +38,7 @@ export default function DiceTray({ dice, rolling, onToggle, disabled, skinId, pi
               rolling={rolling && !d.used}
               onClick={() => !disabled && !d.used && onToggle && onToggle(d.id)}
               size={92}
-              skinId="baseball"
+              skinId="aquamarine_light"
               pipsId={pipsId}
             />
           </motion.div>
