@@ -248,6 +248,9 @@ export default function Die({
           // Cash per-face tuning
           const CASH_X_OFFSET = { 1: -1, 2: -9, 3: -17, 4: -2, 5: -9, 6: -18 };
           const CASH_Y_OFFSET = { 1: 1, 2: 1, 3: 2, 4: -7, 5: -6, 6: -6 };
+          // Bullet Holes per-face tuning
+          const BULLET_HOLES_X_OFFSET = { 3: -1, 4: -1, 5: -0.5, 6: -0.5 };
+          const BULLET_HOLES_Y_OFFSET = { 1: 1, 2: 1, 3: 1, 4: -1 };
           // Labradorite per-face tuning
           const LABRADORITE_X_OFFSET = { 2: 2, 3: 4, 4: 2, 5: 2, 6: 2 };
           const LABRADORITE_Y_OFFSET = {};
@@ -303,6 +306,8 @@ export default function Die({
             ? (TOXIC2_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "cash"
             ? (CASH_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
+            : skin.id === "bullet_holes"
+            ? (BULLET_HOLES_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "labradorite"
             ? (LABRADORITE_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "labradorite_polished"
@@ -362,6 +367,8 @@ export default function Die({
             ? (TOXIC2_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : skin.id === "cash"
             ? (CASH_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
+            : skin.id === "bullet_holes"
+            ? (BULLET_HOLES_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : skin.id === "labradorite"
             ? (LABRADORITE_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : skin.id === "labradorite_polished"
