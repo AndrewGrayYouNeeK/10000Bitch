@@ -240,8 +240,8 @@ export default function Die({
           const CIRCUIT_X_OFFSET = { 1: -3, 2: -18, 3: -29, 4: -2, 5: -17, 6: -29 };
           const CIRCUIT_Y_OFFSET = { 1: 5, 2: 4, 3: 4, 4: -7, 5: -10, 6: -9 };
           // Amber Wasp per-face tuning
-          const AMBER_WASP_X_OFFSET = { 1: 1, 2: 2, 3: 3, 4: 1, 5: 1, 6: 3 };
-          const AMBER_WASP_Y_OFFSET = { 1: -3, 2: -2, 3: -2, 4: 2, 5: 2, 6: 3 };
+          const AMBER_WASP_X_OFFSET = { 1: 1, 2: 1, 3: 0, 4: 0, 5: 0, 6: 2 };
+          const AMBER_WASP_Y_OFFSET = { 1: -2, 2: -1, 3: -1, 4: -2, 5: -3, 6: -3 };
 
           const xNudge = skin.id === "wood"
             ? (WOOD_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
