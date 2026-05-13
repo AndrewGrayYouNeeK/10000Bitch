@@ -167,29 +167,33 @@ export default function FishOverlay({ size, radius, count = 1, bigFishVariantInd
         }}
       />
 
-      {/* Bubbles drifting up */}
-      {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => {
-        const sz = size * (0.025 + (i % 3) * 0.015);
-        return (
-          <motion.div
-            key={i}
-            className="absolute rounded-full bg-white/70"
-            style={{
-              width: sz,
-              height: sz,
-              left: `${8 + i * 11}%`,
-              bottom: -size * 0.05,
-            }}
-            animate={{ y: [0, -size * 1.15], opacity: [0, 0.8, 0] }}
-            transition={{
-              duration: 2.5 + (i % 4) * 0.6,
-              repeat: Infinity,
-              delay: i * 0.45,
-              ease: "easeOut",
-            }}
-          />
-        );
-      })}
+      {/* Bubbles drifting up — more on higher-value dice */}
+      {(() => {
+        const bubbleCount = count >= 5 ? 22 : count === 4 ? 14 : 8;
+        return Array.from({ length: bubbleCount }, (_, i) => {
+          const sz = size * (0.02 + (i % 4) * 0.013);
+          const leftPct = (i * 37) % 95 + 2;
+          return (
+            <motion.div
+              key={i}
+              className="absolute rounded-full bg-white/70"
+              style={{
+                width: sz,
+                height: sz,
+                left: `${leftPct}%`,
+                bottom: -size * 0.05,
+              }}
+              animate={{ y: [0, -size * 1.15], opacity: [0, 0.8, 0] }}
+              transition={{
+                duration: 2.2 + ((i * 0.31) % 1.8),
+                repeat: Infinity,
+                delay: (i * 0.22) % 3,
+                ease: "easeOut",
+              }}
+            />
+          );
+        });
+      })()}
 
       {/* Fish */}
       {fish.map((f, i) => (
