@@ -351,18 +351,6 @@ export const DICE_SKINS = [
     spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/1f8e20d7a_Aefo3mZm6pYMmwcs9AaPi_cY70s0I3.png",
   },
   {
-    id: "copper_v2",
-    name: "Copper Faceted",
-    price: 450,
-    gradient: "from-orange-300 via-orange-500 to-amber-800",
-    border: "border-amber-900",
-    pipColor: "bg-slate-900",
-    glow: "shadow-orange-400/60",
-    description: "Hand-faceted copper.",
-    realistic: true,
-    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/2d6c29133_BmfP_o5DAVeLg2qIRGbt6_NB0TmCXi.png",
-  },
-  {
     id: "lightning_loop",
     name: "Lightning Loop",
     price: 1300,
