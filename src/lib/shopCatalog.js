@@ -520,18 +520,6 @@ export const DICE_SKINS = [
     spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/ed83ab294_PFl9loYMeN6_jAsrcx6Ah_o55139sM.png",
   },
   {
-    id: "amber_mosquito",
-    name: "Amber Mosquito",
-    price: 850,
-    gradient: "from-yellow-300 via-amber-500 to-orange-700",
-    border: "border-amber-800",
-    pipColor: "bg-slate-800",
-    glow: "shadow-amber-500/70",
-    description: "Jurassic-era mosquito preserved.",
-    realistic: true,
-    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/d386c998b_DMWqduC1aGy1jEzj0ma-J_Q7kKv53n.png",
-  },
-  {
     id: "toxic_plasma_v2",
     name: "Toxic Plasma Glow",
     price: 1400,
