@@ -551,6 +551,26 @@ export default function Die({
           </div>
         }
 
+        {/* Snow Globe — dark pip grid on top so the number is readable through the snow */}
+        {skin.id === "snow_globe" && (
+          <div
+            className="absolute grid grid-cols-3 grid-rows-3 z-10"
+            style={{ inset: padding, gap: Math.round(size * 0.045) }}
+          >
+            {layout.flat().map((p, i) => (
+              <div key={i} className="flex items-center justify-center">
+                {p === 1 && (
+                  <Pip
+                    size={pipSize}
+                    colorClass="bg-slate-900"
+                    inset={true}
+                  />
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+
         {/* Corner shadow vignette — Chrome Silver only */}
         {skin.id === "silver" && (
           <div
