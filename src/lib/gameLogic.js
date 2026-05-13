@@ -30,7 +30,7 @@ export function createInitialState(playerNames) {
 function makeFreshDice() {
   return Array.from({ length: 6 }, (_, i) => ({
     id: i,
-    value: 1,
+    value: i + 1,
     used: false, // banked into turnScore (locked from a previous roll this turn)
     held: false, // selected in current pending roll
   }));
