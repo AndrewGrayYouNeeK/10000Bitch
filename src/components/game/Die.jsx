@@ -269,12 +269,17 @@ export default function Die({
             ? (PLASMA_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : (FACE_Y_OFFSET[value] || 0);
           const isMarble = skin.id === "marble";
+          // Per-face stretch for marble: positive = stretch outward in that direction
+          const MARBLE_TOP_STRETCH = { 1: 2, 2: 0, 3: 2, 4: 2, 5: 2, 6: 2 };
+          const MARBLE_BOTTOM_STRETCH = { 1: 0, 2: 2, 3: 0, 4: 2, 5: 2, 6: 2 };
+          const marbleTop = MARBLE_TOP_STRETCH[value] || 0;
+          const marbleBot = MARBLE_BOTTOM_STRETCH[value] || 0;
           return (
             <div
               className="absolute pointer-events-none"
               style={{
-                top: isMarble ? `${-size * 0.14 + yNudge - 0.5}px` : `${-size * 0.14 + yNudge}px`,
-                bottom: isMarble ? `${-size * 0.8}px` : `${-size * 0.8 + yNudge}px`,
+                top: isMarble ? `${-size * 0.14 + yNudge - 0.5 - marbleTop}px` : `${-size * 0.14 + yNudge}px`,
+                bottom: isMarble ? `${-size * 0.8 - marbleBot}px` : `${-size * 0.8 + yNudge}px`,
                 left: `${-size * 0.35 + xNudge}px`,
                 right: `${-size * 0.35 + xNudge}px`,
                 borderRadius: radius,
