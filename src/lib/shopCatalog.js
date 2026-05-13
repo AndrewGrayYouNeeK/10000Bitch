@@ -363,18 +363,6 @@ export const DICE_SKINS = [
     spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/2d6c29133_BmfP_o5DAVeLg2qIRGbt6_NB0TmCXi.png",
   },
   {
-    id: "teal_crackle_v2",
-    name: "Teal Glow",
-    price: 500,
-    gradient: "from-cyan-200 via-teal-300 to-cyan-500",
-    border: "border-cyan-400",
-    pipColor: "bg-slate-900",
-    glow: "shadow-cyan-300/70",
-    description: "Glowing crackled teal.",
-    realistic: true,
-    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/b154fd1df_4grOkW27dXAMMIWio02qb_XCcgJ8xy.png",
-  },
-  {
     id: "lightning_loop",
     name: "Lightning Loop",
     price: 1300,
