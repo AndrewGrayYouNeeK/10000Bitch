@@ -177,18 +177,35 @@ export default function Die({
           ...squircleStyle
         }}>
         
-        {/* Video background skin */}
-        {skin.videoUrl && (
-          <video
-            src={skin.videoUrl}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-            style={{ borderRadius: radius }}
-          />
-        )}
+        {/* Video background skin — cropped 3x2 grid so each face shows its own cell */}
+        {skin.videoUrl && (() => {
+          const cols = 3;
+          const rows = 2;
+          const col = (value - 1) % cols;
+          const row = Math.floor((value - 1) / cols);
+          return (
+            <div
+              className="absolute inset-0 overflow-hidden pointer-events-none"
+              style={{ borderRadius: radius }}
+            >
+              <video
+                src={skin.videoUrl}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="absolute top-0 left-0 pointer-events-none"
+                style={{
+                  width: `${cols * 100}%`,
+                  height: `${rows * 100}%`,
+                  transform: `translate(${-col * (100 / cols)}%, ${-row * (100 / rows)}%)`,
+                  transformOrigin: "top left",
+                  objectFit: "cover",
+                }}
+              />
+            </div>
+          );
+        })()}
 
         {/* Snow Globe — borrows the Aquamarine glass shell with snowflakes drifting inside */}
         {skin.id === "snow_globe" && (() => {
