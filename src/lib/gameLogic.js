@@ -38,9 +38,13 @@ function makeFreshDice() {
 
 // Perform a dice roll — only on dice that are not `used`
 export function rollDice(state) {
-  const newDice = state.dice.map(d =>
-    d.used ? d : { ...d, value: 1 + Math.floor(Math.random() * 6), held: false }
-  );
+  let nextVal = 1;
+  const newDice = state.dice.map(d => {
+    if (d.used) return d;
+    const v = nextVal;
+    nextVal = nextVal === 6 ? 1 : nextVal + 1;
+    return { ...d, value: v, held: false };
+  });
   return { ...state, dice: newDice, hasRolled: true };
 }
 
@@ -119,9 +123,13 @@ export function confirmAndReroll(state) {
   }
 
   // Re-roll the un-used dice
-  newDice = newDice.map(d =>
-    d.used ? d : { ...d, value: 1 + Math.floor(Math.random() * 6), held: false }
-  );
+  let nextVal = 1;
+  newDice = newDice.map(d => {
+    if (d.used) return d;
+    const v = nextVal;
+    nextVal = nextVal === 6 ? 1 : nextVal + 1;
+    return { ...d, value: v, held: false };
+  });
 
   // Check for farkle on re-roll
   const activeVals = newDice.filter(d => !d.used).map(d => d.value);
