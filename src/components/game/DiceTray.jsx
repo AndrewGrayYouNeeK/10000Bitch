@@ -23,29 +23,26 @@ export default function DiceTray({ dice, rolling, onToggle, disabled, skinId, pi
         }}
       />
 
-      <div className="relative grid grid-cols-3 gap-3 justify-items-center">
-        {dice.map((d, idx) => {
-          const prideSkins = ["moonstone_v2", "moonstone_v2", "moonstone_v2", "moonstone", "moonstone", "moonstone"];
-          return (
-            <motion.div
-              key={d.id}
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: idx * 0.04 }}
-            >
-              <Die
-                value={d.value}
-                held={d.held}
-                used={d.used}
-                rolling={rolling && !d.used}
-                onClick={() => !disabled && !d.used && onToggle && onToggle(d.id)}
-                size={92}
-                skinId={prideSkins[idx % 6]}
-                pipsId={pipsId}
-              />
-            </motion.div>
-          );
-        })}
+      <div className="relative grid grid-cols-3 gap-3 justify-items-center sm:grid-cols-6">
+        {dice.map((d, idx) => (
+          <motion.div
+            key={d.id}
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: idx * 0.04 }}
+          >
+            <Die
+              value={d.value}
+              held={d.held}
+              used={d.used}
+              rolling={rolling && !d.used}
+              onClick={() => !disabled && !d.used && onToggle && onToggle(d.id)}
+              size={92}
+              skinId={skinId}
+              pipsId={pipsId}
+            />
+          </motion.div>
+        ))}
       </div>
     </div>
   );
