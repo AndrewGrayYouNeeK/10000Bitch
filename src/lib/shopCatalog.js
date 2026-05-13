@@ -160,7 +160,7 @@ export const DICE_SKINS = [
   },
   {
     id: "teal_crackle",
-    name: "Teal Crackle",
+    name: "Antarctic Blue Ice",
     price: 450,
     gradient: "from-cyan-200 via-teal-300 to-cyan-500",
     border: "border-cyan-400",
