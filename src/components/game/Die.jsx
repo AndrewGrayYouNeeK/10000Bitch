@@ -311,7 +311,7 @@ export default function Die({
         }
 
         {/* Corner shadow vignette — darkens the corners to hide tray bleed-through (skipped for silver) */}
-        {skin.id !== "silver" && (
+        {skin.id !== "silver" && skin.id !== "marble" && (
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
