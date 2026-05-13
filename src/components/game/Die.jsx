@@ -148,12 +148,11 @@ export default function Die({
         type="button"
         onClick={onClick}
         disabled={used || rolling}
-        className={`relative w-full h-full ${skin.id !== "classic_white" ? `bg-gradient-to-br ${skin.gradient}` : ""} ${used ? "opacity-20 grayscale cursor-not-allowed" : ""}`}
+        className={`relative w-full h-full ${skin.id !== "classic_white" ? `bg-gradient-to-br ${skin.gradient}` : "bg-white"} ${used ? "opacity-20 grayscale cursor-not-allowed" : ""}`}
         style={{
           borderRadius: radius,
           boxShadow: buildShadow(),
           overflow: "hidden",
-          background: skin.id === "classic_white" ? "transparent" : undefined,
           ...squircleStyle
         }}>
         
