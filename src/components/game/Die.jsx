@@ -246,8 +246,8 @@ export default function Die({
           const TOXIC2_X_OFFSET = { 2: -4, 3: -7, 4: -1, 5: -4, 6: -7 };
           const TOXIC2_Y_OFFSET = { 4: -4 };
           // Cash per-face tuning
-          const CASH_X_OFFSET = { 1: -1, 2: -6 };
-          const CASH_Y_OFFSET = { 1: 1 };
+          const CASH_X_OFFSET = { 1: -1, 2: -6, 3: -13 };
+          const CASH_Y_OFFSET = { 1: 1, 3: 2 };
           // Labradorite per-face tuning
           const LABRADORITE_X_OFFSET = { 2: 2, 3: 4, 4: 2, 5: 2, 6: 2 };
           const LABRADORITE_Y_OFFSET = {};
