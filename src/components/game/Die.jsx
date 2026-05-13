@@ -179,7 +179,7 @@ export default function Die({
         
         {/* Video background skin — cropped 3x2 grid, zoomed 3x centered in each cell */}
         {skin.videoUrl && (() => {
-          const zoom = 2.6;
+          const zoom = 3.0;
           const cols = 3;
           const rows = 2;
           const col = (value - 1) % cols;
