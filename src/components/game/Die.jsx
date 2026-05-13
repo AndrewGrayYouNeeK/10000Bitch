@@ -205,8 +205,8 @@ export default function Die({
           const AMETHYST_Y_OFFSET = { 1: -size * 0.025, 2: -size * 0.025, 3: -size * 0.025, 4: -size * 0.035, 5: -size * 0.035, 6: -size * 0.035 };
           const PLASMA_X_OFFSET = { 1: -size * 0.02, 2: -size * 0.06, 3: -size * 0.11, 4: -size * 0.02, 5: -size * 0.07, 6: -size * 0.12 };
           const PLASMA_Y_OFFSET = { 1: size * 0.04, 2: size * 0.02, 3: size * 0.02, 4: -size * 0.06, 6: -size * 0.045 };
-          const PAPER_X_OFFSET = { 1: -1, 2: size * 0.01, 3: size * 0.01, 5: size * 0.01, 6: size * 0.01 };
-          const PAPER_Y_OFFSET = { 1: -size * 0.015 + 1, 2: -size * 0.015, 3: -size * 0.02, 4: -size * 0.04, 5: -size * 0.04, 6: -size * 0.04 };
+          const PAPER_X_OFFSET = { 1: -2, 2: size * 0.01, 3: size * 0.01, 5: size * 0.01, 6: size * 0.01 };
+          const PAPER_Y_OFFSET = { 1: -size * 0.015 + 2, 2: -size * 0.015, 3: -size * 0.02, 4: -size * 0.04, 5: -size * 0.04, 6: -size * 0.04 };
           const TEAL2_X_OFFSET = { 2: size * 0.01, 3: size * 0.01, 5: size * 0.01, 6: size * 0.01 };
           const TEAL2_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.02, 4: -size * 0.04, 5: -size * 0.04, 6: -size * 0.04 };
           const COPPER2_X_OFFSET = { 2: size * 0.01, 3: size * 0.01, 5: size * 0.01, 6: size * 0.01 };
