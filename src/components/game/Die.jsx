@@ -191,7 +191,7 @@ export default function Die({
           const videoH = rows * zoom; // multiples of die height
           // Center of the cell in video units (die widths): col + 0.5
           // Translate so that center lands at die center (0.5, 0.5)
-          const FACE_TX_OFFSET = { 1: -1.5, 2: -3.0, 3: -5.2, 4: -1.3, 5: -3.2, 6: -5.0 };
+          const FACE_TX_OFFSET = { 1: -4.5, 2: -6.0, 3: -8.2, 4: -4.3, 5: -6.2, 6: -8.0 };
           const FACE_TY_OFFSET = { 1: -0.15, 2: -0.5 };
           const tx = (col + 0.5) * zoom - 0.5 + (FACE_TX_OFFSET[value] || 0); // in die widths (per-face right shift)
           const ty = (row + 0.5) * zoom - 0.5 + (FACE_TY_OFFSET[value] || 0); // in die heights (per-face down shift)
