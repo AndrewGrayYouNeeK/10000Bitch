@@ -12,9 +12,9 @@ export default function DiceTray({ dice, rolling, onToggle, disabled, skinId, pi
       className="relative rounded-3xl p-6 overflow-hidden border-4 border-amber-900/60 shadow-2xl"
       style={{
         background:
-          "radial-gradient(ellipse at center, #1f6b3a 0%, #134524 70%, #0b2e18 100%)",
+          "radial-gradient(ellipse at center, #1f6b3a 0%, #134524 55%, #061509 100%)",
         boxShadow:
-          "inset 0 0 40px rgba(0,0,0,0.5), inset 0 4px 10px rgba(255,255,255,0.08), 0 10px 30px rgba(0,0,0,0.5)",
+          "inset 0 0 80px 30px rgba(0,0,0,0.85), inset 0 0 40px rgba(0,0,0,0.6), inset 0 4px 10px rgba(255,255,255,0.06), 0 10px 30px rgba(0,0,0,0.5)",
       }}
     >
       {/* Felt texture */}
