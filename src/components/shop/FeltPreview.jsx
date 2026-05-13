@@ -15,6 +15,18 @@ export default function FeltPreview({ felt }) {
           "inset 0 0 18px rgba(0,0,0,0.45), inset 0 2px 6px rgba(255,255,255,0.06)",
       }}
     >
+      {felt.textureUrl && (
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: `url(${felt.textureUrl})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            mixBlendMode: "multiply",
+            opacity: 0.85,
+          }}
+        />
+      )}
       {/* Fiber strands */}
       <div
         className="absolute inset-0 opacity-30 pointer-events-none mix-blend-overlay"

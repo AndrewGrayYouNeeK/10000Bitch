@@ -18,6 +18,19 @@ export default function DiceTray({ dice, rolling, onToggle, disabled, skinId, pi
           "inset 0 0 40px rgba(0,0,0,0.45), inset 0 4px 12px rgba(255,255,255,0.06)",
       }}
     >
+      {/* Photographic felt texture (when provided) — layered behind procedural grain */}
+      {felt.textureUrl && (
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: `url(${felt.textureUrl})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            mixBlendMode: "multiply",
+            opacity: 0.85,
+          }}
+        />
+      )}
       {/* Fine fiber strands — two crossing directions */}
       <div
         className="absolute inset-0 opacity-30 pointer-events-none mix-blend-overlay"

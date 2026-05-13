@@ -476,6 +476,7 @@ export const FELT_COLORS = [
     outer: "#226a3b",
     border: "border-amber-900/70",
     description: "Traditional casino felt.",
+    textureUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/c668f8a5c_ziA4KOYCS_QY2BcnEzQGb_sNgQTA4n.png",
   },
   {
     id: "royal_blue",
