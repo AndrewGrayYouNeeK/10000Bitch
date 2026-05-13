@@ -68,7 +68,7 @@ function Snowflake({ size, leftPct, delay, duration, drift, scale, shaking, star
  * `count` (matches die face value) controls density: higher values = more snow.
  */
 export default function SnowGlobeOverlay({ size, radius, count = 1, shaking = false }) {
-  const flakeCount = shaking ? 40 : count >= 5 ? 28 : count === 4 ? 20 : count === 3 ? 14 : count === 2 ? 10 : 7;
+  const flakeCount = shaking ? 70 : count >= 5 ? 55 : count === 4 ? 45 : count === 3 ? 38 : count === 2 ? 30 : 22;
   const flakes = React.useMemo(() => {
     return Array.from({ length: flakeCount }, (_, i) => ({
       leftPct: (i * 53) % 95 + 2,
