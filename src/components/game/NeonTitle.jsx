@@ -98,28 +98,28 @@ export default function NeonTitle({ dieSize = 40 }) {
         }} />
       
 
-      <div className="relative flex items-center justify-center gap-1 font-pixel neon-glitch select-none px-2 py-1 hidden">
-        <span
-          className="neon-text-magenta neon-pulse"
-          style={{
-            fontSize: dieSize * 1.05,
-            lineHeight: 1,
-            letterSpacing: "0.04em"
-          }}>
-          
-          1
-        </span>
-        <DieZero size={dieSize} pips={1} />
-        <span
-          className="neon-text-cyan"
-          style={{ fontSize: dieSize * 0.7, lineHeight: 1, marginLeft: 2, marginRight: 2 }}>
-          
-          ,
-        </span>
-        <DieZero size={dieSize} pips={1} />
-        <DieZero size={dieSize} pips={1} />
-        <DieZero size={dieSize} pips={1} />
-      </div>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
     </div>);
 
 }
