@@ -12,14 +12,14 @@ import ShopItemCard from "@/components/shop/ShopItemCard";
 import DicePreview from "@/components/shop/DicePreview";
 import BadgePreview from "@/components/shop/BadgePreview";
 import FeltPreview from "@/components/shop/FeltPreview";
-import BuyCoinsDialog from "@/components/shop/BuyCoinsDialog";
+
 
 export default function Shop() {
   const {
     coins, xp, currentTier, nextTier, isLoading,
     ownedSkins, ownedPips, ownedBadges, ownedFelts,
     equippedSkinId, equippedPipsId, equippedBadgeId, equippedFeltId,
-    buyItem, equipItem, addCoins, getSkinEffectivePrice,
+    buyItem, equipItem, getSkinEffectivePrice,
   } = useCosmetics();
   const [tab, setTab] = useState("skins");
 
@@ -57,7 +57,6 @@ export default function Shop() {
               {isLoading ? "…" : coins.toLocaleString()}
             </span>
           </div>
-          <BuyCoinsDialog onPurchase={(amount) => addCoins(amount)} />
         </div>
       </div>
 
