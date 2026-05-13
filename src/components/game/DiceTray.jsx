@@ -26,6 +26,22 @@ export default function DiceTray({ dice, rolling, onToggle, disabled, skinId, pi
         }}
       />
 
+      {/* Top corner shadows */}
+      <div
+        className="absolute top-0 left-0 w-1/2 h-1/2 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at top left, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 30%, transparent 70%)",
+        }}
+      />
+      <div
+        className="absolute top-0 right-0 w-1/2 h-1/2 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at top right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 30%, transparent 70%)",
+        }}
+      />
+
       <div className="relative grid grid-cols-3 gap-3 justify-items-center sm:grid-cols-6">
         {dice.map((d, idx) => (
           <motion.div
