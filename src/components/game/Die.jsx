@@ -141,7 +141,7 @@ export default function Die({
 
   return (
     <motion.div
-      key={skin.videoUrl ? "die" : (rolling ? rollKey.current : "idle")}
+      key={rolling ? rollKey.current : "idle"}
       className="flex-shrink-0"
       style={{ width: size, height: size }}
       initial={false}
@@ -216,24 +216,28 @@ export default function Die({
                   objectFit: "cover",
                 }}
               />
-              {/* Pink translucent glass tint */}
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background:
-                    "radial-gradient(ellipse at 35% 30%, rgba(255,192,225,0.45) 0%, rgba(255,105,180,0.35) 55%, rgba(255,20,147,0.45) 100%)",
-                  mixBlendMode: "screen",
-                }}
-              />
-              {/* Pink glass rim + highlights */}
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  borderRadius: radius,
-                  boxShadow:
-                    "inset 0 0 0 2px rgba(255,210,230,0.55), inset 0 -6px 14px rgba(255,20,147,0.45), inset 0 4px 10px rgba(255,225,240,0.55)",
-                }}
-              />
+              {!rolling && (
+                <>
+                  {/* Pink translucent glass tint */}
+                  <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      background:
+                        "radial-gradient(ellipse at 35% 30%, rgba(255,192,225,0.45) 0%, rgba(255,105,180,0.35) 55%, rgba(255,20,147,0.45) 100%)",
+                      mixBlendMode: "screen",
+                    }}
+                  />
+                  {/* Pink glass rim + highlights */}
+                  <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      borderRadius: radius,
+                      boxShadow:
+                        "inset 0 0 0 2px rgba(255,210,230,0.55), inset 0 -6px 14px rgba(255,20,147,0.45), inset 0 4px 10px rgba(255,225,240,0.55)",
+                    }}
+                  />
+                </>
+              )}
             </div>
           );
         })()}
