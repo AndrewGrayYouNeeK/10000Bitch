@@ -326,6 +326,16 @@ export default function Die({
 
         }
 
+        {/* Corner shadow vignette — darkens the corners to hide tray bleed-through */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            borderRadius: radius,
+            background:
+              "radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.45) 85%, rgba(0,0,0,0.75) 100%)",
+          }}
+        />
+
         {/* Diamond shimmer overlay */}
         {skin.special === "diamond" &&
         <>
