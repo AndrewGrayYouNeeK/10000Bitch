@@ -191,7 +191,7 @@ export default function Die({
           const videoH = rows * zoom; // multiples of die height
           // Center of the cell in video units (die widths): col + 0.5
           // Translate so that center lands at die center (0.5, 0.5)
-          const tx = (col + 0.5) * zoom - 0.5; // in die widths
+          const tx = (col + 0.5) * zoom - 0.5 + 10; // in die widths (shifted 10 right)
           const ty = (row + 0.5) * zoom - 0.5; // in die heights
           return (
             <div
