@@ -205,6 +205,14 @@ export default function Die({
           const AMETHYST_Y_OFFSET = { 1: -size * 0.025, 2: -size * 0.025, 3: -size * 0.025, 4: -size * 0.035, 5: -size * 0.035, 6: -size * 0.035 };
           const PLASMA_X_OFFSET = { 1: -size * 0.02, 2: -size * 0.06, 3: -size * 0.11, 4: -size * 0.02, 5: -size * 0.07, 6: -size * 0.12 };
           const PLASMA_Y_OFFSET = { 1: size * 0.04, 2: size * 0.02, 3: size * 0.02, 4: -size * 0.06, 6: -size * 0.045 };
+          const PAPER_X_OFFSET = { 2: size * 0.01, 3: size * 0.01, 5: size * 0.01, 6: size * 0.01 };
+          const PAPER_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.02, 4: -size * 0.04, 5: -size * 0.04, 6: -size * 0.04 };
+          const TEAL2_X_OFFSET = { 2: size * 0.01, 3: size * 0.01, 5: size * 0.01, 6: size * 0.01 };
+          const TEAL2_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.02, 4: -size * 0.04, 5: -size * 0.04, 6: -size * 0.04 };
+          const COPPER2_X_OFFSET = { 2: size * 0.01, 3: size * 0.01, 5: size * 0.01, 6: size * 0.01 };
+          const COPPER2_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.02, 4: -size * 0.04, 5: -size * 0.04, 6: -size * 0.04 };
+          const LOVE_X_OFFSET = { 2: size * 0.01, 3: size * 0.01, 5: size * 0.01, 6: size * 0.01 };
+          const LOVE_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.02, 4: -size * 0.04, 5: -size * 0.04, 6: -size * 0.04 };
           const xNudge = skin.id === "wood"
             ? (WOOD_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "silver"
@@ -221,6 +229,14 @@ export default function Die({
             ? (LAVA_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "plasma"
             ? (PLASMA_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
+            : skin.id === "paper"
+            ? (PAPER_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
+            : skin.id === "teal_crackle_v2"
+            ? (TEAL2_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
+            : skin.id === "copper_v2"
+            ? (COPPER2_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
+            : skin.id === "love_is_love"
+            ? (LOVE_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : (FACE_X_OFFSET[value] || 0);
           const yNudge = skin.id === "classic_white"
             ? (CLASSIC_WHITE_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
@@ -244,6 +260,14 @@ export default function Die({
             ? (LAVA_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : skin.id === "plasma"
             ? (PLASMA_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
+            : skin.id === "paper"
+            ? (PAPER_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
+            : skin.id === "teal_crackle_v2"
+            ? (TEAL2_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
+            : skin.id === "copper_v2"
+            ? (COPPER2_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
+            : skin.id === "love_is_love"
+            ? (LOVE_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : (FACE_Y_OFFSET[value] || 0);
           return (
             <div
