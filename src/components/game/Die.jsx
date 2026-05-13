@@ -218,19 +218,6 @@ export default function Die({
                     "inset 0 0 0 2px rgba(255,255,255,0.5), inset 0 -6px 12px rgba(0,0,0,0.2), inset 0 4px 8px rgba(255,255,255,0.45)",
                 }}
               />
-              {/* Dark pip grid on top so the number is readable through the snow */}
-              <div
-                className="absolute grid grid-cols-3 grid-rows-3 z-10"
-                style={{ inset: padding, gap: Math.round(size * 0.045) }}
-              >
-                {layout.flat().map((p, i) => (
-                  <div key={i} className="flex items-center justify-center">
-                    {p === 1 && (
-                      <Pip size={pipSize} colorClass="bg-slate-900" inset={true} />
-                    )}
-                  </div>
-                ))}
-              </div>
             </>
           );
         })()}
