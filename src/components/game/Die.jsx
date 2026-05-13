@@ -223,7 +223,7 @@ export default function Die({
           const ICE_X_OFFSET = { 3: -size * 0.03, 6: -size * 0.03 };
           // Aquamarine per-face tuning
           const AQUA_X_OFFSET = { 3: -size * 0.03, 4: -size * 0.01, 5: -size * 0.03, 6: -size * 0.04 };
-          const AQUA_Y_OFFSET = { 1: size * 0.01, 3: -size * 0.01, 4: -size * 0.02 };
+          const AQUA_Y_OFFSET = { 1: 0, 3: -size * 0.01, 4: -size * 0.02 };
           const xNudge = skin.id === "wood"
             ? (WOOD_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "silver"
