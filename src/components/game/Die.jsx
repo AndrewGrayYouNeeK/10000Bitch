@@ -171,8 +171,8 @@ export default function Die({
           />
         )}
 
-        {/* Fish Tank overlay — swimming fish behind pips */}
-        {skin.id === "fish_tank" && <FishOverlay size={size} radius={radius} />}
+        {/* Fish Tank overlay — swimming fish behind the Blue Gel sprite */}
+        {skin.id === "blue_gel" && <FishOverlay size={size} radius={radius} />}
 
         {/* Sprite sheet texture or pip grid */}
         {skin.spriteUrl ?
