@@ -76,8 +76,8 @@ export default function GlitchNeonBanner({ src, alt = "Neon sign", objectPositio
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            clipPath: "inset(18% 18% 22% 18%)",
-            WebkitClipPath: "inset(18% 18% 22% 18%)",
+            clipPath: "inset(8% 14% 42% 14% round 12px)",
+            WebkitClipPath: "inset(8% 14% 42% 14% round 12px)",
           }}
         >
           <img
