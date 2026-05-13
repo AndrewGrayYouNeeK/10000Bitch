@@ -411,17 +411,6 @@ export const DICE_SKINS = [
     spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/5784136aa_KkADf2cqhZJ_5eX9yaSRr_AbX94tDb1.png",
   },
   {
-    id: "fish_tank",
-    name: "Fish Tank",
-    price: 850,
-    gradient: "from-cyan-200 via-sky-400 to-blue-600",
-    border: "border-sky-500",
-    pipColor: "bg-white",
-    glow: "shadow-sky-400/70",
-    description: "A tiny fish swims inside.",
-    realistic: false,
-  },
-  {
     id: "snow_globe",
     name: "Snow Globe",
     price: 400,
