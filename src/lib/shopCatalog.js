@@ -574,7 +574,10 @@ export const BADGES = [
   { id: "high_roller", name: "High Roller", price: 600, emoji: "💎", color: "from-cyan-400 to-blue-600", description: "Big risk, big reward." },
   { id: "champion", name: "Champion", price: 800, emoji: "👑", color: "from-yellow-300 to-amber-600", description: "Born to win." },
   { id: "legend", name: "Legend", price: 1500, emoji: "⚡", color: "from-fuchsia-400 to-purple-700", description: "The stuff of myth." },
+  { id: "perfect_10k", name: "Perfect 10,000", price: 0, emoji: "🎯", color: "from-fuchsia-300 via-pink-400 to-purple-700", description: "Awarded for winning with an exact 10,000 — all six dice on your final turn.", achievementOnly: true },
 ];
+
+export const PERFECT_TENK_REWARD = { skinId: "crystal_cut", badgeId: "perfect_10k" };
 
 export function getSkin(id) {
   return DICE_SKINS.find(s => s.id === id) || DICE_SKINS[0];

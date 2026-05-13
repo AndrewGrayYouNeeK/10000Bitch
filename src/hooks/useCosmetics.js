@@ -99,6 +99,26 @@ export function useCosmetics() {
     updateMe.mutate({ [key]: itemId });
   };
 
+  // Grants ownership of a skin and/or badge without spending coins (achievement rewards).
+  const grantReward = ({ skinId, badgeId }) => {
+    if (!user) return { skinGranted: false, badgeGranted: false };
+    const skins = user.owned_skins || ["classic_white"];
+    const badges = user.owned_badges || [];
+    const patch = {};
+    let skinGranted = false;
+    let badgeGranted = false;
+    if (skinId && !skins.includes(skinId)) {
+      patch.owned_skins = [...skins, skinId];
+      skinGranted = true;
+    }
+    if (badgeId && !badges.includes(badgeId)) {
+      patch.owned_badges = [...badges, badgeId];
+      badgeGranted = true;
+    }
+    if (Object.keys(patch).length > 0) updateMe.mutate(patch);
+    return { skinGranted, badgeGranted };
+  };
+
   return {
     user,
     isLoading,
@@ -109,6 +129,7 @@ export function useCosmetics() {
     addCoins, addXp, markIntroSeen, recordGameResult,
     buyItem,
     equipItem,
+    grantReward,
     getSkinEffectivePrice: (skin) => getSkinEffectivePrice(skin, xp),
     isSkinUnlockedByTier: (skinId) => isSkinUnlockedByTier(skinId, xp),
     isSkinAchievementOnly: (skinId) => isSkinAchievementOnly(skinId, xp),

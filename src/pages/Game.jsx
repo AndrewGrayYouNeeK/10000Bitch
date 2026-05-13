@@ -30,7 +30,7 @@ export default function Game() {
   const [rollAnim, setRollAnim] = useState(false);
   const [popup, setPopup] = useState(null); // { word, variant }
   const [shakeTriggered, setShakeTriggered] = useState(0);
-  const { user, equippedSkinId, equippedPipsId, equippedFeltId, addCoins, addXp, recordGameResult } = useCosmetics();
+  const { user, equippedSkinId, equippedPipsId, equippedFeltId, addCoins, addXp, recordGameResult, grantReward } = useCosmetics();
   const prevBustRef = React.useRef(0);
   const winnerAwardedRef = React.useRef(false);
 
@@ -68,7 +68,11 @@ export default function Game() {
       if (state.perfectTenK) {
         xpGain += XP_REWARDS.perfectTenK;
         addCoins(1000); // bonus coin payout for the ultra-rare achievement
-        setPopup({ word: "PERFECT 10,000!", variant: "success" });
+        // Grant the exclusive Mythic dice + badge for hitting an exact 10,000.
+        import("@/lib/shopCatalog").then(({ PERFECT_TENK_REWARD }) => {
+          grantReward(PERFECT_TENK_REWARD);
+        });
+        setPopup({ word: "PERFECT 10,000! 🎯 BADGE + MYTHIC DICE UNLOCKED", variant: "success" });
       }
 
       recordGameResult({ won: true, xpGain });

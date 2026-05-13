@@ -30,8 +30,6 @@ export const SKIN_TIERS = {
   teal_crackle: 1,
   aquamarine: 1,
   aquamarine_light: 1,
-  snow_globe: 1,
-  blue_gel: 1,
   pride: 1,
 
   // Gold (tier 2)
@@ -39,27 +37,29 @@ export const SKIN_TIERS = {
   silver: 2,
   lava: 2,
   fluorite: 2,
-  circuit_board: 2,
-  dragon_scale: 2,
   bullet_holes: 2,
   bloodstone: 2,
-  amber_wasp: 2,
   labradorite: 2,
   labradorite_polished: 2,
 
   // Diamond (tier 3)
-  galaxy: 3,
   ruby: 3,
   cash: 3,
   neon_grid: 3,
   plasma: 3,
-  matrix: 3,
-  tesla: 3,
-  toxic_plasma_v2: 3,
 
-  // Mythic (tier 4) — rarest
+  // Mythic / Exotic (tier 4) — achievement-only, never buyable
   crystal_cut: 4,
   love_is_love: 4,
+  galaxy: 4,
+  dragon_scale: 4,
+  tesla: 4,
+  circuit_board: 4,
+  amber_wasp: 4,
+  toxic_plasma_v2: 4,
+  matrix: 4,
+  snow_globe: 4,
+  blue_gel: 4,
 };
 
 // If the player tries to buy a skin from a tier above their current tier,
@@ -93,6 +93,12 @@ export function isSkinUnlockedByTier(skinId, xp = 0) {
 export const isSkinShortcutBuyable = (skinId) => {
   const skinTier = SKIN_TIERS[skinId] ?? 0;
   return skinTier < 4; // tiers 0–3 buyable via shortcut, Mythic (4) is not
+};
+
+// True when the skin can only be unlocked by earning it (e.g. Mythic tier).
+export const isSkinAchievementOnly = (skinId) => {
+  const skinTier = SKIN_TIERS[skinId] ?? 0;
+  return skinTier >= 4;
 };
 
 export function getSkinEffectivePrice(skin, xp = 0) {
