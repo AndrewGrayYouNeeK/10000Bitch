@@ -392,7 +392,7 @@ export const DICE_SKINS = [
     price: 2000,
     gradient: "from-cyan-100 via-white to-sky-200",
     border: "border-cyan-200",
-    pipColor: "bg-slate-900",
+    pipColor: "bg-black",
     glow: "shadow-cyan-300/80",
     description: "Brilliant faceted crystal. The legendary tier.",
     realistic: true,
