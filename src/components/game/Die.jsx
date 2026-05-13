@@ -215,24 +215,7 @@ export default function Die({
                   objectFit: "cover",
                 }}
               />
-              {/* Pink translucent glass tint */}
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background:
-                    "radial-gradient(ellipse at 35% 30%, rgba(255,182,222,0.45) 0%, rgba(236,72,153,0.35) 55%, rgba(190,24,93,0.45) 100%)",
-                  mixBlendMode: "screen",
-                }}
-              />
-              {/* Pink glass rim + highlights */}
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  borderRadius: radius,
-                  boxShadow:
-                    "inset 0 0 0 2px rgba(255,200,230,0.55), inset 0 -6px 14px rgba(190,24,93,0.45), inset 0 4px 10px rgba(255,220,235,0.55)",
-                }}
-              />
+
             </div>
           );
         })()}
