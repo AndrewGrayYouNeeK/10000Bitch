@@ -228,6 +228,18 @@ export default function Game() {
         <RulesSheet />
       </div>
 
+      {/* Night City tagline */}
+      <div
+        className="text-center font-term tracking-[0.18em] py-1.5 text-[13px]"
+        style={{
+          color: "#ffff66",
+          textShadow: "0 0 10px rgba(255,255,102,0.7), 0 0 18px rgba(255,0,170,0.4)",
+          background: "linear-gradient(90deg, rgba(255,0,170,0.05), rgba(0,255,200,0.08), rgba(255,0,170,0.05))",
+        }}
+      >
+        NIGHT CITY DICE PROTOCOL • RUN HARD OR FARKLE
+      </div>
+
       {/* Score panel */}
       <div className="p-3">
         <ScorePanel players={state.players} currentIndex={state.currentIndex} />
@@ -296,7 +308,15 @@ export default function Game() {
 
       {/* Dice tray */}
       <div className="px-3 flex-[0.85] flex items-center justify-center">
-        <div className="w-full">
+        <div
+          className="w-full rounded-2xl p-2"
+          style={{
+            border: "2px solid #ff00ea",
+            boxShadow:
+              "0 0 18px #00ffff, 0 0 36px rgba(255,0,234,0.6), inset 0 0 0 1px rgba(255,255,255,0.06)",
+            background: "rgba(8,2,20,0.45)",
+          }}
+        >
           <DiceTray
             dice={state.dice}
             rolling={rollAnim}
@@ -318,6 +338,17 @@ export default function Game() {
             </div>
           )}
         </div>
+      </div>
+
+      {/* Neon footer strip */}
+      <div
+        className="text-center font-term tracking-[0.22em] text-[12px] py-1"
+        style={{
+          color: "#ff66ff",
+          textShadow: "0 0 10px #ff00ea, 0 0 18px rgba(0,255,255,0.5)",
+        }}
+      >
+        ▣ STAY NEON • MAX RISK • DON'T FARKLE OUT ▣
       </div>
 
       {/* Actions */}
