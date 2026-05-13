@@ -317,6 +317,22 @@ export default function Die({
           </div>
         }
 
+        {/* Diamond Cut: darken top-left pip on faces 4, 5, 6 (sprite pip is too light there) */}
+        {skin.id === "crystal_cut" && (value === 4 || value === 5 || value === 6) && (
+          <div
+            className="absolute pointer-events-none"
+            style={{
+              top: padding,
+              left: padding,
+              width: pipSize,
+              height: pipSize,
+              borderRadius: "50%",
+              background: "radial-gradient(circle at 40% 35%, #3a3a3a 0%, #111 60%, #000 100%)",
+              boxShadow: "inset 0 2px 4px rgba(0,0,0,0.9), inset 0 1px 2px rgba(0,0,0,0.8)",
+            }}
+          />
+        )}
+
         {/* Corner shadow vignette — Chrome Silver only */}
         {skin.id === "silver" && (
           <div
