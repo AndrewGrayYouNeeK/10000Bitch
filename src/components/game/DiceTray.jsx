@@ -23,7 +23,7 @@ export default function DiceTray({ dice, rolling, onToggle, disabled, skinId, pi
         }}
       />
 
-      <div className="relative grid grid-cols-3 gap-3 justify-items-center sm:grid-cols-6">
+      <div className="relative grid grid-cols-3 gap-3 justify-items-center">
         {dice.map((d, idx) => {
           const prideSkins = ["moonstone_v2", "moonstone_v2", "moonstone_v2", "moonstone", "moonstone", "moonstone"];
           return (
