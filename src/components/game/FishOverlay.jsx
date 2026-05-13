@@ -18,6 +18,8 @@ const FISH_VARIANTS = [
   { tail: "#7c3aed", body: "#a855f7", highlight: "#d8b4fe", fin: "#6b21a8", mouth: "#581c87", stripe: null },
   // Green
   { tail: "#15803d", body: "#22c55e", highlight: "#86efac", fin: "#14532d", mouth: "#166534", stripe: null },
+  // Angelfish — silver body with bold black vertical bars and yellow fins
+  { tail: "#facc15", body: "#e5e7eb", highlight: "#f9fafb", fin: "#facc15", mouth: "#1f2937", stripe: "#0f172a", angelfish: true },
 ];
 
 /**
@@ -56,31 +58,60 @@ function Fish({ size, top, duration, delay, dir = 1, scale = 1, variant }) {
         height="100%"
         style={{ filter: "drop-shadow(0 1px 2px rgba(0,0,0,0.3))" }}
       >
-        <motion.path
-          d="M 8 20 L 0 8 L 4 20 L 0 32 Z"
-          fill={v.tail}
-          animate={{ rotate: [-8, 8, -8] }}
-          transition={{ duration: 0.4, repeat: Infinity, ease: "easeInOut" }}
-          style={{ originX: "20%", originY: "50%" }}
-        />
-        <ellipse cx="32" cy="20" rx="22" ry="11" fill={v.body} />
-        <ellipse cx="32" cy="17" rx="20" ry="6" fill={v.highlight} opacity="0.7" />
-        {v.stripe && (
+        {v.angelfish ? (
           <>
-            <path d="M 20 12 Q 22 20 20 28 L 24 28 Q 26 20 24 12 Z" fill={v.stripe} opacity="0.6" />
-            <path d="M 38 11 Q 40 20 38 29 L 42 29 Q 44 20 42 11 Z" fill={v.stripe} opacity="0.6" />
+            {/* Tall triangular dorsal fin */}
+            <path d="M 30 14 L 24 -2 L 38 14 Z" fill={v.fin} opacity="0.95" />
+            {/* Tall triangular anal fin */}
+            <path d="M 30 26 L 24 42 L 38 26 Z" fill={v.fin} opacity="0.95" />
+            {/* Trailing tail */}
+            <motion.path
+              d="M 10 20 L 0 10 L 6 20 L 0 30 Z"
+              fill={v.tail}
+              animate={{ rotate: [-6, 6, -6] }}
+              transition={{ duration: 0.45, repeat: Infinity, ease: "easeInOut" }}
+              style={{ originX: "20%", originY: "50%" }}
+            />
+            {/* Disc-shaped body */}
+            <ellipse cx="32" cy="20" rx="20" ry="13" fill={v.body} />
+            <ellipse cx="32" cy="16" rx="17" ry="6" fill={v.highlight} opacity="0.7" />
+            {/* Bold vertical bars */}
+            <path d="M 22 9 Q 24 20 22 31 L 26 31 Q 28 20 26 9 Z" fill={v.stripe} opacity="0.75" />
+            <path d="M 36 9 Q 38 20 36 31 L 40 31 Q 42 20 40 9 Z" fill={v.stripe} opacity="0.75" />
+            {/* Eye */}
+            <circle cx="46" cy="18" r="2.5" fill="white" />
+            <circle cx="46.5" cy="18" r="1.4" fill="#0f172a" />
+            <path d="M 40 17 Q 38 20 40 23" stroke={v.mouth} strokeWidth="1" fill="none" />
+          </>
+        ) : (
+          <>
+            <motion.path
+              d="M 8 20 L 0 8 L 4 20 L 0 32 Z"
+              fill={v.tail}
+              animate={{ rotate: [-8, 8, -8] }}
+              transition={{ duration: 0.4, repeat: Infinity, ease: "easeInOut" }}
+              style={{ originX: "20%", originY: "50%" }}
+            />
+            <ellipse cx="32" cy="20" rx="22" ry="11" fill={v.body} />
+            <ellipse cx="32" cy="17" rx="20" ry="6" fill={v.highlight} opacity="0.7" />
+            {v.stripe && (
+              <>
+                <path d="M 20 12 Q 22 20 20 28 L 24 28 Q 26 20 24 12 Z" fill={v.stripe} opacity="0.6" />
+                <path d="M 38 11 Q 40 20 38 29 L 42 29 Q 44 20 42 11 Z" fill={v.stripe} opacity="0.6" />
+              </>
+            )}
+            <path d="M 26 10 Q 32 2 38 10 Z" fill={v.fin} />
+            <path d="M 28 30 Q 32 36 36 30 Z" fill={v.fin} />
+            <circle cx="46" cy="18" r="2.5" fill="white" />
+            <circle cx="46.5" cy="18" r="1.4" fill="#0f172a" />
+            <path
+              d="M 40 17 Q 38 20 40 23"
+              stroke={v.mouth}
+              strokeWidth="1"
+              fill="none"
+            />
           </>
         )}
-        <path d="M 26 10 Q 32 2 38 10 Z" fill={v.fin} />
-        <path d="M 28 30 Q 32 36 36 30 Z" fill={v.fin} />
-        <circle cx="46" cy="18" r="2.5" fill="white" />
-        <circle cx="46.5" cy="18" r="1.4" fill="#0f172a" />
-        <path
-          d="M 40 17 Q 38 20 40 23"
-          stroke={v.mouth}
-          strokeWidth="1"
-          fill="none"
-        />
       </svg>
     </motion.div>
   );
