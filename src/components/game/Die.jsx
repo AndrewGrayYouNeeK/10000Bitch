@@ -246,7 +246,7 @@ export default function Die({
           const TOXIC2_X_OFFSET = { 2: -4, 3: -7, 4: -1, 5: -4, 6: -7 };
           const TOXIC2_Y_OFFSET = { 4: -4 };
           // Labradorite per-face tuning
-          const LABRADORITE_X_OFFSET = { 2: 2, 3: 2 };
+          const LABRADORITE_X_OFFSET = { 2: 2, 3: 4 };
           const LABRADORITE_Y_OFFSET = {};
 
           const xNudge = skin.id === "wood"
