@@ -38,9 +38,7 @@ export default function DiceRain() {
 
     let frame;
     const draw = () => {
-      // Trail effect — fade previous frame instead of clearing
-      ctx.fillStyle = "rgba(2, 4, 8, 0.18)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       diceRef.current.forEach((d, i) => {
         d.flipTimer--;
