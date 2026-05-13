@@ -191,8 +191,8 @@ export default function Die({
           const yNudge = AQUA_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0);
           return (
             <>
-              {/* Snowflakes drift behind — density tied to face value */}
-              <SnowGlobeOverlay size={size} radius={radius} count={value} />
+              {/* Snowflakes drift behind — density tied to face value; goes crazy while rolling */}
+              <SnowGlobeOverlay size={size} radius={radius} count={value} shaking={rolling} />
               {/* Aquamarine sprite as a translucent glass shell */}
               <div
                 className="absolute pointer-events-none"
@@ -551,25 +551,7 @@ export default function Die({
           </div>
         }
 
-        {/* Snow Globe — dark pip grid on top so the number is readable through the snow */}
-        {skin.id === "snow_globe" && (
-          <div
-            className="absolute grid grid-cols-3 grid-rows-3 z-10"
-            style={{ inset: padding, gap: Math.round(size * 0.045) }}
-          >
-            {layout.flat().map((p, i) => (
-              <div key={i} className="flex items-center justify-center">
-                {p === 1 && (
-                  <Pip
-                    size={pipSize}
-                    colorClass="bg-slate-900"
-                    inset={true}
-                  />
-                )}
-              </div>
-            ))}
-          </div>
-        )}
+
 
         {/* Corner shadow vignette — Chrome Silver only */}
         {skin.id === "silver" && (

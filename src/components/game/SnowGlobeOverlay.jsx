@@ -4,30 +4,47 @@ import { motion } from "framer-motion";
 /**
  * A single drifting snowflake.
  */
-function Snowflake({ size, leftPct, delay, duration, drift, scale }) {
+function Snowflake({ size, leftPct, delay, duration, drift, scale, shaking, startTop, startLeftPct }) {
   const flakeSize = size * 0.06 * scale;
   return (
     <motion.div
       className="absolute"
       style={{
-        top: -flakeSize,
-        left: `${leftPct}%`,
+        top: shaking ? `${startTop}%` : -flakeSize,
+        left: `${shaking ? startLeftPct : leftPct}%`,
         width: flakeSize,
         height: flakeSize,
       }}
-      animate={{
-        y: [0, size * 1.2],
-        x: [0, drift, -drift, drift * 0.5, 0],
-        opacity: [0, 1, 1, 1, 0],
-        rotate: [0, 360],
-      }}
-      transition={{
-        duration,
-        repeat: Infinity,
-        delay,
-        ease: "linear",
-        times: [0, 0.15, 0.5, 0.85, 1],
-      }}
+      animate={
+        shaking
+          ? {
+              x: [0, size * 0.9, -size * 0.9, size * 0.7, -size * 0.7, 0],
+              y: [0, -size * 0.4, size * 0.4, -size * 0.3, size * 0.3, 0],
+              rotate: [0, 720, -720, 540, -540, 0],
+              opacity: [1, 1, 1, 1, 1, 1],
+            }
+          : {
+              y: [0, size * 1.2],
+              x: [0, drift, -drift, drift * 0.5, 0],
+              opacity: [0, 1, 1, 1, 0],
+              rotate: [0, 360],
+            }
+      }
+      transition={
+        shaking
+          ? {
+              duration: 0.85,
+              ease: "easeInOut",
+              times: [0, 0.2, 0.4, 0.6, 0.8, 1],
+            }
+          : {
+              duration,
+              repeat: Infinity,
+              delay,
+              ease: "linear",
+              times: [0, 0.15, 0.5, 0.85, 1],
+            }
+      }
     >
       <svg viewBox="0 0 16 16" width="100%" height="100%" style={{ filter: "drop-shadow(0 0 2px rgba(255,255,255,0.7))" }}>
         <g stroke="white" strokeWidth="1.4" strokeLinecap="round" fill="none">
@@ -50,8 +67,8 @@ function Snowflake({ size, leftPct, delay, duration, drift, scale }) {
  * Snow globe interior — snowflakes drifting down inside a glassy dome.
  * `count` (matches die face value) controls density: higher values = more snow.
  */
-export default function SnowGlobeOverlay({ size, radius, count = 1 }) {
-  const flakeCount = count >= 5 ? 28 : count === 4 ? 20 : count === 3 ? 14 : count === 2 ? 10 : 7;
+export default function SnowGlobeOverlay({ size, radius, count = 1, shaking = false }) {
+  const flakeCount = shaking ? 40 : count >= 5 ? 28 : count === 4 ? 20 : count === 3 ? 14 : count === 2 ? 10 : 7;
   const flakes = React.useMemo(() => {
     return Array.from({ length: flakeCount }, (_, i) => ({
       leftPct: (i * 53) % 95 + 2,
@@ -59,6 +76,8 @@ export default function SnowGlobeOverlay({ size, radius, count = 1 }) {
       duration: 4 + ((i * 0.41) % 3),
       drift: size * (0.04 + (i % 4) * 0.02),
       scale: 0.6 + (i % 5) * 0.15,
+      startTop: (i * 41) % 90 + 5,
+      startLeftPct: (i * 67) % 90 + 5,
     }));
   }, [flakeCount, size]);
 
@@ -88,7 +107,7 @@ export default function SnowGlobeOverlay({ size, radius, count = 1 }) {
 
       {/* Drifting snowflakes */}
       {flakes.map((f, i) => (
-        <Snowflake key={i} size={size} {...f} />
+        <Snowflake key={`${shaking ? "s" : "d"}-${i}`} size={size} shaking={shaking} {...f} />
       ))}
     </div>
   );
