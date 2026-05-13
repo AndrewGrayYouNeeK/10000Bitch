@@ -62,10 +62,11 @@ export default function NeonTitle({ dieSize = 44 }) {
       >
         1
       </span>
+      <DieZero size={dieSize} pips={1} />
       <span className="neon-text-magenta" style={{ fontSize: dieSize * 0.6, lineHeight: 1 }}>,</span>
-      <DieZero size={dieSize} pips={5} />
-      <DieZero size={dieSize} pips={6} />
-      <DieZero size={dieSize} pips={3} />
+      <DieZero size={dieSize} pips={1} />
+      <DieZero size={dieSize} pips={1} />
+      <DieZero size={dieSize} pips={1} />
     </div>
   );
 }
