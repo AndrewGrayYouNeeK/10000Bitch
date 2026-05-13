@@ -27,10 +27,10 @@ export default function DiceRain() {
     const spawn = (initial = false) => ({
       x: randomBetween(0, canvas.width),
       y: initial ? randomBetween(-canvas.height, canvas.height) : randomBetween(-canvas.height * 0.5, -SIZE),
-      vy: randomBetween(2.2, 6.5),
+      vy: randomBetween(0.6, 1.8),
       face: FACES[Math.floor(Math.random() * 6)],
-      flipTimer: Math.floor(randomBetween(20, 80)),
-      opacity: randomBetween(0.25, 0.85),
+      flipTimer: Math.floor(randomBetween(40, 140)),
+      opacity: randomBetween(0.08, 0.3),
       size: randomBetween(SIZE * 0.6, SIZE * 1.2),
     });
 
@@ -60,9 +60,9 @@ export default function DiceRain() {
         ctx.font = `${d.size}px serif`;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.shadowColor = "rgba(0, 255, 200, 0.9)";
-        ctx.shadowBlur = 10;
-        ctx.fillStyle = "rgba(0, 255, 200, 0.9)";
+        ctx.shadowColor = "rgba(0, 255, 200, 0.5)";
+        ctx.shadowBlur = 5;
+        ctx.fillStyle = "rgba(0, 200, 160, 0.7)";
         ctx.fillText(d.face, d.x, d.y);
         ctx.restore();
       });
