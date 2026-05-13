@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Dices, Users, BookOpen, Sparkles, Coins, Zap } from "lucide-react";
+import { Dices, Users, BookOpen, Sparkles, Coins, Zap, Wifi } from "lucide-react";
 import RulesSheet from "@/components/game/RulesSheet";
 import { useCosmetics } from "@/hooks/useCosmetics";
 import DiceRain from "@/components/game/DiceRain";
@@ -173,6 +173,26 @@ export default function Home() {
               />
               <Zap className="w-6 h-6" />
               PLAY NOW
+            </Link>
+          </motion.div>
+
+          {/* Online play */}
+          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
+            <Link
+              to="/online"
+              className="flex items-center justify-center w-full h-14 text-base font-black rounded-lg gap-2 relative overflow-hidden border"
+              style={{
+                background: "rgba(0,255,200,0.08)",
+                borderColor: "rgba(0,255,200,0.5)",
+                color: "#00ffc8",
+                boxShadow: "0 0 20px rgba(0,255,200,0.2)",
+              }}
+            >
+              <Wifi className="w-5 h-5" />
+              PLAY ONLINE
+              <span className="text-[10px] font-bold ml-1 px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                1.5×
+              </span>
             </Link>
           </motion.div>
 

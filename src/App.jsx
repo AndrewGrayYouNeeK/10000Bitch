@@ -13,6 +13,8 @@ import Rules from '@/pages/Rules';
 import Shop from '@/pages/Shop';
 import About from '@/pages/About';
 import Contact from '@/pages/Contact';
+import OnlineLobby from '@/pages/OnlineLobby';
+import OnlineGame from '@/pages/OnlineGame';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -47,6 +49,8 @@ const AuthenticatedApp = () => {
       <Route path="/shop" element={<Shop />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/online" element={<OnlineLobby />} />
+      <Route path="/online/:matchId" element={<OnlineGame />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

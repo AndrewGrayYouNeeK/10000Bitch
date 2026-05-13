@@ -1,0 +1,126 @@
+{
+  "name": "OnlineMatch",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "active",
+        "finished",
+        "abandoned"
+      ],
+      "default": "waiting",
+      "description": "Match lifecycle status"
+    },
+    "max_players": {
+      "type": "number",
+      "default": 4,
+      "description": "Max players allowed in this match"
+    },
+    "players": {
+      "type": "array",
+      "description": "List of players in this match",
+      "items": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "score": {
+            "type": "number",
+            "default": 0
+          },
+          "onBoard": {
+            "type": "boolean",
+            "default": false
+          },
+          "skin_id": {
+            "type": "string"
+          },
+          "felt_id": {
+            "type": "string"
+          },
+          "badge_id": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "current_index": {
+      "type": "number",
+      "default": 0,
+      "description": "Index of the player whose turn it is"
+    },
+    "dice": {
+      "type": "array",
+      "description": "Current dice state",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "value": {
+            "type": "number"
+          },
+          "used": {
+            "type": "boolean"
+          },
+          "held": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "has_rolled": {
+      "type": "boolean",
+      "default": false
+    },
+    "turn_score": {
+      "type": "number",
+      "default": 0
+    },
+    "farkle": {
+      "type": "boolean",
+      "default": false
+    },
+    "bust_count": {
+      "type": "number",
+      "default": 0
+    },
+    "last_bust_word": {
+      "type": "string"
+    },
+    "winner_email": {
+      "type": "string"
+    },
+    "perfect_ten_k": {
+      "type": "boolean",
+      "default": false
+    },
+    "message": {
+      "type": "string"
+    },
+    "message_variant": {
+      "type": "string",
+      "default": "info"
+    },
+    "last_action_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "rewards_awarded": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether end-of-game rewards have been distributed"
+    }
+  },
+  "required": [
+    "status",
+    "players"
+  ]
+}

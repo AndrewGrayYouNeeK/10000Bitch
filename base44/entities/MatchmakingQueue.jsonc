@@ -1,0 +1,31 @@
+{
+  "name": "MatchmakingQueue",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "description": "Email of the player waiting"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the player"
+    },
+    "match_id": {
+      "type": "string",
+      "description": "Once matched, the OnlineMatch id assigned to this player"
+    },
+    "skin_id": {
+      "type": "string"
+    },
+    "felt_id": {
+      "type": "string"
+    },
+    "badge_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "email",
+    "name"
+  ]
+}
