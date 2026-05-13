@@ -340,17 +340,6 @@ export default function Game() {
         </div>
       </div>
 
-      {/* Neon footer strip */}
-      <div
-        className="text-center font-term tracking-[0.22em] text-[12px] py-1"
-        style={{
-          color: "#ff66ff",
-          textShadow: "0 0 10px #ff00ea, 0 0 18px rgba(0,255,255,0.5)",
-        }}
-      >
-        ▣ STAY NEON • MAX RISK • DON'T FARKLE OUT ▣
-      </div>
-
       {/* Actions */}
       <div
         className="p-3 space-y-2 border-t"
