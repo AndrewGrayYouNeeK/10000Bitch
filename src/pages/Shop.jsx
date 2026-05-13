@@ -5,6 +5,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { ArrowLeft, Coins, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 import { DICE_SKINS, BADGES } from "@/lib/shopCatalog";
+import { getDuplicateGroups } from "@/lib/duplicateSkins";
 import { useCosmetics } from "@/hooks/useCosmetics";
 import ShopItemCard from "@/components/shop/ShopItemCard";
 import DicePreview from "@/components/shop/DicePreview";
@@ -66,18 +67,22 @@ export default function Shop() {
 
           <TabsContent value="skins" className="mt-4">
             <div className="grid grid-cols-2 gap-3">
-              {DICE_SKINS.map(skin => (
-                <ShopItemCard
-                  key={skin.id}
-                  item={skin}
-                  owned={ownedSkins.includes(skin.id)}
-                  equipped={equippedSkinId === skin.id}
-                  canAfford={coins >= skin.price}
-                  onBuy={() => handleBuy("skin", skin)}
-                  onEquip={() => handleEquip("skin", skin)}
-                  preview={<DicePreview skinId={skin.id} pipsId={equippedPipsId} />}
-                />
-              ))}
+              {(() => {
+                const dupes = getDuplicateGroups(DICE_SKINS);
+                return DICE_SKINS.map(skin => (
+                  <ShopItemCard
+                    key={skin.id}
+                    item={skin}
+                    owned={ownedSkins.includes(skin.id)}
+                    equipped={equippedSkinId === skin.id}
+                    canAfford={coins >= skin.price}
+                    onBuy={() => handleBuy("skin", skin)}
+                    onEquip={() => handleEquip("skin", skin)}
+                    preview={<DicePreview skinId={skin.id} pipsId={equippedPipsId} />}
+                    duplicateTag={dupes[skin.id]}
+                  />
+                ));
+              })()}
             </div>
           </TabsContent>
 

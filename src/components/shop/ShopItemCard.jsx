@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Coins, Check, Lock } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-export default function ShopItemCard({ item, owned, equipped, canAfford, onBuy, onEquip, preview }) {
+export default function ShopItemCard({ item, owned, equipped, canAfford, onBuy, onEquip, preview, duplicateTag }) {
   return (
     <motion.div
       whileHover={{ y: -3 }}
@@ -16,6 +16,14 @@ export default function ShopItemCard({ item, owned, equipped, canAfford, onBuy, 
       {equipped && (
         <div className="absolute top-2 right-2 bg-amber-500 text-black text-[10px] font-black px-2 py-0.5 rounded-full">
           EQUIPPED
+        </div>
+      )}
+      {duplicateTag && (
+        <div className={cn(
+          "absolute top-2 left-2 text-[10px] font-black px-2 py-0.5 rounded-full",
+          duplicateTag.bg, duplicateTag.text
+        )}>
+          {duplicateTag.label}
         </div>
       )}
 
