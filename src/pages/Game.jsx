@@ -23,6 +23,7 @@ import RulesSheet from "@/components/game/RulesSheet";
 import BigPopup from "@/components/game/BigPopup";
 import CyberBackground from "@/components/game/CyberBackground";
 import NeonTitle from "@/components/game/NeonTitle";
+import GlitchNeonBanner from "@/components/game/GlitchNeonBanner";
 import { useCosmetics } from "@/hooks/useCosmetics";
 import { XP_REWARDS } from "@/lib/progression";
 
@@ -237,11 +238,10 @@ export default function Game() {
             boxShadow: "0 0 18px #00ffff, 0 0 36px rgba(255,0,234,0.6)",
           }}
         >
-          <img
+          <GlitchNeonBanner
             src="https://media.base44.com/images/public/69e7669b223d37093cd03879/354eae8fe_generated_image.png"
             alt="Neon 10000 sign"
-            className="w-full h-48 sm:h-64 object-cover"
-            style={{ objectPosition: "center 30%" }}
+            objectPosition="center 30%"
           />
         </div>
       </div>
