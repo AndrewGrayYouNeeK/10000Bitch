@@ -141,7 +141,7 @@ export default function Die({
 
   return (
     <motion.div
-      key={rolling ? rollKey.current : "idle"}
+      key={skin.videoUrl ? "die" : (rolling ? rollKey.current : "idle")}
       className="flex-shrink-0"
       style={{ width: size, height: size }}
       initial={false}
