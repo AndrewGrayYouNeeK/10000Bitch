@@ -411,18 +411,6 @@ export const DICE_SKINS = [
     spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/4ea2ebc40_AEVwA3ZnKA53oXNB1kVpd_lBugstGt.png",
   },
   {
-    id: "yellow_felt_v2",
-    name: "Yellow Felt Plush",
-    price: 250,
-    gradient: "from-yellow-200 via-yellow-300 to-yellow-400",
-    border: "border-yellow-500",
-    pipColor: "bg-slate-900",
-    glow: "shadow-yellow-300/60",
-    description: "Fuzzy and soft.",
-    realistic: true,
-    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/8b2a4e61b_KkOdrHpwX5jkGjo3GQkfZ_eWYF4Kqn.png",
-  },
-  {
     id: "neon_grid",
     name: "Neon Grid",
     price: 1100,
