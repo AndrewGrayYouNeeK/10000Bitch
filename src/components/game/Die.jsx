@@ -282,18 +282,19 @@ export default function Die({
             : skin.id === "leather"
             ? (LEATHER_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : (FACE_Y_OFFSET[value] || 0);
+          const stretch = skin.id === "moonstone" ? size * 0.0075 : 0;
           return (
             <div
               className="absolute pointer-events-none"
               style={{
-                top: `${-size * 0.14 + yNudge}px`,
-                bottom: `${-size * 0.8 + yNudge}px`,
-                left: `${-size * 0.35 + xNudge}px`,
-                right: `${-size * 0.35 + xNudge}px`,
+                top: `${-size * 0.14 + yNudge - stretch}px`,
+                bottom: `${-size * 0.8 + yNudge - stretch}px`,
+                left: `${-size * 0.35 + xNudge - stretch}px`,
+                right: `${-size * 0.35 + xNudge - stretch}px`,
                 borderRadius: radius,
                 backgroundImage: `url(${skin.spriteUrl})`,
-                backgroundSize: `${cellW * cols}px ${cellH * rows}px`,
-                backgroundPosition: `${-(col * cellW)}px ${-(row * cellH)}px`,
+                backgroundSize: `${cellW * cols + stretch * 2}px ${cellH * rows + stretch * 2}px`,
+                backgroundPosition: `${-(col * (cellW + stretch * 2 / cols))}px ${-(row * (cellH + stretch * 2 / rows))}px`,
                 backgroundRepeat: 'no-repeat',
               }} />
           );
