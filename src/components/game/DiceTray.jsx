@@ -96,6 +96,7 @@ export default function DiceTray({ dice, rolling, onToggle, disabled, skinId, pi
               size={100}
               skinId="blue_gel"
               pipsId={pipsId}
+              bigFishVariantIndex={idx}
             />
           </motion.div>
         ))}

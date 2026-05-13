@@ -90,29 +90,35 @@ function Fish({ size, top, duration, delay, dir = 1, scale = 1, variant }) {
  * Animated cartoon fish swimming inside the die.
  * `count` controls how many fish appear (matches the die's face value).
  */
-export default function FishOverlay({ size, radius, count = 1 }) {
+export default function FishOverlay({ size, radius, count = 1, bigFishVariantIndex = 0 }) {
   // Distribute fish vertically across the die. Stagger timing & direction for variety.
   const fish = React.useMemo(() => {
     const arr = [];
     const n = Math.max(1, count);
-    // Shuffle variant indices so the same fish doesn't repeat back-to-back.
-    const indices = FISH_VARIANTS.map((_, i) => i).sort(() => Math.random() - 0.5);
-    // Pick one fish to be the "big one"
+    // Pick which fish on this die will be the "big one"
     const bigIdx = Math.floor(Math.random() * n);
+    // The big fish uses a deterministic variant (unique per die).
+    const bigVariant = FISH_VARIANTS[bigFishVariantIndex % FISH_VARIANTS.length];
+    // Smaller fish use any variant EXCEPT the big one's, shuffled.
+    const smallPool = FISH_VARIANTS
+      .filter((_, i) => i !== bigFishVariantIndex % FISH_VARIANTS.length)
+      .sort(() => Math.random() - 0.5);
+    let smallCursor = 0;
     for (let i = 0; i < n; i++) {
       const top = n === 1 ? 40 : 15 + (i * 65) / (n - 1);
       const baseScale = n >= 5 ? 0.75 : n >= 3 ? 0.85 : 1;
+      const isBig = i === bigIdx;
       arr.push({
         top,
         duration: 5 + ((i * 0.7) % 2.5),
         delay: -(i * 1.3 + Math.random() * 1.5),
         dir: i % 2 === 0 ? 1 : -1,
-        scale: i === bigIdx ? baseScale * 1.6 : baseScale,
-        variant: FISH_VARIANTS[indices[i % indices.length]],
+        scale: isBig ? baseScale * 1.6 : baseScale,
+        variant: isBig ? bigVariant : smallPool[smallCursor++ % smallPool.length],
       });
     }
     return arr;
-  }, [count]);
+  }, [count, bigFishVariantIndex]);
 
   return (
     <div

@@ -65,7 +65,8 @@ export default function Die({
   onClick,
   size = 64,
   skinId = "classic_white",
-  pipsId = "classic_dots"
+  pipsId = "classic_dots",
+  bigFishVariantIndex = 0
 }) {
   const layout = PIP_LAYOUTS[value] || PIP_LAYOUTS[1];
   const skin = getSkin(skinId);
@@ -189,7 +190,7 @@ export default function Die({
           return (
             <>
               {/* Fish swim behind — one per pip on the face */}
-              <FishOverlay size={size} radius={radius} count={value} />
+              <FishOverlay size={size} radius={radius} count={value} bigFishVariantIndex={bigFishVariantIndex} />
               {/* Aquamarine sprite as a translucent glass shell — on top of the fish */}
               <div
                 className="absolute pointer-events-none"
