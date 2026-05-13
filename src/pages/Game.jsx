@@ -240,7 +240,8 @@ export default function Game() {
           <img
             src="https://media.base44.com/images/public/69e7669b223d37093cd03879/354eae8fe_generated_image.png"
             alt="Neon 10000 sign"
-            className="w-full h-48 sm:h-64 object-cover object-bottom"
+            className="w-full h-48 sm:h-64 object-cover"
+            style={{ objectPosition: "center 85%" }}
           />
         </div>
       </div>
