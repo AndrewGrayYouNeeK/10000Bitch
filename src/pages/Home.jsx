@@ -14,7 +14,7 @@ export default function Home() {
 
   return (
     <div
-      className="min-h-screen flex flex-col items-center justify-center p-6 overflow-hidden relative"
+      className="min-h-screen flex flex-col items-center justify-center px-6 pb-6 pt-20 overflow-hidden relative"
       style={{ background: "#020408" }}
     >
       {/* Matrix dice rain */}
