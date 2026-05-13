@@ -214,7 +214,7 @@ export default function Die({
           const LOVE_X_OFFSET = { 2: size * 0.01, 3: size * 0.01, 5: size * 0.01, 6: size * 0.01 };
           const LOVE_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.02, 4: -size * 0.04, 5: -size * 0.04, 6: -size * 0.04 };
           const CRYSTAL_CUT_X_OFFSET = { 2: -size * 0.0925, 3: -size * 0.175, 4: -size * 0.03, 5: -size * 0.09, 6: -size * 0.145 };
-          const CRYSTAL_CUT_Y_OFFSET = { 4: -size * 0.045, 5: -size * 0.0375, 6: -size * 0.015 };
+          const CRYSTAL_CUT_Y_OFFSET = { 4: -size * 0.06, 5: -size * 0.0525, 6: -size * 0.015 };
           const xNudge = skin.id === "wood"
             ? (WOOD_X_OFFSET[value] ?? (FACE_X_OFFSET[value] || 0))
             : skin.id === "silver"
