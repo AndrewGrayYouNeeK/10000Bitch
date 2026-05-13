@@ -287,8 +287,17 @@ export default function Die({
           </div>
         }
 
-        {/* Corner shadow vignette — darkens the corners to hide tray bleed-through (skipped for silver) */}
-
+        {/* Corner shadow vignette — Chrome Silver only */}
+        {skin.id === "silver" && (
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              borderRadius: radius,
+              background:
+                "radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.35) 90%, rgba(0,0,0,0.55) 100%)",
+            }}
+          />
+        )}
 
         {/* Top-left gloss highlight — only for non-photo skins */}
         {skin.realistic && skin.id !== "classic_white" && skin.id !== "classic_white" &&
