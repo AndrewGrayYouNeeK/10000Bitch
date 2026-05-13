@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Die from "@/components/game/Die";
+import { useCosmetics } from "@/hooks/useCosmetics";
 
-// Continuously rolling row of 6 Diamond dice for the Home screen.
+// Continuously rolling row of 6 dice for the Home screen — uses the equipped skin.
 export default function DiamondShowcase() {
+  const { equippedSkinId, equippedPipsId } = useCosmetics();
   const [dice, setDice] = useState([1, 2, 3, 4, 5, 6]);
   const [rolling, setRolling] = useState(false);
 
@@ -25,8 +27,8 @@ export default function DiamondShowcase() {
           value={value}
           rolling={rolling}
           size={40}
-          skinId="leather"
-          pipsId="classic_dots"
+          skinId={equippedSkinId}
+          pipsId={equippedPipsId}
         />
       ))}
     </div>
