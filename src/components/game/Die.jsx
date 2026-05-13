@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { getSkin, getPipStyle, getSpriteStyle } from "@/lib/shopCatalog";
 import Pip from "./Pip";
 import LightningOverlay from "./LightningOverlay";
+import FishOverlay from "./FishOverlay";
 
 // Pip grid positions for each face value.
 // Grid is 3x3. 1 = pip present, 0 = empty.
@@ -169,6 +170,9 @@ export default function Die({
             style={{ borderRadius: radius, transform: `translateY(${size * 0.5}px) scale(7)`, transformOrigin: "center" }}
           />
         )}
+
+        {/* Fish Tank overlay — swimming fish behind pips */}
+        {skin.id === "fish_tank" && <FishOverlay size={size} radius={radius} />}
 
         {/* Sprite sheet texture or pip grid */}
         {skin.spriteUrl ?
