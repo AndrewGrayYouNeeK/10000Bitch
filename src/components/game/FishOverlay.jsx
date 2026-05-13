@@ -20,8 +20,8 @@ const FISH_VARIANTS = [
   { tail: "#15803d", body: "#22c55e", highlight: "#86efac", fin: "#14532d", mouth: "#166534", stripe: null },
   // Angelfish — silver body with bold black vertical bars and yellow fins
   { tail: "#facc15", body: "#e5e7eb", highlight: "#f9fafb", fin: "#facc15", mouth: "#1f2937", stripe: "#0f172a", angelfish: true },
-  // Angelfish (coral) — warm orange body with deep red bars and magenta fins
-  { tail: "#ec4899", body: "#fb923c", highlight: "#fed7aa", fin: "#ec4899", mouth: "#7f1d1d", stripe: "#7f1d1d", angelfish: true },
+  // Angelfish (blue) — two-tone blue with deep navy bars
+  { tail: "#1e40af", body: "#3b82f6", highlight: "#93c5fd", fin: "#1d4ed8", mouth: "#1e3a8a", stripe: "#1e3a8a", angelfish: true },
 ];
 
 /**
@@ -62,28 +62,28 @@ function Fish({ size, top, duration, delay, dir = 1, scale = 1, variant }) {
       >
         {v.angelfish ? (
           <>
-            {/* Tall triangular dorsal fin */}
-            <path d="M 30 14 L 24 -2 L 38 14 Z" fill={v.fin} opacity="0.95" />
-            {/* Tall triangular anal fin */}
-            <path d="M 30 26 L 24 42 L 38 26 Z" fill={v.fin} opacity="0.95" />
-            {/* Trailing tail */}
+            {/* Tall angular dorsal fin */}
+            <path d="M 28 12 L 22 -4 L 40 12 Z" fill={v.fin} opacity="0.95" />
+            {/* Tall angular anal fin */}
+            <path d="M 28 28 L 22 44 L 40 28 Z" fill={v.fin} opacity="0.95" />
+            {/* Trailing angular tail */}
             <motion.path
-              d="M 10 20 L 0 10 L 6 20 L 0 30 Z"
+              d="M 12 20 L 0 8 L 5 20 L 0 32 Z"
               fill={v.tail}
               animate={{ rotate: [-6, 6, -6] }}
               transition={{ duration: 0.45, repeat: Infinity, ease: "easeInOut" }}
               style={{ originX: "20%", originY: "50%" }}
             />
-            {/* Disc-shaped body */}
-            <ellipse cx="32" cy="20" rx="20" ry="13" fill={v.body} />
-            <ellipse cx="32" cy="16" rx="17" ry="6" fill={v.highlight} opacity="0.7" />
-            {/* Bold vertical bars */}
-            <path d="M 22 9 Q 24 20 22 31 L 26 31 Q 28 20 26 9 Z" fill={v.stripe} opacity="0.75" />
-            <path d="M 36 9 Q 38 20 36 31 L 40 31 Q 42 20 40 9 Z" fill={v.stripe} opacity="0.75" />
+            {/* Diamond/kite body — straight edges */}
+            <path d="M 12 20 L 32 6 L 52 20 L 32 34 Z" fill={v.body} />
+            <path d="M 18 18 L 32 10 L 46 18 L 32 22 Z" fill={v.highlight} opacity="0.7" />
+            {/* Bold straight vertical bars */}
+            <path d="M 22 10 L 26 10 L 26 30 L 22 30 Z" fill={v.stripe} opacity="0.75" />
+            <path d="M 36 10 L 40 10 L 40 30 L 36 30 Z" fill={v.stripe} opacity="0.75" />
             {/* Eye */}
             <circle cx="46" cy="18" r="2.5" fill="white" />
             <circle cx="46.5" cy="18" r="1.4" fill="#0f172a" />
-            <path d="M 40 17 Q 38 20 40 23" stroke={v.mouth} strokeWidth="1" fill="none" />
+            <path d="M 42 19 L 40 20 L 42 21" stroke={v.mouth} strokeWidth="1" fill="none" />
           </>
         ) : (
           <>
