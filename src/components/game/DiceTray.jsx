@@ -9,12 +9,9 @@ import { motion } from "framer-motion";
 export default function DiceTray({ dice, rolling, onToggle, disabled, skinId, pipsId }) {
   return (
     <div
-      className="relative rounded-3xl p-6 overflow-hidden border-4 border-amber-900/60 shadow-2xl"
+      className="relative rounded-3xl p-6 overflow-hidden border-4 border-amber-900/60"
       style={{
-        background:
-          "radial-gradient(ellipse at center, #1f6b3a 0%, #134524 55%, #061509 100%)",
-        boxShadow:
-          "inset 0 0 80px 30px rgba(0,0,0,0.85), inset 0 0 40px rgba(0,0,0,0.6), inset 0 4px 10px rgba(255,255,255,0.06), 0 10px 30px rgba(0,0,0,0.5)",
+        background: "#1f6b3a",
       }}
     >
       {/* Felt texture */}
