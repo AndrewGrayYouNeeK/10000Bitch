@@ -7,9 +7,10 @@ import RulesSheet from "@/components/game/RulesSheet";
 import { useCosmetics } from "@/hooks/useCosmetics";
 import DiceRain from "@/components/game/DiceRain";
 import DiamondShowcase from "@/components/home/DiamondShowcase";
+import PrisonDiceIntro from "@/components/onboarding/PrisonDiceIntro";
 
 export default function Home() {
-  const { coins, isLoading } = useCosmetics();
+  const { coins, isLoading, introSeen, markIntroSeen, user } = useCosmetics();
 
   return (
     <div
@@ -218,6 +219,8 @@ export default function Home() {
           <Link to="/contact" className="hover:opacity-70 transition-opacity">Contact</Link>
         </div>
       </motion.div>
+
+      <PrisonDiceIntro open={!!user && !introSeen} onDismiss={markIntroSeen} />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { base44 } from "@/api/base44Client";
 import { getSkin, getPipStyle, getBadge, getFelt } from "@/lib/shopCatalog";
+import { getTierForXp, getNextTier, getSkinEffectivePrice, isSkinUnlockedByTier } from "@/lib/progression";
 
 // Fetches the current user (with cosmetics fields) and exposes equipped/owned helpers + mutations.
 export function useCosmetics() {
@@ -21,6 +22,10 @@ export function useCosmetics() {
   });
 
   const coins = user?.coins ?? 0;
+  const xp = user?.xp ?? 0;
+  const currentTier = getTierForXp(xp);
+  const nextTier = getNextTier(xp);
+  const introSeen = user?.intro_seen ?? false;
   const ownedSkins = user?.owned_skins ?? ["classic_white"];
   const ownedPips = user?.owned_pips ?? ["classic_dots"];
   const ownedBadges = user?.owned_badges ?? [];
@@ -40,9 +45,32 @@ export function useCosmetics() {
     updateMe.mutate({ coins: Math.max(0, (user.coins ?? 0) + delta) });
   };
 
+  const addXp = (delta) => {
+    if (!user || !delta) return;
+    updateMe.mutate({ xp: Math.max(0, (user.xp ?? 0) + delta) });
+  };
+
+  // Update XP, wins, and games_finished in a single mutation when a game ends.
+  const recordGameResult = ({ won, xpGain }) => {
+    if (!user) return;
+    updateMe.mutate({
+      xp: Math.max(0, (user.xp ?? 0) + (xpGain || 0)),
+      games_finished: (user.games_finished ?? 0) + 1,
+      wins: (user.wins ?? 0) + (won ? 1 : 0),
+    });
+  };
+
+  const markIntroSeen = () => {
+    if (!user || user.intro_seen) return;
+    updateMe.mutate({ intro_seen: true });
+  };
+
   const buyItem = (type, item) => {
     if (!user) return { ok: false, reason: "not_loaded" };
-    if (coins < item.price) return { ok: false, reason: "insufficient" };
+
+    // For skins, apply the tier shortcut multiplier when buying above your tier.
+    const effectivePrice = type === "skin" ? getSkinEffectivePrice(item, xp) : item.price;
+    if (coins < effectivePrice) return { ok: false, reason: "insufficient" };
 
     const key = type === "skin" ? "owned_skins" : type === "pips" ? "owned_pips" : type === "felt" ? "owned_felts" : "owned_badges";
     const current = user[key] || [];
@@ -50,9 +78,9 @@ export function useCosmetics() {
 
     updateMe.mutate({
       [key]: [...current, item.id],
-      coins: coins - item.price,
+      coins: coins - effectivePrice,
     });
-    return { ok: true };
+    return { ok: true, pricePaid: effectivePrice };
   };
 
   const equipItem = (type, itemId) => {
@@ -63,12 +91,14 @@ export function useCosmetics() {
   return {
     user,
     isLoading,
-    coins,
+    coins, xp, currentTier, nextTier, introSeen,
     ownedSkins, ownedPips, ownedBadges, ownedFelts,
     equippedSkinId, equippedPipsId, equippedBadgeId, equippedFeltId,
     equippedSkin, equippedPips, equippedBadge, equippedFelt,
-    addCoins,
+    addCoins, addXp, markIntroSeen, recordGameResult,
     buyItem,
     equipItem,
+    getSkinEffectivePrice: (skin) => getSkinEffectivePrice(skin, xp),
+    isSkinUnlockedByTier: (skinId) => isSkinUnlockedByTier(skinId, xp),
   };
 }

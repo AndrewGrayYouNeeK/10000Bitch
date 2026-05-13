@@ -22,7 +22,7 @@ import GameOverDialog from "@/components/game/GameOverDialog";
 import RulesSheet from "@/components/game/RulesSheet";
 import BigPopup from "@/components/game/BigPopup";
 import { useCosmetics } from "@/hooks/useCosmetics";
-import { DICE_SKINS } from "@/lib/shopCatalog";
+import { XP_REWARDS } from "@/lib/progression";
 
 export default function Game() {
   const navigate = useNavigate();
@@ -30,21 +30,9 @@ export default function Game() {
   const [rollAnim, setRollAnim] = useState(false);
   const [popup, setPopup] = useState(null); // { word, variant }
   const [shakeTriggered, setShakeTriggered] = useState(0);
-  const { equippedSkinId, equippedPipsId, equippedFeltId, addCoins } = useCosmetics();
+  const { user, equippedSkinId, equippedPipsId, equippedFeltId, addCoins, addXp, recordGameResult } = useCosmetics();
   const prevBustRef = React.useRef(0);
   const winnerAwardedRef = React.useRef(false);
-
-  // Cycle through every dice skin twice, 5 seconds each
-  const [skinCycleIndex, setSkinCycleIndex] = useState(0);
-  const cycleLength = DICE_SKINS.length * 2;
-  useEffect(() => {
-    const id = setInterval(() => {
-      setSkinCycleIndex(i => (i + 1 < cycleLength ? i + 1 : i));
-    }, 5000);
-    return () => clearInterval(id);
-  }, [cycleLength]);
-  const currentSkinId = DICE_SKINS[skinCycleIndex % DICE_SKINS.length].id;
-  const currentSkinName = DICE_SKINS[skinCycleIndex % DICE_SKINS.length].name;
 
   useEffect(() => {
     const stored = sessionStorage.getItem("dice10k_players");
@@ -66,13 +54,32 @@ export default function Game() {
     }
   }, [state]);
 
-  // Award 200 coin bonus on win
+  // Award coins + XP on game end (and record win / games_finished)
   useEffect(() => {
     if (state?.winner && !winnerAwardedRef.current) {
       winnerAwardedRef.current = true;
       addCoins(200);
+
+      let xpGain = XP_REWARDS.finishGame + XP_REWARDS.winGame;
+      const wins = user?.wins ?? 0;
+      if (wins === 0) xpGain += XP_REWARDS.firstWin;
+      if (wins + 1 === 10) xpGain += XP_REWARDS.tenWins;
+      if ((state.bustCount || 0) === 0) xpGain += XP_REWARDS.noFarkleGame;
+
+      recordGameResult({ won: true, xpGain });
     }
-  }, [state?.winner, addCoins]);
+  }, [state?.winner, addCoins, recordGameResult, user, state?.bustCount]);
+
+  // Hot dice XP — awarded each time a player clears all 6 dice in a turn
+  const prevDiceLeftRef = React.useRef(6);
+  useEffect(() => {
+    if (!state) return;
+    const remaining = state.dice.filter(d => !d.used).length;
+    if (remaining === 0 && prevDiceLeftRef.current > 0 && !state.farkle) {
+      addXp(XP_REWARDS.hotDice);
+    }
+    prevDiceLeftRef.current = remaining || 6;
+  }, [state, addXp]);
 
   // Shake-to-roll via DeviceMotion
   useEffect(() => {
@@ -196,9 +203,7 @@ export default function Game() {
         <Button asChild variant="ghost" size="icon" className="text-white hover:bg-white/10">
           <Link to="/"><ArrowLeft className="w-5 h-5" /></Link>
         </Button>
-        <div className="text-sm font-bold text-slate-300">
-          {currentSkinName} ({(skinCycleIndex % DICE_SKINS.length) + 1}/{DICE_SKINS.length} · pass {Math.floor(skinCycleIndex / DICE_SKINS.length) + 1}/2)
-        </div>
+        <div className="text-sm font-bold text-slate-300">Goal: 10,000</div>
         <RulesSheet />
       </div>
 
@@ -252,7 +257,7 @@ export default function Game() {
             rolling={rollAnim}
             onToggle={onToggle}
             disabled={!state.hasRolled || state.farkle || !!state.winner}
-            skinId={currentSkinId}
+            skinId={equippedSkinId}
             pipsId={equippedPipsId}
             feltId={equippedFeltId}
           />

@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { DICE_SKINS, BADGES, FELT_COLORS, getFelt } from "@/lib/shopCatalog";
 import { getDuplicateGroups } from "@/lib/duplicateSkins";
 import { useCosmetics } from "@/hooks/useCosmetics";
+import { getSkinTier, isSkinUnlockedByTier as checkUnlocked } from "@/lib/progression";
 import ShopItemCard from "@/components/shop/ShopItemCard";
 import DicePreview from "@/components/shop/DicePreview";
 import BadgePreview from "@/components/shop/BadgePreview";
@@ -15,10 +16,10 @@ import BuyCoinsDialog from "@/components/shop/BuyCoinsDialog";
 
 export default function Shop() {
   const {
-    coins, isLoading,
+    coins, xp, currentTier, nextTier, isLoading,
     ownedSkins, ownedPips, ownedBadges, ownedFelts,
     equippedSkinId, equippedPipsId, equippedBadgeId, equippedFeltId,
-    buyItem, equipItem, addCoins,
+    buyItem, equipItem, addCoins, getSkinEffectivePrice,
   } = useCosmetics();
   const [tab, setTab] = useState("skins");
 
@@ -60,6 +61,38 @@ export default function Shop() {
       </div>
 
       <div className="p-4 max-w-2xl mx-auto">
+        {/* Tier progress */}
+        <div className="rounded-2xl bg-slate-900/70 border border-slate-800 p-3 mb-4">
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-2">
+              <span className={`text-[11px] font-black px-2 py-0.5 rounded-full border ${currentTier?.chip || ""}`}>
+                {currentTier?.name || "Bronze"}
+              </span>
+              <span className="text-xs text-slate-400 font-semibold">
+                {xp.toLocaleString()} XP
+              </span>
+            </div>
+            {nextTier && (
+              <div className="text-xs text-slate-400">
+                Next: <span className="text-white font-bold">{nextTier.name}</span> at {nextTier.minXp.toLocaleString()} XP
+              </div>
+            )}
+            {!nextTier && (
+              <div className="text-xs text-fuchsia-300 font-bold">MAX TIER</div>
+            )}
+          </div>
+          {nextTier && (
+            <div className="h-1.5 rounded-full bg-slate-800 overflow-hidden">
+              <div
+                className={`h-full bg-gradient-to-r ${currentTier?.color || ""} transition-all`}
+                style={{
+                  width: `${Math.min(100, Math.max(0, ((xp - (currentTier?.minXp || 0)) / (nextTier.minXp - (currentTier?.minXp || 0))) * 100))}%`,
+                }}
+              />
+            </div>
+          )}
+        </div>
+
         <Tabs value={tab} onValueChange={setTab}>
           <TabsList className="grid grid-cols-3 w-full bg-slate-900 border border-slate-800">
             <TabsTrigger value="skins">Dice Skins</TabsTrigger>
@@ -71,19 +104,27 @@ export default function Shop() {
             <div className="grid grid-cols-2 gap-3">
               {(() => {
                 const dupes = getDuplicateGroups(DICE_SKINS);
-                return DICE_SKINS.map(skin => (
-                  <ShopItemCard
-                    key={skin.id}
-                    item={skin}
-                    owned={ownedSkins.includes(skin.id)}
-                    equipped={equippedSkinId === skin.id}
-                    canAfford={coins >= skin.price}
-                    onBuy={() => handleBuy("skin", skin)}
-                    onEquip={() => handleEquip("skin", skin)}
-                    preview={<DicePreview skinId={skin.id} pipsId={equippedPipsId} />}
-                    duplicateTag={dupes[skin.id]}
-                  />
-                ));
+                return DICE_SKINS.map(skin => {
+                  const tier = getSkinTier(skin.id);
+                  const tierLocked = !checkUnlocked(skin.id, xp);
+                  const effectivePrice = getSkinEffectivePrice(skin);
+                  return (
+                    <ShopItemCard
+                      key={skin.id}
+                      item={skin}
+                      owned={ownedSkins.includes(skin.id)}
+                      equipped={equippedSkinId === skin.id}
+                      canAfford={coins >= effectivePrice}
+                      onBuy={() => handleBuy("skin", skin)}
+                      onEquip={() => handleEquip("skin", skin)}
+                      preview={<DicePreview skinId={skin.id} pipsId={equippedPipsId} />}
+                      duplicateTag={dupes[skin.id]}
+                      tier={tier}
+                      tierLocked={tierLocked}
+                      effectivePrice={effectivePrice}
+                    />
+                  );
+                });
               })()}
             </div>
           </TabsContent>
@@ -135,7 +176,7 @@ export default function Shop() {
         </Tabs>
 
         <p className="text-center text-xs text-slate-500 mt-6 pb-10">
-          Earn coins by banking points & winning games. 1 coin per 100 points banked + 200 bonus for wins.
+          Earn coins by banking points & winning games. Earn <b className="text-amber-300">XP</b> by finishing games, winning, and hitting milestones — climb tiers to unlock the rarest dice. Locked dice can still be bought at a 10× shortcut price.
         </p>
       </div>
     </div>

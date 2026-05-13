@@ -7,6 +7,26 @@
       "default": 200,
       "description": "In-game currency"
     },
+    "xp": {
+      "type": "number",
+      "default": 0,
+      "description": "Progression XP earned by playing & achievements"
+    },
+    "games_finished": {
+      "type": "number",
+      "default": 0,
+      "description": "Total games completed"
+    },
+    "wins": {
+      "type": "number",
+      "default": 0,
+      "description": "Total games won"
+    },
+    "intro_seen": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the Prison Dice tutorial intro has been shown"
+    },
     "owned_skins": {
       "type": "array",
       "items": {
