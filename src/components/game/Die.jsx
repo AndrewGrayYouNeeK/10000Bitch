@@ -272,7 +272,7 @@ export default function Die({
             <div
               className="absolute pointer-events-none"
               style={{
-                top: `${-size * 0.14 + yNudge}px`,
+                top: `${(skin.id === "marble" ? -size * 0.22 : -size * 0.14) + yNudge}px`,
                 bottom: `${-size * 0.8 + yNudge}px`,
                 left: `${-size * 0.35 + xNudge}px`,
                 right: `${-size * 0.35 + xNudge}px`,
