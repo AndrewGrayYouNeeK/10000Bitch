@@ -65,43 +65,53 @@ export default function GlitchNeonBanner({ src, alt = "Neon sign", objectPositio
         }
       `}</style>
       <div className="relative w-full h-48 sm:h-64 overflow-hidden">
+        {/* Base image — static, no glitch */}
         <img
           src={src}
           alt={alt}
-          className="absolute inset-0 w-full h-full object-cover glitch-base"
+          className="absolute inset-0 w-full h-full object-cover"
           style={{ objectPosition }}
         />
-        <img
-          src={src}
-          alt=""
-          aria-hidden
-          className="absolute inset-0 w-full h-full object-cover glitch-r pointer-events-none"
-          style={{ objectPosition }}
-        />
-        <img
-          src={src}
-          alt=""
-          aria-hidden
-          className="absolute inset-0 w-full h-full object-cover glitch-b pointer-events-none"
-          style={{ objectPosition }}
-        />
-        {/* Scanlines overlay */}
+        {/* Glitch layers — clipped to the billboard region only */}
         <div
-          className="absolute inset-0 pointer-events-none opacity-30"
+          className="absolute inset-0 pointer-events-none"
           style={{
-            backgroundImage:
-              "repeating-linear-gradient(0deg, rgba(0,0,0,0.5) 0, rgba(0,0,0,0.5) 1px, transparent 1px, transparent 3px)",
+            // Roughly isolates the billboard area in the center of the image
+            clipPath: "inset(18% 18% 22% 18%)",
+            WebkitClipPath: "inset(18% 18% 22% 18%)",
           }}
-        />
-        {/* Moving bright scan bar */}
-        <div
-          className="absolute left-0 right-0 h-8 pointer-events-none glitch-scanline"
-          style={{
-            background:
-              "linear-gradient(to bottom, transparent, rgba(0,255,234,0.15) 50%, transparent)",
-            mixBlendMode: "screen",
-          }}
-        />
+        >
+          <img
+            src={src}
+            alt=""
+            aria-hidden
+            className="absolute inset-0 w-full h-full object-cover glitch-base"
+            style={{ objectPosition }}
+          />
+          <img
+            src={src}
+            alt=""
+            aria-hidden
+            className="absolute inset-0 w-full h-full object-cover glitch-r"
+            style={{ objectPosition }}
+          />
+          <img
+            src={src}
+            alt=""
+            aria-hidden
+            className="absolute inset-0 w-full h-full object-cover glitch-b"
+            style={{ objectPosition }}
+          />
+          {/* Moving bright scan bar — only across the billboard */}
+          <div
+            className="absolute left-0 right-0 h-6 glitch-scanline"
+            style={{
+              background:
+                "linear-gradient(to bottom, transparent, rgba(0,255,234,0.25) 50%, transparent)",
+              mixBlendMode: "screen",
+            }}
+          />
+        </div>
       </div>
     </>
   );
