@@ -4,11 +4,11 @@
 // Top tier (Mythic) takes a LOT of play OR a much higher coin shortcut.
 
 export const TIERS = [
-  { id: 0, name: "Bronze",  minXp: 0,     color: "from-amber-700 to-orange-800", chip: "bg-amber-800/40 text-amber-200 border-amber-700" },
-  { id: 1, name: "Silver",  minXp: 500,   color: "from-slate-400 to-slate-600",  chip: "bg-slate-500/30 text-slate-200 border-slate-500" },
-  { id: 2, name: "Gold",    minXp: 2000,  color: "from-yellow-400 to-amber-600", chip: "bg-amber-500/30 text-amber-200 border-amber-500" },
-  { id: 3, name: "Diamond", minXp: 6000,  color: "from-cyan-300 to-sky-500",     chip: "bg-cyan-500/30 text-cyan-100 border-cyan-400" },
-  { id: 4, name: "Mythic",  minXp: 20000, color: "from-fuchsia-500 to-purple-700", chip: "bg-fuchsia-500/30 text-fuchsia-100 border-fuchsia-500" },
+  { id: 0, name: "Bronze",  minXp: 0,      color: "from-amber-700 to-orange-800", chip: "bg-amber-800/40 text-amber-200 border-amber-700" },
+  { id: 1, name: "Silver",  minXp: 2000,   color: "from-slate-400 to-slate-600",  chip: "bg-slate-500/30 text-slate-200 border-slate-500" },
+  { id: 2, name: "Gold",    minXp: 15000,  color: "from-yellow-400 to-amber-600", chip: "bg-amber-500/30 text-amber-200 border-amber-500" },
+  { id: 3, name: "Diamond", minXp: 60000,  color: "from-cyan-300 to-sky-500",     chip: "bg-cyan-500/30 text-cyan-100 border-cyan-400" },
+  { id: 4, name: "Mythic",  minXp: 180000, color: "from-fuchsia-500 to-purple-700", chip: "bg-fuchsia-500/30 text-fuchsia-100 border-fuchsia-500" },
 ];
 
 // Per-skin tier assignment. Anything not listed defaults to Bronze (tier 0).
