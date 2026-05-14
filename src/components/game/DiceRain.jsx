@@ -145,16 +145,12 @@ export default function DiceRain() {
 
             if (minOverlap === overlapTop && d.vy > 0) {
               d.y = o.y - radius;
-              // On solid obstacles (like the logo), ~30% of dice roll off the
-              // nearest edge instead of bouncing normally on top.
-              if (o.solid && Math.random() < 0.3) {
-                d.vy = -Math.abs(d.vy) * 0.25;
-                const center = o.x + o.w / 2;
-                const dir = d.x < center ? -1 : 1;
-                d.vx += dir * randomBetween(0.8, 1.6);
-              } else {
-                d.vy = -Math.abs(d.vy) * BOUNCE;
-                d.vx += randomBetween(-0.6, 0.6);
+              d.vy = -Math.abs(d.vy) * BOUNCE;
+              d.vx += randomBetween(-0.6, 0.6);
+              // After bouncing off the logo, ~40% of dice "fall through" in
+              // front of it so they land on the Play Now sign below.
+              if (o.solid && Math.random() < 0.4) {
+                d.passThrough = true;
               }
             } else if (minOverlap === overlapBottom && d.vy < 0) {
               d.y = o.y + o.h + radius;
