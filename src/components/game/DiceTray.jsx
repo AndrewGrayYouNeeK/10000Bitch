@@ -70,7 +70,7 @@ export default function DiceTray({ dice, rolling, onToggle, disabled, skinId, pi
         }}
       />
 
-      <div className="relative grid grid-cols-3 gap-x-6 gap-y-5 sm:gap-6 justify-items-center sm:grid-cols-6">
+      <div className="relative grid grid-cols-3 gap-3 sm:gap-6 justify-items-center sm:grid-cols-6">
         {dice.map((d, idx) => (
           <motion.div
             key={d.id}
