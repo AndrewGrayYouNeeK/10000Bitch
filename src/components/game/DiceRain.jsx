@@ -145,8 +145,17 @@ export default function DiceRain() {
 
             if (minOverlap === overlapTop && d.vy > 0) {
               d.y = o.y - radius;
-              d.vy = -Math.abs(d.vy) * BOUNCE;
-              d.vx += randomBetween(-0.6, 0.6);
+              // On solid obstacles (like the logo), dampen bounce and push
+              // dice toward the nearest horizontal edge so they roll off the front.
+              if (o.solid) {
+                d.vy = -Math.abs(d.vy) * 0.25;
+                const center = o.x + o.w / 2;
+                const dir = d.x < center ? -1 : 1;
+                d.vx += dir * randomBetween(0.8, 1.6);
+              } else {
+                d.vy = -Math.abs(d.vy) * BOUNCE;
+                d.vx += randomBetween(-0.6, 0.6);
+              }
             } else if (minOverlap === overlapBottom && d.vy < 0) {
               d.y = o.y + o.h + radius;
               d.vy = Math.abs(d.vy) * BOUNCE;
