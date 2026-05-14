@@ -6,6 +6,7 @@ import { ArrowLeft, Users, Wifi, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { useCosmetics } from "@/hooks/useCosmetics";
 import { toast } from "sonner";
+import NightCityBackground from "@/components/online/NightCityBackground";
 
 export default function OnlineLobby() {
   const navigate = useNavigate();
@@ -100,12 +101,7 @@ export default function OnlineLobby() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-6 relative" style={{ background: "#020408" }}>
-      {/* Atmosphere */}
-      <div className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,200,0.02) 2px, rgba(0,255,200,0.02) 4px)",
-        }}
-      />
+      <NightCityBackground />
 
       <div className="absolute top-4 left-4 z-10">
         <Button asChild variant="ghost" size="icon" className="text-white hover:bg-white/10">
@@ -131,7 +127,14 @@ export default function OnlineLobby() {
           <Wifi className="w-10 h-10" style={{ color: "#00ffc8" }} />
         </motion.div>
 
-        <h1 className="text-2xl font-black mb-2" style={{ color: "#00ffc8", textShadow: "0 0 10px rgba(0,255,200,0.5)" }}>
+        <h1
+          className="font-pixel text-xl mb-3 neon-glitch"
+          style={{
+            color: "#fff",
+            textShadow: "0 0 6px #00ffea, 0 0 16px #00ffea, 0 0 28px #ff00ea",
+            letterSpacing: "0.1em",
+          }}
+        >
           QUICK MATCH
         </h1>
         <p className="text-sm text-slate-400 mb-6">

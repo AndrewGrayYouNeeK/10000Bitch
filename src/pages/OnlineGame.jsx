@@ -11,7 +11,9 @@ import TurnBanner from "@/components/game/TurnBanner";
 import RulesSheet from "@/components/game/RulesSheet";
 import BigPopup from "@/components/game/BigPopup";
 import MatchChat from "@/components/online/MatchChat";
+import NightCityBackground from "@/components/online/NightCityBackground";
 import { useOnlineMatch } from "@/hooks/useOnlineMatch";
+import { useDiceSound } from "@/lib/useDiceSound";
 import { useCosmetics } from "@/hooks/useCosmetics";
 import { toast } from "sonner";
 
@@ -23,6 +25,7 @@ export default function OnlineGame() {
   const navigate = useNavigate();
   const { user, equippedSkinId, equippedPipsId, equippedFeltId } = useCosmetics();
   const { match, loading, submitting, submit } = useOnlineMatch(matchId);
+  const playDiceSound = useDiceSound();
   const [rollAnim, setRollAnim] = useState(false);
   const [popup, setPopup] = useState(null);
   const [claimedSummary, setClaimedSummary] = useState(null);
@@ -35,6 +38,7 @@ export default function OnlineGame() {
     if (!match) return;
     if (match.has_rolled && !prevHasRolledRef.current) {
       setRollAnim(true);
+      playDiceSound();
       const t = setTimeout(() => setRollAnim(false), 900);
       return () => clearTimeout(t);
     }
@@ -137,13 +141,31 @@ export default function OnlineGame() {
     : null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white flex flex-col pb-6">
-      <div className="flex items-center justify-between p-3 border-b border-white/10">
+    <div className="min-h-screen text-white flex flex-col pb-6 relative">
+      <NightCityBackground />
+      <div className="relative z-10 flex flex-col flex-1">
+      <div
+        className="flex items-center justify-between p-3 border-b"
+        style={{
+          borderColor: "rgba(255,0,234,0.4)",
+          background: "rgba(2,3,12,0.55)",
+          backdropFilter: "blur(8px)",
+          boxShadow: "0 0 18px rgba(0,255,234,0.15), inset 0 -1px 0 rgba(255,0,234,0.3)",
+        }}
+      >
         <Button asChild variant="ghost" size="icon" className="text-white hover:bg-white/10">
           <Link to="/"><ArrowLeft className="w-5 h-5" /></Link>
         </Button>
-        <div className="text-sm font-bold flex items-center gap-1.5" style={{ color: "#00ffc8" }}>
-          <Wifi className="w-4 h-4" /> ONLINE · Goal 10,000
+        <div
+          className="font-pixel text-[10px] flex items-center gap-1.5 neon-glitch"
+          style={{
+            color: "#fff",
+            textShadow: "0 0 4px #00ffea, 0 0 10px #00ffea, 0 0 18px #ff00ea",
+            letterSpacing: "0.15em",
+          }}
+        >
+          <Wifi className="w-4 h-4" style={{ filter: "drop-shadow(0 0 6px #00ffea)" }} />
+          NEON 10,000
         </div>
         <RulesSheet />
       </div>
@@ -215,7 +237,15 @@ export default function OnlineGame() {
       </div>
 
       {/* Actions */}
-      <div className="p-3 space-y-2 border-t border-white/10 bg-slate-950/80">
+      <div
+        className="p-3 space-y-2 border-t"
+        style={{
+          borderColor: "rgba(0,255,234,0.35)",
+          background: "rgba(2,3,12,0.78)",
+          backdropFilter: "blur(8px)",
+          boxShadow: "0 0 18px rgba(255,0,234,0.2), inset 0 1px 0 rgba(0,255,234,0.25)",
+        }}
+      >
         {match.status === "finished" ? (
           <Button asChild size="lg" className="w-full h-14 text-lg bg-gradient-to-r from-emerald-500 to-green-600 text-white">
             <Link to="/"><Trophy className="w-5 h-5 mr-2" /> Back to Home</Link>
@@ -286,6 +316,8 @@ export default function OnlineGame() {
           </motion.div>
         </div>
       )}
+
+      </div>
 
       <BigPopup open={!!popup} word={popup?.word} variant={popup?.variant} onClose={() => setPopup(null)} />
 
