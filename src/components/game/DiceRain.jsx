@@ -192,7 +192,7 @@ export default function DiceRain() {
     <canvas
       ref={canvasRef}
       className="absolute inset-0 w-full h-full pointer-events-none"
-      style={{ zIndex: 1 }}
+      style={{ zIndex: 20 }}
     />
   );
 }
