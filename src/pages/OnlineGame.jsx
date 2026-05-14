@@ -10,6 +10,7 @@ import ScorePanel from "@/components/game/ScorePanel";
 import TurnBanner from "@/components/game/TurnBanner";
 import RulesSheet from "@/components/game/RulesSheet";
 import BigPopup from "@/components/game/BigPopup";
+import MatchChat from "@/components/online/MatchChat";
 import { useOnlineMatch } from "@/hooks/useOnlineMatch";
 import { useCosmetics } from "@/hooks/useCosmetics";
 import { toast } from "sonner";
@@ -287,6 +288,8 @@ export default function OnlineGame() {
       )}
 
       <BigPopup open={!!popup} word={popup?.word} variant={popup?.variant} onClose={() => setPopup(null)} />
+
+      <MatchChat matchId={matchId} user={user} />
     </div>
   );
 }

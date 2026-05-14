@@ -1,0 +1,28 @@
+{
+  "name": "ChatMessage",
+  "type": "object",
+  "properties": {
+    "match_id": {
+      "type": "string",
+      "description": "The online match this message belongs to"
+    },
+    "email": {
+      "type": "string",
+      "description": "Email of the sender"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the sender"
+    },
+    "text": {
+      "type": "string",
+      "description": "Message text"
+    }
+  },
+  "required": [
+    "match_id",
+    "email",
+    "name",
+    "text"
+  ]
+}
