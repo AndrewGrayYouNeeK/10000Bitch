@@ -91,8 +91,8 @@ export default function DiceRain() {
       flipTimer: Math.floor(randomBetween(40, 140)),
       opacity: randomBetween(0.15, 0.45),
       size: randomBetween(SIZE * 0.6, SIZE * 1.2),
-      // ~35% of dice pass in front of UI (including the logo); the rest bounce
-      passThrough: Math.random() < 0.35,
+      // Only ~15% of dice pass in front; the rest land/bounce on UI boxes
+      passThrough: Math.random() < 0.15,
     });
 
     diceRef.current = Array.from({ length: COUNT }, () => spawn(true));
@@ -147,6 +147,12 @@ export default function DiceRain() {
               d.y = o.y - radius;
               d.vy = -Math.abs(d.vy) * BOUNCE;
               d.vx += randomBetween(-0.6, 0.6);
+              // After bouncing off the top of the logo, ~50% of dice switch
+              // to pass-through so they fall down IN FRONT of the logo onto
+              // the Play Now sign below.
+              if (o.solid && Math.random() < 0.5) {
+                d.passThrough = true;
+              }
             } else if (minOverlap === overlapBottom && d.vy < 0) {
               d.y = o.y + o.h + radius;
               d.vy = Math.abs(d.vy) * BOUNCE;
