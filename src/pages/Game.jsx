@@ -212,21 +212,6 @@ export default function Game() {
     <div className="min-h-screen text-white flex flex-col pb-6 relative">
       <CyberBackground />
       <div className="relative z-10 flex flex-col flex-1">
-      {/* "by: Andrew Gray" glitching neon billboard */}
-      <div
-        className="border-b-2"
-        style={{
-          borderColor: "#ff00ea",
-          boxShadow: "0 0 18px #00ffff, 0 4px 24px rgba(255,0,234,0.5)",
-        }}
-      >
-        <GlitchNeonBanner
-          src="https://media.base44.com/images/public/69e7669b223d37093cd03879/7a401b3b0_generated_image.png"
-          alt="by: Andrew Gray"
-          objectPosition="center center"
-        />
-      </div>
-
       {/* Header */}
       <div
         className="flex items-center justify-between p-3 border-b"
