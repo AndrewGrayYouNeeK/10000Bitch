@@ -91,8 +91,8 @@ export default function DiceRain() {
       flipTimer: Math.floor(randomBetween(40, 140)),
       opacity: randomBetween(0.15, 0.45),
       size: randomBetween(SIZE * 0.6, SIZE * 1.2),
-      // Only ~15% of dice pass in front; the rest land/bounce on UI boxes
-      passThrough: Math.random() < 0.15,
+      // No dice pass in front by default — only enabled after bouncing on top of the logo
+      passThrough: false,
     });
 
     diceRef.current = Array.from({ length: COUNT }, () => spawn(true));
