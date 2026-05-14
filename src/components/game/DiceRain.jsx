@@ -90,6 +90,8 @@ export default function DiceRain() {
       flipTimer: Math.floor(randomBetween(40, 140)),
       opacity: randomBetween(0.15, 0.45),
       size: randomBetween(SIZE * 0.6, SIZE * 1.2),
+      // ~40% of dice pass in front of obstacles (no collision)
+      passThrough: Math.random() < 0.4,
     });
 
     diceRef.current = Array.from({ length: COUNT }, () => spawn(true));
@@ -120,8 +122,9 @@ export default function DiceRain() {
         if (d.x > canvas.width + d.size) d.x = -d.size;
 
         // Collision with obstacles (axis-aligned, bounce off nearest edge)
+        // Skip collision entirely for "passThrough" dice — they fall in front of UI.
         const radius = d.size * 0.4;
-        for (let j = 0; j < obstacles.length; j++) {
+        if (!d.passThrough) for (let j = 0; j < obstacles.length; j++) {
           const o = obstacles[j];
           if (
             d.x + radius > o.x &&
