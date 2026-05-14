@@ -145,12 +145,16 @@ export default function DiceRain() {
 
             if (minOverlap === overlapTop && d.vy > 0) {
               d.y = o.y - radius;
-              d.vy = -Math.abs(d.vy) * BOUNCE;
-              d.vx += randomBetween(-0.6, 0.6);
-              // After bouncing off the logo, ~40% of dice "fall through" in
-              // front of it so they land on the Play Now sign below.
-              if (o.solid && Math.random() < 0.4) {
+              // After bouncing off the logo, ~50% of dice "fall through" in
+              // front of it so they tumble down onto the Play Now sign.
+              if (o.solid && Math.random() < 0.5) {
                 d.passThrough = true;
+                // Small upward kick, then gravity carries them down in front.
+                d.vy = -Math.abs(d.vy) * 0.2;
+                d.vx += randomBetween(-0.4, 0.4);
+              } else {
+                d.vy = -Math.abs(d.vy) * BOUNCE;
+                d.vx += randomBetween(-0.6, 0.6);
               }
             } else if (minOverlap === overlapBottom && d.vy < 0) {
               d.y = o.y + o.h + radius;
