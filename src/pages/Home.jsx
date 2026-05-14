@@ -159,6 +159,7 @@ export default function Home() {
           <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
             <Link
               data-dice-obstacle
+              data-dice-solid
               to="/setup"
               className="flex items-center justify-center w-full h-16 text-lg font-black rounded-lg gap-2 relative overflow-hidden"
               style={{
