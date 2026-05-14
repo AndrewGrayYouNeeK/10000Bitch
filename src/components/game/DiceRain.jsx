@@ -35,6 +35,7 @@ export default function DiceRain() {
           y: r.top - canvasRect.top,
           w: r.width,
           h: r.height,
+          solid: el.hasAttribute("data-dice-solid"),
         };
       });
     };
@@ -90,8 +91,8 @@ export default function DiceRain() {
       flipTimer: Math.floor(randomBetween(40, 140)),
       opacity: randomBetween(0.15, 0.45),
       size: randomBetween(SIZE * 0.6, SIZE * 1.2),
-      // ~35% of dice pass in front of obstacles (e.g. falling over the logo)
-      passThrough: Math.random() < 0.35,
+      // Only ~15% of dice pass in front; the rest land/bounce on UI boxes
+      passThrough: Math.random() < 0.15,
     });
 
     diceRef.current = Array.from({ length: COUNT }, () => spawn(true));
@@ -124,8 +125,11 @@ export default function DiceRain() {
         // Collision with obstacles (axis-aligned, bounce off nearest edge)
         // Skip collision entirely for "passThrough" dice — they fall in front of UI.
         const radius = d.size * 0.4;
-        if (!d.passThrough) for (let j = 0; j < obstacles.length; j++) {
+        for (let j = 0; j < obstacles.length; j++) {
           const o = obstacles[j];
+          // passThrough dice ignore non-solid obstacles (like the logo);
+          // they still bounce off solid ones if marked.
+          if (d.passThrough && !o.solid) continue;
           if (
             d.x + radius > o.x &&
             d.x - radius < o.x + o.w &&
