@@ -144,17 +144,6 @@ export default function DiceRain() {
             const minOverlap = Math.min(overlapLeft, overlapRight, overlapTop, overlapBottom);
 
             if (minOverlap === overlapTop && d.vy > 0) {
-              // ~60% of dice hitting the logo top fall THROUGH it (in front),
-              // continuing downward to land on the Play Now sign.
-              if (o.solid && Math.random() < 0.6) {
-                d.passThrough = true;
-                // Push the die past the logo top edge so it continues falling
-                // in front instead of getting stuck bouncing on it.
-                d.y = o.y + radius + 2;
-                d.vy = Math.max(d.vy, 2.5);
-                d.vx += randomBetween(-0.3, 0.3);
-                continue;
-              }
               d.y = o.y - radius;
               d.vy = -Math.abs(d.vy) * BOUNCE;
               d.vx += randomBetween(-0.6, 0.6);
