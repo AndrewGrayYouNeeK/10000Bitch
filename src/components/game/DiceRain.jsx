@@ -10,6 +10,7 @@ export default function DiceRain() {
   const canvasRef = useRef(null);
   const diceRef = useRef([]);
   const obstaclesRef = useRef([]);
+  const tiltRef = useRef({ gx: 0, gy: 0.08 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -47,6 +48,39 @@ export default function DiceRain() {
     const BOUNCE = 0.55;
     const FRICTION = 0.985;
 
+    // Phone tilt → gravity vector. beta = front/back tilt (-180..180), gamma = left/right (-90..90).
+    const handleOrientation = (e) => {
+      const gamma = e.gamma || 0; // left/right tilt
+      const beta = e.beta || 0;   // front/back tilt
+      // Map tilt to a gravity vector. Clamp to reasonable range.
+      const gx = Math.max(-1, Math.min(1, gamma / 45)) * 0.25;
+      // Allow upward "gravity" when phone is tilted back, downward when forward.
+      const gy = Math.max(-1, Math.min(1, beta / 45)) * 0.25 + GRAVITY * 0.5;
+      tiltRef.current = { gx, gy };
+    };
+
+    const attachOrientation = () => {
+      window.addEventListener("deviceorientation", handleOrientation);
+    };
+
+    if (typeof DeviceOrientationEvent !== "undefined") {
+      if (typeof DeviceOrientationEvent.requestPermission === "function") {
+        // iOS 13+: request on first user tap
+        const requestPerm = async () => {
+          try {
+            const res = await DeviceOrientationEvent.requestPermission();
+            if (res === "granted") attachOrientation();
+          } catch {}
+          document.removeEventListener("click", requestPerm);
+          document.removeEventListener("touchend", requestPerm);
+        };
+        document.addEventListener("click", requestPerm);
+        document.addEventListener("touchend", requestPerm);
+      } else {
+        attachOrientation();
+      }
+    }
+
     const spawn = (initial = false) => ({
       x: randomBetween(0, canvas.width),
       y: initial ? randomBetween(-canvas.height, canvas.height) : randomBetween(-canvas.height * 0.5, -SIZE),
@@ -72,11 +106,18 @@ export default function DiceRain() {
           d.flipTimer = Math.floor(randomBetween(20, 80));
         }
 
-        // Gravity + motion
-        d.vy += GRAVITY;
+        // Gravity + motion (gravity vector shifts with phone tilt)
+        const { gx, gy } = tiltRef.current;
+        d.vx += gx;
+        d.vy += gy;
         d.vx *= FRICTION;
+        d.vy *= FRICTION;
         d.x += d.vx;
         d.y += d.vy;
+
+        // Wrap horizontally so tilted dice don't pile off-screen
+        if (d.x < -d.size) d.x = canvas.width + d.size;
+        if (d.x > canvas.width + d.size) d.x = -d.size;
 
         // Collision with obstacles (axis-aligned, bounce off nearest edge)
         const radius = d.size * 0.4;
@@ -140,6 +181,7 @@ export default function DiceRain() {
       clearInterval(obsInterval);
       window.removeEventListener("resize", resize);
       window.removeEventListener("scroll", updateObstacles);
+      window.removeEventListener("deviceorientation", handleOrientation);
     };
   }, []);
 
