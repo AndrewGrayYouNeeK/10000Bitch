@@ -28,9 +28,10 @@ export default function DiceRain() {
     const updateObstacles = () => {
       const canvasRect = canvas.getBoundingClientRect();
       const nodes = document.querySelectorAll("[data-dice-obstacle]");
-      obstaclesRef.current = Array.from(nodes).map((el) => {
+      obstaclesRef.current = Array.from(nodes).map((el, idx) => {
         const r = el.getBoundingClientRect();
         return {
+          id: el.getAttribute("data-dice-id") || `obs-${idx}`,
           x: r.left - canvasRect.left,
           y: r.top - canvasRect.top,
           w: r.width,
@@ -93,6 +94,8 @@ export default function DiceRain() {
       size: randomBetween(SIZE * 0.6, SIZE * 1.2),
       // No dice pass in front by default — only enabled after bouncing on top of the logo
       passThrough: false,
+      // Obstacle id this die should now ignore (so it falls in front of it)
+      ignoreObstacleId: null,
     });
 
     diceRef.current = Array.from({ length: COUNT }, () => spawn(true));
@@ -127,9 +130,9 @@ export default function DiceRain() {
         const radius = d.size * 0.4;
         for (let j = 0; j < obstacles.length; j++) {
           const o = obstacles[j];
-          // passThrough dice ignore non-solid obstacles (like the logo);
-          // they still bounce off solid ones if marked.
-          if (d.passThrough && !o.solid) continue;
+          // After bouncing on top of the logo, the die passes through THAT
+          // obstacle only — so it can keep falling onto the Play Now sign below.
+          if (d.ignoreObstacleId && d.ignoreObstacleId === o.id) continue;
           if (
             d.x + radius > o.x &&
             d.x - radius < o.x + o.w &&
@@ -147,11 +150,11 @@ export default function DiceRain() {
               d.y = o.y - radius;
               d.vy = -Math.abs(d.vy) * BOUNCE;
               d.vx += randomBetween(-0.6, 0.6);
-              // After bouncing off the top of the logo, ~50% of dice switch
-              // to pass-through so they fall down IN FRONT of the logo onto
-              // the Play Now sign below.
-              if (o.solid && Math.random() < 0.5) {
-                d.passThrough = true;
+              // After bouncing off the top of an obstacle, ~50% of dice start
+              // ignoring that specific obstacle — so they fall down IN FRONT of it
+              // onto whatever is below (e.g. Play Now sign).
+              if (Math.random() < 0.5) {
+                d.ignoreObstacleId = o.id;
               }
             } else if (minOverlap === overlapBottom && d.vy < 0) {
               d.y = o.y + o.h + radius;
