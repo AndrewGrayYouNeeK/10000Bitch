@@ -145,9 +145,9 @@ export default function DiceRain() {
 
             if (minOverlap === overlapTop && d.vy > 0) {
               d.y = o.y - radius;
-              // On solid obstacles (like the logo), dampen bounce and push
-              // dice toward the nearest horizontal edge so they roll off the front.
-              if (o.solid) {
+              // On solid obstacles (like the logo), ~30% of dice roll off the
+              // nearest edge instead of bouncing normally on top.
+              if (o.solid && Math.random() < 0.3) {
                 d.vy = -Math.abs(d.vy) * 0.25;
                 const center = o.x + o.w / 2;
                 const dir = d.x < center ? -1 : 1;
