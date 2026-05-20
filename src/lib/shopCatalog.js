@@ -444,14 +444,6 @@ export const COIN_PACKS = [
   { id: "pack_jackpot", name: "Jackpot", coins: 5000, emoji: "👑" },
 ];
 
-export const PIP_STYLES = [
-  { id: "classic_dots", name: "Classic Dots", price: 0, shape: "dot", description: "Round and simple." },
-  { id: "square_pips", name: "Square Pips", price: 100, shape: "square", description: "Sharp corners." },
-  { id: "star_pips", name: "Star Pips", price: 250, shape: "star", description: "Shine bright." },
-  { id: "heart_pips", name: "Heart Pips", price: 250, shape: "heart", description: "Roll with love." },
-  { id: "diamond_pips", name: "Diamond Pips", price: 300, shape: "diamond", description: "Cut above." },
-];
-
 // Table felt colors. `inner`, `mid`, `outer` define the radial gradient stops.
 // `border` is the wooden/edge border color class.
 export const FELT_COLORS = [
@@ -581,9 +573,6 @@ export const PERFECT_TENK_REWARD = { skinId: "crystal_cut", badgeId: "perfect_10
 
 export function getSkin(id) {
   return DICE_SKINS.find(s => s.id === id) || DICE_SKINS[0];
-}
-export function getPipStyle(id) {
-  return PIP_STYLES.find(p => p.id === id) || PIP_STYLES[0];
 }
 export function getBadge(id) {
   return BADGES.find(b => b.id === id) || null;

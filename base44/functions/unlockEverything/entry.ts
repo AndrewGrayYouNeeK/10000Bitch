@@ -21,7 +21,6 @@ Deno.serve(async (req) => {
         "neon_grid","circuit_board","amber_wasp","toxic_plasma_v2","bloodstone","matrix",
         "snow_globe","blue_gel","plasma"
       ],
-      owned_pips: ["classic_dots","square_pips","star_pips","heart_pips","diamond_pips"],
       owned_felts: [
         "classic_green","royal_blue","crimson_red","midnight_black","burgundy",
         "forest_pine","amethyst_purple","graphite","ocean_teal","sahara_sand"

@@ -329,7 +329,6 @@ export default function Game() {
             onToggle={onToggle}
             disabled={!state.hasRolled || state.farkle || !!state.winner}
             skinId={equippedSkinId}
-            pipsId={equippedPipsId}
             feltId={equippedFeltId}
           />
           {info.held.length > 0 && (

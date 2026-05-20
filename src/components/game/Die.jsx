@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
-import { getSkin, getPipStyle, getSpriteStyle } from "@/lib/shopCatalog";
+import { getSkin } from "@/lib/shopCatalog";
 import Pip from "./Pip";
 import LightningOverlay from "./LightningOverlay";
 import FishOverlay from "./FishOverlay";
@@ -66,7 +66,6 @@ export default function Die({
   onClick,
   size = 64,
   skinId = "classic_white",
-  pipsId = "classic_dots",
   bigFishVariantIndex = 0,
   bigFishExtraScale = 1
 }) {

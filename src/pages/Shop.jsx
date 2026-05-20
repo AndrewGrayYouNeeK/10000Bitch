@@ -18,8 +18,8 @@ import PowersInfo from "@/components/game/PowersInfo";
 export default function Shop() {
   const {
     coins, xp, currentTier, nextTier, isLoading,
-    ownedSkins, ownedPips, ownedBadges, ownedFelts,
-    equippedSkinId, equippedPipsId, equippedBadgeId, equippedFeltId,
+    ownedSkins, ownedBadges, ownedFelts,
+    equippedSkinId, equippedBadgeId, equippedFeltId,
     buyItem, equipItem, getSkinEffectivePrice,
   } = useCosmetics();
   const [tab, setTab] = useState("skins");
@@ -131,7 +131,7 @@ export default function Shop() {
                       canAfford={coins >= effectivePrice}
                       onBuy={() => handleBuy("skin", skin)}
                       onEquip={() => handleEquip("skin", skin)}
-                      preview={<DicePreview skinId={skin.id} pipsId={equippedPipsId} />}
+                      preview={<DicePreview skinId={skin.id} />}
                       duplicateTag={dupes[skin.id]}
                       tier={tier}
                       tierLocked={tierLocked}

@@ -23,7 +23,7 @@ const TARGET_SCORE = 10000;
 export default function OnlineGame() {
   const { matchId } = useParams();
   const navigate = useNavigate();
-  const { user, equippedSkinId, equippedPipsId, equippedFeltId } = useCosmetics();
+  const { user, equippedSkinId, equippedFeltId } = useCosmetics();
   const { match, loading, submitting, submit } = useOnlineMatch(matchId);
   const playDiceSound = useDiceSound();
   const [rollAnim, setRollAnim] = useState(false);
@@ -219,7 +219,6 @@ export default function OnlineGame() {
             onToggle={handleToggle}
             disabled={!isMyTurn || !match.has_rolled || match.farkle || match.status === "finished"}
             skinId={activeSkin}
-            pipsId={equippedPipsId}
             feltId={activeFelt}
           />
           {info.held.length > 0 && (

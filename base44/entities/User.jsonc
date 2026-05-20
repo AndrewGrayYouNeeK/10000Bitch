@@ -37,16 +37,6 @@
       ],
       "description": "IDs of dice skins the user owns"
     },
-    "owned_pips": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "default": [
-        "classic_dots"
-      ],
-      "description": "IDs of pip styles the user owns"
-    },
     "owned_badges": {
       "type": "array",
       "items": {
@@ -69,11 +59,6 @@
       "type": "string",
       "default": "classic_white",
       "description": "Currently equipped dice skin id"
-    },
-    "equipped_pips": {
-      "type": "string",
-      "default": "classic_dots",
-      "description": "Currently equipped pip style id"
     },
     "equipped_badge": {
       "type": "string",
