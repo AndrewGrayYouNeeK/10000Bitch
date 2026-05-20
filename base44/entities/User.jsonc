@@ -84,6 +84,22 @@
       "type": "string",
       "default": "classic_green",
       "description": "Currently equipped table felt color id"
+    },
+    "equipped_powers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "description": "Up to 3 power IDs the user brings into matches"
+    },
+    "bosses_defeated": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [],
+      "description": "IDs of campaign bosses this user has beaten"
     }
   },
   "required": []
