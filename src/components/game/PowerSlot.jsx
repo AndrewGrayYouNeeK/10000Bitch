@@ -4,7 +4,7 @@ import { canAfford } from "@/lib/powers";
 
 // One equipped power button shown during a match.
 // Locked = used (one-charge) or disabled by Lockout debuff.
-export default function PowerSlot({ power, energy = 0, used = false, locked = false, onFire }) {
+export default function PowerSlot({ power, currentPower = 0, used = false, locked = false, onFire }) {
   if (!power) {
     return (
       <div
@@ -15,7 +15,7 @@ export default function PowerSlot({ power, energy = 0, used = false, locked = fa
       </div>
     );
   }
-  const affordable = canAfford(energy, power.id);
+  const affordable = canAfford(currentPower, power.id);
   const disabled = used || locked || !affordable;
 
   return (

@@ -1,11 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { MAX_ENERGY } from "@/lib/powers";
+import { MAX_POWER } from "@/lib/powers";
 
-// Neon energy bar — fills as the player rolls, scores, hot-dices.
+// Neon Power bar — fills as the player rolls, scores, hot-dices.
 // Pass `frozen` to render the depleted/iced state (Freeze sabotage).
-export default function PowerBar({ energy = 0, frozen = false, label = "ENERGY" }) {
-  const pct = Math.max(0, Math.min(100, (energy / MAX_ENERGY) * 100));
+export default function PowerBar({ power = 0, frozen = false, label = "POWER" }) {
+  const pct = Math.max(0, Math.min(100, (power / MAX_POWER) * 100));
 
   return (
     <div className="w-full">
@@ -26,7 +26,7 @@ export default function PowerBar({ energy = 0, frozen = false, label = "ENERGY" 
             textShadow: "0 0 6px rgba(0,255,200,0.7)",
           }}
         >
-          {Math.floor(energy)}/{MAX_ENERGY}
+          {Math.floor(power)}/{MAX_POWER}
         </span>
       </div>
       <div

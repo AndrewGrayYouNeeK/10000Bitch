@@ -1,16 +1,16 @@
 // NEON 10,000 — Powers System
-// Players equip up to 3 powers before a match. Energy fills as they roll/score.
-// Each power costs energy to fire. Sabotage powers target the opponent and
+// Players equip up to 3 powers before a match. Power fills as they roll/score.
+// Each ability costs Power to fire. Sabotage abilities target the opponent and
 // persist UNTIL THAT OPPONENT BUSTS (farkles).
 
-export const MAX_ENERGY = 100;
+export const MAX_POWER = 100;
 export const MAX_EQUIPPED = 3;
 
-// Energy gain rules
-export const ENERGY_RULES = {
-  perRoll: 4,            // +4 energy each roll
+// Power gain rules
+export const POWER_RULES = {
+  perRoll: 4,            // +4 power each roll
   perHotDice: 25,        // bonus when clearing all 6 dice
-  perBankPer100: 1,      // +1 energy per 100 points banked
+  perBankPer100: 1,      // +1 power per 100 points banked
   perFarkleSelf: 8,      // small consolation when YOU farkle
 };
 
@@ -94,7 +94,7 @@ export const POWERS = [
     cost: 50,
     icon: "❄️",
     color: "#00d4ff",
-    description: "Drain opponent's energy bar to 0. Lasts until they bust.",
+    description: "Drain opponent's Power bar to 0. Lasts until they bust.",
     tagline: "Ice in their veins.",
   },
   {
@@ -136,19 +136,19 @@ export function getPower(id) {
 export const BASE_POWERS = POWERS.filter(p => p.kind === "self");
 export const SABO_POWERS = POWERS.filter(p => p.kind === "sabo");
 
-// Calculate energy gain for an action.
-export function energyForAction(action, value = 0) {
+// Calculate Power gain for an action.
+export function powerForAction(action, value = 0) {
   switch (action) {
-    case "roll":      return ENERGY_RULES.perRoll;
-    case "hot_dice":  return ENERGY_RULES.perHotDice;
-    case "bank":      return Math.floor(value / 100) * ENERGY_RULES.perBankPer100;
-    case "farkle":    return ENERGY_RULES.perFarkleSelf;
+    case "roll":      return POWER_RULES.perRoll;
+    case "hot_dice":  return POWER_RULES.perHotDice;
+    case "bank":      return Math.floor(value / 100) * POWER_RULES.perBankPer100;
+    case "farkle":    return POWER_RULES.perFarkleSelf;
     default:          return 0;
   }
 }
 
-export function canAfford(energy, powerId) {
-  const p = getPower(powerId);
+export function canAfford(power, abilityId) {
+  const p = getPower(abilityId);
   if (!p) return false;
-  return energy >= p.cost;
+  return power >= p.cost;
 }
