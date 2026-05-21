@@ -1,5 +1,5 @@
 import React from "react";
-import { BASE_POWERS, SABO_POWERS, MAX_EQUIPPED, MAX_POWER } from "@/lib/powers";
+import { BASE_POWERS, SABO_POWERS, MAX_POWER } from "@/lib/powers";
 
 // Shared powers reference shown in Rules + Shop so players know what each does.
 // `variant="rules"` uses the dark-slate panel style; `variant="shop"` uses the
@@ -33,8 +33,8 @@ export default function PowersInfo({ variant = "rules" }) {
         ⚡ Powers
       </h2>
       <p className={`text-sm mb-3 ${isShop ? "text-cyan-100/80" : "text-slate-300"}`}>
-        Equip up to <b className={isShop ? "text-white" : "text-white"}>{MAX_EQUIPPED} powers</b> before a match.
-        Roll, bank, and Hot Dice to fill your <b>Power bar</b> (max {MAX_POWER}). Spend Power to fire an ability.
+        Every dice skin comes with <b>one Power</b>. The skin you equip <i>is</i> your power — no picking, no loadouts.
+        Roll, bank, and Hot Dice to fill your <b>Power bar</b> (max {MAX_POWER}). Spend it to fire your ability.
       </p>
 
       <Group

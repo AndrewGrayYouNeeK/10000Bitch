@@ -4,7 +4,6 @@
 // persist UNTIL THAT OPPONENT BUSTS (farkles).
 
 export const MAX_POWER = 100;
-export const MAX_EQUIPPED = 3;
 
 // Power gain rules
 export const POWER_RULES = {
