@@ -38,18 +38,18 @@ export function scoreSelection(dice) {
     }
   }
 
-  // Five of a kind
+  // Five of a kind => flat 4000 (any face)
   for (let face = 1; face <= 6; face++) {
     if (remaining[face] >= 5) {
-      score += (face === 1 ? 1000 : face * 100) * 4; // 5 of a kind = 4x three of a kind
+      score += 4000;
       remaining[face] -= 5;
     }
   }
 
-  // Four of a kind
+  // Four of a kind => flat 2000 (any face)
   for (let face = 1; face <= 6; face++) {
     if (remaining[face] >= 4) {
-      score += (face === 1 ? 1000 : face * 100) * 2; // 4 of a kind = 2x three of a kind
+      score += 2000;
       remaining[face] -= 4;
     }
   }

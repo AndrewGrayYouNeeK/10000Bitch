@@ -41,8 +41,8 @@ export default function RulesSheet() {
               <li>Single <b>5</b> = 50</li>
               <li>Three 1s = 1000 • Three 2s = 200 • Three 3s = 300</li>
               <li>Three 4s = 400 • Three 5s = 500 • Three 6s = 600</li>
-              <li>Four of a kind = 2× three of a kind</li>
-              <li>Five of a kind = 4× three of a kind</li>
+              <li>Four of a kind = 2,000</li>
+              <li>Five of a kind = 4,000</li>
               <li><b>Six of a kind = INSTANT WIN 🎉</b></li>
               <li>Straight 1-2-3-4-5-6 = 1500</li>
               <li>Three Pairs = 1500</li>
