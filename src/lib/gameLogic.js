@@ -114,6 +114,26 @@ export function confirmAndReroll(state) {
   let newDice = state.dice.map(d => (d.held ? { ...d, used: true, held: false } : d));
   const newTurnScore = state.turnScore + info.score;
 
+  // Overshoot bust — you must land EXACTLY on 10,000. If the locked-in turn score
+  // already pushes the player over, end the turn immediately (no further rolls).
+  const currentPlayer = state.players[state.currentIndex];
+  if (currentPlayer.score + newTurnScore > TARGET_SCORE) {
+    const word = bustWord(state.bustCount || 0);
+    return {
+      state: {
+        ...state,
+        dice: newDice,
+        turnScore: 0,
+        hasRolled: true,
+        farkle: true,
+        bustCount: (state.bustCount || 0) + 1,
+        lastBustWord: word,
+        message: `💥 Overshoot! ${currentPlayer.name} needed exactly ${TARGET_SCORE - currentPlayer.score} — busted ${newTurnScore}.`,
+        messageVariant: "danger",
+      },
+    };
+  }
+
   // Hot dice? — all dice now used → refresh
   const allUsed = newDice.every(d => d.used);
   if (allUsed) {
