@@ -30,6 +30,16 @@ export function scoreSelection(dice) {
     return { score: 1500, valid: true, straight: true };
   }
 
+  // Small Straight: 5 sequential dice (1-2-3-4-5 or 2-3-4-5-6) => 1000
+  if (dice.length === 5) {
+    if ([1,2,3,4,5].every(f => counts[f] === 1)) {
+      return { score: 1000, valid: true, smallStraight: true };
+    }
+    if ([2,3,4,5,6].every(f => counts[f] === 1)) {
+      return { score: 1000, valid: true, smallStraight: true };
+    }
+  }
+
   // Three pairs => 1500 (only with 6 dice)
   if (dice.length === 6) {
     const pairs = [1,2,3,4,5,6].filter(f => counts[f] === 2).length;
@@ -91,6 +101,10 @@ export function hasAnyScore(dice) {
   // Straight (6 dice)
   if (dice.length === 6 && [1,2,3,4,5,6].every(f => counts[f] === 1)) return true;
 
+  // Small straight (5 sequential dice within the roll)
+  if ([1,2,3,4,5].every(f => counts[f] >= 1)) return true;
+  if ([2,3,4,5,6].every(f => counts[f] >= 1)) return true;
+
   // Three pairs (6 dice)
   if (dice.length === 6) {
     const pairs = [1,2,3,4,5,6].filter(f => counts[f] === 2).length;
@@ -105,6 +119,7 @@ export function describeSelection(dice) {
   const result = scoreSelection(dice);
   if (result.sixOfAKind) return `Six ${result.face}s — INSTANT WIN!`;
   if (result.straight) return "Straight 1-6 (1500)";
+  if (result.smallStraight) return "Small Straight (1000)";
   if (result.threePairs) return "Three Pairs (1500)";
   if (!result.valid) return "Invalid — includes non-scoring dice";
   if (result.score === 0) return "No score";

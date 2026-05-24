@@ -344,7 +344,7 @@ export default function Game() {
             <div className="mt-2 text-center text-sm">
               {info.valid ? (
                 <span className="text-emerald-400 font-semibold">
-                  {info.sixOfAKind ? "SIX OF A KIND!" : info.straight ? "Straight!" : info.threePairs ? "Three Pairs!" : `Selection: +${info.score}`}
+                  {info.sixOfAKind ? "SIX OF A KIND!" : info.straight ? "Straight!" : info.smallStraight ? "Small Straight! +1000" : info.threePairs ? "Three Pairs!" : `Selection: +${info.score}`}
                 </span>
               ) : (
                 <span className="text-rose-400 font-semibold">Selection includes non-scoring dice</span>
