@@ -22,14 +22,18 @@ export default function DiamondShowcase() {
   return (
     <div className="flex justify-center gap-1.5 mb-4">
       {dice.map((value, i) => (
-        <Die
+        <div
           key={i}
-          value={value}
-          rolling={rolling}
-          size={40}
-          skinId={equippedSkinId}
-          pipsId={equippedPipsId}
-        />
+          style={i === 0 ? { transform: "translate(-6px, -6px)" } : undefined}
+        >
+          <Die
+            value={value}
+            rolling={rolling}
+            size={40}
+            skinId={equippedSkinId}
+            pipsId={equippedPipsId}
+          />
+        </div>
       ))}
     </div>
   );
