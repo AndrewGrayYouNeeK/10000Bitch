@@ -26,6 +26,7 @@ import NeonTitle from "@/components/game/NeonTitle";
 import GlitchNeonBanner from "@/components/game/GlitchNeonBanner";
 import { useCosmetics } from "@/hooks/useCosmetics";
 import { XP_REWARDS } from "@/lib/progression";
+import { base44 } from "@/api/base44Client";
 
 export default function Game() {
   const navigate = useNavigate();
@@ -54,6 +55,14 @@ export default function Game() {
     if ((state.bustCount || 0) > prevBustRef.current && state.lastBustWord) {
       setPopup({ word: state.lastBustWord, variant: "danger" });
       prevBustRef.current = state.bustCount;
+      base44.analytics.track({
+        eventName: "farkle_rolled",
+        properties: {
+          player_name: state.players[state.currentIndex]?.name || "unknown",
+          turn_score_lost: state.turnScore || 0,
+          player_score: state.players[state.currentIndex]?.score || 0,
+        },
+      });
     }
   }, [state]);
 
