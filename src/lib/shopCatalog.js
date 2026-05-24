@@ -124,7 +124,7 @@ export const DICE_SKINS = [
   },
   {
     id: "lava",
-    name: "Lava",
+    name: "Ragnarok",
     price: 600,
     gradient: "from-orange-400 via-red-600 to-black",
     border: "border-orange-800",
