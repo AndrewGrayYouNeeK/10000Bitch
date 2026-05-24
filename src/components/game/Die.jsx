@@ -363,7 +363,7 @@ export default function Die({
           const DRAGON_X_OFFSET = { 2: size * 0.015, 3: size * 0.015, 5: size * 0.01, 6: size * 0.015 };
           const AMETHYST_X_OFFSET = { 2: size * 0.015, 3: -size * 0.005, 6: size * 0.015 };
           const LAVA_X_OFFSET = { 2: -size * 0.005, 3: -size * 0.005, 5: size * 0.015, 6: size * 0.015 };
-          const LAVA_Y_OFFSET = { 1: -size * 0.035, 2: -size * 0.035, 3: -size * 0.035, 4: -size * 0.045, 5: -size * 0.03, 6: -size * 0.03 };
+          const LAVA_Y_OFFSET = { 1: -size * 0.035, 2: -size * 0.035, 3: -size * 0.035, 4: -size * 0.045, 5: -size * 0.045, 6: -size * 0.045 };
           const MOONSTONE_X_OFFSET = { 1: size * 0.03, 2: size * 0.035, 3: size * 0.035, 4: size * 0.04, 5: size * 0.035, 6: size * 0.035 };
           const MOONSTONE_Y_OFFSET = { 1: size * 0.01, 2: size * 0.005, 3: size * 0.0075, 4: size * 0.003, 5: size * 0.003, 6: size * 0.003 };
           const SILVER_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.015 };
