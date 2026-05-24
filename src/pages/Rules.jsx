@@ -59,8 +59,8 @@ export default function Rules() {
               ["Three 6s", "600"],
               ["Four of a kind", "2,000"],
               ["Five of a kind", "4,000"],
-              ["Straight 1-2-3-4-5-6", "1,500"],
               ["Small Straight (1-2-3-4-5 or 2-3-4-5-6)", "1,000"],
+              ["Large Straight (1-2-3-4-5-6)", "1,500"],
               ["Three Pairs", "1,500"],
               ["Six of a kind", "INSTANT WIN 🎉"],
             ].map(([label, val]) => (
