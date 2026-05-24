@@ -49,8 +49,8 @@ export default function Rules() {
           <h2 className="text-lg font-bold text-amber-400 mb-3">🏆 Scoring</h2>
           <div className="space-y-2 text-sm">
             {[
-              ["Single 1", "100"],
               ["Single 5", "50"],
+              ["Single 1", "100"],
               ["Three 1s", "1,000"],
               ["Three 2s", "200"],
               ["Three 3s", "300"],
