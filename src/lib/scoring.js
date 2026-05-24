@@ -31,12 +31,27 @@ export function scoreSelection(dice) {
   }
 
   // Small Straight: 5 sequential dice (1-2-3-4-5 or 2-3-4-5-6) => 1000
+  // Also allow a 6-die selection = small straight + one extra scoring die (1 or 5).
   if (dice.length === 5) {
     if ([1,2,3,4,5].every(f => counts[f] === 1)) {
       return { score: 1000, valid: true, smallStraight: true };
     }
     if ([2,3,4,5,6].every(f => counts[f] === 1)) {
       return { score: 1000, valid: true, smallStraight: true };
+    }
+  }
+  if (dice.length === 6) {
+    // 1-2-3-4-5 small straight with an extra 1 (counts: 1×2, 2,3,4,5)
+    if (counts[1] === 2 && counts[2] === 1 && counts[3] === 1 && counts[4] === 1 && counts[5] === 1 && counts[6] === 0) {
+      return { score: 1100, valid: true, smallStraight: true };
+    }
+    // 1-2-3-4-5 small straight with an extra 5 (counts: 1,2,3,4, 5×2)
+    if (counts[1] === 1 && counts[2] === 1 && counts[3] === 1 && counts[4] === 1 && counts[5] === 2 && counts[6] === 0) {
+      return { score: 1050, valid: true, smallStraight: true };
+    }
+    // 2-3-4-5-6 small straight with an extra 5 (counts: 2,3,4, 5×2, 6)
+    if (counts[1] === 0 && counts[2] === 1 && counts[3] === 1 && counts[4] === 1 && counts[5] === 2 && counts[6] === 1) {
+      return { score: 1050, valid: true, smallStraight: true };
     }
   }
 
