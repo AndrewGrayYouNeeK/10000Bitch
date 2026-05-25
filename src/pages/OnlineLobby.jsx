@@ -128,15 +128,43 @@ export default function OnlineLobby() {
         </motion.div>
 
         <h1
-          className="font-pixel text-xl mb-3 neon-glitch"
+          className="font-pixel mb-3 neon-glitch relative inline-block"
           style={{
             color: "#fff",
-            textShadow: "0 0 6px #00ffea, 0 0 16px #00ffea, 0 0 28px #ff00ea",
-            letterSpacing: "0.1em",
+            fontSize: "2.75rem",
+            textShadow: "0 0 6px #00ffea, 0 0 16px #00ffea, 0 0 28px #ff00ea, 0 0 48px #ff00ea",
+            letterSpacing: "0.15em",
           }}
         >
-          QUICK MATCH
+          <span
+            aria-hidden
+            className="absolute inset-0 neon-glitch"
+            style={{
+              color: "#ff00ea",
+              transform: "translate(2px, 0)",
+              mixBlendMode: "screen",
+              opacity: 0.85,
+            }}
+          >
+            10000
+          </span>
+          <span
+            aria-hidden
+            className="absolute inset-0 neon-glitch"
+            style={{
+              color: "#00ffea",
+              transform: "translate(-2px, 0)",
+              mixBlendMode: "screen",
+              opacity: 0.85,
+            }}
+          >
+            10000
+          </span>
+          <span className="relative">10000</span>
         </h1>
+        <div className="text-xs tracking-[0.3em] text-slate-400 mb-3 font-pixel" style={{ opacity: 0.7 }}>
+          QUICK MATCH
+        </div>
         <p className="text-sm text-slate-400 mb-6">
           {joining ? "Connecting..." : count < 2 ? "Searching for players..." : "Filling lobby — starting soon"}
         </p>
