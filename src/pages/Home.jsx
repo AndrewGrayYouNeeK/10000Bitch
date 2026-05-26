@@ -2,9 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Dices, Users, BookOpen, Sparkles, Coins, Zap, Wifi, Swords } from "lucide-react";
+import { Dices, Users, BookOpen, Sparkles, Coins, Zap, Wifi, Swords, LogOut } from "lucide-react";
 import RulesSheet from "@/components/game/RulesSheet";
 import { useCosmetics } from "@/hooks/useCosmetics";
+import { base44 } from "@/api/base44Client";
 import DiceRain from "@/components/game/DiceRain";
 import DiamondShowcase from "@/components/home/DiamondShowcase";
 
@@ -104,7 +105,27 @@ export default function Home() {
           <Coins className="w-4 h-4" />
           {isLoading ? "…" : coins.toLocaleString()}
         </Link>
-        <RulesSheet />
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => {
+              if (window.confirm("Sign out of your account?")) {
+                base44.auth.logout();
+              }
+            }}
+            title="Sign out"
+            className="flex items-center gap-1.5 rounded px-3 py-1.5 transition-all border font-bold text-xs uppercase tracking-wider"
+            style={{
+              background: "rgba(255,50,150,0.08)",
+              borderColor: "rgba(255,50,150,0.4)",
+              color: "#ff5cb0",
+              boxShadow: "0 0 12px rgba(255,50,150,0.15)",
+            }}
+          >
+            <LogOut className="w-3.5 h-3.5" />
+            Sign Out
+          </button>
+          <RulesSheet />
+        </div>
       </div>
 
       {/* Main content */}
