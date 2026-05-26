@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Dices, PiggyBank, ChevronRight, Wifi, Trophy, Zap } from "lucide-react";
 import { motion } from "framer-motion";
 import { base44 } from "@/api/base44Client";
+import { ENTRY_THRESHOLD, TARGET_SCORE } from "@/lib/gameLogic";
 import { scoreSelection } from "@/lib/scoring";
 import DiceTray from "@/components/game/DiceTray";
 import ScorePanel from "@/components/game/ScorePanel";
@@ -17,9 +18,6 @@ import { useOnlineMatch } from "@/hooks/useOnlineMatch";
 import { useDiceSound } from "@/lib/useDiceSound";
 import { useCosmetics } from "@/hooks/useCosmetics";
 import { toast } from "sonner";
-
-const ENTRY_THRESHOLD = 1000;
-const TARGET_SCORE = 10000;
 
 export default function OnlineGame() {
   const { matchId } = useParams();
@@ -194,7 +192,9 @@ export default function OnlineGame() {
             if (inProgress && !window.confirm("Leave the match? You'll forfeit this game.")) return;
             try {
               await base44.functions.invoke("leaveQueueOrMatch", {});
-            } catch {}
+            } catch (err) {
+              console.warn("Failed to leave match gracefully:", err);
+            }
             navigate("/");
           }}
         >

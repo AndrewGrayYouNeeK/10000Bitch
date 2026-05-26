@@ -142,17 +142,6 @@ export default function Game() {
     return () => window.removeEventListener("devicemotion", handleMotion);
   }, [rollAnim]);
 
-  useEffect(() => {
-    if (shakeTriggered === 0) return;
-    if (!state || state.farkle || state.winner || rollAnim) return;
-    if (!state.hasRolled) {
-      doRoll();
-    } else {
-      const info = getHeldInfo(state);
-      if (info.valid && info.score > 0) onRollAgain();
-    }
-  }, [shakeTriggered]);
-
   const doRoll = useCallback(() => {
     if (!state) return;
     setRollAnim(true);
@@ -168,7 +157,7 @@ export default function Game() {
     setState(s => toggleHold(s, dieId));
   };
 
-  const onRollAgain = () => {
+  const onRollAgain = useCallback(() => {
     const { state: next } = confirmAndReroll(state);
     if (!next) return;
     if (next.winner) {
@@ -178,21 +167,26 @@ export default function Game() {
     setRollAnim(true);
     setState(next);
     setTimeout(() => setRollAnim(false), 900);
-  };
+  }, [state]);
+
+  useEffect(() => {
+    if (shakeTriggered === 0) return;
+    if (!state || state.farkle || state.winner || rollAnim) return;
+    if (!state.hasRolled) {
+      doRoll();
+    } else {
+      const info = getHeldInfo(state);
+      if (info.valid && info.score > 0) onRollAgain();
+    }
+  }, [shakeTriggered, state, doRoll, onRollAgain, rollAnim]);
 
   const onBank = () => {
     const prevScore = state.players[state.currentIndex].score;
+    const prevName = state.players[state.currentIndex].name;
     const next = bankAndPass(state);
-    // Award 1 coin per 1000 points actually banked (heavily reduced — wins matter more).
-    const gained = next.players[state.currentIndex].score - prevScore;
-    if (gained <= 0) {
-      const prevName = state.players[state.currentIndex].name;
-      const after = next.players.find(p => p.name === prevName);
-      const delta = (after?.score || prevScore) - prevScore;
-      if (delta > 0) addCoins(Math.floor(delta / 1000));
-    } else {
-      addCoins(Math.floor(gained / 1000));
-    }
+    const after = next.players.find(p => p.name === prevName);
+    const gained = (after?.score ?? prevScore) - prevScore;
+    if (gained > 0) addCoins(Math.floor(gained / 1000));
     setState(next);
   };
 
