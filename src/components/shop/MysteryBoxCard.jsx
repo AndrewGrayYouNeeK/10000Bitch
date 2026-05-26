@@ -20,20 +20,6 @@ export default function MysteryBoxCard({ box, canAfford, onBuy, opening }) {
         boxShadow: `0 0 30px ${glow}, inset 0 0 0 1px rgba(255,255,255,0.04)`,
       }}
     >
-      {/* Featured ribbon */}
-      {featured && (
-        <div
-          className="absolute top-3 right-3 z-20 text-[9px] font-black uppercase tracking-widest px-2 py-1 rounded"
-          style={{
-            background: `linear-gradient(135deg, ${accent}, ${accent2})`,
-            color: "#fff",
-            boxShadow: `0 0 12px ${glow}`,
-          }}
-        >
-          Most Popular
-        </div>
-      )}
-
       {/* Ambient glow orb */}
       <motion.div
         className="absolute -top-16 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full pointer-events-none"

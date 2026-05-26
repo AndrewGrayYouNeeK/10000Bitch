@@ -11,7 +11,7 @@
 export const MYSTERY_BOXES = [
   {
     id: "box_bronze",
-    name: "Starter Vault",
+    name: "Novice Vault",
     price: 250,
     tagline: "Entry-level mystery",
     description:
@@ -52,7 +52,7 @@ export const MYSTERY_BOXES = [
   },
   {
     id: "box_obsidian",
-    name: "Legendary Reliquary",
+    name: "Royal Reliquary",
     price: 2000,
     tagline: "For the truly bold",
     description:
