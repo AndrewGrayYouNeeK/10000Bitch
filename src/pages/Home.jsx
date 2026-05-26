@@ -108,10 +108,31 @@ export default function Home() {
         </Link>
         <div className="flex items-center gap-2">
           <button
-            onClick={() => {
-              // Clear local token then redirect to Base44 logout to fully sign out
-              try { logout(false); } catch (e) {}
-              window.location.href = "https://base44.app/logout?redirect_url=" + encodeURIComponent("https://base44.app/");
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              console.log("[SignOut] clicked");
+              try {
+                // Clear any cached auth tokens
+                Object.keys(localStorage).forEach((k) => {
+                  if (k.toLowerCase().includes("base44") || k.toLowerCase().includes("token") || k.toLowerCase().includes("auth")) {
+                    localStorage.removeItem(k);
+                  }
+                });
+                Object.keys(sessionStorage).forEach((k) => {
+                  if (k.toLowerCase().includes("base44") || k.toLowerCase().includes("token") || k.toLowerCase().includes("auth")) {
+                    sessionStorage.removeItem(k);
+                  }
+                });
+              } catch (err) {
+                console.error("[SignOut] storage clear failed", err);
+              }
+              // Hard navigate the TOP window (escapes the preview iframe)
+              try {
+                window.top.location.href = "/logout";
+              } catch (err) {
+                window.location.href = "/logout";
+              }
             }}
             title="Sign out"
             className="flex items-center gap-1.5 rounded px-3 py-1.5 transition-all border font-bold text-xs uppercase tracking-wider"
