@@ -17,7 +17,7 @@ import {
   ENTRY_THRESHOLD,
 } from "@/lib/gameLogic";
 import { scoreSelection } from "@/lib/scoring";
-import { getBoss } from "@/lib/storyBosses";
+import { getBoss, getStoryPlayerSkin } from "@/lib/storyBosses";
 import { chooseDiceToHold, chooseBankOrRoll } from "@/lib/aiOpponent";
 import { useCosmetics } from "@/hooks/useCosmetics";
 import { useDiceSound } from "@/lib/useDiceSound";
@@ -35,7 +35,9 @@ export default function StoryGame() {
   const { bossId } = useParams();
   const navigate = useNavigate();
   const boss = getBoss(bossId);
-  const { user, equippedSkinId, equippedFeltId, grantReward, updateMe } = useCosmetics();
+  const { user, equippedFeltId, grantReward, updateMe } = useCosmetics();
+  // In Story Mode you can't pick your dice — they're forced by your ladder progress.
+  const storyPlayerSkin = getStoryPlayerSkin(user?.bosses_defeated || []);
   const playDiceSound = useDiceSound();
 
   const [dialogue, setDialogue] = useState("intro"); // "intro" | null | "win" | "lose"
@@ -419,7 +421,7 @@ export default function StoryGame() {
               rolling={rollAnim}
               onToggle={handleToggle}
               disabled={!myTurn || !game.hasRolled || game.farkle || !!game.winner}
-              skinId={myTurn ? equippedSkinId : (boss.bossSkinId || "obsidian")}
+              skinId={myTurn ? storyPlayerSkin : (boss.bossSkinId || "obsidian")}
               feltId={equippedFeltId}
             />
             {heldInfo.held.length > 0 && (

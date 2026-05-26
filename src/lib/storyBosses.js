@@ -463,3 +463,15 @@ export function isBossUnlocked(bossId, bossesDefeated = []) {
 export function isBossDefeated(bossId, bossesDefeated = []) {
   return bossesDefeated.includes(bossId);
 }
+
+// In Story Mode, the player's dice are forced — you start with Prison Dice ("paper")
+// and roll with whatever skin you most recently unlocked by beating a boss in the ladder.
+export function getStoryPlayerSkin(bossesDefeated = []) {
+  // Walk the ladder backward and use the latest defeated boss's reward skin.
+  for (let i = BOSSES.length - 1; i >= 0; i--) {
+    if (bossesDefeated.includes(BOSSES[i].id) && BOSSES[i].rewards?.skin) {
+      return BOSSES[i].rewards.skin;
+    }
+  }
+  return "paper"; // Prison Dice — the starting kit.
+}
