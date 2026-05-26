@@ -411,15 +411,15 @@ export const DICE_SKINS = [
   },
   {
     id: "blue_gel",
-    name: "Cold Fish",
+    name: "Shark Tank",
     price: 400,
     gradient: "from-sky-300 via-blue-400 to-blue-600",
     border: "border-blue-500",
     pipColor: "bg-white",
     glow: "shadow-blue-400/60",
-    description: "Translucent blue jelly.",
+    description: "Sharks circling the pips.",
     realistic: true,
-    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/9fb931ac6_LZmPx9m7bqJyACwXQcfNu_Lwtd1VVk.png",
+    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/ecdba3778_generated_image.png",
   },
   {
     id: "plasma",
