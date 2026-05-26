@@ -45,6 +45,15 @@ export function useOnlineMatch(matchId) {
         ...extra,
       });
       return res.data;
+    } catch (err) {
+      // Server rejected the action (e.g. stale state from rapid clicks, not your turn).
+      // Swallow benign 4xx errors — the realtime subscription will keep UI in sync.
+      const status = err?.response?.status;
+      const message = err?.response?.data?.error || err?.message || "Action failed";
+      if (status && status >= 500) {
+        console.error("submitMatchAction failed:", message);
+      }
+      return { error: message };
     } finally {
       setSubmitting(false);
     }
