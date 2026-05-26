@@ -88,15 +88,26 @@ export default function Shop() {
             <div className="grid grid-cols-2 gap-3">
               {(() => {
                 const dupes = getDuplicateGroups(DICE_SKINS);
-                const PINNED_LAST = ["snow_globe", "blue_gel"];
-                const rank = (id) => PINNED_LAST.indexOf(id);
+                // Pinned to the top (in order)
+                const PINNED_FIRST = ["pride", "ruby"];
+                // Pinned to the bottom (in order — snow_globe & blue_gel stay dead last)
+                const PINNED_LAST = ["gold", "lava", "dragon_scale", "circuit_board", "galaxy", "snow_globe", "blue_gel"];
+                const firstRank = (id) => PINNED_FIRST.indexOf(id);
+                const lastRank = (id) => PINNED_LAST.indexOf(id);
                 const sortedSkins = [...DICE_SKINS].sort((a, b) => {
-                  const aPinned = rank(a.id);
-                  const bPinned = rank(b.id);
-                  if (aPinned !== -1 || bPinned !== -1) {
-                    if (aPinned === -1) return -1;
-                    if (bPinned === -1) return 1;
-                    return aPinned - bPinned;
+                  const aFirst = firstRank(a.id);
+                  const bFirst = firstRank(b.id);
+                  if (aFirst !== -1 || bFirst !== -1) {
+                    if (aFirst === -1) return 1;
+                    if (bFirst === -1) return -1;
+                    return aFirst - bFirst;
+                  }
+                  const aLast = lastRank(a.id);
+                  const bLast = lastRank(b.id);
+                  if (aLast !== -1 || bLast !== -1) {
+                    if (aLast === -1) return -1;
+                    if (bLast === -1) return 1;
+                    return aLast - bLast;
                   }
                   return getSkinEffectivePrice(a) - getSkinEffectivePrice(b);
                 });
