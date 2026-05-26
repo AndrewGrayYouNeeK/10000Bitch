@@ -46,18 +46,26 @@
           },
           "badge_id": {
             "type": "string"
+          },
+          "level": {
+            "type": "number",
+            "default": 1,
+            "description": "Player's account level (1-100) at time of joining"
+          },
+          "tier_id": {
+            "type": "number",
+            "default": 0,
+            "description": "Player's prestige tier (0=Bronze, 4=Mythic) at time of joining"
           }
         }
       }
     },
     "current_index": {
       "type": "number",
-      "default": 0,
-      "description": "Index of the player whose turn it is"
+      "default": 0
     },
     "dice": {
       "type": "array",
-      "description": "Current dice state",
       "items": {
         "type": "object",
         "properties": {
@@ -115,32 +123,11 @@
     },
     "rewards_awarded": {
       "type": "boolean",
-      "default": false,
-      "description": "Whether end-of-game rewards have been distributed"
+      "default": false
     }
   },
   "required": [
     "status",
     "players"
-  ],
-  "rls": {
-    "create": {
-      "user_condition": {
-        "role": "admin"
-      }
-    },
-    "read": {
-      "data.players.email": "{{user.email}}"
-    },
-    "update": {
-      "user_condition": {
-        "role": "admin"
-      }
-    },
-    "delete": {
-      "user_condition": {
-        "role": "admin"
-      }
-    }
-  }
+  ]
 }

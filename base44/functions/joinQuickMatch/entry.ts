@@ -3,6 +3,23 @@ import { createClientFromRequest } from 'npm:@base44/sdk@0.8.25';
 const MAX_PLAYERS = 4;
 const WAIT_FOR_FILL_MS = 8000; // After 2 are queued, wait this long to try to fill up to 4
 
+// Mirrors lib/progression.js — level curve based on XP (1–100).
+function levelForXp(xp = 0) {
+  if (xp <= 0) return 1;
+  const lvl = Math.floor(Math.sqrt(xp / 50)) + 1;
+  return Math.min(100, Math.max(1, lvl));
+}
+
+// Mirrors lib/progression.js — tier thresholds (0=Bronze ... 4=Mythic).
+const TIER_MIN_XP = [0, 2000, 15000, 60000, 180000];
+function tierForXp(xp = 0) {
+  let t = 0;
+  for (let i = 0; i < TIER_MIN_XP.length; i++) {
+    if (xp >= TIER_MIN_XP[i]) t = i;
+  }
+  return t;
+}
+
 function makeFreshDice() {
   return Array.from({ length: 6 }, (_, i) => ({
     id: i,
@@ -45,6 +62,11 @@ Deno.serve(async (req) => {
     const felt_id = body.felt_id || 'classic_green';
     const badge_id = body.badge_id || '';
 
+    // Compute level + tier server-side from the user's stored XP (anti-tamper).
+    const userXp = user.xp ?? 0;
+    const level = levelForXp(userXp);
+    const tier_id = tierForXp(userXp);
+
     // Look for a waiting match with room
     const waitingMatches = await svc.entities.OnlineMatch.filter({ status: 'waiting' });
     const joinable = waitingMatches.find(m =>
@@ -64,6 +86,8 @@ Deno.serve(async (req) => {
           skin_id,
           felt_id,
           badge_id,
+          level,
+          tier_id,
         },
       ];
 
@@ -99,6 +123,8 @@ Deno.serve(async (req) => {
           skin_id,
           felt_id,
           badge_id,
+          level,
+          tier_id,
         },
       ],
       dice: makeFreshDice(),

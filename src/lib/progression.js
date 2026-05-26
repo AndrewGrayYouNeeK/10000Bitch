@@ -66,6 +66,33 @@ export const SKIN_TIERS = {
 // the price is multiplied by this — the "impatient shortcut".
 export const TIER_SHORTCUT_MULTIPLIER = 10;
 
+// Level curve: smooth 1–100 scale derived from XP.
+// Level 1 starts at 0 XP. Each level requires more XP than the previous.
+// Formula: xp >= 50 * level^2  → level = floor(sqrt(xp/50))
+// → L2 = 50 XP, L5 = 1,250, L10 = 5,000, L20 = 20,000, L50 = 125,000, L100 = 500,000.
+export const MAX_LEVEL = 100;
+
+export function getLevelForXp(xp = 0) {
+  if (xp <= 0) return 1;
+  const level = Math.floor(Math.sqrt(xp / 50)) + 1;
+  return Math.min(MAX_LEVEL, Math.max(1, level));
+}
+
+export function xpForLevel(level) {
+  if (level <= 1) return 0;
+  return 50 * Math.pow(level - 1, 2);
+}
+
+export function getLevelProgress(xp = 0) {
+  const level = getLevelForXp(xp);
+  if (level >= MAX_LEVEL) return { level, pct: 100, xpInto: 0, xpNeeded: 0 };
+  const curXp = xpForLevel(level);
+  const nextXp = xpForLevel(level + 1);
+  const xpInto = xp - curXp;
+  const xpNeeded = nextXp - curXp;
+  return { level, pct: Math.round((xpInto / xpNeeded) * 100), xpInto, xpNeeded };
+}
+
 export function getTierForXp(xp = 0) {
   let current = TIERS[0];
   for (const t of TIERS) {

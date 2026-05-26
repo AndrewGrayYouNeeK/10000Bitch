@@ -12,6 +12,7 @@ import RulesSheet from "@/components/game/RulesSheet";
 import BigPopup from "@/components/game/BigPopup";
 import MatchChat from "@/components/online/MatchChat";
 import NightCityBackground from "@/components/online/NightCityBackground";
+import LevelBadge from "@/components/online/LevelBadge";
 import { useOnlineMatch } from "@/hooks/useOnlineMatch";
 import { useDiceSound } from "@/lib/useDiceSound";
 import { useCosmetics } from "@/hooks/useCosmetics";
@@ -130,6 +131,8 @@ export default function OnlineGame() {
     name: p.name + (p.email === myEmail ? " (you)" : ""),
     score: p.score,
     onBoard: p.onBoard,
+    level: p.level ?? 1,
+    tierId: p.tier_id ?? 0,
   }));
 
   // Build dice for DiceTray (it expects {id, value, used, held})

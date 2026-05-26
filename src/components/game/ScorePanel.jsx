@@ -2,6 +2,7 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Trophy, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
+import LevelBadge from "@/components/online/LevelBadge";
 
 export default function ScorePanel({ players, currentIndex, target = 10000 }) {
   return (
@@ -56,6 +57,9 @@ export default function ScorePanel({ players, currentIndex, target = 10000 }) {
               >
                 {p.name}
               </span>
+              {typeof p.level === "number" && (
+                <LevelBadge level={p.level} tierId={p.tierId ?? 0} size="xs" />
+              )}
               {p.score >= target && (
                 <Trophy
                   className="w-4 h-4 ml-auto"

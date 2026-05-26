@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { useCosmetics } from "@/hooks/useCosmetics";
 import { toast } from "sonner";
 import NightCityBackground from "@/components/online/NightCityBackground";
+import LevelBadge from "@/components/online/LevelBadge";
 
 export default function OnlineLobby() {
   const navigate = useNavigate();
@@ -186,7 +187,8 @@ export default function OnlineLobby() {
                 className="flex items-center gap-2 text-left text-sm bg-white/5 rounded px-3 py-2"
               >
                 <Users className="w-4 h-4 text-slate-400" />
-                <span className="text-white truncate">{p.name}</span>
+                <span className="text-white truncate flex-1">{p.name}</span>
+                <LevelBadge level={p.level ?? 1} tierId={p.tier_id ?? 0} size="xs" />
               </motion.div>
             ))}
             {Array.from({ length: Math.max(0, maxPlayers - count) }).map((_, i) => (
