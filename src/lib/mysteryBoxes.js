@@ -11,7 +11,7 @@
 export const MYSTERY_BOXES = [
   {
     id: "box_bronze",
-    name: "Bronze Vault",
+    name: "Starter Vault",
     price: 250,
     tagline: "Entry-level mystery",
     description:
@@ -35,9 +35,9 @@ export const MYSTERY_BOXES = [
     tagline: "Where the action gets real",
     description:
       "Bigger payouts. Better skins. Premium felts in the mix. The sweet spot.",
-    accent: "#a855f7",
-    accent2: "#4c1d95",
-    glow: "rgba(168,85,247,0.55)",
+    accent: "#22d3ee",
+    accent2: "#0e7490",
+    glow: "rgba(34,211,238,0.55)",
     rarity: "Rare",
     featured: true,
     odds: [
@@ -52,14 +52,14 @@ export const MYSTERY_BOXES = [
   },
   {
     id: "box_obsidian",
-    name: "Obsidian Reliquary",
+    name: "Legendary Reliquary",
     price: 2000,
     tagline: "For the truly bold",
     description:
       "Legendary skins. Premium felts. Jackpot coin prizes. The highest of stakes.",
-    accent: "#22d3ee",
-    accent2: "#0e7490",
-    glow: "rgba(34,211,238,0.55)",
+    accent: "#a855f7",
+    accent2: "#4c1d95",
+    glow: "rgba(168,85,247,0.55)",
     rarity: "Legendary",
     odds: [
       { type: "coins", amount: 500, weight: 18, label: "500 Coins" },
