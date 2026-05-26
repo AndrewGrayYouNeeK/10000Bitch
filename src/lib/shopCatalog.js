@@ -710,7 +710,7 @@ export const FELT_COLORS = [
   { id: "phoenix_fire",    name: "Phoenix Fire",    price: 1500, inner: "#ffb43a", mid: "#c4341a", outer: "#3a0a08", border: "border-amber-900/70", description: "Flickering flames around the edges.", premium: true, textureUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/c668f8a5c_ziA4KOYCS_QY2BcnEzQGb_sNgQTA4n.png" },
 
   // ===== 🐺 FUR =====
-  { id: "wolf_fur",        name: "Wolf Fur",        price: 1200, inner: "#a07a4a", mid: "#5a3a1e", outer: "#1a0e06", border: "border-amber-900/70", description: "Thick, wild wolf pelt.", premium: true, textureUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/3a7017943_IMG_1494.jpg" },
+  { id: "wolf_fur",        name: "Fur",             price: 1200, inner: "#a07a4a", mid: "#5a3a1e", outer: "#1a0e06", border: "border-amber-900/70", description: "Thick, wild pelt.", premium: true, textureUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/3a7017943_IMG_1494.jpg" },
 ];
 
 // Level badges — IDs `level_1` … `level_100`. The badge you own = your current level.
