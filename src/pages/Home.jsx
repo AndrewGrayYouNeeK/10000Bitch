@@ -111,9 +111,11 @@ export default function Home() {
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
-              logout();
+              // Open Google account chooser in a new tab so the user can pick a different account
+              // WITHOUT logging out of their current session.
+              window.open("https://accounts.google.com/AccountChooser", "_blank", "noopener,noreferrer");
             }}
-            title="Sign out"
+            title="Switch account"
             className="flex items-center gap-1.5 rounded px-3 py-1.5 transition-all border font-bold text-xs uppercase tracking-wider"
             style={{
               background: "rgba(255,50,150,0.08)",
@@ -123,7 +125,7 @@ export default function Home() {
             }}
           >
             <LogOut className="w-3.5 h-3.5" />
-            Sign Out
+            Switch
           </button>
           <RulesSheet />
         </div>
