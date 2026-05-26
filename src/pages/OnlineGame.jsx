@@ -153,8 +153,20 @@ export default function OnlineGame() {
           boxShadow: "0 0 18px rgba(0,255,234,0.15), inset 0 -1px 0 rgba(255,0,234,0.3)",
         }}
       >
-        <Button asChild variant="ghost" size="icon" className="text-white hover:bg-white/10">
-          <Link to="/"><ArrowLeft className="w-5 h-5" /></Link>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="text-white hover:bg-white/10"
+          onClick={async () => {
+            const inProgress = match?.status === "active" || match?.status === "waiting";
+            if (inProgress && !window.confirm("Leave the match? You'll forfeit this game.")) return;
+            try {
+              await base44.functions.invoke("leaveQueueOrMatch", {});
+            } catch {}
+            navigate("/");
+          }}
+        >
+          <ArrowLeft className="w-5 h-5" />
         </Button>
         <div
           className="font-pixel text-[10px] flex items-center gap-1.5 neon-glitch"
