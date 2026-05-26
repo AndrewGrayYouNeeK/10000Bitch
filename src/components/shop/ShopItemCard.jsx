@@ -32,15 +32,6 @@ export default function ShopItemCard({
           EQUIPPED
         </div>
       )}
-      {duplicateTag && (
-        <div className={cn(
-          "absolute top-2 left-2 text-[10px] font-black px-2 py-0.5 rounded-full",
-          duplicateTag.bg, duplicateTag.text
-        )}>
-          {duplicateTag.label}
-        </div>
-      )}
-
       <div className="flex items-center justify-center h-24 mb-3 relative">
         {preview}
         {tierLocked && !owned && (
