@@ -108,7 +108,11 @@ export default function Home() {
         </Link>
         <div className="flex items-center gap-2">
           <button
-            onClick={() => logout(true)}
+            onClick={() => {
+              // Clear local token then redirect to Base44 logout to fully sign out
+              try { logout(false); } catch (e) {}
+              window.location.href = "https://base44.app/logout?redirect_url=" + encodeURIComponent("https://base44.app/");
+            }}
             title="Sign out"
             className="flex items-center gap-1.5 rounded px-3 py-1.5 transition-all border font-bold text-xs uppercase tracking-wider"
             style={{
