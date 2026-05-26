@@ -197,16 +197,15 @@ export default function OnlineGame() {
         >
           <ArrowLeft className="w-5 h-5" />
         </Button>
-        <div
-          className="font-pixel text-[10px] flex items-center gap-1.5 neon-glitch"
-          style={{
-            color: "#fff",
-            textShadow: "0 0 4px #00ffea, 0 0 10px #00ffea, 0 0 18px #ff00ea",
-            letterSpacing: "0.15em",
-          }}
-        >
-          <Wifi className="w-4 h-4" style={{ filter: "drop-shadow(0 0 6px #00ffea)" }} />
-          NEON 10,000
+        <div className="flex items-center gap-1.5">
+          <Wifi className="w-4 h-4" style={{ color: "#00ffea", filter: "drop-shadow(0 0 6px #00ffea)" }} />
+          <span
+            data-text="10000"
+            className="cyber-glitch font-pixel text-sm"
+            style={{ letterSpacing: "0.2em" }}
+          >
+            10000
+          </span>
         </div>
         <RulesSheet />
       </div>
