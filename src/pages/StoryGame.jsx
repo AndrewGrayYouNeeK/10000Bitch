@@ -422,7 +422,7 @@ export default function StoryGame() {
               rolling={rollAnim}
               onToggle={handleToggle}
               disabled={!myTurn || !game.hasRolled || game.farkle || !!game.winner}
-              skinId={myTurn ? equippedSkinId : "obsidian"}
+              skinId={myTurn ? equippedSkinId : (boss.bossSkinId || "obsidian")}
               feltId={equippedFeltId}
             />
             {heldInfo.held.length > 0 && (
