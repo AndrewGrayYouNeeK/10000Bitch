@@ -4,13 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { ArrowLeft, Coins, Sparkles } from "lucide-react";
 import { toast } from "sonner";
-import { DICE_SKINS, BADGES, FELT_COLORS, getFelt } from "@/lib/shopCatalog";
+import { DICE_SKINS, FELT_COLORS, getFelt } from "@/lib/shopCatalog";
 import { getDuplicateGroups } from "@/lib/duplicateSkins";
 import { useCosmetics } from "@/hooks/useCosmetics";
 import { isSkinUnlockedByTier as checkUnlocked, isSkinAchievementOnly } from "@/lib/progression";
 import ShopItemCard from "@/components/shop/ShopItemCard";
 import DicePreview from "@/components/shop/DicePreview";
-import BadgePreview from "@/components/shop/BadgePreview";
 import FeltPreview from "@/components/shop/FeltPreview";
 import MysteryBoxesTab from "@/components/shop/MysteryBoxesTab";
 
@@ -71,10 +70,9 @@ export default function Shop() {
         </div>
 
         <Tabs value={tab} onValueChange={setTab}>
-          <TabsList className="grid grid-cols-4 w-full bg-slate-900 border border-slate-800">
+          <TabsList className="grid grid-cols-3 w-full bg-slate-900 border border-slate-800">
             <TabsTrigger value="skins">Skins</TabsTrigger>
             <TabsTrigger value="felts">Felts</TabsTrigger>
-            <TabsTrigger value="badges">Badges</TabsTrigger>
             <TabsTrigger
               value="mystery"
               className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-fuchsia-600 data-[state=active]:to-cyan-600 data-[state=active]:text-white"
@@ -154,41 +152,6 @@ export default function Shop() {
 
           <TabsContent value="mystery" className="mt-4">
             <MysteryBoxesTab user={user} coins={coins} />
-          </TabsContent>
-
-          <TabsContent value="badges" className="mt-4">
-            <div className="rounded-xl bg-fuchsia-950/30 border border-fuchsia-800/40 p-3 mb-3 text-center">
-              <p className="text-xs text-fuchsia-200 font-semibold">
-                🏆 Badges are <span className="text-fuchsia-300 font-black">your level</span> — earned automatically as you level up (1–100).
-              </p>
-            </div>
-            <div className="grid grid-cols-2 gap-3">
-              {BADGES.map(badge => (
-                <ShopItemCard
-                  key={badge.id}
-                  item={{ ...badge, description: badge.unlock || badge.description }}
-                  owned={ownedBadges.includes(badge.id)}
-                  equipped={equippedBadgeId === badge.id}
-                  canAfford={false}
-                  onBuy={() => {}}
-                  onEquip={() => handleEquip("badge", badge)}
-                  preview={<BadgePreview badge={badge} />}
-                  achievementOnly={true}
-                  hideLockedAction={true}
-                />
-              ))}
-              {equippedBadgeId && (
-                <div className="col-span-2">
-                  <Button
-                    variant="outline"
-                    className="w-full bg-white/5 border-white/20 text-white hover:bg-white/10"
-                    onClick={() => { equipItem("badge", ""); toast.success("Badge removed"); }}
-                  >
-                    Unequip Badge
-                  </Button>
-                </div>
-              )}
-            </div>
           </TabsContent>
         </Tabs>
 
