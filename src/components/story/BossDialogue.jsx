@@ -2,6 +2,7 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Swords, X } from "lucide-react";
+import BossAvatar from "./BossAvatar";
 
 // A pre-fight or post-fight dialogue overlay.
 // mode: "intro" | "win" | "lose"
@@ -40,12 +41,7 @@ export default function BossDialogue({ boss, mode, onContinue, onExit, summary }
         >
           {/* Avatar + name */}
           <div className="flex items-center gap-3 mb-4">
-            <div
-              className={`w-16 h-16 rounded-xl flex items-center justify-center text-4xl bg-gradient-to-br ${boss.color}`}
-              style={{ boxShadow: "0 0 18px rgba(0,0,0,0.4)" }}
-            >
-              {boss.avatar}
-            </div>
+            <BossAvatar boss={boss} sizeClass="w-16 h-16" emojiClass="text-4xl" />
             <div className="flex-1 min-w-0">
               <div className="text-lg font-black text-white truncate">{boss.name}</div>
               <div className="text-xs text-slate-400 italic">{boss.title}</div>

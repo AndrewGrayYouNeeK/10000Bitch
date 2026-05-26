@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Lock, Check, Crown, Coins, Sparkles } from "lucide-react";
 import { getSkin } from "@/lib/shopCatalog";
+import BossAvatar from "./BossAvatar";
 
 export default function BossCard({ boss, unlocked, defeated, onClick, index }) {
   const skinName = boss.rewards.skin ? getSkin(boss.rewards.skin)?.name : null;
@@ -33,12 +34,7 @@ export default function BossCard({ boss, unlocked, defeated, onClick, index }) {
 
       <div className="flex items-start gap-3 pl-2">
         {/* Avatar */}
-        <div
-          className={`w-14 h-14 rounded-xl flex items-center justify-center text-3xl bg-gradient-to-br ${boss.color} flex-shrink-0`}
-          style={{ boxShadow: "0 0 18px rgba(0,0,0,0.4)" }}
-        >
-          {boss.avatar}
-        </div>
+        <BossAvatar boss={boss} sizeClass="w-14 h-14" emojiClass="text-3xl" />
 
         {/* Body */}
         <div className="flex-1 min-w-0">

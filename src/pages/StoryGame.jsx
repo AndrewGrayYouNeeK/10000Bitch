@@ -26,6 +26,7 @@ import ScorePanel from "@/components/game/ScorePanel";
 import TurnBanner from "@/components/game/TurnBanner";
 import BigPopup from "@/components/game/BigPopup";
 import BossDialogue from "@/components/story/BossDialogue";
+import BossAvatar from "@/components/story/BossAvatar";
 import CyberBackground from "@/components/game/CyberBackground";
 
 const PLAYER_NAME = "You";
@@ -351,11 +352,7 @@ export default function StoryGame() {
               background: "rgba(8,2,20,0.6)",
             }}
           >
-            <div
-              className={`w-10 h-10 rounded-lg flex items-center justify-center text-2xl bg-gradient-to-br ${boss.color}`}
-            >
-              {boss.avatar}
-            </div>
+            <BossAvatar boss={boss} sizeClass="w-10 h-10" emojiClass="text-2xl" rounded="rounded-lg" />
             <div className="flex-1 min-w-0">
               <div className="text-sm font-bold text-white truncate">{boss.name}</div>
               <div className="text-[10px] text-slate-400 italic truncate">{boss.title}</div>
