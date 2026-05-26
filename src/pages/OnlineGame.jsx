@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Dices, PiggyBank, ChevronRight, Wifi, Trophy } from "lucide-react";
+import { ArrowLeft, Dices, PiggyBank, ChevronRight, Wifi, Trophy, Zap } from "lucide-react";
 import { motion } from "framer-motion";
 import { base44 } from "@/api/base44Client";
 import { scoreSelection } from "@/lib/scoring";
@@ -29,9 +29,21 @@ export default function OnlineGame() {
   const [rollAnim, setRollAnim] = useState(false);
   const [popup, setPopup] = useState(null);
   const [claimedSummary, setClaimedSummary] = useState(null);
+  const [autoPassFarkle, setAutoPassFarkle] = useState(() => {
+    try { return localStorage.getItem("autoPassFarkle") !== "false"; } catch { return true; }
+  });
   const prevBustRef = useRef(0);
   const prevHasRolledRef = useRef(false);
   const claimedRef = useRef(false);
+  const autoPassFiredRef = useRef(false);
+
+  const toggleAutoPass = () => {
+    setAutoPassFarkle((v) => {
+      const next = !v;
+      try { localStorage.setItem("autoPassFarkle", String(next)); } catch {}
+      return next;
+    });
+  };
 
   // Animate dice rolls when has_rolled flips from false to true
   useEffect(() => {
@@ -53,6 +65,23 @@ export default function OnlineGame() {
       prevBustRef.current = match.bust_count;
     }
   }, [match?.bust_count, match?.last_bust_word]);
+
+  // Auto-pass on farkle: when it's my turn and a farkle is detected, end turn automatically after a brief delay.
+  useEffect(() => {
+    if (!match) return;
+    const myEmail = user?.email;
+    const myTurn = match.players?.[match.current_index]?.email === myEmail;
+    if (!autoPassFarkle || !myTurn || !match.farkle || rollAnim || submitting) {
+      if (!match?.farkle) autoPassFiredRef.current = false;
+      return;
+    }
+    if (autoPassFiredRef.current) return;
+    autoPassFiredRef.current = true;
+    const t = setTimeout(() => {
+      submit("pass_farkle");
+    }, 1400);
+    return () => clearTimeout(t);
+  }, [match?.farkle, match?.current_index, rollAnim, submitting, autoPassFarkle, user?.email]);
 
   // Claim rewards when match finishes
   useEffect(() => {
@@ -245,6 +274,24 @@ export default function OnlineGame() {
             </div>
           )}
         </div>
+      </div>
+
+      {/* Auto-pass farkle toggle */}
+      <div className="px-3 pb-2 flex justify-end">
+        <button
+          onClick={toggleAutoPass}
+          className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md border transition-colors"
+          style={{
+            borderColor: autoPassFarkle ? "rgba(0,255,200,0.55)" : "rgba(148,163,184,0.35)",
+            background: autoPassFarkle ? "rgba(0,255,200,0.12)" : "rgba(15,23,42,0.6)",
+            color: autoPassFarkle ? "#00ffc8" : "#94a3b8",
+            textShadow: autoPassFarkle ? "0 0 6px rgba(0,255,200,0.7)" : "none",
+          }}
+          title="When you farkle (no scoring dice), automatically end your turn."
+        >
+          <Zap className="w-3 h-3" />
+          Auto-end on Farkle: {autoPassFarkle ? "ON" : "OFF"}
+        </button>
       </div>
 
       {/* Actions */}
