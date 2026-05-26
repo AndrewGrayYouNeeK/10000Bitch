@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
  */
 export default function ShopItemCard({
   item, owned, equipped, canAfford, onBuy, onEquip, preview, duplicateTag,
-  tierLocked, effectivePrice, achievementOnly,
+  tierLocked, effectivePrice, achievementOnly, hideLockedAction,
 }) {
   const displayPrice = effectivePrice ?? item.price;
 
@@ -59,13 +59,15 @@ export default function ShopItemCard({
           <Check className="w-4 h-4 mr-1" /> {equipped ? "Equipped" : "Equip"}
         </Button>
       ) : achievementOnly ? (
-        <Button
-          size="sm"
-          disabled
-          className="w-full h-9 bg-slate-800 text-fuchsia-300 border border-fuchsia-700/50 disabled:opacity-100"
-        >
-          <Lock className="w-4 h-4 mr-1" /> Unlock by playing
-        </Button>
+        hideLockedAction ? null : (
+          <Button
+            size="sm"
+            disabled
+            className="w-full h-9 bg-slate-800 text-fuchsia-300 border border-fuchsia-700/50 disabled:opacity-100"
+          >
+            <Lock className="w-4 h-4 mr-1" /> Unlock by playing
+          </Button>
+        )
       ) : (
         <Button
           size="sm"

@@ -175,6 +175,7 @@ export default function Shop() {
                   onEquip={() => handleEquip("badge", badge)}
                   preview={<BadgePreview badge={badge} />}
                   achievementOnly={true}
+                  hideLockedAction={true}
                 />
               ))}
               {equippedBadgeId && (
