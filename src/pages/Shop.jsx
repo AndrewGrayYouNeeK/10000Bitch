@@ -176,7 +176,7 @@ export default function Shop() {
           <TabsContent value="badges" className="mt-4">
             <div className="rounded-xl bg-fuchsia-950/30 border border-fuchsia-800/40 p-3 mb-3 text-center">
               <p className="text-xs text-fuchsia-200 font-semibold">
-                🏆 Badges are <span className="text-fuchsia-300 font-black">earned by playing</span> — not bought. Hit the milestone, unlock the badge.
+                🏆 Badges are <span className="text-fuchsia-300 font-black">your level</span> — earned automatically as you level up (1–100).
               </p>
             </div>
             <div className="grid grid-cols-2 gap-3">

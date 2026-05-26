@@ -656,19 +656,31 @@ export const FELT_COLORS = [
   },
 ];
 
-// All badges are achievement-only — earned by playing, never purchased.
-// Each badge has an `unlock` field describing how to earn it.
-export const BADGES = [
-  { id: "rookie",      name: "Rookie",         price: 0, emoji: "🎲", color: "from-slate-400 to-slate-600",         description: "Finish your first game.",                  unlock: "Finish 1 game",       achievementOnly: true },
-  { id: "hot_hand",    name: "Hot Hand",       price: 0, emoji: "🔥", color: "from-orange-400 to-red-600",          description: "Roll Hot Dice — clear all 6 in a turn.",   unlock: "Get Hot Dice once",   achievementOnly: true },
-  { id: "lucky_seven", name: "Lucky 7",        price: 0, emoji: "🍀", color: "from-green-400 to-emerald-600",       description: "Win 7 games.",                              unlock: "Win 7 games",         achievementOnly: true },
-  { id: "high_roller", name: "High Roller",    price: 0, emoji: "💎", color: "from-cyan-400 to-blue-600",           description: "Bank a single turn of 2,000+ points.",      unlock: "Bank 2,000+ in one turn", achievementOnly: true },
-  { id: "champion",    name: "Champion",       price: 0, emoji: "👑", color: "from-yellow-300 to-amber-600",        description: "Win 25 games.",                             unlock: "Win 25 games",        achievementOnly: true },
-  { id: "legend",      name: "Legend",         price: 0, emoji: "⚡", color: "from-fuchsia-400 to-purple-700",      description: "Win 100 games. The stuff of myth.",         unlock: "Win 100 games",       achievementOnly: true },
-  { id: "perfect_10k", name: "Perfect 10,000", price: 0, emoji: "🎯", color: "from-fuchsia-300 via-pink-400 to-purple-700", description: "Win with an exact 10,000 — all six dice on your final turn.", unlock: "Perfect 10K win", achievementOnly: true },
-];
+// Level badges — IDs `level_1` … `level_100`. The badge you own = your current level.
+// Tier-colored to match prestige tiers: Bronze 1-9, Silver 10-24, Gold 25-49, Diamond 50-79, Mythic 80-100.
+function _levelBadgeStyle(level) {
+  if (level >= 80) return { tier: "Mythic",  color: "from-fuchsia-400 to-purple-700",   emoji: "⚡" };
+  if (level >= 50) return { tier: "Diamond", color: "from-cyan-300 to-sky-500",         emoji: "💎" };
+  if (level >= 25) return { tier: "Gold",    color: "from-yellow-300 to-amber-600",     emoji: "👑" };
+  if (level >= 10) return { tier: "Silver",  color: "from-slate-300 to-slate-500",      emoji: "🥈" };
+  return                  { tier: "Bronze",  color: "from-amber-700 to-orange-800",     emoji: "🥉" };
+}
 
-export const PERFECT_TENK_REWARD = { skinId: "crystal_cut", badgeId: "perfect_10k" };
+export const BADGES = Array.from({ length: 100 }, (_, i) => {
+  const level = i + 1;
+  const style = _levelBadgeStyle(level);
+  return {
+    id: `level_${level}`,
+    level,
+    name: `Level ${level}`,
+    price: 0,
+    emoji: style.emoji,
+    color: style.color,
+    description: `${style.tier} • Reach Level ${level}.`,
+    unlock: `Reach Level ${level}`,
+    achievementOnly: true,
+  };
+});
 
 export function getSkin(id) {
   return DICE_SKINS.find(s => s.id === id) || DICE_SKINS[0];
