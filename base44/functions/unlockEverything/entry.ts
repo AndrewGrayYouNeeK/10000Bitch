@@ -26,7 +26,9 @@ Deno.serve(async (req) => {
         "forest_pine","amethyst_purple","graphite","ocean_teal","sahara_sand"
       ],
       owned_badges: ["rookie","hot_hand","lucky_seven","high_roller","champion","legend","perfect_10k"],
+      owned_pips: ["classic_dots","square_pips","star_pips","heart_pips","diamond_pips"],
       coins: 999999,
+      xp: 25118864, // Max level 100 under steep curve (100 * L^2.6)
     };
 
     const updated = await base44.asServiceRole.entities.User.update(user.id, payload);
