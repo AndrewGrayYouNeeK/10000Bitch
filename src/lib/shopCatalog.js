@@ -437,11 +437,14 @@ export const DICE_SKINS = [
 ];
 
 // Coin packs — direct-buy alternative for players who don't want to grind.
+// 100 Gray Quarters (GQ) = $1. Larger packs include bonus GQs.
 export const COIN_PACKS = [
-  { id: "pack_handful", name: "Handful", coins: 250, emoji: "🎲" },
-  { id: "pack_stack",   name: "Stack",   coins: 750, emoji: "💰" },
-  { id: "pack_roll",    name: "Big Roll", coins: 2000, emoji: "💎" },
-  { id: "pack_jackpot", name: "Jackpot", coins: 5000, emoji: "👑" },
+  { id: "pack_5",    name: "$5",    dollars: 5,    coins: 400,    emoji: "🎲" },
+  { id: "pack_10",   name: "$10",   dollars: 10,   coins: 1100,   emoji: "💰", popular: true },
+  { id: "pack_20",   name: "$20",   dollars: 20,   coins: 2500,   emoji: "💎" },
+  { id: "pack_50",   name: "$50",   dollars: 50,   coins: 6000,   emoji: "👑" },
+  { id: "pack_100",  name: "$100",  dollars: 100,  coins: 15000,  emoji: "🏆" },
+  { id: "pack_1000", name: "$1000", dollars: 1000, coins: 175000, emoji: "🌟" },
 ];
 
 // Table felt colors. `inner`, `mid`, `outer` define the radial gradient stops.

@@ -250,7 +250,9 @@ export default function StoryGame() {
   const claimRewards = async () => {
     const alreadyDefeated = (user?.bosses_defeated || []).includes(boss.id);
     const multiplier = alreadyDefeated ? 0.5 : 1;
-    const coinGain = Math.round(boss.rewards.coins * multiplier);
+    // Coins are deflated 10× — Gray Quarters are the in-game currency and 100 GQ = $1.
+    // Players should need ~10 games to afford a Starter Vault.
+    const coinGain = Math.max(5, Math.round((boss.rewards.coins * multiplier) / 10));
     const xpGain = Math.round(boss.rewards.xp * multiplier);
 
     // Build the user patch

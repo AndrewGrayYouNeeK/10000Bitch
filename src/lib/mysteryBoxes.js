@@ -11,8 +11,8 @@
 export const MYSTERY_BOXES = [
   {
     id: "box_bronze",
-    name: "Novice Vault",
-    price: 250,
+    name: "Starter Vault",
+    price: 500,
     tagline: "Entry-level mystery",
     description:
       "A starter cache. Mostly coins, with a chance at a common skin or standard felt.",
@@ -30,8 +30,8 @@ export const MYSTERY_BOXES = [
   },
   {
     id: "box_royal",
-    name: "Royal Crate",
-    price: 750,
+    name: "Novice Crate",
+    price: 1000,
     tagline: "Where the action gets real",
     description:
       "Bigger payouts. Better skins. Premium felts in the mix. The sweet spot.",

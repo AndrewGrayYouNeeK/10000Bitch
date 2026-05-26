@@ -70,7 +70,7 @@ export default function Game() {
   useEffect(() => {
     if (state?.winner && !winnerAwardedRef.current) {
       winnerAwardedRef.current = true;
-      addCoins(200);
+      addCoins(40); // small win bonus — ~10 wins to afford a Starter Vault
 
       let xpGain = XP_REWARDS.finishGame + XP_REWARDS.winGame;
       const wins = user?.wins ?? 0;
@@ -79,7 +79,7 @@ export default function Game() {
       if ((state.bustCount || 0) === 0) xpGain += XP_REWARDS.noFarkleGame;
       if (state.perfectTenK) {
         xpGain += XP_REWARDS.perfectTenK;
-        addCoins(1000); // bonus coin payout for the ultra-rare achievement
+        addCoins(200); // bonus coin payout for the ultra-rare achievement
         // Grant the exclusive Mythic dice + badge for hitting an exact 10,000.
         import("@/lib/shopCatalog").then(({ PERFECT_TENK_REWARD }) => {
           grantReward(PERFECT_TENK_REWARD);
@@ -183,17 +183,15 @@ export default function Game() {
   const onBank = () => {
     const prevScore = state.players[state.currentIndex].score;
     const next = bankAndPass(state);
-    // Award 1 coin per 100 points actually banked (diff in this player's score).
+    // Award 1 coin per 1000 points actually banked (heavily reduced — wins matter more).
     const gained = next.players[state.currentIndex].score - prevScore;
-    // bankAndPass advances currentIndex unless there's a winner — look up by matching name instead
     if (gained <= 0) {
-      // Player might have advanced; recompute from the player who just banked.
       const prevName = state.players[state.currentIndex].name;
       const after = next.players.find(p => p.name === prevName);
       const delta = (after?.score || prevScore) - prevScore;
-      if (delta > 0) addCoins(Math.floor(delta / 100));
+      if (delta > 0) addCoins(Math.floor(delta / 1000));
     } else {
-      addCoins(Math.floor(gained / 100));
+      addCoins(Math.floor(gained / 1000));
     }
     setState(next);
   };
