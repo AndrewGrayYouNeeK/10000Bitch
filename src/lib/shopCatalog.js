@@ -657,26 +657,17 @@ export const FELT_COLORS = [
 ];
 
 // Level badges — IDs `level_1` … `level_100`. The badge you own = your current level.
-// Tier-colored to match prestige tiers: Bronze 1-9, Silver 10-24, Gold 25-49, Diamond 50-79, Mythic 80-100.
-function _levelBadgeStyle(level) {
-  if (level >= 80) return { tier: "Mythic",  color: "from-fuchsia-400 to-purple-700",   emoji: "⚡" };
-  if (level >= 50) return { tier: "Diamond", color: "from-cyan-300 to-sky-500",         emoji: "💎" };
-  if (level >= 25) return { tier: "Gold",    color: "from-yellow-300 to-amber-600",     emoji: "👑" };
-  if (level >= 10) return { tier: "Silver",  color: "from-slate-300 to-slate-500",      emoji: "🥈" };
-  return                  { tier: "Bronze",  color: "from-amber-700 to-orange-800",     emoji: "🥉" };
-}
-
+// No tier categories — every level uses the same neon-cyan style.
 export const BADGES = Array.from({ length: 100 }, (_, i) => {
   const level = i + 1;
-  const style = _levelBadgeStyle(level);
   return {
     id: `level_${level}`,
     level,
     name: `Level ${level}`,
     price: 0,
-    emoji: style.emoji,
-    color: style.color,
-    description: `${style.tier} • Reach Level ${level}.`,
+    emoji: "⚡",
+    color: "from-cyan-400 to-sky-600",
+    description: `Reach Level ${level}.`,
     unlock: `Reach Level ${level}`,
     achievementOnly: true,
   };

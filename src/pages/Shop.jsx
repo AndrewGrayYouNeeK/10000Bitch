@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { DICE_SKINS, BADGES, FELT_COLORS, getFelt } from "@/lib/shopCatalog";
 import { getDuplicateGroups } from "@/lib/duplicateSkins";
 import { useCosmetics } from "@/hooks/useCosmetics";
-import { getSkinTier, isSkinUnlockedByTier as checkUnlocked, isSkinAchievementOnly } from "@/lib/progression";
+import { isSkinUnlockedByTier as checkUnlocked, isSkinAchievementOnly } from "@/lib/progression";
 import ShopItemCard from "@/components/shop/ShopItemCard";
 import DicePreview from "@/components/shop/DicePreview";
 import BadgePreview from "@/components/shop/BadgePreview";
@@ -19,7 +19,7 @@ import PowersInfo from "@/components/game/PowersInfo";
 export default function Shop() {
   const {
     user,
-    coins, xp, currentTier, nextTier, isLoading,
+    coins, xp, isLoading,
     ownedSkins, ownedBadges, ownedFelts,
     equippedSkinId, equippedBadgeId, equippedFeltId,
     buyItem, equipItem, getSkinEffectivePrice,
@@ -31,7 +31,7 @@ export default function Shop() {
     if (!res.ok) {
       if (res.reason === "insufficient") toast.error("Not enough coins!");
       else if (res.reason === "already_owned") toast.info("Already owned.");
-      else if (res.reason === "achievement_only") toast.error("Mythic dice are earned by playing — no shortcut.");
+      else if (res.reason === "achievement_only") toast.error("These dice are earned by playing — no shortcut.");
       return;
     }
     toast.success(`Unlocked ${item.name}!`);
@@ -64,36 +64,11 @@ export default function Shop() {
       </div>
 
       <div className="p-4 max-w-2xl mx-auto">
-        {/* Tier progress */}
-        <div className="rounded-2xl bg-slate-900/70 border border-slate-800 p-3 mb-4">
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-2">
-              <span className={`text-[11px] font-black px-2 py-0.5 rounded-full border ${currentTier?.chip || ""}`}>
-                {currentTier?.name || "Bronze"}
-              </span>
-              <span className="text-xs text-slate-400 font-semibold">
-                {xp.toLocaleString()} XP
-              </span>
-            </div>
-            {nextTier && (
-              <div className="text-xs text-slate-400">
-                Next: <span className="text-white font-bold">{nextTier.name}</span> at {nextTier.minXp.toLocaleString()} XP
-              </div>
-            )}
-            {!nextTier && (
-              <div className="text-xs text-fuchsia-300 font-bold">MAX TIER</div>
-            )}
-          </div>
-          {nextTier && (
-            <div className="h-1.5 rounded-full bg-slate-800 overflow-hidden">
-              <div
-                className={`h-full bg-gradient-to-r ${currentTier?.color || ""} transition-all`}
-                style={{
-                  width: `${Math.min(100, Math.max(0, ((xp - (currentTier?.minXp || 0)) / (nextTier.minXp - (currentTier?.minXp || 0))) * 100))}%`,
-                }}
-              />
-            </div>
-          )}
+        {/* XP display */}
+        <div className="rounded-2xl bg-slate-900/70 border border-slate-800 p-3 mb-4 flex items-center justify-center">
+          <span className="text-xs text-slate-400 font-semibold">
+            <span className="text-cyan-300 font-black tabular-nums">{xp.toLocaleString()}</span> XP
+          </span>
         </div>
 
         <Tabs value={tab} onValueChange={setTab}>
@@ -126,7 +101,6 @@ export default function Shop() {
                   return getSkinEffectivePrice(a) - getSkinEffectivePrice(b);
                 });
                 return sortedSkins.map(skin => {
-                  const tier = getSkinTier(skin.id);
                   const tierLocked = !checkUnlocked(skin.id, xp);
                   const achievementOnly = isSkinAchievementOnly(skin.id, xp);
                   const effectivePrice = getSkinEffectivePrice(skin);
@@ -141,7 +115,6 @@ export default function Shop() {
                       onEquip={() => handleEquip("skin", skin)}
                       preview={<DicePreview skinId={skin.id} />}
                       duplicateTag={dupes[skin.id]}
-                      tier={tier}
                       tierLocked={tierLocked}
                       achievementOnly={achievementOnly}
                       effectivePrice={effectivePrice}
@@ -213,7 +186,7 @@ export default function Shop() {
         </div>
 
         <p className="text-center text-xs text-slate-500 mt-6 pb-10">
-          Earn coins by banking points & winning games. Earn <b className="text-amber-300">XP</b> by finishing games, winning, and hitting milestones — climb tiers to unlock the rarest dice. Locked dice can be bought at a 10× shortcut price, except <b className="text-fuchsia-300">Mythic</b> dice — those can only be earned by reaching the tier.
+          Earn coins by banking points & winning games. Earn <b className="text-amber-300">XP</b> by finishing games, winning, and hitting milestones — level up to unlock rarer dice. Locked dice can be bought at a 10× shortcut price; the rarest dice can only be earned by playing.
         </p>
       </div>
     </div>

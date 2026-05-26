@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
  */
 export default function ShopItemCard({
   item, owned, equipped, canAfford, onBuy, onEquip, preview, duplicateTag,
-  tier, tierLocked, effectivePrice, achievementOnly,
+  tierLocked, effectivePrice, achievementOnly,
 }) {
   const displayPrice = effectivePrice ?? item.price;
 
@@ -30,14 +30,6 @@ export default function ShopItemCard({
       {equipped && (
         <div className="absolute top-2 right-2 bg-amber-500 text-black text-[10px] font-black px-2 py-0.5 rounded-full">
           EQUIPPED
-        </div>
-      )}
-      {!equipped && tier && (
-        <div className={cn(
-          "absolute top-2 right-2 text-[10px] font-black px-2 py-0.5 rounded-full border",
-          tier.chip
-        )}>
-          {tier.name}
         </div>
       )}
       {duplicateTag && (
