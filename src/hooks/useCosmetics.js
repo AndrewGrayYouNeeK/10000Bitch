@@ -76,6 +76,11 @@ export function useCosmetics() {
       return { ok: false, reason: "achievement_only" };
     }
 
+    // All badges are achievement-only — earned by playing, not purchased.
+    if (type === "badge") {
+      return { ok: false, reason: "achievement_only" };
+    }
+
     // For skins, apply the tier shortcut multiplier when buying above your tier.
     const effectivePrice = type === "skin" ? getSkinEffectivePrice(item, xp) : item.price;
     if (coins < effectivePrice) return { ok: false, reason: "insufficient" };

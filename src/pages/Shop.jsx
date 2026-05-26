@@ -174,17 +174,23 @@ export default function Shop() {
           </TabsContent>
 
           <TabsContent value="badges" className="mt-4">
+            <div className="rounded-xl bg-fuchsia-950/30 border border-fuchsia-800/40 p-3 mb-3 text-center">
+              <p className="text-xs text-fuchsia-200 font-semibold">
+                🏆 Badges are <span className="text-fuchsia-300 font-black">earned by playing</span> — not bought. Hit the milestone, unlock the badge.
+              </p>
+            </div>
             <div className="grid grid-cols-2 gap-3">
               {BADGES.map(badge => (
                 <ShopItemCard
                   key={badge.id}
-                  item={badge}
+                  item={{ ...badge, description: badge.unlock || badge.description }}
                   owned={ownedBadges.includes(badge.id)}
                   equipped={equippedBadgeId === badge.id}
-                  canAfford={coins >= badge.price}
-                  onBuy={() => handleBuy("badge", badge)}
+                  canAfford={false}
+                  onBuy={() => {}}
                   onEquip={() => handleEquip("badge", badge)}
                   preview={<BadgePreview badge={badge} />}
+                  achievementOnly={true}
                 />
               ))}
               {equippedBadgeId && (

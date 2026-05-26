@@ -656,14 +656,16 @@ export const FELT_COLORS = [
   },
 ];
 
+// All badges are achievement-only — earned by playing, never purchased.
+// Each badge has an `unlock` field describing how to earn it.
 export const BADGES = [
-  { id: "rookie", name: "Rookie", price: 100, emoji: "🎲", color: "from-slate-400 to-slate-600", description: "Every legend starts here." },
-  { id: "hot_hand", name: "Hot Hand", price: 300, emoji: "🔥", color: "from-orange-400 to-red-600", description: "You're on fire." },
-  { id: "lucky_seven", name: "Lucky 7", price: 400, emoji: "🍀", color: "from-green-400 to-emerald-600", description: "Fortune favors you." },
-  { id: "high_roller", name: "High Roller", price: 600, emoji: "💎", color: "from-cyan-400 to-blue-600", description: "Big risk, big reward." },
-  { id: "champion", name: "Champion", price: 800, emoji: "👑", color: "from-yellow-300 to-amber-600", description: "Born to win." },
-  { id: "legend", name: "Legend", price: 1500, emoji: "⚡", color: "from-fuchsia-400 to-purple-700", description: "The stuff of myth." },
-  { id: "perfect_10k", name: "Perfect 10,000", price: 0, emoji: "🎯", color: "from-fuchsia-300 via-pink-400 to-purple-700", description: "Awarded for winning with an exact 10,000 — all six dice on your final turn.", achievementOnly: true },
+  { id: "rookie",      name: "Rookie",         price: 0, emoji: "🎲", color: "from-slate-400 to-slate-600",         description: "Finish your first game.",                  unlock: "Finish 1 game",       achievementOnly: true },
+  { id: "hot_hand",    name: "Hot Hand",       price: 0, emoji: "🔥", color: "from-orange-400 to-red-600",          description: "Roll Hot Dice — clear all 6 in a turn.",   unlock: "Get Hot Dice once",   achievementOnly: true },
+  { id: "lucky_seven", name: "Lucky 7",        price: 0, emoji: "🍀", color: "from-green-400 to-emerald-600",       description: "Win 7 games.",                              unlock: "Win 7 games",         achievementOnly: true },
+  { id: "high_roller", name: "High Roller",    price: 0, emoji: "💎", color: "from-cyan-400 to-blue-600",           description: "Bank a single turn of 2,000+ points.",      unlock: "Bank 2,000+ in one turn", achievementOnly: true },
+  { id: "champion",    name: "Champion",       price: 0, emoji: "👑", color: "from-yellow-300 to-amber-600",        description: "Win 25 games.",                             unlock: "Win 25 games",        achievementOnly: true },
+  { id: "legend",      name: "Legend",         price: 0, emoji: "⚡", color: "from-fuchsia-400 to-purple-700",      description: "Win 100 games. The stuff of myth.",         unlock: "Win 100 games",       achievementOnly: true },
+  { id: "perfect_10k", name: "Perfect 10,000", price: 0, emoji: "🎯", color: "from-fuchsia-300 via-pink-400 to-purple-700", description: "Win with an exact 10,000 — all six dice on your final turn.", unlock: "Perfect 10K win", achievementOnly: true },
 ];
 
 export const PERFECT_TENK_REWARD = { skinId: "crystal_cut", badgeId: "perfect_10k" };
