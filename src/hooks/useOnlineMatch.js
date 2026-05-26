@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { base44 } from "@/api/base44Client";
+import { toast } from "sonner";
 
 // Subscribes to a single OnlineMatch by id and provides a typed action submitter.
 export function useOnlineMatch(matchId) {
@@ -46,12 +47,15 @@ export function useOnlineMatch(matchId) {
       });
       return res.data;
     } catch (err) {
-      // Server rejected the action (e.g. stale state from rapid clicks, not your turn).
-      // Swallow benign 4xx errors — the realtime subscription will keep UI in sync.
+      // Server rejected the action — surface the reason so the user knows why nothing happened.
       const status = err?.response?.status;
       const message = err?.response?.data?.error || err?.message || "Action failed";
       if (status && status >= 500) {
         console.error("submitMatchAction failed:", message);
+        toast.error(message);
+      } else if (action === "bank" || action === "roll" || action === "roll_again") {
+        // Only toast on user-initiated primary actions, not on rapid hold toggles
+        toast.error(message);
       }
       return { error: message };
     } finally {
