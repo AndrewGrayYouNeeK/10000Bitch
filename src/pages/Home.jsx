@@ -11,7 +11,7 @@ import DiamondShowcase from "@/components/home/DiamondShowcase";
 
 export default function Home() {
   const { coins, isLoading } = useCosmetics();
-  const { navigateToLogin } = useAuth();
+  const { logout, isAuthenticated, navigateToLogin } = useAuth();
 
   return (
     <div
@@ -111,7 +111,13 @@ export default function Home() {
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
-              navigateToLogin();
+              // If already signed in, log out (which redirects to login).
+              // If not signed in, go straight to login.
+              if (isAuthenticated) {
+                logout(true);
+              } else {
+                navigateToLogin();
+              }
             }}
             title="Sign in"
             className="flex items-center gap-1.5 rounded px-3 py-1.5 transition-all border font-bold text-xs uppercase tracking-wider"
