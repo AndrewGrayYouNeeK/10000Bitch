@@ -15,6 +15,8 @@ import About from '@/pages/About';
 import Contact from '@/pages/Contact';
 import OnlineLobby from '@/pages/OnlineLobby';
 import OnlineGame from '@/pages/OnlineGame';
+import Story from '@/pages/Story';
+import StoryGame from '@/pages/StoryGame';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -51,6 +53,8 @@ const AuthenticatedApp = () => {
       <Route path="/contact" element={<Contact />} />
       <Route path="/online" element={<OnlineLobby />} />
       <Route path="/online/:matchId" element={<OnlineGame />} />
+      <Route path="/story" element={<Story />} />
+      <Route path="/story/:bossId" element={<StoryGame />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Dices, Users, BookOpen, Sparkles, Coins, Zap, Wifi } from "lucide-react";
+import { Dices, Users, BookOpen, Sparkles, Coins, Zap, Wifi, Swords } from "lucide-react";
 import RulesSheet from "@/components/game/RulesSheet";
 import { useCosmetics } from "@/hooks/useCosmetics";
 import DiceRain from "@/components/game/DiceRain";
@@ -176,6 +176,24 @@ export default function Home() {
               />
               <Zap className="w-6 h-6" />
               PLAY NOW
+            </Link>
+          </motion.div>
+
+          {/* Story mode */}
+          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
+            <Link
+              data-dice-obstacle
+              to="/story"
+              className="flex items-center justify-center w-full h-14 text-base font-black rounded-lg gap-2 relative overflow-hidden border"
+              style={{
+                background: "rgba(255,0,170,0.08)",
+                borderColor: "rgba(255,0,170,0.5)",
+                color: "#ff5cb0",
+                boxShadow: "0 0 20px rgba(255,0,170,0.2)",
+              }}
+            >
+              <Swords className="w-5 h-5" />
+              STORY MODE
             </Link>
           </motion.div>
 
