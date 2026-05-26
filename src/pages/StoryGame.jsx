@@ -27,7 +27,7 @@ import TurnBanner from "@/components/game/TurnBanner";
 import BigPopup from "@/components/game/BigPopup";
 import BossDialogue from "@/components/story/BossDialogue";
 import BossAvatar from "@/components/story/BossAvatar";
-import CyberBackground from "@/components/game/CyberBackground";
+import BossRainBackground from "@/components/story/BossRainBackground";
 
 const PLAYER_NAME = "You";
 
@@ -311,7 +311,7 @@ export default function StoryGame() {
 
   return (
     <div className="min-h-screen text-white pb-6 flex flex-col relative">
-      <CyberBackground />
+      <BossRainBackground bossId={boss.id} />
       <div className="relative z-10 flex-1 flex flex-col">
         {/* Header */}
         <div
