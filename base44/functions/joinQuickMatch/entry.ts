@@ -3,10 +3,11 @@ import { createClientFromRequest } from 'npm:@base44/sdk@0.8.25';
 const MAX_PLAYERS = 4;
 const WAIT_FOR_FILL_MS = 8000; // After 2 are queued, wait this long to try to fill up to 4
 
-// Mirrors lib/progression.js — level curve based on XP (1–100).
+// Mirrors lib/progression.js — steep level curve based on XP (1–100).
+// Formula: level = floor((xp/100)^(1/2.6)) + 1, capped at 100.
 function levelForXp(xp = 0) {
   if (xp <= 0) return 1;
-  const lvl = Math.floor(Math.sqrt(xp / 50)) + 1;
+  const lvl = Math.floor(Math.pow(xp / 100, 1 / 2.6)) + 1;
   return Math.min(100, Math.max(1, lvl));
 }
 
