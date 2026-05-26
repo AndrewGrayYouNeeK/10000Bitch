@@ -61,9 +61,6 @@ export default function Story() {
             >
               BOSS LADDER
             </h1>
-            <p className="text-sm text-slate-400">
-              Climb the ranks. Defeat 6 challengers. Become the dice overlord.
-            </p>
             <div className="mt-3 inline-block px-3 py-1 rounded border text-xs font-bold tabular-nums"
               style={{
                 background: "rgba(0,255,200,0.07)",
