@@ -13,7 +13,6 @@ import DicePreview from "@/components/shop/DicePreview";
 import BadgePreview from "@/components/shop/BadgePreview";
 import FeltPreview from "@/components/shop/FeltPreview";
 import MysteryBoxesTab from "@/components/shop/MysteryBoxesTab";
-import PowersInfo from "@/components/game/PowersInfo";
 
 
 export default function Shop() {
@@ -192,10 +191,6 @@ export default function Shop() {
             </div>
           </TabsContent>
         </Tabs>
-
-        <div className="mt-6">
-          <PowersInfo variant="shop" />
-        </div>
 
         <p className="text-center text-xs text-slate-500 mt-6 pb-10">
           Earn coins by banking points & winning games. Earn <b className="text-amber-300">XP</b> by finishing games, winning, and hitting milestones — level up to unlock rarer dice. Locked dice can be bought at a 10× shortcut price; the rarest dice can only be earned by playing.

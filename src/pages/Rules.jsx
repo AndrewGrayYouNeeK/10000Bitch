@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
-import PowersInfo from "@/components/game/PowersInfo";
 
 export default function Rules() {
   return (
@@ -72,7 +71,6 @@ export default function Rules() {
           </div>
         </section>
 
-        <PowersInfo variant="rules" />
       </div>
     </div>
   );
