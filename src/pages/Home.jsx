@@ -11,7 +11,7 @@ import DiamondShowcase from "@/components/home/DiamondShowcase";
 
 export default function Home() {
   const { coins, isLoading } = useCosmetics();
-  const { logout } = useAuth();
+  const { navigateToLogin } = useAuth();
 
   return (
     <div
@@ -111,21 +111,19 @@ export default function Home() {
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
-              // Open Google account chooser in a new tab so the user can pick a different account
-              // WITHOUT logging out of their current session.
-              window.open("https://accounts.google.com/AccountChooser", "_blank", "noopener,noreferrer");
+              navigateToLogin();
             }}
-            title="Switch account"
+            title="Sign in"
             className="flex items-center gap-1.5 rounded px-3 py-1.5 transition-all border font-bold text-xs uppercase tracking-wider"
             style={{
-              background: "rgba(255,50,150,0.08)",
-              borderColor: "rgba(255,50,150,0.4)",
-              color: "#ff5cb0",
-              boxShadow: "0 0 12px rgba(255,50,150,0.15)",
+              background: "rgba(0,255,200,0.08)",
+              borderColor: "rgba(0,255,200,0.4)",
+              color: "#00ffc8",
+              boxShadow: "0 0 12px rgba(0,255,200,0.15)",
             }}
           >
             <LogOut className="w-3.5 h-3.5" />
-            Switch
+            Sign In
           </button>
           <RulesSheet />
         </div>
