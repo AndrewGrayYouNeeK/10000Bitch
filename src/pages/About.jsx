@@ -16,7 +16,7 @@ export default function About() {
         <div className="space-y-4 text-slate-300 leading-relaxed text-base">
           <p>
             10,000 — The Ultimate Roll is a fast-paced, strategic dice game for 2 to 4 players, all
-            sharing a single device. Based on the classic folk dice game known by many names — Farkle,
+            sharing a single device. Based on the classic folk dice game known by many names — Bust,
             Zilch, Greed — our version brings it to life with a sleek neon interface, animated dice,
             and a fully featured cosmetics shop to personalize your experience.
           </p>

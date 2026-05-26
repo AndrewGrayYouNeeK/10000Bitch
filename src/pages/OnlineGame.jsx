@@ -286,10 +286,10 @@ export default function OnlineGame() {
             color: autoPassFarkle ? "#00ffc8" : "#94a3b8",
             textShadow: autoPassFarkle ? "0 0 6px rgba(0,255,200,0.7)" : "none",
           }}
-          title="When you farkle (no scoring dice), automatically end your turn."
+          title="When you bust (no scoring dice), automatically end your turn."
         >
           <Zap className="w-3 h-3" />
-          Auto-end on Farkle: {autoPassFarkle ? "ON" : "OFF"}
+          Auto-end on Bust: {autoPassFarkle ? "ON" : "OFF"}
         </button>
       </div>
 
