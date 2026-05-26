@@ -12,11 +12,13 @@ import ShopItemCard from "@/components/shop/ShopItemCard";
 import DicePreview from "@/components/shop/DicePreview";
 import BadgePreview from "@/components/shop/BadgePreview";
 import FeltPreview from "@/components/shop/FeltPreview";
+import MysteryBoxesTab from "@/components/shop/MysteryBoxesTab";
 import PowersInfo from "@/components/game/PowersInfo";
 
 
 export default function Shop() {
   const {
+    user,
     coins, xp, currentTier, nextTier, isLoading,
     ownedSkins, ownedBadges, ownedFelts,
     equippedSkinId, equippedBadgeId, equippedFeltId,
@@ -95,10 +97,16 @@ export default function Shop() {
         </div>
 
         <Tabs value={tab} onValueChange={setTab}>
-          <TabsList className="grid grid-cols-3 w-full bg-slate-900 border border-slate-800">
-            <TabsTrigger value="skins">Dice Skins</TabsTrigger>
+          <TabsList className="grid grid-cols-4 w-full bg-slate-900 border border-slate-800">
+            <TabsTrigger value="skins">Skins</TabsTrigger>
             <TabsTrigger value="felts">Felts</TabsTrigger>
             <TabsTrigger value="badges">Badges</TabsTrigger>
+            <TabsTrigger
+              value="mystery"
+              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-fuchsia-600 data-[state=active]:to-cyan-600 data-[state=active]:text-white"
+            >
+              Mystery
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="skins" className="mt-4">
@@ -159,6 +167,10 @@ export default function Shop() {
                 />
               ))}
             </div>
+          </TabsContent>
+
+          <TabsContent value="mystery" className="mt-4">
+            <MysteryBoxesTab user={user} coins={coins} />
           </TabsContent>
 
           <TabsContent value="badges" className="mt-4">
