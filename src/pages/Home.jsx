@@ -5,12 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Dices, Users, BookOpen, Sparkles, Coins, Zap, Wifi, Swords, LogOut } from "lucide-react";
 import RulesSheet from "@/components/game/RulesSheet";
 import { useCosmetics } from "@/hooks/useCosmetics";
-import { base44 } from "@/api/base44Client";
+import { useAuth } from "@/lib/AuthContext";
 import DiceRain from "@/components/game/DiceRain";
 import DiamondShowcase from "@/components/home/DiamondShowcase";
 
 export default function Home() {
   const { coins, isLoading } = useCosmetics();
+  const { logout } = useAuth();
 
   return (
     <div
@@ -107,11 +108,7 @@ export default function Home() {
         </Link>
         <div className="flex items-center gap-2">
           <button
-            onClick={() => {
-              if (window.confirm("Sign out of your account?")) {
-                base44.auth.logout();
-              }
-            }}
+            onClick={() => logout(true)}
             title="Sign out"
             className="flex items-center gap-1.5 rounded px-3 py-1.5 transition-all border font-bold text-xs uppercase tracking-wider"
             style={{
