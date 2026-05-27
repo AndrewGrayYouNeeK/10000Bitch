@@ -30,16 +30,16 @@
   ],
   "rls": {
     "create": {
-      "data.email": "{{user.email}}"
+      "created_by": "{{user.email}}"
     },
     "read": {
-      "data.email": "{{user.email}}"
+      "created_by": "{{user.email}}"
     },
     "update": {
-      "data.email": "{{user.email}}"
+      "created_by": "{{user.email}}"
     },
     "delete": {
-      "data.email": "{{user.email}}"
+      "created_by": "{{user.email}}"
     }
   }
 }

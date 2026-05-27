@@ -29,7 +29,11 @@
     "create": {
       "created_by": "{{user.email}}"
     },
-    "read": {},
+    "read": {
+      "created_by": {
+        "$exists": true
+      }
+    },
     "update": {
       "created_by": "{{user.email}}"
     },
