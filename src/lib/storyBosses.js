@@ -429,7 +429,7 @@ export const BOSSES = [
   // ── FINAL BOSS ─────────────────────────────────────────────────────────
   fight({
     id: "gq", name: "GQ", title: "The One On The Logo",
-    avatar: "https://media.base44.com/images/public/69e7669b223d37093cd03879/02645f1df_J-pkVgoLigDTfwK1sZ0Qt_3RwWpqbD.png",
+    avatar: "https://media.base44.com/images/public/69e7669b223d37093cd03879/2f11cfe0c_IMG_0629.jpg",
     color: "from-cyan-100 via-white to-sky-300",
     isBoss: true,
     difficulty: { bankThreshold: 2000, greed: 0.7, holdGreedy: true },
