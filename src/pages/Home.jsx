@@ -129,7 +129,7 @@ export default function Home() {
             }}
           >
             <LogOut className="w-3.5 h-3.5" />
-            Sign In
+            {isAuthenticated ? "Sign Out" : "Sign In"}
           </button>
           <RulesSheet />
         </div>
