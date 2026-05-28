@@ -22,6 +22,8 @@ const FISH_VARIANTS = [
   { tail: "#facc15", body: "#e5e7eb", highlight: "#f9fafb", fin: "#facc15", mouth: "#1f2937", stripe: "#0f172a", angelfish: true },
   // Angelfish (blue) — two-tone blue with deep navy bars
   { tail: "#1e40af", body: "#3b82f6", highlight: "#93c5fd", fin: "#1d4ed8", mouth: "#1e3a8a", stripe: "#1e3a8a", angelfish: true },
+  // SHARK — sleek grey predator with white belly and toothy grin
+  { tail: "#475569", body: "#64748b", highlight: "#cbd5e1", fin: "#334155", mouth: "#0f172a", stripe: null, shark: true },
 ];
 
 /**
@@ -60,7 +62,36 @@ function Fish({ size, top, duration, delay, dir = 1, scale = 1, variant }) {
         height="100%"
         style={{ filter: "drop-shadow(0 1px 2px rgba(0,0,0,0.3))" }}
       >
-        {v.angelfish ? (
+        {v.shark ? (
+          <>
+            {/* Sleek shark tail (crescent) */}
+            <motion.path
+              d="M 8 20 L -2 6 L 4 20 L -2 34 Z"
+              fill={v.tail}
+              animate={{ rotate: [-10, 10, -10] }}
+              transition={{ duration: 0.35, repeat: Infinity, ease: "easeInOut" }}
+              style={{ originX: "20%", originY: "50%" }}
+            />
+            {/* Tall pointed dorsal fin */}
+            <path d="M 30 12 L 34 0 L 40 12 Z" fill={v.fin} />
+            {/* Pectoral fin underneath */}
+            <path d="M 30 26 L 26 34 L 38 28 Z" fill={v.fin} />
+            {/* Streamlined body — pointed snout */}
+            <path d="M 8 20 Q 22 8 44 14 Q 56 18 58 20 Q 56 22 44 26 Q 22 32 8 20 Z" fill={v.body} />
+            {/* White belly */}
+            <path d="M 14 24 Q 30 30 50 24 Q 40 28 22 28 Z" fill="#f1f5f9" opacity="0.85" />
+            {/* Gill slits */}
+            <path d="M 26 18 L 25 22" stroke={v.mouth} strokeWidth="0.8" opacity="0.6" />
+            <path d="M 29 18 L 28 22" stroke={v.mouth} strokeWidth="0.8" opacity="0.6" />
+            <path d="M 32 18 L 31 22" stroke={v.mouth} strokeWidth="0.8" opacity="0.6" />
+            {/* Cold eye */}
+            <circle cx="48" cy="18" r="1.8" fill="white" />
+            <circle cx="48.2" cy="18" r="1" fill="#0f172a" />
+            {/* Toothy grin */}
+            <path d="M 50 22 L 58 21" stroke={v.mouth} strokeWidth="1" fill="none" />
+            <path d="M 51 22 L 51.5 23 L 52 22 L 52.5 23 L 53 22 L 53.5 23 L 54 22 L 54.5 23 L 55 22" stroke="white" strokeWidth="0.6" fill="none" />
+          </>
+        ) : v.angelfish ? (
           <>
             {/* Tall angular dorsal fin */}
             <path d="M 28 12 L 22 -4 L 40 12 Z" fill={v.fin} opacity="0.95" />
