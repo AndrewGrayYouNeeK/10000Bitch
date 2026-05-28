@@ -129,12 +129,18 @@ export default function FishOverlay({ size, radius, count = 1, bigFishVariantInd
     const arr = [];
     const n = Math.max(1, count);
     // Pick which fish on this die will be the "big one" (skip for value=2).
-    const bigIdx = n === 2 ? -1 : Math.floor(Math.random() * n);
+    // For the "1" face, always make the single fish the big one — and force an angelfish variant.
+    const bigIdx = n === 1 ? 0 : n === 2 ? -1 : Math.floor(Math.random() * n);
     // The big fish uses a deterministic variant (unique per die).
-    const bigVariant = FISH_VARIANTS[bigFishVariantIndex % FISH_VARIANTS.length];
+    // For the "1" face, force an angelfish variant (indices 6 or 7).
+    const ANGELFISH_INDICES = [6, 7];
+    const effectiveBigIndex = n === 1
+      ? ANGELFISH_INDICES[bigFishVariantIndex % ANGELFISH_INDICES.length]
+      : bigFishVariantIndex % FISH_VARIANTS.length;
+    const bigVariant = FISH_VARIANTS[effectiveBigIndex];
     // Smaller fish use any variant EXCEPT the big one's, shuffled.
     const smallPool = FISH_VARIANTS
-      .filter((_, i) => i !== bigFishVariantIndex % FISH_VARIANTS.length)
+      .filter((_, i) => i !== effectiveBigIndex)
       .sort(() => Math.random() - 0.5);
     let smallCursor = 0;
     for (let i = 0; i < n; i++) {
