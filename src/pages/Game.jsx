@@ -103,23 +103,34 @@ export default function Game() {
   }, [state, addXp]);
 
   // Shake-to-roll via DeviceMotion
+  // NOTE: Uses pure acceleration (gravity removed) and a high threshold so taps
+  // on the dice don't accidentally trigger a roll. Also ignores motion for a
+  // brief window after any touch/click.
+  const lastTouchRef = useRef(0);
+  useEffect(() => {
+    const markTouch = () => { lastTouchRef.current = Date.now(); };
+    window.addEventListener("touchstart", markTouch, { passive: true });
+    window.addEventListener("mousedown", markTouch, { passive: true });
+    return () => {
+      window.removeEventListener("touchstart", markTouch);
+      window.removeEventListener("mousedown", markTouch);
+    };
+  }, []);
+
   useEffect(() => {
     let lastShake = 0;
-    const THRESHOLD = 18;
+    const THRESHOLD = 28; // raised — typical taps spike to ~15-22
     const COOLDOWN = 1500;
+    const TOUCH_GUARD_MS = 600; // ignore motion right after a tap/click
 
     const handleMotion = (e) => {
-      const acc = e.accelerationIncludingGravity;
-      if (!acc) return;
-      const total = Math.sqrt((acc.x || 0) ** 2 + (acc.y || 0) ** 2 + (acc.z || 0) ** 2);
+      const acc = e.acceleration; // gravity-free; null if device doesn't support
+      if (!acc || (acc.x == null && acc.y == null && acc.z == null)) return;
       const now = Date.now();
+      if (now - lastTouchRef.current < TOUCH_GUARD_MS) return;
+      const total = Math.sqrt((acc.x || 0) ** 2 + (acc.y || 0) ** 2 + (acc.z || 0) ** 2);
       if (total > THRESHOLD && now - lastShake > COOLDOWN) {
         lastShake = now;
-        // Only roll if the game is in a rollable state
-        setState(s => {
-          if (!s || s.farkle || s.winner || rollAnim) return s;
-          return s; // trigger via side effect below
-        });
         setShakeTriggered(t => t + 1);
       }
     };
