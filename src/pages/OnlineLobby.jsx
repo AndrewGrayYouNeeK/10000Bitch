@@ -69,22 +69,32 @@ export default function OnlineLobby() {
     }
   }, [match?.status, match?.id, navigate]);
 
+  // Auto-start after a short delay once we have 2+ players (so we don't wait forever for 4)
+  useEffect(() => {
+    if (!match || match.status !== "waiting") return;
+    const count = match.players?.length || 0;
+    if (count >= 2 && !startedRef.current) {
+      // wait 8s for more players, then start
+      startTimerRef.current = setTimeout(async () => {
+        startedRef.current = true;
+        try {
+          await base44.functions.invoke("startWaitingMatch", { match_id: match.id });
+        } catch {}
+      }, 8000);
+    }
+    return () => {
+      if (startTimerRef.current) {
+        clearTimeout(startTimerRef.current);
+        startTimerRef.current = null;
+      }
+    };
+  }, [match?.id, match?.status, match?.players?.length]);
+
   const handleLeave = async () => {
     try {
       await base44.functions.invoke("leaveQueueOrMatch", {});
     } catch {}
     navigate("/");
-  };
-
-  const handleStartNow = async () => {
-    if (startedRef.current) return;
-    startedRef.current = true;
-    try {
-      await base44.functions.invoke("startWaitingMatch", { match_id: match.id });
-    } catch {
-      startedRef.current = false;
-      toast.error("Couldn't start match");
-    }
   };
 
   const count = match?.players?.length || 0;
@@ -157,7 +167,7 @@ export default function OnlineLobby() {
           QUICK MATCH
         </div>
         <p className="text-sm text-slate-400 mb-6">
-          {joining ? "Connecting..." : count < 2 ? "Searching for players..." : "Press Play when ready, or wait for more"}
+          {joining ? "Connecting..." : count < 2 ? "Searching for players..." : "Filling lobby — starting soon"}
         </p>
 
         <div className="rounded-xl border p-4 mb-6"
@@ -192,20 +202,6 @@ export default function OnlineLobby() {
             ))}
           </div>
         </div>
-
-        {count >= 2 && (
-          <Button
-            onClick={handleStartNow}
-            disabled={startedRef.current}
-            className="w-full mb-3 font-black text-base h-12 text-black"
-            style={{
-              background: "linear-gradient(135deg, #00ffc8, #00b3ff)",
-              boxShadow: "0 0 20px rgba(0,255,200,0.45)",
-            }}
-          >
-            ▶ PLAY NOW ({count})
-          </Button>
-        )}
 
         <Button
           onClick={handleLeave}
