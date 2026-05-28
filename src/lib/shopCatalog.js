@@ -411,15 +411,15 @@ export const DICE_SKINS = [
   },
   {
     id: "blue_gel",
-    name: "Shark Tank",
+    name: "Angelfish",
     price: 400,
     gradient: "from-sky-300 via-blue-400 to-blue-600",
     border: "border-blue-500",
     pipColor: "bg-white",
     glow: "shadow-blue-400/60",
-    description: "Sharks circling the pips.",
+    description: "A big angelfish circling the pips.",
     realistic: true,
-    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/ecdba3778_generated_image.png",
+    spriteUrl: "https://media.base44.com/images/public/69e7669b223d37093cd03879/999d8760b_generated_image.png",
   },
   {
     id: "plasma",
