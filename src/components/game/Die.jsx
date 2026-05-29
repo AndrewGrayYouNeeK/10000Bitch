@@ -582,6 +582,8 @@ export default function Die({
             ? size * 0.0375 + (MOONSTONE_EXTRA_STRETCH[value] || 0)
             : skin.id === "amber_wasp"
             ? (AMBER_WASP_STRETCH[value] || 0)
+            : skin.id === "galaxy"
+            ? size * 0.04
             : 0;
           return (
             <div
