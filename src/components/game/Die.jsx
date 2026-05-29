@@ -407,7 +407,7 @@ export default function Die({
           const CIRCUIT_X_OFFSET = { 1: -3, 2: -18, 3: -31, 4: -2, 5: -17, 6: -29 };
           const CIRCUIT_Y_OFFSET = { 1: 5, 2: 4, 3: 4, 4: -7, 5: -10, 6: -9 };
           // Amber Wasp per-face tuning
-          const AMBER_WASP_X_OFFSET = { 1: 1, 2: 1, 3: 1, 4: 2.5, 5: 0.5, 6: 2 };
+          const AMBER_WASP_X_OFFSET = { 1: 4, 2: 4, 3: 4, 4: 5.5, 5: 3.5, 6: 5 };
           const AMBER_WASP_Y_OFFSET = { 1: 2, 2: 2, 3: 2, 4: 2, 5: 1, 6: 1 };
           // Radiation (toxic_plasma_v2) per-face tuning
           const TOXIC2_X_OFFSET = { 2: -4, 3: -7, 4: -1, 5: -4, 6: -7 };
