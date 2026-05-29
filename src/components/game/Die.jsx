@@ -359,7 +359,7 @@ export default function Die({
           const WOOD_Y_OFFSET = { 1: -size * 0.02, 2: -size * 0.02, 3: -size * 0.025, 5: -size * 0.035, 6: -size * 0.02 };
           const WOOD_X_OFFSET = { 3: size * 0.02, 5: size * 0.02, 6: size * 0.02 };
           const SILVER_X_OFFSET = { 1: size * 0.02, 2: size * 0.02, 3: size * 0.02, 4: size * 0.02, 5: size * 0.02, 6: size * 0.02 };
-          const GALAXY_X_OFFSET = { 3: size * 0.025, 5: size * 0.02, 6: size * 0.015 };
+          const GALAXY_X_OFFSET = { 2: size * 0.02, 3: size * 0.025, 5: size * 0.02, 6: size * 0.015 };
           const DRAGON_X_OFFSET = { 2: size * 0.015, 3: size * 0.015, 5: size * 0.01, 6: size * 0.015 };
           const AMETHYST_X_OFFSET = { 2: size * 0.015, 3: -size * 0.005, 6: size * 0.015 };
           const LAVA_X_OFFSET = { 2: -size * 0.005, 3: -size * 0.005, 5: 0, 6: 0 };
@@ -367,7 +367,7 @@ export default function Die({
           const MOONSTONE_X_OFFSET = { 1: size * 0.03, 2: size * 0.035, 3: size * 0.035, 4: size * 0.04, 5: size * 0.035, 6: size * 0.035 };
           const MOONSTONE_Y_OFFSET = { 1: size * 0.01, 2: size * 0.005, 3: size * 0.0075, 4: size * 0.003, 5: size * 0.003, 6: size * 0.003 };
           const SILVER_Y_OFFSET = { 1: -size * 0.015, 2: -size * 0.015, 3: -size * 0.015 };
-          const GALAXY_Y_OFFSET = { 1: size * 0.005, 2: size * 0.005, 3: size * 0.005, 4: size * 0.025, 5: size * 0.025, 6: size * 0.025 };
+          const GALAXY_Y_OFFSET = { 1: size * 0.005, 2: size * 0.005, 3: size * 0.005, 4: size * 0.01, 5: size * 0.01, 6: size * 0.01 };
           const DRAGON_Y_OFFSET = { 5: -size * 0.025 };
           const AMETHYST_Y_OFFSET = { 1: -size * 0.025, 2: -size * 0.025, 3: -size * 0.025, 4: -size * 0.035, 5: -size * 0.035, 6: -size * 0.035 };
           const PLASMA_X_OFFSET = { 1: -size * 0.03, 2: -size * 0.06, 3: -size * 0.11, 4: -size * 0.02, 5: -size * 0.085, 6: -size * 0.12 };
