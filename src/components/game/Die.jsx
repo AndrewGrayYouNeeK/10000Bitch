@@ -359,7 +359,7 @@ export default function Die({
           const WOOD_Y_OFFSET = { 1: -size * 0.02, 2: -size * 0.02, 3: -size * 0.025, 5: -size * 0.035, 6: -size * 0.02 };
           const WOOD_X_OFFSET = { 3: size * 0.02, 5: size * 0.02, 6: size * 0.02 };
           const SILVER_X_OFFSET = { 1: size * 0.02, 2: size * 0.02, 3: size * 0.02, 4: size * 0.02, 5: size * 0.02, 6: size * 0.02 };
-          const GALAXY_X_OFFSET = { 2: size * 0.02, 3: size * 0.025, 5: size * 0.02, 6: size * 0.015 };
+          const GALAXY_X_OFFSET = { 1: size * 0.01, 2: size * 0.02, 3: size * 0.025, 4: size * 0.01, 5: size * 0.02, 6: size * 0.025 };
           const DRAGON_X_OFFSET = { 2: size * 0.015, 3: size * 0.015, 5: size * 0.01, 6: size * 0.015 };
           const AMETHYST_X_OFFSET = { 2: size * 0.015, 3: -size * 0.005, 6: size * 0.015 };
           const LAVA_X_OFFSET = { 2: -size * 0.005, 3: -size * 0.005, 5: 0, 6: 0 };
