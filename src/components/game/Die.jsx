@@ -577,7 +577,7 @@ export default function Die({
             ? (NEON_GRID_Y_OFFSET[value] ?? (FACE_Y_OFFSET[value] || 0))
             : (FACE_Y_OFFSET[value] || 0);
           const MOONSTONE_EXTRA_STRETCH = { 3: size * 0.015, 4: size * 0.015, 5: size * 0.015, 6: size * 0.015 };
-          const AMBER_WASP_STRETCH = { 1: size * 0.030, 2: size * 0.030, 3: size * 0.030, 4: size * 0.030, 5: size * 0.030, 6: size * 0.030 };
+          const AMBER_WASP_STRETCH = { 1: size * 0.065, 2: size * 0.065, 3: size * 0.065, 4: size * 0.065, 5: size * 0.065, 6: size * 0.065 };
           const stretch = skin.id === "moonstone"
             ? size * 0.0375 + (MOONSTONE_EXTRA_STRETCH[value] || 0)
             : skin.id === "amber_wasp"
